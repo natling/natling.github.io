@@ -1,5 +1,5 @@
 var margin = 50;
-var strings = [ 'natalie braginsky', 'music', 'poetry', 'art', '\"an angry trans shit\"', '\"a markov chain\"' ];
+var strings = [ 'natalie braginsky', 'music', 'poetry', 'art', 'code', \"an angry trans shit\"', '\"a markov chain\"' ];
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
