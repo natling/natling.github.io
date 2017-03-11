@@ -1,4 +1,4 @@
-var strings = [ "natalie braginsky" ];
+var strings = [ "natalie braginsky", "music", "poetry", "art", "\"an angry trans shit\"", "\"a markov chain\"" ];
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
@@ -6,5 +6,9 @@ function setup() {
 
 	fill(255);
 	textFont("Menlo");
-	text(strings[0], random(width), random(height));
+	textAlign(CENTER, CENTER);
+
+	for (var i = 0; i < strings.length; i++) {
+		text(strings[i], random(width), random(height));
+	}
 }
