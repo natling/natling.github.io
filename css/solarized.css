@@ -22,6 +22,9 @@ body {
   color: #b58900;
   font-family: Menlo, monospace;
 }
+p {
+  font-family: Menlo, monospace;
+}
 pre {
   font-family: Menlo, monospace;
 }
