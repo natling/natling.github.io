@@ -1,3 +1,4 @@
+var margin = 50;
 var strings = [ 'natalie braginsky', 'music', 'poetry', 'art', '\"an angry trans shit\"', '\"a markov chain\"' ];
 
 function setup() {
@@ -9,6 +10,6 @@ function setup() {
 	textAlign(CENTER, CENTER);
 
 	for (var i = 0; i < strings.length; i++) {
-		text(strings[i], random(width), random(height));
+		text(strings[i], random(margin, width - margin), random(margin, height - margin));
 	}
 }
