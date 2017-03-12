@@ -4,9 +4,9 @@ var strings = [ 'natalie braginsky', 'music', 'poetry', 'art', 'code', '\"an ang
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	noCursor();
-	background(0);
+	background('#002b36');
 
-	fill(255);
+	fill('#b58900');
 	textFont('Menlo');
 	textAlign(CENTER, CENTER);
 
