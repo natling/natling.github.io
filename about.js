@@ -38,5 +38,5 @@ function setup() {
 }
 
 function draw() {
-	console.log(coin(0.5));
+	console.log(coin(0.1));
 }
