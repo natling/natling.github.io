@@ -1,5 +1,3 @@
-var randomItem = require('random-item');
-
 var margin = 50;
 var strings = [ 'natalie braginsky', 'music', 'poetry', 'art', 'code', '\"an angry trans shit\"', '\"a markov chain\"' ];
 
@@ -29,11 +27,11 @@ function setup() {
 	noCursor();
 	background(solarized.base03);
 
-	fill(255);
 	textFont('Menlo');
 	textAlign(CENTER, CENTER);
 
 	for (var i = 0; i < strings.length; i++) {
+		fill(solarized[randomItem(solarizedAccent)]);
 		text(strings[i], random(margin, width - margin), random(margin, height - margin));
 	}
 }
