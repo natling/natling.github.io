@@ -26,7 +26,7 @@ var solarizedAccent = [ 'yellow', 'orange', 'red', 'magenta', 'violet', 'blue', 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	noCursor();
-	background(solarized.base03);
+	background(solarized['base03']);
 
 	textFont('Menlo');
 	textAlign(CENTER, CENTER);
