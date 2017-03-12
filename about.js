@@ -20,7 +20,8 @@ var solarized = {
 	'green':   '#859900'
 };
 
-var solarizedAccent = ['yellow', 'orange', 'red', 'magenta', 'violet', 'blue', 'cyan', 'green'];
+var solarizedBase = [ 'base03', 'base02', 'base01', 'base00', 'base0', 'base1', 'base2', 'base3' ];
+var solarizedAccent = [ 'yellow', 'orange', 'red', 'magenta', 'violet', 'blue', 'cyan', 'green' ];
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
