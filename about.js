@@ -36,7 +36,3 @@ function setup() {
 		text(strings[i], random(margin, width - margin), random(margin, height - margin));
 	}
 }
-
-function draw() {
-	console.log(coin(0.1));
-}
