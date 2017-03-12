@@ -3,6 +3,7 @@ var strings = [ 'natalie braginsky', 'music', 'poetry', 'art', 'code', '\"an ang
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
+	noCursor();
 	background(0);
 
 	fill(255);
