@@ -1,5 +1,5 @@
-// var fs = require('fs');
-var read = require('read-file');
+var fs = require('fs');
+// var read = require('read-file');
 // var interleave = require('loose-interleave');
 // var Chance = require('chance');
 // var chance = new Chance();
@@ -15,5 +15,5 @@ var read = require('read-file');
 
 // console.log(corpus);
 
-var corpus = read.sync('files/some imagist poets.txt');
-console.log(corpus);
+// var corpus = read.sync('files/some imagist poets.txt');
+// console.log(corpus);
