@@ -1,8 +1,24 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var fs = require('fs');
+var read = require('read-file');
 var interleave = require('loose-interleave');
 var Chance = require('chance');
 var chance = new Chance();
-},{"chance":2,"loose-interleave":3}],2:[function(require,module,exports){
+
+// var openFile = function(event) {
+// 	var input = event.target;
+// 	var reader = new FileReader();
+// 	reader.onload = function() {
+// 		corpus = reader.result;
+// 	}
+// 	reader.readAsText("files/some imagist poets.txt");
+// }
+
+// console.log(corpus);
+
+var corpus = read.sync('files/some imagist poets.txt');
+console.log(corpus);
+},{"chance":2,"fs":6,"loose-interleave":3,"read-file":4}],2:[function(require,module,exports){
 (function (Buffer){
 //  Chance.js 1.0.6
 //  http://chancejs.com
@@ -5534,7 +5550,7 @@ var chance = new Chance();
 })();
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":5}],3:[function(require,module,exports){
+},{"buffer":7}],3:[function(require,module,exports){
 module.exports = looseInterleave
 
 function looseInterleave () {
@@ -5557,6 +5573,67 @@ function looseInterleave () {
 }
 
 },{}],4:[function(require,module,exports){
+/**
+ * read-file <https://github.com/assemble/read-file>
+ *
+ * Copyright (c) 2014, 2015 Jon Schlinkert.
+ * Licensed under the MIT license.
+ */
+
+var fs = require('fs');
+
+function read(fp, opts, cb) {
+  if (typeof opts === 'function') {
+    cb = opts;
+    opts = {};
+  }
+
+  if (typeof cb !== 'function') {
+    throw new TypeError('read-file async expects a callback function.');
+  }
+
+  if (typeof fp !== 'string') {
+    cb(new TypeError('read-file async expects a string.'));
+  }
+
+  fs.readFile(fp, opts, function (err, buffer) {
+    if (err) return cb(err);
+    cb(null, normalize(buffer, opts));
+  });
+}
+
+read.sync = function(fp, opts) {
+  if (typeof fp !== 'string') {
+    throw new TypeError('read-file sync expects a string.');
+  }
+  try {
+    return normalize(fs.readFileSync(fp, opts), opts);
+  } catch (err) {
+    err.message = 'Failed to read "' + fp + '": ' + err.message;
+    throw new Error(err);
+  }
+};
+
+function normalize(str, opts) {
+  str = stripBom(str);
+  if (typeof opts === 'object' && opts.normalize === true) {
+    return String(str).replace(/\r\n|\n/g, '\n');
+  }
+  return str;
+}
+
+function stripBom(str) {
+  return typeof str === 'string' && str.charAt(0) === '\uFEFF'
+    ? str.slice(1)
+    : str;
+}
+
+/**
+ * Expose `read`
+ */
+
+module.exports = read;
+},{"fs":6}],5:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -5672,7 +5749,9 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
+
+},{}],7:[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -7380,7 +7459,7 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-},{"base64-js":4,"ieee754":6}],6:[function(require,module,exports){
+},{"base64-js":5,"ieee754":8}],8:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
