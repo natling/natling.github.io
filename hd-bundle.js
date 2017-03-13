@@ -1,5 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var fs = require('fs');
+// var fs = require('fs');
 var read = require('read-file');
 var interleave = require('loose-interleave');
 var Chance = require('chance');
@@ -18,7 +18,7 @@ var chance = new Chance();
 
 var corpus = read.sync('files/some imagist poets.txt');
 console.log(corpus);
-},{"chance":2,"fs":6,"loose-interleave":3,"read-file":4}],2:[function(require,module,exports){
+},{"chance":2,"loose-interleave":3,"read-file":4}],2:[function(require,module,exports){
 (function (Buffer){
 //  Chance.js 1.0.6
 //  http://chancejs.com
