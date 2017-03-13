@@ -40,5 +40,4 @@ function poem() {
 }
 
 // console.log(poem());
-
-var aPoem = poem();
+aPoem = poem();

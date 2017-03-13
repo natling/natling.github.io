@@ -5595,8 +5595,7 @@ function poem() {
 }
 
 // console.log(poem());
-
-var aPoem = poem();
+aPoem = poem();
 },{"chance":1,"loose-interleave":2}],4:[function(require,module,exports){
 'use strict'
 
