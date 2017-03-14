@@ -2,6 +2,7 @@
 var $ = require('jquery');
 var _ = require('lodash');
 var removePunctuation = require('remove-punctuation');
+var interleave = require('loose-interleave');
 var Chance = require('chance');
 var chance = new Chance();
 
@@ -43,7 +44,7 @@ function callback() {
 	};
 	console.log(poem());
 };
-},{"chance":2,"jquery":3,"lodash":4,"remove-punctuation":5}],2:[function(require,module,exports){
+},{"chance":2,"jquery":3,"lodash":4,"loose-interleave":5,"remove-punctuation":6}],2:[function(require,module,exports){
 (function (Buffer){
 //  Chance.js 1.0.6
 //  http://chancejs.com
@@ -5575,7 +5576,7 @@ function callback() {
 })();
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":7}],3:[function(require,module,exports){
+},{"buffer":8}],3:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.1.1
  * https://jquery.com/
@@ -32886,6 +32887,28 @@ return jQuery;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],5:[function(require,module,exports){
+module.exports = looseInterleave
+
+function looseInterleave () {
+  var arrs = [].slice.call(arguments)
+  var maxLength = Math.max.apply(Math, arrs.map(function (arr) {
+    return arr.length
+  }))
+
+  var result = []
+
+  for (var i = 0; i < maxLength; ++i) {
+    arrs.forEach(function (arr) {
+      if (arr.length > i) {
+        result.push(arr[i])
+      }
+    })
+  }
+
+  return result
+}
+
+},{}],6:[function(require,module,exports){
 'use strict';
 module.exports = function (str) {
 	if (typeof str !== 'string') {
@@ -32895,7 +32918,7 @@ module.exports = function (str) {
 	return str.replace(/[&\/\\#,+\(\)$~%\.!^'"\;:*?\[\]<>{}]/g, '');
 };
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -33011,7 +33034,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -34719,7 +34742,7 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-},{"base64-js":6,"ieee754":8}],8:[function(require,module,exports){
+},{"base64-js":7,"ieee754":9}],9:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
