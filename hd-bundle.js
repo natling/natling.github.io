@@ -32,11 +32,14 @@ function callback() {
 		var numberOfInputLines = chance.integer({min: numberOfInputLinesLow, max: numberOfInputLinesHigh});
 
 		var words = _.flatten(Array.from({length: numberOfInputLines}, v => chance.pickone(corpusFormatted)));
-		return words;
-	}
 
+		function layoutChoose() {
+			chance.weighted([' ', '\n', '\n\n'], [probabilitySpace, probabilityNewLine, probabilityNewStanza]);
+		};
+		return layoutChoose();
+	};
 	console.log(poem());
-}
+};
 },{"chance":2,"jquery":3,"lodash":4,"remove-punctuation":5}],2:[function(require,module,exports){
 (function (Buffer){
 //  Chance.js 1.0.6
