@@ -1,9 +1,9 @@
-var $ = require('jquery');
-var _ = require('lodash');
+var $                 = require('jquery');
+var _                 = require('lodash');
 var removePunctuation = require('remove-punctuation');
-var interleave = require('loose-interleave');
-var Chance = require('chance');
-var chance = new Chance();
+var interleave        = require('loose-interleave');
+var Chance            = require('chance');
+var chance            = new Chance();
 
 var corpus;
 
