@@ -17,6 +17,7 @@ function callback() {
 	corpusFormatted = corpusFormatted.map(function(line) {return line.match(/\S+/g) || []});
 	corpusFormatted = corpusFormatted.filter(function(line) {return line.length != 0});
 	corpusFormatted = corpusFormatted.filter(function(line) {return  !(/[A-Z]/.test(line.slice(-1)[0].slice(-1)[0]))});
+	corpusFormatted = corpusFormatted.map(function(line) {line.map(function(word) {word.toLowerCase()})})
 
 	console.log(corpusFormatted);
 
