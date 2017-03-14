@@ -7,5 +7,6 @@ $.get("files/some imagist poets.txt", function(data) {
 });
 
 function callback() {
-	console.log("hue");
+	corpus = corpus.substring(0, 200);
+	console.log(corpus);
 }
