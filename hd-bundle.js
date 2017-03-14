@@ -42,8 +42,8 @@ function callback() {
 
 		return interleave(words, layout).join('');
 	};
-	
-	console.log(poem());
+
+	aPoem = poem();
 };
 },{"chance":2,"jquery":3,"lodash":4,"loose-interleave":5,"remove-punctuation":6}],2:[function(require,module,exports){
 (function (Buffer){
