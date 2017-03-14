@@ -36,7 +36,10 @@ function callback() {
 		function layoutChoose() {
 			return chance.weighted([' ', '\n', '\n\n'], [probabilitySpace, probabilityNewLine, probabilityNewStanza]);
 		};
-		return layoutChoose();
+
+		var layout = Array.from({length: words.length - 1}, v => layoutChoose());
+
+		return layout;
 	};
 	console.log(poem());
 };
