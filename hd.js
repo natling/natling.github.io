@@ -38,3 +38,5 @@ var $ = require("jquery");
 $.get("files/some imagist poets.txt", function(data) {
 	var myData = data;
 });
+
+console.log(myData);
