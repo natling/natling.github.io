@@ -35,4 +35,6 @@ var $ = require("jquery");
 
 // loadFile("files/some imagist poets.txt");
 
-$.get("files/some imagist poets.txt");
+$.get("files/some imagist poets.txt", function(data) {
+	var myData = data;
+});

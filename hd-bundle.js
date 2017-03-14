@@ -36,7 +36,9 @@ var $ = require("jquery");
 
 // loadFile("files/some imagist poets.txt");
 
-$.get("files/some imagist poets.txt");
+$.get("files/some imagist poets.txt", function(data) {
+	var myData = data;
+});
 },{"jquery":2}],2:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.1.1
