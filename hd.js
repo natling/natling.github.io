@@ -30,6 +30,9 @@ function callback() {
 	) {
 		var numberOfInputLines = chance.integer({min: numberOfInputLinesLow, max: numberOfInputLinesHigh});
 
-		var words = Array.from({length: numberOfInputLines}, v => chance.pickone(corpusFormatted));
+		var words = _.flatten(Array.from({length: numberOfInputLines}, v => chance.pickone(corpusFormatted)));
+		return words;
 	}
+
+	console.log(poem());
 }
