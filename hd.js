@@ -1,7 +1,8 @@
-var $ = require("jquery");
+var $ = require('jquery');
+var _ = require('lodash');
+var removePunctuation = require('remove-punctuation');
 var Chance = require('chance');
 var chance = new Chance();
-var removePunctuation = require('remove-punctuation');
 
 var corpus;
 
@@ -18,8 +19,17 @@ function callback() {
 	corpusFormatted = corpusFormatted.filter(function(line) {return  !(/[A-Z]/.test(line.slice(-1)[0].slice(-1)[0]))});
 	corpusFormatted = corpusFormatted.map(function(line) {return line.map(function(word) {return word.toLowerCase()})})
 
-	console.log(corpusFormatted);
+	// console.log(corpusFormatted);
 
-	// var line = chance.pickone(corpusFormatted);
-	// console.log(line);
+	function poem(
+		numberOfInputLinesLow = 2,
+		numberOfInputLinesHigh = 4,
+		probabilitySpace = 10,
+		probabilityNewLine = 5,
+		probabilityNewStanza = 1
+	) {
+		var numberOfInputLines = chance.integer({min: numberOfInputLinesLow, max: numberOfInputLinesHigh});
+
+		var words = Array.from({length: numberOfInputLines}, v => chance.pickone(corpusFormatted));
+	}
 }
