@@ -13,10 +13,10 @@ $.get("files/some imagist poets.txt", function(data) {
 
 function callback() {
 	var corpusFormatted = corpus.split('\n');
-	corpusFormatted = corpusFormatted.map(function(line) {return line.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")});
+	corpusFormatted = corpusFormatted.map(function(line) {return line.replace(/[.,\/#!?$%\^&\*;:{}=\-_`~()]/g,"")});
 	corpusFormatted = corpusFormatted.map(function(line) {return line.match(/\S+/g) || []});
 	corpusFormatted = corpusFormatted.filter(function(line) {return line.length != 0});
-	corpusFormatted = corpusFormatted.filter(function(line) {return  !(/[A-Z]/.test(line.slice(-1)[0].slice(-1)[0]))});
+	// corpusFormatted = corpusFormatted.filter(function(line) {return  !(/[A-Z]/.test(line.slice(-1)[0].slice(-1)[0]))});
 	corpusFormatted = corpusFormatted.filter(function(line) {return  !(/[A-Z]/.test(_.last(_.last(line))))});
 	corpusFormatted = corpusFormatted.map(function(line) {return line.map(function(word) {return word.toLowerCase()})})
 
