@@ -9,7 +9,7 @@ $.get("files/some imagist poets.txt", function(data) {
 });
 
 function callback() {
-	corpusFormatted = corpus.split();
+	corpusFormatted = corpus.split('\n');
 	console.log(corpusFormatted);
 }
 },{"jquery":2}],2:[function(require,module,exports){

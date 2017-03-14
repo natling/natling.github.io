@@ -8,6 +8,6 @@ $.get("files/some imagist poets.txt", function(data) {
 });
 
 function callback() {
-	corpusFormatted = corpus.split();
+	corpusFormatted = corpus.split('\n');
 	console.log(corpusFormatted);
 }
