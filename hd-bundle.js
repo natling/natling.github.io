@@ -16,7 +16,7 @@ function callback() {
 	corpusFormatted = corpusFormatted.map(function(line) {return line.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")});
 	corpusFormatted = corpusFormatted.map(function(line) {return line.match(/\S+/g) || []});
 	corpusFormatted = corpusFormatted.filter(function(line) {return line.length != 0});
-	corpusFormatted = corpusFormatted.map(function(line) {return line.slice(-1)[0]});
+	corpusFormatted = corpusFormatted.map(function(line) {return line.slice(-1)[0].slice(-1)[0]});
 	console.log(corpusFormatted);
 
 	// var line = chance.pickone(corpusFormatted);
