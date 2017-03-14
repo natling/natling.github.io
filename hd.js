@@ -39,7 +39,8 @@ function callback() {
 
 		var layout = Array.from({length: words.length - 1}, v => layoutChoose());
 
-		return layout;
+		return interleave(words, layout).join('');
 	};
+	
 	console.log(poem());
 };

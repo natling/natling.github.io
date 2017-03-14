@@ -40,8 +40,9 @@ function callback() {
 
 		var layout = Array.from({length: words.length - 1}, v => layoutChoose());
 
-		return layout;
+		return interleave(words, layout).join('');
 	};
+	
 	console.log(poem());
 };
 },{"chance":2,"jquery":3,"lodash":4,"loose-interleave":5,"remove-punctuation":6}],2:[function(require,module,exports){
