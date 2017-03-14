@@ -34,9 +34,10 @@ var $ = require("jquery");
 // }
 
 // loadFile("files/some imagist poets.txt");
+var corpus;
 
 $.get("files/some imagist poets.txt", function(data) {
-	var myData = data;
+	corpus = data;
 });
 
-console.log(myData);
+console.log(corpus);
