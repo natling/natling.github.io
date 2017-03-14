@@ -12,8 +12,10 @@ $.get("files/some imagist poets.txt", function(data) {
 
 function callback() {
 	var corpusFormatted = corpus.split('\n');
+	corpusFormatted = corpusFormatted.filter(function(value) {return value != ''})
+	console.log(corpusFormatted);
+
 	var line = chance.pickone(corpusFormatted);
-	// console.log(corpusFormatted);
 	console.log(line);
 }
 },{"chance":2,"jquery":3}],2:[function(require,module,exports){
