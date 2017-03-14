@@ -34,7 +34,7 @@ function callback() {
 		var words = _.flatten(Array.from({length: numberOfInputLines}, v => chance.pickone(corpusFormatted)));
 
 		function layoutChoose() {
-			chance.weighted([' ', '\n', '\n\n'], [probabilitySpace, probabilityNewLine, probabilityNewStanza]);
+			return chance.weighted([' ', '\n', '\n\n'], [probabilitySpace, probabilityNewLine, probabilityNewStanza]);
 		};
 		return layoutChoose();
 	};
