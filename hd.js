@@ -37,7 +37,8 @@ var $ = require("jquery");
 var corpus;
 
 $.get("files/some imagist poets.txt", function(data) {
-	corpus = data;
+	// corpus = data;
+	console.log(data);
 });
 
-console.log(corpus);
+// console.log(corpus);
