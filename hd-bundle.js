@@ -2,7 +2,6 @@
 var $ = require("jquery");
 var Chance = require('chance');
 var chance = new Chance();
-var removePunctuation = require('remove-punctuation');
 
 var corpus;
 
@@ -15,14 +14,13 @@ function callback() {
 	var corpusFormatted = corpus.split('\n');
 	corpusFormatted = corpusFormatted.map(function(line) {return line.match(/\S+/g) || []});
 	corpusFormatted = corpusFormatted.filter(function(line) {return line.length != 0});
-	// corpusFormatted = corpusFormatted.map(function(line) {return line.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")});
-	corpusFormatted = corpusFormatted.map(function(line) {return removePunctuation(line)});
+	corpusFormatted = corpusFormatted.map(function(line) {return line.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")});
 	console.log(corpusFormatted);
 
 	var line = chance.pickone(corpusFormatted);
 	console.log(line);
 }
-},{"chance":2,"jquery":3,"remove-punctuation":4}],2:[function(require,module,exports){
+},{"chance":2,"jquery":3}],2:[function(require,module,exports){
 (function (Buffer){
 //  Chance.js 1.0.6
 //  http://chancejs.com
@@ -5554,7 +5552,7 @@ function callback() {
 })();
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":6}],3:[function(require,module,exports){
+},{"buffer":5}],3:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.1.1
  * https://jquery.com/
@@ -15777,16 +15775,6 @@ return jQuery;
 } );
 
 },{}],4:[function(require,module,exports){
-'use strict';
-module.exports = function (str) {
-	if (typeof str !== 'string') {
-		throw new TypeError('Expected a string');
-	}
-
-	return str.replace(/[&\/\\#,+\(\)$~%\.!^'"\;:*?\[\]<>{}]/g, '');
-};
-
-},{}],5:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -15902,7 +15890,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -17610,7 +17598,7 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-},{"base64-js":5,"ieee754":7}],7:[function(require,module,exports){
+},{"base64-js":4,"ieee754":6}],6:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1

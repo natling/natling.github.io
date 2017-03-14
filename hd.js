@@ -1,7 +1,6 @@
 var $ = require("jquery");
 var Chance = require('chance');
 var chance = new Chance();
-var removePunctuation = require('remove-punctuation');
 
 var corpus;
 
@@ -14,8 +13,7 @@ function callback() {
 	var corpusFormatted = corpus.split('\n');
 	corpusFormatted = corpusFormatted.map(function(line) {return line.match(/\S+/g) || []});
 	corpusFormatted = corpusFormatted.filter(function(line) {return line.length != 0});
-	// corpusFormatted = corpusFormatted.map(function(line) {return line.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")});
-	corpusFormatted = corpusFormatted.map(function(line) {return removePunctuation(line)});
+	corpusFormatted = corpusFormatted.map(function(line) {return line.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")});
 	console.log(corpusFormatted);
 
 	var line = chance.pickone(corpusFormatted);
