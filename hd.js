@@ -43,4 +43,5 @@ function callback() {
 	};
 
 	aPoem = poem();
+	console.log(aPoem);
 };
