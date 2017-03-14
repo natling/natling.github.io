@@ -12,7 +12,7 @@ $.get("files/some imagist poets.txt", function(data) {
 
 function callback() {
 	var corpusFormatted = corpus.split('\n');
-	corpusFormatted = corpusFormatted.filter(String)
+	corpusFormatted = corpusFormatted.filter(function(value) {return value})
 	console.log(corpusFormatted);
 
 	var line = chance.pickone(corpusFormatted);
