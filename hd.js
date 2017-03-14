@@ -11,8 +11,8 @@ $.get("files/some imagist poets.txt", function(data) {
 
 function callback() {
 	var corpusFormatted = corpus.split('\n');
-	corpusFormatted = corpusFormatted.filter(function(value) {return value})
-	console.log(corpusFormatted);
+	newCorpusFormatted = corpusFormatted.filter(function(value) {return value});
+	console.log(newCorpusFormatted);
 
 	var line = chance.pickone(corpusFormatted);
 	console.log(line);
