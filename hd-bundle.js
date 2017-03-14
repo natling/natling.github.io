@@ -35,14 +35,14 @@ var $ = require("jquery");
 // }
 
 // loadFile("files/some imagist poets.txt");
-var corpus;
+var corpus = "";
 
 $.get("files/some imagist poets.txt", function(data) {
-	// corpus = data;
-	console.log(data);
+	corpus = data;
+	// console.log(data);
 });
 
-// console.log(corpus);
+console.log(corpus);
 },{"jquery":2}],2:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.1.1
