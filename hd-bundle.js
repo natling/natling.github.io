@@ -3,8 +3,13 @@ var $ = require("jquery");
 
 $.get("files/some imagist poets.txt", function(data) {
 	var corpus = data;
-	console.log(corpus);
+	callback();
+	// console.log(corpus);
 });
+
+function callback() {
+	console.log("hue");
+}
 },{"jquery":2}],2:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.1.1
