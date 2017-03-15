@@ -24,23 +24,9 @@ function setup() {
 		}
 	}
 
-	console.log(characterArray);
-}
-
-function draw() {
-	background('#000000');
-
-	// uniqueCharacters = 5;
-	// characters = Array.from({length: uniqueCharacters}, v => String.fromCharCode(random(32, 127)));
-	// var characterChoice = 0;
-
 	for (var j = 0; j < rows; j++) {
 		for (var i = 0; i < columns; i++) {
 			text(characterArray[i * j + j], i * columnWidth, j * rowHeight);
-			// text(characters[characterChoice], i * columnWidth, j * rowHeight);
-			// if (random() < 0.01) {
-			// 	characterChoice = ((characterChoice + 1) % uniqueCharacters);
-			// }
 		}
 	}
 }
