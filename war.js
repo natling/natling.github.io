@@ -1,6 +1,6 @@
 var uniqueCharacters = 10,
-	speedMax = 3,
-	speedMin = 7;
+	speedMax         = 3,
+	speedMin         = 7;
 
 var columns, rows, columnWidth, rowHeight, characterArray = [], centers = [], speeds = [], densities = [];
 
