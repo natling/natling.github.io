@@ -34,10 +34,12 @@ function draw() {
 		}
 	}
 
-	characterArray = arrayRotate(characterArray);
+	characterArray = arrayRotate(characterArray, 10);
 }
 
-function arrayRotate(array) {
-	array.push(array.shift());
+function arrayRotate(array, rotateBy) {
+	for (var i = 0; i < rotateBy; i++) {
+		array.push(array.shift());
+	}
 	return array;
 }
