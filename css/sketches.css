@@ -17,10 +17,10 @@ $cyan:      #2aa198;
 $green:     #859900;
 */
 
-@font-face {
+/*@font-face {
   font-family: 'Menlo';
   src: url('../fonts/Menlo.otf');
-}
+}*/
 body {
   padding: 0;
   margin: 0;
