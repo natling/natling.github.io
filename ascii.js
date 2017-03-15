@@ -1,3 +1,5 @@
+var speed = 10;
+
 var columns, rows, columnWidth, rowHeight, characterArray = [];
 
 function setup() {
@@ -34,7 +36,7 @@ function draw() {
 		}
 	}
 
-	characterArray = arrayRotate(characterArray, 10);
+	characterArray = arrayRotate(characterArray, speed);
 }
 
 function arrayRotate(array, rotateBy) {
