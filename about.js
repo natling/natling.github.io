@@ -1,6 +1,5 @@
 var margin = 50;
 var strings = [ 'natalie braginsky', 'music', 'poetry', 'art', 'code', '\"an angry trans shit\"', '\"a markov chain\"' ];
-var menlo;
 
 var solarized = {
 	'base03':  '#002b36',
@@ -24,16 +23,12 @@ var solarized = {
 var solarizedBase = [ 'base03', 'base02', 'base01', 'base00', 'base0', 'base1', 'base2', 'base3' ];
 var solarizedAccent = [ 'yellow', 'orange', 'red', 'magenta', 'violet', 'blue', 'cyan', 'green' ];
 
-function preload() {
-	menlo = loadFont('fonts/Menlo.otf');
-}
-
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	noCursor();
 	background(solarized['base03']);
 
-	textFont(menlo);
+	textFont('Menlo');
 	textAlign(CENTER, CENTER);
 
 	for (var i = 0; i < strings.length; i++) {
