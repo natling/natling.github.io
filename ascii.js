@@ -23,10 +23,21 @@ function setup() {
 			currentCharacter = String.fromCharCode(random(32, 127));
 		}
 	}
+}
+
+function draw() {
+	background('#000000');
 
 	for (var j = 0; j < rows; j++) {
 		for (var i = 0; i < columns; i++) {
 			text(characterArray[i * j + i], i * columnWidth, j * rowHeight);
 		}
 	}
+
+	characterArray = arrayRotate(characterArray);
+}
+
+function arrayRotate(array) {
+	array.push(array.shift());
+	return array;
 }
