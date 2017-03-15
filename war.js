@@ -2,7 +2,7 @@ var uniqueCharacters = 10,
 	speedMax = 3,
 	speedMin = 7;
 
-var columns, rows, columnWidth, rowHeight, characterArray = [], centers = [], speeds = [];
+var columns, rows, columnWidth, rowHeight, characterArray = [], centers = [], speeds = [], densities = [];
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
@@ -27,6 +27,7 @@ function setup() {
 		}
 		centers.push([int(random(columns)), int(random(rows))]);
 		speeds.push(int(random(speedMin, speedMax)));
+		densities.push(random());
 	}
 }
 
@@ -41,7 +42,11 @@ function draw() {
 				distances.push(distanceBetweenCells([[i, j], centers[k]]));
 			}
 
-			text(characterArray[minIndex(distances)], i * columnWidth, j * rowHeight);
+			var army = minIndex(distances);
+
+			if (random() < densities[army]) {
+				text(characterArray[army], i * columnWidth, j * rowHeight);
+			}
 		}
 	}
 
