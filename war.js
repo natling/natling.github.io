@@ -41,7 +41,6 @@ function draw() {
 				distances.push(distanceBetweenCells([[i, j], centers[k]]));
 			}
 
-			cellNumber = j * columns + i;
 			text(characterArray[minIndex(distances)], i * columnWidth, j * rowHeight);
 		}
 	}
