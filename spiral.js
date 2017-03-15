@@ -1,5 +1,6 @@
-var speed = 10;
-var characterArrays = [], rotation = [];
+var density = 0.7;
+var scale;
+var characterArrays = [], rotations = [], colors = [];
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
@@ -10,13 +11,15 @@ function setup() {
 	textAlign(CENTER, CENTER);
 	fill('#00f72c');
 
+	scale = 9;
+
 	for (var r = 0; r < 100; r++) {
 		var n = r * 5;
 
 		var characterArray = [];
 
 		for (var i = 0; i < n; i++) {
-			if (random() < 1) {
+			if (random() < density) {
 				characterArray.push(String.fromCharCode(random(32, 127)));
 			} else {
 				characterArray.push(' ');
@@ -25,7 +28,7 @@ function setup() {
 
 		characterArrays.push(characterArray);
 
-		var rotationSpeed = int(random(1, 3));
+		var rotationSpeed = int(random(1, 2));
 		var rotationDirection;
 
 		if (random() < 0.5) {
@@ -34,7 +37,9 @@ function setup() {
 			rotationDirection = false;
 		}
 
-		rotation.push([rotationSpeed, rotationDirection]);
+		rotations.push([rotationSpeed, rotationDirection]);
+
+		// colors.push(color(random(255), random(255), random(255)));
 	}
 }
 
@@ -44,15 +49,15 @@ function draw() {
 	for (var r = 0; r < 100; r++) {
 		var n = r * 5;
 		
-		var scale = 10;
-
 		for (var i = 0; i < n; i++) {
 			var x = r * scale * cos(TAU / n * i);
 			var y = r * scale * sin(TAU / n * i);
+
+			// fill(colors[r]);
 			text(characterArrays[r][i], width / 2 + x, height / 2 + y);
 		}
 
-		characterArrays[r] = arrayRotate(characterArrays[r], rotation[r][0], rotation[r][1]);
+		characterArrays[r] = arrayRotate(characterArrays[r], rotations[r][0], rotations[r][1]);
 	}
 }
 
