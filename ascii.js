@@ -26,7 +26,7 @@ function setup() {
 
 	for (var j = 0; j < rows; j++) {
 		for (var i = 0; i < columns; i++) {
-			text(characterArray[i * j + j], i * columnWidth, j * rowHeight);
+			text(characterArray[i * j + i], i * columnWidth, j * rowHeight);
 		}
 	}
 }
