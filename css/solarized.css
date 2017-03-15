@@ -19,7 +19,7 @@ $green:     #859900;
 
 @font-face {
   font-family: Menlo;
-  src: url('fonts/Menlo.otf');
+  src: url('../fonts/Menlo.otf');
 }
 body {
   background-color: #002b36;
