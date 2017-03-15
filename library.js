@@ -12,37 +12,6 @@ var gridWidth,
 	rgb = create2DArray(3, colors),
 	centers = create2DArray(colors, 2);
 
-function create2DArray(rows, columns) {
-	var x = new Array(rows);
-
-	for (var i = 0; i < rows; i++) {
-		x[i] = new Array(columns);
-	}
-
-	return x;
-};
-
-function randomWalk(start, low, high, step) {
-	while (true) {
-		var newStart = start + int(random(-(step + 1), step + 1));
-		if (newStart >= low && newStart <= high) {
-			return newStart;
-		}
-	}
-};
-
-function weightedAverage(values, weights) {
-	var weightedValuesSum = 0;
-	var weightsSum = 0;
-
-	for (var i = 0; i < values.length; i++) {
-		weightedValuesSum += values[i] * weights[i];
-		weightsSum += weights[i];
-	}
-
-	return weightedValuesSum / weightsSum;
-};
-
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	background(0);
@@ -112,4 +81,35 @@ function draw() {
 		centers[i][0] = randomWalk(centers[i][0], 0, columns, centerSpeed);
 		centers[i][1] = randomWalk(centers[i][1], 0, rows, centerSpeed);
 	}
+}
+
+function create2DArray(rows, columns) {
+	var x = new Array(rows);
+
+	for (var i = 0; i < rows; i++) {
+		x[i] = new Array(columns);
+	}
+
+	return x;
+}
+
+function randomWalk(start, low, high, step) {
+	while (true) {
+		var newStart = start + int(random(-(step + 1), step + 1));
+		if (newStart >= low && newStart <= high) {
+			return newStart;
+		}
+	}
+}
+
+function weightedAverage(values, weights) {
+	var weightedValuesSum = 0;
+	var weightsSum = 0;
+
+	for (var i = 0; i < values.length; i++) {
+		weightedValuesSum += values[i] * weights[i];
+		weightsSum += weights[i];
+	}
+
+	return weightedValuesSum / weightsSum;
 }
