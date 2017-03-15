@@ -1,4 +1,5 @@
 var density = 0.7;
+var layers = 90;
 var scale;
 var characterArrays = [], rotations = [], colors = [];
 
@@ -13,7 +14,7 @@ function setup() {
 
 	scale = 9;
 
-	for (var r = 0; r < 100; r++) {
+	for (var r = 0; r < layers; r++) {
 		var n = r * 5;
 
 		var characterArray = [];
@@ -46,7 +47,7 @@ function setup() {
 function draw() {
 	background('#000000');
 
-	for (var r = 0; r < 100; r++) {
+	for (var r = 0; r < layers; r++) {
 		var n = r * 5;
 		
 		for (var i = 0; i < n; i++) {
