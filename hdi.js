@@ -22,7 +22,7 @@ function makeAxis() {
 	line(margin, height - margin, margin, margin);
 	textAlign(CENTER, CENTER);
 	for (var i = 1980; i < 2015; i += 10) {
-		x = map(i, 1980, 2015, 100, width - margin);
+		var x = map(i, 1980, 2015, 100, width - margin);
 		text(str(i), x, height - margin + 10);
 	}
 }
