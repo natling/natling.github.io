@@ -7,7 +7,7 @@ function preload() {
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
-	background(0);
+	background(255);
 
 	console.log(table);
 	print(table.getRowCount());
@@ -17,6 +17,7 @@ function setup() {
 }
 
 function makeAxis() {
+	fill(0);
 	line(margin, height - margin, width - margin, height - margin);
 	// line();
 }
