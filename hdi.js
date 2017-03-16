@@ -1,4 +1,6 @@
 var margin = 100;
+var tickMarkLength = 5;
+
 var table;
 
 function preload() {
@@ -20,10 +22,18 @@ function makeAxis() {
 	fill(0);
 	line(margin, height - margin, width - margin, height - margin);
 	line(margin, height - margin, margin, margin);
+
 	textAlign(CENTER, CENTER);
+
 	for (var i = 1980; i < 2015; i += 10) {
 		var x = map(i, 1980, 2015, 100, width - margin);
 		text(str(i), x, height - margin + 15);
-		line(x, height - margin, x, height - margin + 5);
+		line(x, height - margin, x, height - margin + tickMarkLength);
+	}
+
+	for (var i = 0; i < 1; i += 0.2) {
+		var y = map(i, 0, 1, height - margin, margin);
+		text(str(i), margin - 15, y);
+		line(margin - tickMarkLength, y, margin, y);
 	}
 }
