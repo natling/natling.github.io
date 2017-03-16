@@ -34,7 +34,7 @@ function makeAxis() {
 	textAlign(RIGHT, CENTER);
 
 	for (var i = 0; i < 1; i += 0.2) {
-		var y = map(i, 0, 1, height - margin, margin);
+		var y = Math.round10(map(i, 0, 1, height - margin, margin), 1);
 		text(str(i), margin - 15, y);
 		line(margin - tickMarkLength, y, margin, y);
 	}
