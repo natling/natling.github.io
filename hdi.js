@@ -31,6 +31,8 @@ function makeAxis() {
 		line(x, height - margin, x, height - margin + tickMarkLength);
 	}
 
+	textAlign(RIGHT, CENTER);
+
 	for (var i = 0; i < 1; i += 0.2) {
 		var y = map(i, 0, 1, height - margin, margin);
 		text(str(i), margin - 15, y);
