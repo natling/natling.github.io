@@ -34,8 +34,15 @@ function makeAxis() {
 	textAlign(RIGHT, CENTER);
 
 	for (var i = 0; i < 1; i += 0.2) {
-		var y = Math.round10(map(i, 0, 1, height - margin, margin), 1);
+		var y = roundPrecise(map(i, 0, 1, height - margin, margin), 1);
 		text(str(i), margin - 15, y);
 		line(margin - tickMarkLength, y, margin, y);
 	}
 }
+
+function roundPrecise(number, precision) {
+	var factor = Math.pow(10, precision);
+	var tempNumber = number * factor;
+	var roundedTempNumber = Math.round(tempNumber);
+	return roundedTempNumber / factor;
+};
