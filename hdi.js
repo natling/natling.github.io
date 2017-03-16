@@ -19,5 +19,5 @@ function setup() {
 function makeAxis() {
 	fill(0);
 	line(margin, height - margin, width - margin, height - margin);
-	// line();
+	line(margin, height - margin, margin, margin);
 }
