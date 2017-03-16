@@ -25,6 +25,7 @@ function makeAxis() {
 	line(margin, height - margin, margin, margin);
 
 	textFont('Menlo');
+	textStyle(NORMAL);
 	textSize(12);
 
 	textAlign(CENTER, CENTER);
