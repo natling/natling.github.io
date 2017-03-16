@@ -4,7 +4,7 @@ var tickMarkLength = 5;
 var table;
 
 function preload() {
-	table = loadTable("files/HDI.csv", "csv", "header");
+	table = loadTable('files/HDI.csv', 'csv', 'header');
 }
 
 function setup() {
