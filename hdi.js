@@ -12,6 +12,3 @@ function setup() {
 	print(table.getRowCount());
 	print(table.getColumnCount());
 }
-
-function draw() {
-}
