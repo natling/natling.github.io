@@ -9,7 +9,7 @@ function preload() {
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
-	background(255);
+	background(0);
 
 	console.log(table);
 	print(table.getRowCount());
@@ -19,7 +19,7 @@ function setup() {
 }
 
 function makeAxis() {
-	fill(0);
+	fill(255);
 	line(margin, height - margin, width - margin, height - margin);
 	line(margin, height - margin, margin, margin);
 
