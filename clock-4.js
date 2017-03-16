@@ -11,6 +11,8 @@ function setup() {
 	background(0);
 
 	secondsBarHeight = width / hoursInDay;
+
+	strokeWeight(1);
 }
 
 function draw() {
@@ -20,7 +22,6 @@ function draw() {
 
 	for (var h = 0; h < hoursInDay; h++) {
 		for (var m = 0; m < minutesInHour; m++) {
-			strokeWeight(1);
 
 			if (h * minutesInHour + m < currentMinutes) {
 				fill('#00f72c');
@@ -40,7 +41,6 @@ function draw() {
 	}
 
 	for (var s = 0; s < secondsInMinute; s++) {
-		strokeWeight(1);
 
 		var x = s * width / secondsInMinute;
 		var y = 0;
