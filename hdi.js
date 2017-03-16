@@ -20,8 +20,6 @@ function makeAxis() {
 	fill(0);
 	line(margin, height - margin, width - margin, height - margin);
 	line(margin, height - margin, margin, margin);
-
-	fill(255, 0, 0);
 	textAlign(CENTER, CENTER);
 	for (var i = 1980; i < 2015; i += 10) {
 		var x = map(i, 1980, 2015, 100, width - margin);
