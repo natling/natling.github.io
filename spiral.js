@@ -34,7 +34,7 @@ function setup() {
 			var value;
 			switch(e.controller.number) {
 				case 16:
-					value = map(e.value, 0, 127, 0.01, 10);
+					value = map(e.value, 0, 127, 0.01, 4);
 					a = value;
 					break;
 				case 17:
