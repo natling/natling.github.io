@@ -10,12 +10,6 @@ function setup() {
 	var factors = [[2,7], [3,3], [5,2]]; // n = 24 * 60 * 60 = 86400;
 	var findRatio = createFindRatio(factors);
 
-	rows = findRatio(aspectRatio)[1];
-	columns = findRatio(aspectRatio)[2];
-
-	rowHeight = height / rows;
-	columnWidth = width / columns;
-
 	// console.log(aspectRatio);
 	// console.log(rows);
 	// console.log(columns);
@@ -23,6 +17,12 @@ function setup() {
 
 function draw() {
 	background(0);
+
+	rows = findRatio(aspectRatio)[1];
+	columns = findRatio(aspectRatio)[2];
+
+	rowHeight = height / rows;
+	columnWidth = width / columns;
 
 	currentSeconds = hour() * 60 * 60 + minute() * 60 + second();
 	// console.log(hour(), minute(), second(), currentSeconds);
