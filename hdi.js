@@ -24,5 +24,6 @@ function makeAxis() {
 	for (var i = 1980; i < 2015; i += 10) {
 		var x = map(i, 1980, 2015, 100, width - margin);
 		text(str(i), x, height - margin + 10);
+		line(x, height - margin, x, height - margin + 5);
 	}
 }
