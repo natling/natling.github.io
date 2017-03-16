@@ -19,7 +19,7 @@ var e = 2.71828;
 
 var density = 1.0;
 // var characterArray = [];
-var colorArray = [];
+// var colorArray = [];
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
@@ -55,6 +55,7 @@ function draw() {
 
 		// text(characterArray[i], width / 2 + x, height / 2 + y);
 		text(String.fromCharCode(random(32, 127)), width / 2 + x, height / 2 + y);
+		// text('o', width / 2 + x, height / 2 + y);
 	}
 
 	// characterArray = arrayRotate(characterArray, 1, true);
