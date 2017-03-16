@@ -1,7 +1,7 @@
-var a = 10;
-var b = 0.0005;
+var a = 2;
+var b = 0.0007;
 
-var n = 10000;
+var n = 30000;
 
 var e = 2.71828;
 
@@ -18,39 +18,7 @@ function setup() {
 	textAlign(CENTER, CENTER);
 	fill('#00f72c');
 
-	WebMidi.enable(function (err) {
-		if (err) {
-			console.log("WebMidi could not be enabled.", err);
-		}
-
-		console.log(WebMidi.inputs);
-		console.log(WebMidi.outputs);
-
-		input = WebMidi.getInputByName("nanoKONTROL2 SLIDER/KNOB");
-
-		input.addListener('controlchange', "all", function(e) {
-			// console.log(e.controller.number + ': ' + e.value);
-
-			var value;
-			switch(e.controller.number) {
-				case 16:
-					value = map(e.value, 0, 127, 0.01, 4);
-					a = value;
-					break;
-				case 17:
-					value = map(e.value, 0, 127, 0.0004, 0.001);
-					b = value;
-					break;
-				case 18:
-					value = map(e.value, 0, 127, 0, 30000);
-					n = value;
-					break;
-			}
-			console.log(value);
-		})
-	});
-
-	for (var i = 0; i < 30000; i++) {
+	for (var i = 0; i < n; i++) {
 		if (random() < density) {
 			characterArray.push(String.fromCharCode(random(32, 127)));
 		} else {
@@ -71,6 +39,9 @@ function draw() {
 	}
 
 	characterArray = arrayRotate(characterArray, 1, true);
+
+	a = randomWalk(a, 0.01, 4, 0.01);
+	b = randomWalk(b, 0.0004, 0.001, 0.0001);
 }
 
 function arrayRotate(array, distance, direction) {
@@ -82,4 +53,13 @@ function arrayRotate(array, distance, direction) {
 		}
 	}
 	return array;
+}
+
+function randomWalk(start, low, high, step) {
+	while (true) {
+		var newStart = start + int(random(-(step + 1), (step + 1)));
+		if (newStart >= low && newStart <= high) {
+			return newStart;
+		}
+	}
 }
