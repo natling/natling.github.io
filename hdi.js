@@ -9,8 +9,8 @@ function setup() {
 	background(0);
 
 	console.log(table);
-	print(table.rowCount());
-	print(table.columnCount());
+	print(table.getRowCount());
+	print(table.getColumnCount());
 }
 
 function draw() {
