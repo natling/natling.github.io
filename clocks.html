@@ -11,13 +11,27 @@
     }
     body {
       background-color: #000000;
-      color: #00f72c;
+      margin: 0px;
+   }
+    section {
+      height: 100vh;
+    }
+    .text p {
+      margin: 0px;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform-style: preserve-3d;
+    }
+    p {
       font-family: Menlo, monospace;
       font-size: 500%;
+      text-align: center;
     }
     a {
-      color:#00f72c;
-      background-color:transparent;
+      color: #00f72c;
       padding: 0px 12px;
       text-decoration:none;
       border-style: solid;
@@ -27,9 +41,13 @@
 </head>
 
 <body>
+<section class="text">
+  <p>
   <a href="clock-1">1</a>
   <a href="clock-2">2</a>
   <a href="clock-3">3</a>
   <a href="clock-4">4</a>
+  </p>
+</section>
 </body>
 </html>
