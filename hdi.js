@@ -19,11 +19,14 @@ function setup() {
 }
 
 function makeAxis() {
-	fill(255);
+	stroke(255);
+
 	line(margin, height - margin, width - margin, height - margin);
 	line(margin, height - margin, margin, margin);
 
 	textAlign(CENTER, CENTER);
+
+	fill(255);
 
 	for (var i = 1980; i < 2015; i += 10) {
 		var x = map(i, 1980, 2015, 100, width - margin);
