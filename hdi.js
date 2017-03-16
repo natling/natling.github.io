@@ -1,3 +1,4 @@
+var margin = 100;
 var table;
 
 function preload() {
@@ -11,4 +12,11 @@ function setup() {
 	console.log(table);
 	print(table.getRowCount());
 	print(table.getColumnCount());
+
+	makeAxis();
+}
+
+function makeAxis() {
+	line(margin, height - margin, width - margin, height - margin);
+	// line();
 }
