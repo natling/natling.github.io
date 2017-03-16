@@ -36,7 +36,7 @@ function makeAxis() {
 		var x = map(i, 1980, 2015, 100, width - margin);
 		noStroke();
 		text(str(i), x, height - margin + 15);
-		strokeWeight(1);
+		stroke(255);
 		line(x, height - margin, x, height - margin + tickMarkLength);
 	}
 
@@ -46,7 +46,7 @@ function makeAxis() {
 		var y = map(i, 0, 1, height - margin, margin);
 		noStroke();
 		text(str(roundPrecise(i, 1)), margin - 10, y);
-		strokeWeight(1);
+		stroke(255);
 		line(margin - tickMarkLength, y, margin, y);
 	}
 }
