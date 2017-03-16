@@ -20,4 +20,9 @@ function makeAxis() {
 	fill(0);
 	line(margin, height - margin, width - margin, height - margin);
 	line(margin, height - margin, margin, margin);
+	textAlign(CENTER, CENTER);
+	for (var i = 1980; i < 2015; i += 10) {
+		x = map(i, 1980, 2015, 100, width - margin);
+		text(str(i), 100, height - margin + 10);
+	}
 }
