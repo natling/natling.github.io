@@ -121,8 +121,8 @@ function setup() {
 
 	for (var i = 0; i < strings.length; i++) {
 		var string              = strings[i];
-		var x                   = roundPrecise(random(), 3);
-		var y                   = roundPrecise(random(), 3);
+		var x                   = random();
+		var y                   = random();
 		var col                 = solarized[randomItem(solarizedAccent)];
 		var horizontalDirection = randomItem(['left', 'right']);
 		var verticalDirection   = randomItem(['up', 'down']);
@@ -144,10 +144,3 @@ function draw() {
 function windowResized() {
 	resizeCanvas(windowWidth, windowHeight);
 }
-
-function roundPrecise(number, precision) {
-	var factor = Math.pow(10, precision);
-	var tempNumber = number * factor;
-	var roundedTempNumber = Math.round(tempNumber);
-	return roundedTempNumber / factor;
-};
