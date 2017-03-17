@@ -1,4 +1,5 @@
-var margin = 100;
+var horizontalMargin = 100;
+var verticalMargin = 30;
 
 var strings = [
 	'natalie braginsky',
@@ -57,8 +58,8 @@ function draw() {
 
 	for (var i = 0; i < strings.length; i++) {
 		fill(colors[i]);
-		var x = map(positions[i][0], 0, 1, margin, width - margin);
-		var y = map(positions[i][1], 0, 1, margin, height - margin);
+		var x = map(positions[i][0], 0, 1, horizontalMargin, width - horizontalMargin);
+		var y = map(positions[i][1], 0, 1, verticalMargin, height - verticalMargin);
 		rectMode(CENTER);
 		text(strings[i], x, y, 200, 50);
 		// stroke(0);
