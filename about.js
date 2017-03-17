@@ -114,7 +114,7 @@ function setup() {
 		var col                 = solarized[randomItem(solarizedAccent)];
 		var horizontalDirection = randomItem(['left', 'right']);
 		var verticalDirection   = randomItem(['up', 'down']);
-		var speed               = 0.5;
+		var speed               = random(0.5, 1.0);
 
 		floatingStrings.push(new FloatingString(string, x, y, col, horizontalDirection, verticalDirection, speed));
 	}
