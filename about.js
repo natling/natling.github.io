@@ -1,3 +1,66 @@
+class FloatingString {
+
+	constructor(string, x, y, col, horizontalDirection, verticalDirection, speed) {
+		this.string              = string;
+		this.x                   = x;
+		this.y                   = y;
+		this.col                 = col;
+		this.horizontalDirection = horizontalDirection;
+		this.verticalDirection   = verticalDirection;
+		this.speed               = speed;
+	}
+
+	display() {
+		var xLiteral = map(this.x, 0, 1, horizontalMargin, width - horizontalMargin);
+		var yLiteral = map(this.y, 0, 1, verticalMargin, height - verticalMargin);
+		textFont('Menlo');
+		textAlign(CENTER, CENTER);
+		rectMode(CENTER);
+		fill(this.col);
+		text(this.string, xLiteral, yLiteral, 200, 50);
+	}
+
+	move() {
+		switch(this.horizontalDirection) {
+			case 'left':
+				this.x -= 0.001 * this.speed;
+				break;
+			case 'right':
+				this.x += 0.001 * this.speed;
+				break;
+		}
+
+		switch(this.verticalDirection) {
+			case 'up':
+				this.y -= 0.001 * this.speed;
+				break;
+			case 'down':
+				this.y += 0.001 * this.speed;
+				break;
+		}
+
+		if (this.x <= 0 || this.x >= 1) {
+			if (this.horizontalDirection == 'left') {
+				this.horizontalDirection = 'right';
+				this.col = solarized[randomItem(solarizedAccent)];
+			} else {
+				this.horizontalDirection = 'left';
+				this.col = solarized[randomItem(solarizedAccent)];
+			}
+		}
+
+		if (this.y <= 0 || this.y >= 1) {
+			if (this.verticalDirection == 'up') {
+				this.verticalDirection = 'down';
+				this.col = solarized[randomItem(solarizedAccent)];
+			} else {
+				this.verticalDirection = 'up';
+				this.col = solarized[randomItem(solarizedAccent)];
+			}
+		}
+	}
+}
+
 var horizontalMargin = 100;
 var verticalMargin = 30;
 
@@ -15,9 +78,7 @@ var strings = [
 	'\"actual net art princess\"',
 ];
 
-corners = [ 'topLeft', 'topRight', 'bottomLeft', 'bottomRight' ];
-
-var positions = [], colors = [], directions = [];
+var floatingStrings = [];
 
 var solarized = {
 	'base03':  '#002b36',
@@ -46,27 +107,25 @@ function setup() {
 	noCursor();
 	background(solarized['base03']);
 
-	textFont('Menlo');
-	textAlign(CENTER, CENTER);
-
 	for (var i = 0; i < strings.length; i++) {
-		positions.push([random(), random()]);
-		colors.push(solarized[randomItem(solarizedAccent)]);
-		directions.push(randomItem(corners));
-	}
+		var string              = strings[i];
+		var x                   = random();
+		var y                   = random();
+		var col                 = solarized[randomItem(solarizedAccent)];
+		var horizontalDirection = randomItem(['left', 'right']);
+		var verticalDirection   = randomItem(['up', 'down']);
+		var speed               = 0.5;
 
-	console.log(directions);
+		floatingStrings.push(new FloatingString(string, x, y, col, horizontalDirection, verticalDirection, speed));
+	}
 }
 
 function draw() {
 	background(solarized['base03']);
 
-	for (var i = 0; i < strings.length; i++) {
-		fill(colors[i]);
-		var x = map(positions[i][0], 0, 1, horizontalMargin, width - horizontalMargin);
-		var y = map(positions[i][1], 0, 1, verticalMargin, height - verticalMargin);
-		rectMode(CENTER);
-		text(strings[i], x, y, 200, 50);
+	for (var i = 0; i < floatingStrings.length; i++) {
+		floatingStrings[i].display();
+		floatingStrings[i].move();
 	}
 }
 
