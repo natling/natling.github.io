@@ -13,9 +13,6 @@ class FloatingString {
 	display() {
 		var xLiteral = map(this.x, 0, 1, horizontalMargin, width - horizontalMargin);
 		var yLiteral = map(this.y, 0, 1, verticalMargin, height - verticalMargin);
-		textFont('Menlo');
-		textAlign(CENTER, CENTER);
-		rectMode(CENTER);
 		fill(this.col);
 		text(this.string, xLiteral, yLiteral, 200, 50);
 	}
@@ -117,6 +114,10 @@ function setup() {
 	createCanvas(windowWidth, windowHeight);
 	noCursor();
 	background(solarized['base03']);
+
+	textFont('Menlo');
+	textAlign(CENTER, CENTER);
+	rectMode(CENTER);
 
 	for (var i = 0; i < strings.length; i++) {
 		var string              = strings[i];
