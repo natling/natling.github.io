@@ -1,10 +1,12 @@
+var strings = ['evaluation', 'okc', 'pronouns', 'things we say around love', 'why', 'you']
+
 var canvas;
 
 function setup() {
 	canvas = createCanvas(windowWidth, windowHeight);
-	// canvas.parent('container');
-	canvas.background(0);
 
-	var text = createDiv("Here is some text and <a href='http://i.imgur.com/WXaUlrK.gif'>this is an HTML link</a>!");
-	text.position(100, 100);
+	for (var i = 0; i < strings.length; i++) {
+		var text = createDiv("<a href=" + strings[i] + ">" + strings[i] + "</a>");
+		text.position(100, (i + 1) * 100);
+	}
 }
