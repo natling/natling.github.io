@@ -45,8 +45,10 @@ class FloatingString {
 
 			if (this.horizontalDirection == 'left') {
 				this.horizontalDirection = 'right';
+				this.x += step * speedHigh;
 			} else {
 				this.horizontalDirection = 'left';
+				this.x -= step * speedHigh;
 			}
 		}
 
@@ -56,8 +58,10 @@ class FloatingString {
 
 			if (this.verticalDirection == 'up') {
 				this.verticalDirection = 'down';
+				this.y += step * speedHigh;
 			} else {
 				this.verticalDirection = 'up';
+				this.y -= step * speedHigh;
 			}
 		}
 	}
