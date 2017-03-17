@@ -1,5 +1,6 @@
-var margin = 50;
+var margin = 100;
 var strings = [ 'natalie braginsky', 'music', 'poetry', 'art', 'code', '\"an angry trans shit\"', '\"a markov chain\"' ];
+var positions = [], colors = [];
 
 var solarized = {
 	'base03':  '#002b36',
@@ -32,7 +33,20 @@ function setup() {
 	textAlign(CENTER, CENTER);
 
 	for (var i = 0; i < strings.length; i++) {
-		fill(solarized[randomItem(solarizedAccent)]);
-		text(strings[i], random(margin, width - margin), random(margin, height - margin));
+		positions.push([random(), random()]);
+		colors.push(solarized[randomItem(solarizedAccent)]);
+	}	
+}
+
+function draw() {
+	background(solarized['base03']);
+
+	for (var i = 0; i < strings.length; i++) {
+		fill(colors[i]);
+		text(strings[i], map(positions[i][0], 0, 1, margin, width - margin), map(positions[i][1], 0, 1, margin, height - margin));
 	}
+}
+
+function windowResized() {
+	resizeCanvas(windowWidth, windowHeight);
 }
