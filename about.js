@@ -15,7 +15,9 @@ var strings = [
 	'\"actual net art princess\"',
 ];
 
-var positions = [], colors = [];
+corners = [ 'topLeft', 'topRight', 'bottomLeft', 'bottomRight' ];
+
+var positions = [], colors = [], directions = [];
 
 var solarized = {
 	'base03':  '#002b36',
@@ -50,7 +52,10 @@ function setup() {
 	for (var i = 0; i < strings.length; i++) {
 		positions.push([random(), random()]);
 		colors.push(solarized[randomItem(solarizedAccent)]);
-	}	
+		directions.push(randomItem(corners));
+	}
+
+	console.log(directions);
 }
 
 function draw() {
@@ -62,9 +67,6 @@ function draw() {
 		var y = map(positions[i][1], 0, 1, verticalMargin, height - verticalMargin);
 		rectMode(CENTER);
 		text(strings[i], x, y, 200, 50);
-		// stroke(0);
-		// noFill();
-		// rect(x, y, 200, 50);
 	}
 }
 
