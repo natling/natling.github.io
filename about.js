@@ -1,5 +1,19 @@
 var margin = 100;
-var strings = [ 'natalie braginsky', 'music', 'poetry', 'art', 'code', '\"an angry trans shit\"', '\"a markov chain\"' ];
+
+var strings = [
+	'natalie braginsky',
+	'music',
+	'poetry',
+	'art',
+	'code',
+	'\"an angry trans shit\"',
+	'\"a markov chain\"',
+	'\"road-side snapshots of robotic collisions\"',
+	'\"sad-toned circuits failing in public\"',
+	'\"these are the brief shards of digital noise you\'ve been looking for\"',
+	'\"an actual net art princess\"',
+];
+
 var positions = [], colors = [];
 
 var solarized = {
@@ -43,7 +57,13 @@ function draw() {
 
 	for (var i = 0; i < strings.length; i++) {
 		fill(colors[i]);
-		text(strings[i], map(positions[i][0], 0, 1, margin, width - margin), map(positions[i][1], 0, 1, margin, height - margin));
+		var x = map(positions[i][0], 0, 1, margin, width - margin);
+		var y = map(positions[i][1], 0, 1, margin, height - margin);
+		rectMode(CENTER);
+		text(strings[i], x, y, 200, 50);
+		// stroke(0);
+		// noFill();
+		// rect(x, y, 200, 50);
 	}
 }
 
