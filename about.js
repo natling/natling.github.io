@@ -40,22 +40,24 @@ class FloatingString {
 		}
 
 		if (this.x <= 0 || this.x >= 1) {
+			this.col = solarized[randomItem(solarizedAccent)];
+			this.speed = random(speedLow, speedHigh);
+
 			if (this.horizontalDirection == 'left') {
 				this.horizontalDirection = 'right';
-				this.col = solarized[randomItem(solarizedAccent)];
 			} else {
 				this.horizontalDirection = 'left';
-				this.col = solarized[randomItem(solarizedAccent)];
 			}
 		}
 
 		if (this.y <= 0 || this.y >= 1) {
+			this.col = solarized[randomItem(solarizedAccent)];
+			this.speed = random(speedLow, speedHigh);
+
 			if (this.verticalDirection == 'up') {
 				this.verticalDirection = 'down';
-				this.col = solarized[randomItem(solarizedAccent)];
 			} else {
 				this.verticalDirection = 'up';
-				this.col = solarized[randomItem(solarizedAccent)];
 			}
 		}
 	}
@@ -63,6 +65,9 @@ class FloatingString {
 
 var horizontalMargin = 100;
 var verticalMargin = 30;
+
+var speedLow = 0.3;
+var speedHigh = 1.0;
 
 var strings = [
 	'natalie braginsky',
@@ -114,7 +119,7 @@ function setup() {
 		var col                 = solarized[randomItem(solarizedAccent)];
 		var horizontalDirection = randomItem(['left', 'right']);
 		var verticalDirection   = randomItem(['up', 'down']);
-		var speed               = random(0.5, 1.0);
+		var speed               = random(speedLow, speedHigh);
 
 		floatingStrings.push(new FloatingString(string, x, y, col, horizontalDirection, verticalDirection, speed));
 	}
