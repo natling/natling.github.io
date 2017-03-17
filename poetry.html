@@ -1,13 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>directory</title>
+  <title>poetry</title>
   <meta charset="UTF-8">
   <link rel="shortcut icon" href="files/favicon.png"/>
   <script language="javascript" type="text/javascript" src="libraries/p5.min.js"></script>
   <script language="javascript" type="text/javascript" src="libraries/p5.dom.min.js"></script>
-  <script language="javascript" type="text/javascript" src="directory.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/directory.css">
+  <script language="javascript" type="text/javascript" src="poetry.js"></script>
+  <style>
+    @font-face {
+      font-family: Menlo;
+      src: url('../fonts/Menlo.otf') format("opentype");
+    }
+    body {
+      padding: 0;
+      margin: 0;
+      background-color: #002b36;
+      font-family: Menlo;
+      text-align: center;
+      font-size: 30px;
+    }
+    section {
+      width: inherit;
+      height: inherit;
+    }
+    .text p {
+      width: inherit;
+      height: inherit;
+      margin: 0px;
+    }
+    a:link, a:visited {
+      color: #b58900;
+      text-decoration: none;
+      padding: 44px;
+      /*border-style: solid;*/
+      /*border-width: thin;*/
+      display: block;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform-style: preserve-3d;
+    }
+    a:hover {
+      color: #002b36;
+      background-color: #b58900;
+    }
+  </style>
 </head>
 
 <body>
