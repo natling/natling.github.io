@@ -11,7 +11,7 @@ var strings = [
 	'\"road-side snapshots of robotic collisions\"',
 	'\"sad-toned circuits failing in public\"',
 	'\"these are the brief shards of digital noise you\'ve been looking for\"',
-	'\"an actual net art princess\"',
+	'\"actual net art princess\"',
 ];
 
 var positions = [], colors = [];
