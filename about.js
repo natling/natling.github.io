@@ -37,7 +37,7 @@ class FloatingString {
 		}
 
 		if (this.x <= 0 || this.x >= 1) {
-			this.col = solarized[randomItem(solarizedAccent)];
+			this.col = randomDifferentItem(solarizedAccent, this.col);
 			this.speed = random(speedLow, speedHigh);
 
 			if (this.horizontalDirection == 'left') {
@@ -50,7 +50,7 @@ class FloatingString {
 		}
 
 		if (this.y <= 0 || this.y >= 1) {
-			this.col = solarized[randomItem(solarizedAccent)];
+			this.col = randomDifferentItem(solarizedAccent, this.col);
 			this.speed = random(speedLow, speedHigh);
 
 			if (this.verticalDirection == 'up') {
@@ -107,8 +107,8 @@ var solarized = {
 	'green':   '#859900'
 };
 
-var solarizedBase = [ 'base03', 'base02', 'base01', 'base00', 'base0', 'base1', 'base2', 'base3' ];
-var solarizedAccent = [ 'yellow', 'orange', 'red', 'magenta', 'violet', 'blue', 'cyan', 'green' ];
+var solarizedBase = [ 'base03', 'base02', 'base01', 'base00', 'base0', 'base1', 'base2', 'base3' ].map(function(key) {return solarized[key]});
+var solarizedAccent = [ 'yellow', 'orange', 'red', 'magenta', 'violet', 'blue', 'cyan', 'green' ].map(function(key) {return solarized[key]});
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
@@ -123,7 +123,7 @@ function setup() {
 		var string              = strings[i];
 		var x                   = random();
 		var y                   = random();
-		var col                 = solarized[randomItem(solarizedAccent)];
+		var col                 = randomItem(solarizedAccent);
 		var horizontalDirection = randomItem(['left', 'right']);
 		var verticalDirection   = randomItem(['up', 'down']);
 		var speed               = random(speedLow, speedHigh);
