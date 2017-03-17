@@ -58,3 +58,7 @@ function draw() {
 		rect(x, y, rectWidth, rectHeight);		
 	}
 }
+
+function windowResized() {
+	resizeCanvas(windowWidth, windowHeight);
+}
