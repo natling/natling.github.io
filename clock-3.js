@@ -1,14 +1,20 @@
 var currentSeconds;
-var rows, columns, rowHeight, columnWidth;
+var aspectRatio, factors, findRatio, rows, columns, rowHeight, columnWidth;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	noCursor();
 	background(0);
 
-	var aspectRatio = width / height;
-	var factors = [[2,7], [3,3], [5,2]]; // n = 24 * 60 * 60 = 86400;
-	var findRatio = createFindRatio(factors);
+	aspectRatio = width / height;
+	factors = [[2,7], [3,3], [5,2]]; // n = 24 * 60 * 60 = 86400;
+	findRatio = createFindRatio(factors);
+
+	rows = findRatio(aspectRatio)[1];
+	columns = findRatio(aspectRatio)[2];
+
+	rowHeight = height / rows;
+	columnWidth = width / columns;
 
 	// console.log(aspectRatio);
 	// console.log(rows);
@@ -17,12 +23,6 @@ function setup() {
 
 function draw() {
 	background(0);
-
-	rows = findRatio(aspectRatio)[1];
-	columns = findRatio(aspectRatio)[2];
-
-	rowHeight = height / rows;
-	columnWidth = width / columns;
 
 	currentSeconds = hour() * 60 * 60 + minute() * 60 + second();
 	// console.log(hour(), minute(), second(), currentSeconds);
@@ -38,4 +38,16 @@ function draw() {
 			rect(j * columnWidth, i * rowHeight, columnWidth, rowHeight);
 		}
 	}
+}
+
+function windowResized() {
+	resizeCanvas(windowWidth, windowHeight);
+
+	aspectRatio = width / height;
+
+	rows = findRatio(aspectRatio)[1];
+	columns = findRatio(aspectRatio)[2];
+
+	rowHeight = height / rows;
+	columnWidth = width / columns;
 }
