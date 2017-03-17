@@ -144,3 +144,12 @@ function draw() {
 function windowResized() {
 	resizeCanvas(windowWidth, windowHeight);
 }
+
+function randomDifferentItem(array, item) {
+	while (true) {
+		var candidate = randomItem(array);
+		if (candidate != item) {
+			return candidate;
+		}
+	}
+}
