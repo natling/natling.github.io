@@ -23,19 +23,19 @@ class FloatingString {
 	move() {
 		switch(this.horizontalDirection) {
 			case 'left':
-				this.x -= 0.001 * this.speed;
+				this.x -= step * this.speed;
 				break;
 			case 'right':
-				this.x += 0.001 * this.speed;
+				this.x += step * this.speed;
 				break;
 		}
 
 		switch(this.verticalDirection) {
 			case 'up':
-				this.y -= 0.001 * this.speed;
+				this.y -= step * this.speed;
 				break;
 			case 'down':
-				this.y += 0.001 * this.speed;
+				this.y += step * this.speed;
 				break;
 		}
 
@@ -68,6 +68,8 @@ var verticalMargin = 30;
 
 var speedLow = 0.3;
 var speedHigh = 1.0;
+
+var step = 0.001;
 
 var strings = [
 	'natalie braginsky',
@@ -114,8 +116,8 @@ function setup() {
 
 	for (var i = 0; i < strings.length; i++) {
 		var string              = strings[i];
-		var x                   = random();
-		var y                   = random();
+		var x                   = roundPrecise(random(), 3);
+		var y                   = roundPrecise(random(), 3);
 		var col                 = solarized[randomItem(solarizedAccent)];
 		var horizontalDirection = randomItem(['left', 'right']);
 		var verticalDirection   = randomItem(['up', 'down']);
@@ -137,3 +139,10 @@ function draw() {
 function windowResized() {
 	resizeCanvas(windowWidth, windowHeight);
 }
+
+function roundPrecise(number, precision) {
+	var factor = Math.pow(10, precision);
+	var tempNumber = number * factor;
+	var roundedTempNumber = Math.round(tempNumber);
+	return roundedTempNumber / factor;
+};
