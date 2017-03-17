@@ -24,17 +24,17 @@ $green:     #859900;
 body {
   padding: 0;
   margin: 0;
-  background-color: #000000;
+  background-color: #002b36;
   font-family: Menlo;
 }
 a:link, a:visited {
-  color: #00f72c;
+  color: #b58900;
   padding: 5px;
-  text-decoration:none;
+  text-decoration: none;
   border-style: solid;
   border-width: thin;
 }
 a:hover {
-  color: #000000;
-  background-color: #00f72c;
+  color: #002b36;
+  background-color: #b58900;
 }
