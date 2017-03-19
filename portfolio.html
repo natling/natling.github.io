@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>portfolio</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="files/favicon.png"/>
+  <style>
+    @font-face {
+      font-family: Menlo;
+      src: url('../fonts/Menlo.otf') format("opentype");
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #002b36;
+      font-family: Menlo;
+      text-align: center;
+      font-size: 50px;
+    }
+    div {
+      margin: 0;
+      border: 0;
+      padding: 0;
+      position: fixed;
+    }
+    .top    { height: 50%; top:    0; }
+    .bottom { height: 50%; bottom: 0; }
+    .left   { width:  50%; left:   0; }
+    .right  { width:  50%; right:  0; }
+    p {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      border: 0;
+      padding: 0;
+    }
+    a:link, a:visited {
+      padding: 21vh 0vw;
+      color: #b58900;
+      text-decoration: none;
+      display: block;
+
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform-style: preserve-3d;
+    }
+    a:hover {
+      color: #002b36;
+      background-color: #b58900;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top left">
+    <p>
+      <a href="music">music</a>
+    </p>
+  </div>
+  <div class="top right">
+    <p>
+      <a href="poetry">poetry</a>
+    </p>
+  </div>
+  <div class="bottom left">
+    <p>
+      <a href="art">art</a>
+    </p>
+  </div>
+  <div class="bottom right">
+    <p>
+      <a href="code">code</a>
+    </p>
+  </div>
+</body>
+</html>
