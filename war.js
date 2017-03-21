@@ -2,14 +2,18 @@ var uniqueCharacters = 10,
 	speedMax         = 3,
 	speedMin         = 7;
 
-var columns, rows, columnWidth, rowHeight, characterArray = [], centers = [], speeds = [], densities = [];
+var menlo, columns, rows, columnWidth, rowHeight, characterArray = [], centers = [], speeds = [], densities = [];
+
+function preload() {
+	menlo = loadFont('fonts/Menlo.otf');
+}
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	noCursor();
 	background('#000000');
 
-	textFont('Menlo');
+	textFont(menlo);
 	textAlign(LEFT, TOP);
 	fill('#00f72c');
 
