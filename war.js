@@ -4,16 +4,21 @@ var uniqueCharacters = 10,
 
 var columns, rows, columnWidth, rowHeight, characterArray = [], centers = [], speeds = [], densities = [];
 
+function preload() {
+	textFont('Menlo');
+	columnWidth = Math.round(textWidth(' '));
+}
+
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	noCursor();
 	background('#000000');
 
-	textFont('Menlo');
+	// textFont('Menlo');
 	textAlign(LEFT, TOP);
 	fill('#00f72c');
 
-	columnWidth = Math.round(textWidth(' '));
+	// columnWidth = Math.round(textWidth(' '));
 	rowHeight = 11;
 
 	columns = Math.floor(width / columnWidth);
