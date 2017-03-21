@@ -18,7 +18,7 @@ function setup() {
 	noCursor();
 	frameRate(10);
 
-	textFont("Menlo");
+	textFont('Menlo');
 	textAlign(LEFT, TOP);
 	textSize(20);
 
