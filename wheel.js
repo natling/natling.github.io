@@ -1,5 +1,5 @@
 var density = 0.7;
-var layers = 90;
+var layers = 100;
 var scale;
 var characterArrays = [], rotations = [], colors = [];
 
