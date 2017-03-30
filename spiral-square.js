@@ -20,24 +20,18 @@ function setup() {
 
 	letterWidth = Math.round(textWidth(' '));
 	letterHeight = 11;
-	// letterWidth = 30;
-	// letterHeight = 30;
 
-	// console.log(x, y);
 	write();
 	walk();
 	changeDirection();
 	layerSize++;
-	// console.log("new layer size: " + layerSize);
 
 	for (var l = 0; l < numberOfLayers; l++) {
 		for (var d = 0; d < 2; d++) {
 			if (d == 1) {
 				layerSize++;
-				// console.log("new layer size: " + layerSize);
 			}
 			for (var m = 0; m < layerSize; m++) {
-				// console.log(x, y);
 				write();
 				walk();
 				if (m == layerSize - 1) {
@@ -46,10 +40,6 @@ function setup() {
 			}
 		}
 	}
-
-	// stroke(50);
-	// line(0, height / 2, width, height / 2);
-	// line(width / 2, 0, width / 2, height);
 }
 
 function write() {
@@ -76,5 +66,4 @@ function walk() {
 
 function changeDirection() {
 	direction = (direction + 1) % 4;
-	// console.log("new direction: " + direction);
 }
