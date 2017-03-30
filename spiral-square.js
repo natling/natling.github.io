@@ -1,13 +1,17 @@
+var density = 0.01;
+var numberOfLayers = 210;
+
 var counter = 0;
 var x = 0, y = 0;
 var direction = 0;
 var layerSize = 0;
 
+var t = 0;
+
 var letterWidth, letterHeight;
 
+var characterArraySize;
 var characterArray = [];
-
-var numberOfLayers = 210;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
@@ -21,6 +25,20 @@ function setup() {
 	letterWidth = Math.round(textWidth(' '));
 	letterHeight = 11;
 
+	characterArraySize = (numberOfLayers + 1) ** 2;
+
+	for (var i = 0; i < characterArraySize; i++) {
+		if (random() < density) {
+			characterArray.push(String.fromCharCode(random(32, 127)));
+		} else {
+			characterArray.push(' ');
+		}
+	}
+}
+
+function draw() {
+	background(0);
+
 	write();
 	walk();
 	changeDirection();
@@ -32,6 +50,7 @@ function setup() {
 				layerSize++;
 			}
 			for (var m = 0; m < layerSize; m++) {
+
 				write();
 				walk();
 				if (m == layerSize - 1) {
@@ -40,10 +59,17 @@ function setup() {
 			}
 		}
 	}
+
+	counter = 0;
+	x = 0, y = 0;
+	direction = 0;
+	layerSize = 0;
+
+	t++;
 }
 
 function write() {
-	text(str(0), width / 2 + letterWidth * x, height / 2 + letterHeight * y);
+	text(characterArray[(counter + t) % characterArraySize], width / 2 + letterWidth * x, height / 2 + letterHeight * y);
 	counter++;
 }
 
