@@ -28,6 +28,7 @@ body {
 }
 p {
   font-family: Menlo, monospace;
+  margin-top: 0;
 }
 pre {
   font-family: Menlo, monospace;
