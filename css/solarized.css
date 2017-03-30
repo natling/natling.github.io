@@ -32,4 +32,5 @@ p {
 }
 pre {
   font-family: Menlo, monospace;
+  margin-top: 0;
 }
