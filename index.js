@@ -29,7 +29,7 @@ class Cell {
 }
 
 var gridSize = 10;
-numberOfLiveCells = 300;
+numberOfLiveCells = 1000;
 var rows, columns;
 var liveCells = [];
 
