@@ -29,6 +29,7 @@ class Cell {
 }
 
 var gridSize = 10;
+numberOfLiveCells = 100;
 var rows, columns;
 var liveCells = [];
 
@@ -49,7 +50,7 @@ function setup() {
 	rows = int(windowWidth / gridSize);
 	columns = int(windowWidth / gridSize);
 
-	for (var i = 0; i < 100; i++) {
+	for (var i = 0; i < numberOfLiveCells; i++) {
 		var row = int(random(rows));
 		var column = int(random(columns));
 		var speed = int(random(1, 4));
