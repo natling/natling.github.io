@@ -6,7 +6,7 @@ lineArray = [], locationsOfStreams = [];
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	noCursor();
-	// frameRate(30);
+	frameRate(100);
 	background('#000000');
 
 	textFont('Menlo');
