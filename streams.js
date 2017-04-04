@@ -1,4 +1,4 @@
-numberOfStreams = 40;
+numberOfStreams = 50;
 probabilityOfMoving = 0.9;
 
 lineArray = [], locationsOfStreams = [];
@@ -9,14 +9,19 @@ function setup() {
 	background('#000000');
 
 	textFont('Menlo');
+	textSize(12);
 	textAlign(LEFT, TOP);
-	// fill('#00f72c');
+	fill('#00f72c');
 
 	columnWidth = Math.round(textWidth(' '));
-	rowHeight = 11;
+	rowHeight = 30;
 
 	columns = Math.floor(width / columnWidth);
 	rows = Math.floor(height / rowHeight);
+
+	console.log(width);
+	console.log(columnWidth);
+	console.log(columnWidth * columns);
 
 	var emptyLine = new Array(columns);
 	emptyLine.fill(' ');
@@ -34,7 +39,6 @@ function draw() {
 	background('#000000');
 
 	for (var i = 0; i < rows; i++) {
-		fill(random(255), random(255), random(255));
 		text(lineArray[i].join(''), 0, i * rowHeight);
 	}
 
