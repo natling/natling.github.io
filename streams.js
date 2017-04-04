@@ -6,12 +6,11 @@ lineArray = [], locationsOfStreams = [];
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	noCursor();
-	frameRate(100);
 	background('#000000');
 
 	textFont('Menlo');
 	textAlign(LEFT, TOP);
-	fill('#00f72c');
+	// fill('#00f72c');
 
 	columnWidth = Math.round(textWidth(' '));
 	rowHeight = 11;
@@ -35,7 +34,8 @@ function draw() {
 	background('#000000');
 
 	for (var i = 0; i < rows; i++) {
-			text(lineArray[i].join(''), 0, i * rowHeight);
+		fill(random(255), random(255), random(255));
+		text(lineArray[i].join(''), 0, i * rowHeight);
 	}
 
 	var newLine = new Array(columns);
@@ -47,7 +47,7 @@ function draw() {
 	}
 
 	lineArray.shift();
-	lineArray.push(newLine)
+	lineArray.push(newLine);
 }
 
 function walk(start, p, low, high) {
