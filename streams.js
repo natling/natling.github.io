@@ -6,6 +6,7 @@ lineArray = [], locationsOfStreams = [];
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	noCursor();
+	// frameRate(30);
 	background('#000000');
 
 	textFont('Menlo');
@@ -33,10 +34,8 @@ function setup() {
 function draw() {
 	background('#000000');
 
-	for (var j = 0; j < rows; j++) {
-		for (var i = 0; i < columns; i++) {
-			text(lineArray[j][i], i * columnWidth, j * rowHeight);
-		}
+	for (var i = 0; i < rows; i++) {
+			text(lineArray[i].join(''), 0, i * rowHeight);
 	}
 
 	var newLine = new Array(columns);
