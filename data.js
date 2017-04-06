@@ -117,6 +117,9 @@ function drawLabels() {
 	var title = '2012 Total Vessel Calls - Vessels over 1,000 gross register tons (GRT)';
 	var xLabel = 'capacity';
 	var yLabel = 'calls';
+
+	textAlign(CENTER, CENTER);
+	text(title, 0, 0, width, marginTop);
 }
 
 function windowResized() {
