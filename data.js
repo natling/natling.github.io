@@ -122,7 +122,7 @@ function drawLabels() {
 	text(title, 0, 0, width, marginTop);
 	text(xAxisLabel, marginLeft, height - marginBottom, width - marginRight - marginLeft, marginBottom);
 	rectMode(CENTER);
-	rotate(HALF_PI);
+	// rotate(HALF_PI);
 	text(yAxisLabel, marginLeft / 2, marginTop + ((height - marginBottom) - marginTop) / 2, marginLeft, height - marginBottom - marginTop);
 	rect(marginLeft / 2, marginTop + ((height - marginBottom) - marginTop) / 2, marginLeft, height - marginBottom - marginTop);
 }
