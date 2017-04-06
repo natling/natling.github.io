@@ -14,7 +14,7 @@ var xLabelsMaximum = 400000000;
 
 var yLabelsNumber = 11;
 var yLabelsMinimum = 0;
-var yLabelsMaximum = 1000;
+var yLabelsMaximum = 10000;
 
 var pointSize = 5;
 
