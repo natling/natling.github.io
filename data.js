@@ -119,9 +119,11 @@ function drawLabels() {
 
 	textAlign(CENTER, CENTER);
 	text(title, 0, 0, width, marginTop);
-	text(xAxisLabel, marginLeft, height - marginBottom, marginRight, height);
-	rotate(TAU / 4);
-	text(yAxisLabel, 0, marginTop, marginRight, height - marginBottom);
+	text(xAxisLabel, 0, 0, width, marginTop);
+	text(yAxisLabel, 0, 0, width, marginTop);
+	// text(xAxisLabel, marginLeft, height - marginBottom, marginRight, height);
+	// rotate(TAU / 4);
+	// text(yAxisLabel, 0, marginTop, marginRight, height - marginBottom);
 }
 
 function windowResized() {
