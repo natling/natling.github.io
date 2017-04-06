@@ -56,6 +56,7 @@ function draw() {
 
 	drawAxes();
 	drawData();
+	drawLabels();
 }
 
 function drawAxes() {
@@ -102,8 +103,6 @@ function drawData() {
 
 		var x = map(allCapacity, xLabelsMinimum, xLabelsMaximum, marginLeft, width - marginRight);
 		var y = map(allCalls, yLabelsMinimum, yLabelsMaximum, height - marginBottom, marginTop);
-
-		console.log(port, state, allCalls, allCapacity, x, y);
 
 		fill(foregroundColor);
 		noStroke();
