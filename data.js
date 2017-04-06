@@ -114,14 +114,14 @@ function drawData() {
 
 function drawLabels() {
 	var title  = '2012 Total Vessel Calls - Vessels over 1,000 gross register tons (GRT)';
-	var xLabel = 'capacity';
-	var yLabel = 'calls';
+	var xAxisLabel = 'capacity';
+	var yAxisLabel = 'calls';
 
 	textAlign(CENTER, CENTER);
 	text(title, 0, 0, width, marginTop);
-	text(xLabel, marginLeft, height - marginBottom, marginRight, height);
+	text(xAxisLabel, marginLeft, height - marginBottom, marginRight, height);
 	rotate(TAU / 4);
-	text(yLabel, 0, marginTop, marginRight, height - marginBottom);
+	text(yAxisLabel, 0, marginTop, marginRight, height - marginBottom);
 }
 
 function windowResized() {
