@@ -101,7 +101,7 @@ function drawData() {
 		noStroke();
 		ellipse(x, y, pointSize, pointSize);
 		textAlign(LEFT, CENTER);
-		text(port + ', ' + state, x + 5, y);
+		text(port + ', ' + state, x + 8, y);
 	}
 }
 
