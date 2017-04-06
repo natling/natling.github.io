@@ -124,6 +124,7 @@ function drawLabels() {
 	rectMode(CENTER);
 	rotate(HALF_PI);
 	text(yAxisLabel, marginLeft / 2, marginTop + ((height - marginBottom) - marginTop) / 2, marginLeft, height - marginBottom - marginTop);
+	rect(marginLeft / 2, marginTop + ((height - marginBottom) - marginTop) / 2, marginLeft, height - marginBottom - marginTop);
 }
 
 function windowResized() {
