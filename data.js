@@ -99,7 +99,7 @@ function drawData() {
 
 		fill(foregroundColor);
 		noStroke();
-		ellipse(y, x, pointSize, pointSize);
+		ellipse(x, y, pointSize, pointSize);
 		textAlign(LEFT, CENTER);
 		text(port + ', ' + state, x + 8, y);
 	}
