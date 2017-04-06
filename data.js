@@ -79,7 +79,7 @@ function drawAxes() {
 
 	for (var i = 0; i < yLabelsNumber; i++) {
 		var yLabel = map(i, 0, yLabelsNumber - 1, yLabelsMinimum, yLabelsMaximum);
-		var yLabelText = str(yLabel);
+		var yLabelText = str(Math.round(yLabel));
 		var yLocation = map(i, 0, yLabelsNumber - 1, height - marginBottom, marginTop);
 		textAlign(RIGHT, CENTER);
 		noStroke();
