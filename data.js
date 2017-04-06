@@ -18,6 +18,8 @@ function preload() {
 	table = loadTable('files/DS_U.S._Port_Calls_2012.csv', 'csv', 'header');
 }
 
+data = []
+
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	background(backgroundColor);
@@ -26,9 +28,23 @@ function setup() {
 	textSize(12);
 	fill(foregroundColor);
 
-	console.log(table);
-	console.log(table.getRowCount());
-	console.log(table.getColumnCount());
+	for (var i = 0; i < table.getRowCount(); i++) {
+		var port        = table.getString(i, 0);
+		var state       = table.getString(i, 1);
+		var allCalls    = table.getString(i, 2);
+		var allCapacity = table.getString(i, 3);
+
+		var entry = {
+			port: port,
+			state: state,
+			allCalls: allCalls,
+			allCapacity: allCapacity
+		}
+
+		data.push(entry);
+	}
+
+	console.log(data);
 }
 
 function draw() {
