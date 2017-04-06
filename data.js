@@ -1,3 +1,5 @@
+// data source: https://catalog.data.gov/dataset/vessel-calls-at-us-and-world-ports-2012-vessel-calls-in-u-s-ports-terminals-and-lightering-fcbc0
+
 var backgroundColor = '#002b36';
 var foregroundColor = '#b58900';
 
@@ -14,13 +16,13 @@ var yLabelsNumber = 11;
 var yLabelsMinimum = 0;
 var yLabelsMaximum = 1000;
 
-var pointSize = 3;
+var pointSize = 5;
 
 function preload() {
 	table = loadTable('files/DS_U.S._Port_Calls_2012.csv', 'csv', 'header');
 }
 
-data = []
+data = [];
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
@@ -44,8 +46,6 @@ function setup() {
 
 		data.push(entry);
 	}
-
-	console.log(data);
 }
 
 function draw() {
@@ -89,8 +89,15 @@ function drawData() {
 		fill(foregroundColor);
 		noStroke();
 
-		var x = map(data[i].allCapacity, xLabelsMinimum, xLabelsMaximum, marginLeft, width - marginRight);
-		var y = map(data[i].allCalls, yLabelsMinimum, yLabelsMaximum, height - marginBottom, marginTop);
+		var port        = data[i].port;
+		var state       = data[i].state;
+		var allCalls    = data[i].allCalls;
+		var allCapacity = data[i].allCapacity;
+
+		var x = map(allCapacity, xLabelsMinimum, xLabelsMaximum, marginLeft, width - marginRight);
+		var y = map(allCalls, yLabelsMinimum, yLabelsMaximum, height - marginBottom, marginTop);
+
+		console.log(port, state, allCalls, allCapacity, x, y);
 
 		ellipse(x, y, pointSize, pointSize);
 	}
