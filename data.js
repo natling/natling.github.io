@@ -117,14 +117,14 @@ function drawLabels() {
 	var xAxisLabel = 'capacity';
 	var yAxisLabel = 'calls';
 
-	rectMode(CORNERS);
+	// rectMode(CORNERS);
 	textAlign(CENTER, CENTER);
 	text(title, 0, 0, width, marginTop);
 	text(xAxisLabel, marginLeft, height - marginBottom, width - marginRight - marginLeft, marginBottom);
-	rectMode(CENTER);
-	// rotate(HALF_PI);
-	text(yAxisLabel, marginLeft / 2, marginTop + ((height - marginBottom) - marginTop) / 2, marginLeft, height - marginBottom - marginTop);
-	rect(marginLeft / 2, marginTop + ((height - marginBottom) - marginTop) / 2, marginLeft, height - marginBottom - marginTop);
+	// rectMode(CENTER);
+	rotate(HALF_PI);
+	text(yAxisLabel, marginLeft / 2, marginTop + ((height - marginBottom) - marginTop) / 2);
+	// rect(marginLeft / 2, marginTop + ((height - marginBottom) - marginTop) / 2, marginLeft, height - marginBottom - marginTop);
 }
 
 function windowResized() {
