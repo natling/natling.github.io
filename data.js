@@ -119,6 +119,7 @@ function drawLabels() {
 
 	textAlign(CENTER, CENTER);
 	text(title, 0, 0, width, marginTop);
+	text(xLabel, 0, height - marginBottom, width, height - marginBottom);
 }
 
 function windowResized() {
