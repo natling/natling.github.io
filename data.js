@@ -15,7 +15,7 @@ var yLabelsMinimum = 0;
 var yLabelsMaximum = 1000;
 
 function preload() {
-	table = loadTable('files/DS_U.S._Port_Calls_2012.csv', 'csv');
+	// table = loadTable('files/DS_U.S._Port_Calls_2012.csv', 'csv');
 }
 
 function setup() {
@@ -26,7 +26,10 @@ function setup() {
 	textFont('Menlo');
 	textSize(12);
 	fill(foregroundColor);
+}
 
+function draw() {
+	background(backgroundColor);
 	drawAxes();
 }
 
@@ -56,4 +59,8 @@ function drawAxes() {
 		stroke(foregroundColor)	;
 		line(marginLeft - 5, yLocation, marginLeft + 5, yLocation);
 	}
+}
+
+function windowResized() {
+	resizeCanvas(windowWidth, windowHeight);
 }
