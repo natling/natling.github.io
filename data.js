@@ -18,11 +18,11 @@ var yLabelsMaximum = 1000;
 
 var pointSize = 5;
 
+data = [];
+
 function preload() {
 	table = loadTable('files/DS_U.S._Port_Calls_2012.csv', 'csv', 'header');
 }
-
-data = [];
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
@@ -50,6 +50,7 @@ function setup() {
 
 function draw() {
 	background(backgroundColor);
+
 	drawAxes();
 	drawData();
 }
@@ -86,9 +87,6 @@ function drawAxes() {
 
 function drawData() {
 	for (var i = 0; i < data.length; i++) {
-		fill(foregroundColor);
-		noStroke();
-
 		var port        = data[i].port;
 		var state       = data[i].state;
 		var allCalls    = data[i].allCalls;
@@ -99,7 +97,10 @@ function drawData() {
 
 		console.log(port, state, allCalls, allCapacity, x, y);
 
+		fill(foregroundColor);
+		noStroke();
 		ellipse(x, y, pointSize, pointSize);
+		text(port + ', ' + state, x + 5, y);
 	}
 }
 
