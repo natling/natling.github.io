@@ -65,7 +65,7 @@ function drawAxes() {
 
 	for (var i = 0; i < xLabelsNumber; i++) {
 		var xLabel = map(i, 0, xLabelsNumber - 1, xLabelsMinimum, xLabelsMaximum);
-		var xLabelText = str(Math.round(xLabel) / 1000000) + 'm';
+		var xLabelText = str(Math.round(xLabel / 1000000)) + 'm';
 		var xLocation = map(i, 0, xLabelsNumber - 1, marginLeft, width - marginRight);
 		textAlign(CENTER, TOP);
 		noStroke();
