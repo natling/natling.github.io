@@ -3,7 +3,7 @@
 var backgroundColor = '#002b36';
 var foregroundColor = '#b58900';
 
-var marginTop = 50;
+var marginTop = 100;
 var marginBottom = 100;
 var marginLeft = 150;
 var marginRight = 60;
@@ -111,6 +111,12 @@ function drawData() {
 		textAlign(LEFT, CENTER);
 		text(port + ', ' + state, x + 8, y);
 	}
+}
+
+function drawLabels() {
+	var title = '2012 Total Vessel Calls - Vessels over 1,000 gross register tons (GRT)';
+	var xLabel = 'capacity';
+	var yLabel = 'calls';
 }
 
 function windowResized() {
