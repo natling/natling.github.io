@@ -15,7 +15,7 @@ var yLabelsMinimum = 0;
 var yLabelsMaximum = 1000;
 
 function preload() {
-	table = loadTable('files/DS_U.S._Port_Calls_2012.csv', 'csv');
+	table = loadTable('files/DS_U.S._Port_Calls_2012.csv', 'csv', 'header');
 }
 
 function setup() {
@@ -27,6 +27,8 @@ function setup() {
 	fill(foregroundColor);
 
 	console.log(table);
+	console.log(table.getRowCount());
+	console.log(table.getColumnCount());
 }
 
 function draw() {
