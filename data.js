@@ -1,4 +1,18 @@
-var margin = 50;
+var backgroundColor = '#002b36';
+var foregroundColor = '#b58900';
+
+var marginTop = 50;
+var marginBottom = 100;
+var marginLeft = 150;
+var marginRight = 60;
+
+var xLabelsNumber = 9;
+var xLabelsMinimum = 0;
+var xLabelsMaximum = 400000000;
+
+var yLabelsNumber = 11;
+var yLabelsMinimum = 0;
+var yLabelsMaximum = 1000;
 
 function preload() {
 	table = loadTable('files/DS_U.S._Port_Calls_2012.csv', 'csv');
@@ -7,10 +21,39 @@ function preload() {
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	noCursor();
-	background(0);
+	background(backgroundColor);
+
+	textFont('Menlo');
+	textSize(12);
+	fill(foregroundColor);
+
+	drawAxes();
 }
 
 function drawAxes() {
-	line(150,height-50,width-50,height-50);
-	line(150,50,150,height-50);
+	stroke(foregroundColor);
+	line(marginLeft, height - marginBottom, width - marginRight, height - marginBottom);
+	line(marginLeft, marginTop, marginLeft, height - marginBottom);
+
+	for (var i = 0; i < xLabelsNumber; i++) {
+		var xLabel = map(i, 0, xLabelsNumber - 1, xLabelsMinimum, xLabelsMaximum);
+		var xLabelText = str(Math.round(xLabel) / 1000000) + 'm';
+		var xLocation = map(i, 0, xLabelsNumber - 1, marginLeft, width - marginRight);
+		textAlign(CENTER, TOP);
+		noStroke();
+		text(xLabelText, xLocation, height - marginBottom + 10);
+		stroke(foregroundColor);
+		line(xLocation, height - marginBottom - 5, xLocation, height - marginBottom + 5);
+	}
+
+	for (var i = 0; i < yLabelsNumber; i++) {
+		var yLabel = map(i, 0, yLabelsNumber - 1, yLabelsMinimum, yLabelsMaximum);
+		var yLabelText = str(Math.round(yLabel));
+		var yLocation = map(i, 0, yLabelsNumber - 1, height - marginBottom, marginTop);
+		textAlign(RIGHT, CENTER);
+		noStroke();
+		text(yLabelText, marginLeft - 10, yLocation);
+		stroke(foregroundColor)	;
+		line(marginLeft - 5, yLocation, marginLeft + 5, yLocation);
+	}
 }
