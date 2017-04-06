@@ -120,12 +120,8 @@ function drawLabels() {
 	textAlign(CENTER, CENTER);
 	text(title, 0, 0, width, marginTop);
 	text(xAxisLabel, marginLeft, height - marginBottom, width - marginRight - marginLeft, marginBottom);
-	// noFill();
-	// stroke(foregroundColor);
-	// strokeWeight(1);
-	// rect(marginLeft, height - marginBottom, marginRight, height);
 	rotate(TAU / 4);
-	text(yAxisLabel, 0, marginTop, marginRight, height - marginBottom);
+	text(yAxisLabel, 0, marginTop, marginRight, height - marginBottom - marginTop);
 }
 
 function windowResized() {
