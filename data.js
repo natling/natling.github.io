@@ -60,6 +60,7 @@ function draw() {
 
 function drawAxes() {
 	stroke(foregroundColor);
+	strokeWeight(1);
 	line(marginLeft, height - marginBottom, width - marginRight, height - marginBottom);
 	line(marginLeft, marginTop, marginLeft, height - marginBottom);
 
@@ -75,7 +76,7 @@ function drawAxes() {
 		text(xLabelText, xLocation, height - marginBottom + 10);
 		stroke(foregroundColor);
 		strokeWeight(0.5);
-		line(xLocation, height - marginTop, xLocation, height - marginBottom + 5);
+		line(xLocation, marginTop, xLocation, height - marginBottom + 5);
 	}
 
 	for (var i = 0; i < yLabelsNumber; i++) {
