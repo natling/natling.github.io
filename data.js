@@ -61,7 +61,7 @@ function draw() {
 
 function drawAxes() {
 	stroke(foregroundColor);
-	strokeWeight(1);
+	strokeWeight(2);
 	line(marginLeft, height - marginBottom, width - marginRight, height - marginBottom);
 	line(marginLeft, marginTop, marginLeft, height - marginBottom);
 
@@ -76,7 +76,7 @@ function drawAxes() {
 		fill(foregroundColor);
 		text(xLabelText, xLocation, height - marginBottom + 10);
 		stroke(foregroundColor);
-		strokeWeight(0.5);
+		strokeWeight(1);
 		line(xLocation, marginTop, xLocation, height - marginBottom + 5);
 	}
 
@@ -89,7 +89,7 @@ function drawAxes() {
 		fill(foregroundColor);
 		text(yLabelText, marginLeft - 10, yLocation);
 		stroke(foregroundColor)	;
-		strokeWeight(0.5);
+		strokeWeight(1);
 		line(marginLeft - 5, yLocation, width - marginRight, yLocation);
 	}
 }
@@ -119,6 +119,7 @@ function drawLabels() {
 
 	textAlign(CENTER, CENTER);
 	text(title, 0, 0, width, marginTop);
+	text(xLabelText, 0, height - marginBottom, width, height - marginBottom);
 }
 
 function windowResized() {
