@@ -65,7 +65,7 @@ function drawAxes() {
 
 	for (var i = 0; i < xLabelsNumber; i++) {
 		var xLabel = map(i, 0, xLabelsNumber - 1, xLabelsMinimum, xLabelsMaximum);
-		var xLabelText = (xLabel / 1000000).toPrecision(2);
+		var xLabelText = (xLabel / 1000000).toPrecision(3);
 		// xLabelText = xLabelText.toPrecision
 		var xLabelText = str(xLabelText) + 'm';
 		var xLocation = map(i, 0, xLabelsNumber - 1, marginLeft, width - marginRight);
@@ -79,7 +79,7 @@ function drawAxes() {
 
 	for (var i = 0; i < yLabelsNumber; i++) {
 		var yLabel = map(i, 0, yLabelsNumber - 1, yLabelsMinimum, yLabelsMaximum);
-		var yLabelText = str(Math.round(yLabel));
+		var yLabelText = str(yLabel.toPrecision(4));
 		var yLocation = map(i, 0, yLabelsNumber - 1, height - marginBottom, marginTop);
 		textAlign(RIGHT, CENTER);
 		noStroke();
