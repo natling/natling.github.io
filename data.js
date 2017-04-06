@@ -117,6 +117,7 @@ function drawLabels() {
 	var xAxisLabel = 'capacity';
 	var yAxisLabel = 'calls';
 
+	translate(0, 0);
 	textAlign(CENTER, CENTER);
 	text(title, 0, 0, width, marginTop);
 	text(xAxisLabel, marginLeft, height - marginBottom, width - marginRight - marginLeft, marginBottom);
