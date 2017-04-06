@@ -28,7 +28,6 @@ function setup() {
 
 	textFont('Menlo');
 	textSize(12);
-	fill(foregroundColor);
 
 	for (var i = 0; i < table.getRowCount(); i++) {
 		var port        = table.getString(i, 0);
@@ -66,6 +65,7 @@ function drawAxes() {
 		var xLocation = map(i, 0, xLabelsNumber - 1, marginLeft, width - marginRight);
 		textAlign(CENTER, TOP);
 		noStroke();
+		fill(foregroundColor);
 		text(xLabelText, xLocation, height - marginBottom + 10);
 		stroke(foregroundColor);
 		line(xLocation, height - marginBottom - 5, xLocation, height - marginBottom + 5);
@@ -77,6 +77,7 @@ function drawAxes() {
 		var yLocation = map(i, 0, yLabelsNumber - 1, height - marginBottom, marginTop);
 		textAlign(RIGHT, CENTER);
 		noStroke();
+		fill(foregroundColor);
 		text(yLabelText, marginLeft - 10, yLocation);
 		stroke(foregroundColor)	;
 		line(marginLeft - 5, yLocation, marginLeft + 5, yLocation);
@@ -85,6 +86,8 @@ function drawAxes() {
 
 function drawData() {
 	for (var i = 0; i < data.length; i++) {
+		fill(foregroundColor);
+		noStroke();
 		ellipse(data[i].allCapacity, data[i].allCalls, pointSize, pointSize);
 	}
 }
