@@ -51,8 +51,8 @@ function setup() {
 function draw() {
 	background(backgroundColor);
 
-	xLabelsMaximum = map(mouseX, width, 0, 400000000, 0);
-	yLabelsMaximum = map(mouseY, height, 0, 0, 10000);
+	xLabelsMaximum = map(mouseX, 0, width, 0, 400000000);
+	yLabelsMaximum = map(mouseY, 0, height, 10000, 0);
 
 	drawAxes();
 	drawData();
