@@ -88,7 +88,11 @@ function drawData() {
 	for (var i = 0; i < data.length; i++) {
 		fill(foregroundColor);
 		noStroke();
-		ellipse(data[i].allCapacity, data[i].allCalls, pointSize, pointSize);
+
+		var x = map(data[i].allCapacity, xLabelsMinimum, xLabelsMaximum, marginLeft, width - marginRight);
+		var y = map(data[i].allCalls, yLabelsMinimum, yLabelsMaximum, height - marginBottom, marginTop);
+
+		ellipse(x, y, pointSize, pointSize);
 	}
 }
 
