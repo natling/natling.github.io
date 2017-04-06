@@ -14,6 +14,8 @@ var yLabelsNumber = 11;
 var yLabelsMinimum = 0;
 var yLabelsMaximum = 1000;
 
+var pointSize = 3;
+
 function preload() {
 	table = loadTable('files/DS_U.S._Port_Calls_2012.csv', 'csv', 'header');
 }
@@ -50,6 +52,7 @@ function setup() {
 function draw() {
 	background(backgroundColor);
 	drawAxes();
+	drawData();
 }
 
 function drawAxes() {
@@ -77,6 +80,12 @@ function drawAxes() {
 		text(yLabelText, marginLeft - 10, yLocation);
 		stroke(foregroundColor)	;
 		line(marginLeft - 5, yLocation, marginLeft + 5, yLocation);
+	}
+}
+
+function drawData() {
+	for (var i = 0; i < data.length; i++) {
+		ellipse(data[i].allCapacity, data[i].allCalls, pointSize, pointSize);
 	}
 }
 
