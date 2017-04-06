@@ -120,7 +120,7 @@ function drawLabels() {
 	textAlign(CENTER, CENTER);
 	text(title, 0, 0, width, marginTop);
 	text(xAxisLabel, marginLeft, height - marginBottom, width - marginRight - marginLeft, marginBottom);
-	rotate(TAU / 4);
+	// rotate(TAU / 4);
 	text(yAxisLabel, 0, marginTop, marginRight, height - marginBottom - marginTop);
 }
 
