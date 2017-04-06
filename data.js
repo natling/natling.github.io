@@ -117,12 +117,10 @@ function drawLabels() {
 	var xAxisLabel = 'capacity';
 	var yAxisLabel = 'calls';
 
-	// rectMode(CORNERS);
 	textAlign(CENTER, CENTER);
 	text(title, 0, 0, width, marginTop);
 	text(xAxisLabel, marginLeft, height - marginBottom, width - marginRight - marginLeft, marginBottom);
-	// rectMode(CENTER);
-	// rotate(HALF_PI);
+	rotate(HALF_PI);
 	translate(marginLeft / 2, marginTop + ((height - marginBottom) - marginTop) / 2);
 	text(yAxisLabel, 0, 0);
 	// rect(marginLeft / 2, marginTop + ((height - marginBottom) - marginTop) / 2, marginLeft, height - marginBottom - marginTop);
