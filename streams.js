@@ -19,10 +19,6 @@ function setup() {
 	columns = Math.floor(width / columnWidth);
 	rows = Math.floor(height / rowHeight);
 
-	console.log(width);
-	console.log(columnWidth);
-	console.log(columnWidth * columns);
-
 	var emptyLine = new Array(columns);
 	emptyLine.fill(' ');
 
