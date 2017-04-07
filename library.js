@@ -44,14 +44,6 @@ function setup() {
 }
 
 function draw() {
-	charWidth = textWidth(' ');
-
-	gridWidth = charWidth * 1.3;
-	gridHeight = charWidth * 1.7;
-
-	columns = int(width / gridWidth);
-	rows = int(height / gridHeight);
-
 	background(0);
 
 	for (var i = 0; i < columns; i++) {
