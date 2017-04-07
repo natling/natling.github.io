@@ -1,4 +1,5 @@
-var gridWidth,
+var charWidth,
+	gridWidth,
 	gridHeight,
 
 	colors = 3,
@@ -22,7 +23,7 @@ function setup() {
 	textAlign(LEFT, TOP);
 	textSize(20);
 
-	var charWidth = textWidth(' ');
+	charWidth = textWidth(' ');
 
 	gridWidth = charWidth * 1.3;
 	gridHeight = charWidth * 1.7;
@@ -43,7 +44,7 @@ function setup() {
 }
 
 function draw() {
-	var charWidth = textWidth(' ');
+	charWidth = textWidth(' ');
 
 	gridWidth = charWidth * 1.3;
 	gridHeight = charWidth * 1.7;
