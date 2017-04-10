@@ -5,6 +5,7 @@
   <title>natalie braginsky</title>
   <meta charset="UTF-8">
   <link rel="shortcut icon" href="files/favicon.png"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
   body {
     margin: 0px;
@@ -15,7 +16,15 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    max-height: auto;
+    height: auto;
+  }
+  @media only screen and (orientation: portrait) {
+    img {
+      position: absolute;
+      right: 0;
+      width: auto;
+      height: 100%;
+    }
   }
   </style>
 </head>
