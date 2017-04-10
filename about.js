@@ -14,7 +14,7 @@ class FloatingString {
 		var xLiteral = map(this.x, 0, 1, horizontalMargin, width - horizontalMargin);
 		var yLiteral = map(this.y, 0, 1, verticalMargin, height - verticalMargin);
 		fill(this.col);
-		text(this.string, xLiteral, yLiteral, 200, 50);
+		text(this.string, xLiteral, yLiteral, 200, 90);
 	}
 
 	move() {
@@ -84,6 +84,7 @@ var strings = [
 	'\"sad-toned circuits failing in public\"',
 	'\"these are the brief shards of digital noise you\'ve been looking for\"',
 	'\"actual net art princess\"',
+	'\"noise music reminiscent of that time it was 1983 and you got sucked into your vectrex and the only way to escape was beating level 13 in mine storm\"',
 ];
 
 var floatingStrings = [];
