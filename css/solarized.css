@@ -18,8 +18,12 @@ $green:     #859900;
 */
 
 @font-face {
-  font-family: Menlo;
-  src: url('../fonts/Menlo.otf') format("opentype");
+  font-family: 'Menlo';
+  font-style: normal;
+  src:
+    local('Menlo'),
+    local('Menlo Regular'),
+    url('../fonts/Menlo.otf') format("opentype");
 }
 body {
   background-color: #002b36;
