@@ -7,30 +7,55 @@
   <link rel="shortcut icon" href="files/favicon.png"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-  body {
-    margin: 0px;
-    border: 0px;
-    padding: 0px;
-  }
-  img {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: auto;
-  }
-  @media only screen and (orientation: portrait) {
+    @font-face {
+      font-family: 'Menlo';
+      font-style: normal;
+      src:
+        local('Menlo'),
+        local('Menlo Regular'),
+        url('../fonts/Menlo.otf') format("opentype");
+    }
+    body {
+      margin: 0px;
+      border: 0px;
+      padding: 0px;
+    }
     img {
       position: absolute;
-      right: 0;
-      width: auto;
-      height: 100%;
+      bottom: 0;
+      width: 100%;
+      height: auto;
     }
-  }
+    @media only screen and (orientation: portrait) {
+      img {
+        position: absolute;
+        right: 0;
+        width: auto;
+        height: 100%;
+      }
+    }
+    p {
+      margin: 0px;
+      border: 0px;
+      padding: 10px;
+
+      position: absolute;
+      top: 5vw;
+      left: 5vw;
+      width: 283px;
+      z-index: 1;
+
+      font-family: Menlo;
+      font-size: 11pt;
+      color: white;
+      background-color: black;
+    }
   </style>
 </head>
 
 <body>
   <img src="files/2017.04.08 b.jpg" alt="" title="">
+  <p>natalie braginsky makes music + art + poems + computer programs. she lives in brooklyn.</p>
 </body>
 
 </html>
