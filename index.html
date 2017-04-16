@@ -13,7 +13,7 @@
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-16671024-9', 'auto');
+  ga('create', 'UA-16671024-8', 'auto');
   ga('send', 'pageview');
   </script>
 
@@ -45,9 +45,7 @@
         height: 100%;
       }
     }
-    p {
-      margin: 0px;
-      border: 0px;
+    div.box {
       padding: 10px;
 
       position: absolute;
@@ -59,6 +57,12 @@
       font-size: 11pt;
       color: white;
       background-color: black;
+    }
+    p {
+      margin: 0px;
+    }
+    div.links {
+      columns: 2;
     }
     a:link, a:visited {
       color: white;
@@ -72,19 +76,24 @@
 
 <body>
   <img src="files/2017.04.08 b.jpg" alt="" title="">
-  <p>
-    natalie braginsky makes music +<br>
-    art + poems + computer programs.<br>
-    she lives in brooklyn.<br>
-    <br><a href="http://nataliebraginsky.com/about">about</a>
-    <br><a href="http://nataliebraginsky.com/poetry">poetry</a>
-    <br><a href="http://nataliebraginsky.com/ascii">ascii stuff</a>
-    <br><a href="http://nataliebraginsky.bandcamp.com">bandcamp</a>
-    <br><a href="http://soundcloud.com/nataliebraginsky">soundcloud</a>
-    <br><a href="http://twitter.com/ntkvby">twitter</a>
-    <br><a href="http://instagram.com/ntkvby">instagram</a>
-    <br><a href="mailto:hi@natalie.computer">email</a>
-  </p>
+  <div class="box">
+    <p class="text">
+      natalie braginsky makes music +<br>
+      art + poems + computer programs.<br>
+      she lives in brooklyn.
+    </p>
+    <br>
+    <div class="links">
+      <a href="http://nataliebraginsky.com/about">about</a>
+      <br><a href="http://nataliebraginsky.com/poetry">poetry</a>
+      <br><a href="http://nataliebraginsky.com/ascii">ascii stuff</a>
+      <br><a href="mailto:hi@natalie.computer">email</a>
+      <br><a href="http://nataliebraginsky.bandcamp.com">bandcamp</a>
+      <br><a href="http://soundcloud.com/nataliebraginsky">soundcloud</a>
+      <br><a href="http://twitter.com/ntkvby">twitter</a>
+      <br><a href="http://instagram.com/ntkvby">instagram</a>
+    </div>
+  </div>
 </body>
 
 </html>
