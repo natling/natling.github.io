@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>poetry</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="files/favicon.png"/>
+  <style>
+    @font-face {
+      font-family: 'Menlo';
+      font-style: normal;
+      src:
+        local('Menlo'),
+        local('Menlo Regular'),
+        url('../fonts/Menlo.otf') format("opentype");
+    }
+    body {
+      margin: 0;
+      border: 0;
+      padding: 0;
+
+      background-color: #002b36;
+
+      font-family: Menlo;
+      font-size: 30px;
+      text-align: center;
+    }
+    a:link, a:visited {
+      display: block;
+      color: #b58900;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #002b36;
+      background-color: #b58900;
+    }
+  </style>
+</head>
+
+<body>
+  <a class="link" href="evaluation">evaluation</a>
+  <a class="link" href="okc">okc</a>
+  <a class="link" href="pronouns">pronouns</a>
+  <a class="link" href="love">things we say around love</a>
+  <a class="link" href="why">why</a>
+  <a class="link" href="notsure">not sure</a>
+  <a class="link" href="you">you</a>
+
+  <script>
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+
+    var links = document.getElementsByClassName("link");
+    var linkHeight = links[0].clientHeight;
+
+    var padding = height / (links.length * 2) - linkHeight / 2;
+
+    for (var i = 0; i < links.length; i++) {
+      links[i].style.padding = padding + 'px';
+    }
+  </script>
+</body>
+</html>
