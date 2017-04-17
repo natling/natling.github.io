@@ -11,6 +11,7 @@ var corpus;
 $.get("files/some imagist poets.txt", function(data) {
 	corpus = data;
 	aPoem = callback();
+	console.log(aPoem);
 });
 
 function callback() {
