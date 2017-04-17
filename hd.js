@@ -9,9 +9,7 @@ var corpus;
 
 $.get("files/some imagist poets.txt", function(data) {
 	corpus = data;
-	$( document ).ready(function () {
-		callback();
-	})
+	callback();
 });
 
 function callback() {

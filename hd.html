@@ -12,7 +12,9 @@
 <body>
 <pre id="poem"></pre>
 <script>
-  document.getElementById("poem").innerHTML = aPoem;
+  $( document ).ready(function () {
+    document.getElementById("poem").innerHTML = aPoem;
+  });
 </script>
 </body>
 </html>
