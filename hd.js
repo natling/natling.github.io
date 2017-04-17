@@ -9,12 +9,9 @@ var corpus;
 
 $.get("files/some imagist poets.txt", function(data) {
 	corpus = data;
-	result = callback();
-	console.log(result);
-	return result;
+	aPoem = callback();
+	console.log(aPoem);
 });
-
-aPoem = result;
 
 function callback() {
 	var corpusFormatted = corpus.split('\n');
