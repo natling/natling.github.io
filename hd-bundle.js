@@ -8,11 +8,9 @@ var chance            = new Chance();
 
 var corpus;
 
-$( document ).ready(function () {
-	$.get("files/some imagist poets.txt", function(data) {
-		corpus = data;
-		callback();
-	});
+$.get("files/some imagist poets.txt", function(data) {
+	corpus = data;
+	callback();
 });
 
 function callback() {
