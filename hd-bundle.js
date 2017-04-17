@@ -1,53 +1,54 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var $                 = require('jquery');
-var _                 = require('lodash');
-var removePunctuation = require('remove-punctuation');
-var interleave        = require('loose-interleave');
-var Chance            = require('chance');
-var chance            = new Chance();
-
-var corpus;
-
 $( document ).ready(function() {
+
+	var $                 = require('jquery');
+	var _                 = require('lodash');
+	var removePunctuation = require('remove-punctuation');
+	var interleave        = require('loose-interleave');
+	var Chance            = require('chance');
+	var chance            = new Chance();
+
+	var corpus;
+
 	$.get("files/some imagist poets.txt", function(data) {
 		corpus = data;
 		callback();
 	});
-})
 
-function callback() {
-	var corpusFormatted = corpus.split('\n');
-	corpusFormatted = corpusFormatted.map(function(line) {return line.replace(/[.,\/#!?$%\^&\*;:{}=\-_`~()]/g,"")});
-	corpusFormatted = corpusFormatted.map(function(line) {return line.match(/\S+/g) || []});
-	corpusFormatted = corpusFormatted.filter(function(line) {return line.length != 0});
-	corpusFormatted = corpusFormatted.filter(function(line) {return  !(/[A-Z]/.test(_.last(_.last(line))))});
-	corpusFormatted = corpusFormatted.map(function(line) {return line.map(function(word) {return word.toLowerCase()})})
+	function callback() {
+		var corpusFormatted = corpus.split('\n');
+		corpusFormatted = corpusFormatted.map(function(line) {return line.replace(/[.,\/#!?$%\^&\*;:{}=\-_`~()]/g,"")});
+		corpusFormatted = corpusFormatted.map(function(line) {return line.match(/\S+/g) || []});
+		corpusFormatted = corpusFormatted.filter(function(line) {return line.length != 0});
+		corpusFormatted = corpusFormatted.filter(function(line) {return  !(/[A-Z]/.test(_.last(_.last(line))))});
+		corpusFormatted = corpusFormatted.map(function(line) {return line.map(function(word) {return word.toLowerCase()})})
 
-	// console.log(corpusFormatted);
+		// console.log(corpusFormatted);
 
-	function poem(
-		numberOfInputLinesLow = 2,
-		numberOfInputLinesHigh = 4,
-		probabilitySpace = 10,
-		probabilityNewLine = 5,
-		probabilityNewStanza = 1
-	) {
-		var numberOfInputLines = chance.integer({min: numberOfInputLinesLow, max: numberOfInputLinesHigh});
+		function poem(
+			numberOfInputLinesLow = 2,
+			numberOfInputLinesHigh = 4,
+			probabilitySpace = 10,
+			probabilityNewLine = 5,
+			probabilityNewStanza = 1
+		) {
+			var numberOfInputLines = chance.integer({min: numberOfInputLinesLow, max: numberOfInputLinesHigh});
 
-		var words = _.flatten(Array.from({length: numberOfInputLines}, v => chance.pickone(corpusFormatted)));
+			var words = _.flatten(Array.from({length: numberOfInputLines}, v => chance.pickone(corpusFormatted)));
 
-		function layoutChoose() {
-			return chance.weighted([' ', '\n', '\n\n'], [probabilitySpace, probabilityNewLine, probabilityNewStanza]);
+			function layoutChoose() {
+				return chance.weighted([' ', '\n', '\n\n'], [probabilitySpace, probabilityNewLine, probabilityNewStanza]);
+			};
+
+			var layout = Array.from({length: words.length - 1}, v => layoutChoose());
+
+			return interleave(words, layout).join('');
 		};
 
-		var layout = Array.from({length: words.length - 1}, v => layoutChoose());
-
-		return interleave(words, layout).join('');
+		aPoem = poem();
+		console.log(aPoem);
 	};
-
-	aPoem = poem();
-	console.log(aPoem);
-};
+})
 },{"chance":2,"jquery":3,"lodash":4,"loose-interleave":5,"remove-punctuation":6}],2:[function(require,module,exports){
 (function (Buffer){
 //  Chance.js 1.0.6
