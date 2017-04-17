@@ -9,8 +9,7 @@ var corpus;
 
 $.get("files/some imagist poets.txt", function(data) {
 	corpus = data;
-	aPoem = callback();
-	console.log(aPoem);
+	callback();
 });
 
 function callback() {
@@ -43,5 +42,6 @@ function callback() {
 		return interleave(words, layout).join('');
 	};
 
-	return poem();
+	aPoem = poem();
+	console.log(aPoem);
 };
