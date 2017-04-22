@@ -7,7 +7,9 @@
   <link rel="shortcut icon" href="files/favicon.png"/>
   <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="libraries/featherlight-1.7.1/release/featherlight.min.js"></script>
+  <script src="libraries/featherlight-1.7.1/release/featherlight.gallery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="libraries/featherlight-1.7.1/release/featherlight.min.css">
+  <link rel="stylesheet" type="text/css" href="libraries/featherlight-1.7.1/release/featherlight.gallery.min.css">
   <style>
   body {
     margin: 0px;
@@ -23,6 +25,11 @@
   .left   { width:  50%; left:   0; }
   .right  { width:  50%; right:  0; }
   </style>
+  <script>
+    $(document).ready(function(){
+      $('.gallery').featherlightGallery();
+    });
+  </script>
 </head>
 
 <body>
