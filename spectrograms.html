@@ -11,41 +11,34 @@
   <link rel="stylesheet" type="text/css" href="libraries/featherlight-1.7.1/release/featherlight.min.css">
   <link rel="stylesheet" type="text/css" href="libraries/featherlight-1.7.1/release/featherlight.gallery.min.css">
   <style>
-  body {
-    margin: 0px;
-  }
+    .quadrant {
+      background: black;
+      box-sizing: border-box;
+      position: fixed;
+    }
 
-  .quadrant {
-    margin: 0;
-    border: 0;
-    background: black;
-    box-sizing: border-box;
-    position: fixed;
-  }
+    .top    { height: 50%; top:    0; padding-top: 20px; padding-bottom: 10px; }
+    .bottom { height: 50%; bottom: 0; padding-top: 10px; padding-bottom: 20px; }
+    .left   { width:  50%; left:   0; padding-left: 20px; padding-right: 10px; }
+    .right  { width:  50%; right:  0; padding-left: 10px; padding-right: 20px; }
 
-  .top    { height: 50%; top:    0; padding-top: 20px; padding-bottom: 10px; }
-  .bottom { height: 50%; bottom: 0; padding-top: 10px; padding-bottom: 20px; }
-  .left   { width:  50%; left:   0; padding-left: 20px; padding-right: 10px; }
-  .right  { width:  50%; right:  0; padding-left: 10px; padding-right: 20px; }
+    .featherlight .featherlight-content {
+      border: 0;
+      padding: 0;
+    }
 
-  .featherlight .featherlight-content {
-    margin: 0;
-    border: 0;
-    padding: 0;
-  }
+    .featherlight .featherlight-image {
+      width: 95vw;
+    }
 
-  .featherlight .featherlight-image {
-    width: 95vw;
-  }
+    .featherlight .featherlight-close-icon {
+      display: none;
+    }
 
-  .featherlight .featherlight-close-icon {
-    display: none;
-  }
-
-  .featherlight-next,
-  .featherlight-previous {
-    display: none;
-  }
+    .featherlight-next,
+    .featherlight-previous {
+      display: none;
+    }
   </style>
 </head>
 
