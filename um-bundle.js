@@ -5591,7 +5591,8 @@ function poem() {
 	punctuationStream.push(chance.weighted(punctuation.values, punctuation.end));
 	layoutStream = Array.from({length: numberOfWords - 1}, v => chance.weighted(layout.values, layout.weights));
 
-	return interleave(wordStream, punctuationStream, layoutStream).join('');
+	var poem = interleave(wordStream, punctuationStream, layoutStream).join('');
+	return poem;
 }
 
 console.log(poem());
