@@ -36,9 +36,7 @@ function poem() {
 	punctuationStream.push(chance.weighted(punctuation.values, punctuation.end));
 	layoutStream = Array.from({length: numberOfWords - 1}, v => chance.weighted(layout.values, layout.weights));
 
-	var poem = interleave(wordStream, punctuationStream, layoutStream).join('');
-	return poem;
+	return interleave(wordStream, punctuationStream, layoutStream).join('');
 }
 
-console.log(poem());
-document.getElementById("poem").innerHTML = poem();
+aPoem = poem();
