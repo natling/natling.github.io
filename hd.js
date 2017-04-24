@@ -20,8 +20,6 @@ function callback() {
 	corpusFormatted = corpusFormatted.filter(function(line) {return  !(/[A-Z]/.test(_.last(_.last(line))))});
 	corpusFormatted = corpusFormatted.map(function(line) {return line.map(function(word) {return word.toLowerCase()})})
 
-	// console.log(corpusFormatted);
-
 	function poem(
 		numberOfInputLinesLow = 2,
 		numberOfInputLinesHigh = 4,

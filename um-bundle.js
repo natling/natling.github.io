@@ -5554,8 +5554,8 @@ function looseInterleave () {
 
 },{}],3:[function(require,module,exports){
 var interleave = require('loose-interleave');
-var Chance = require('chance');
-var chance = new Chance();
+var Chance     = require('chance');
+var chance     = new Chance();
 
 var words = [
 	[ 30, [ 'ah', 'hey', 'hm', 'huh', 'oh', 'ok', 'uh', 'um', 'yeah'                                                         ] ],
@@ -5594,8 +5594,7 @@ function poem() {
 	return interleave(wordStream, punctuationStream, layoutStream).join('');
 }
 
-// console.log(poem());
-aPoem = poem();
+document.getElementById("poem").innerHTML = poem();
 },{"chance":1,"loose-interleave":2}],4:[function(require,module,exports){
 'use strict'
 

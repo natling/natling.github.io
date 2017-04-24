@@ -1,6 +1,6 @@
 var interleave = require('loose-interleave');
-var Chance = require('chance');
-var chance = new Chance();
+var Chance     = require('chance');
+var chance     = new Chance();
 
 var words = [
 	[ 30, [ 'ah', 'hey', 'hm', 'huh', 'oh', 'ok', 'uh', 'um', 'yeah'                                                         ] ],
@@ -39,5 +39,4 @@ function poem() {
 	return interleave(wordStream, punctuationStream, layoutStream).join('');
 }
 
-// console.log(poem());
-aPoem = poem();
+document.getElementById("poem").innerHTML = poem();
