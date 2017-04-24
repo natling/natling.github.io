@@ -5594,6 +5594,7 @@ function poem() {
 	return interleave(wordStream, punctuationStream, layoutStream).join('');
 }
 
+console.log(poem());
 document.getElementById("poem").innerHTML = poem();
 },{"chance":1,"loose-interleave":2}],4:[function(require,module,exports){
 'use strict'

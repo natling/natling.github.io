@@ -39,4 +39,5 @@ function poem() {
 	return interleave(wordStream, punctuationStream, layoutStream).join('');
 }
 
+console.log(poem());
 document.getElementById("poem").innerHTML = poem();
