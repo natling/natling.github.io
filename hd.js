@@ -42,6 +42,5 @@ function callback() {
 		return interleave(words, layout).join('');
 	};
 
-	aPoem = poem();
-	console.log(aPoem);
+	document.getElementById("poem").innerHTML = poem();
 };
