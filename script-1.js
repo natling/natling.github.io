@@ -45,7 +45,10 @@ function drawCharacter(x, y, w, h, numberOfPoints, weight) {
 	pointsArray = [];
 
 	for (var i = 0; i < numberOfPoints; i++) {
-		pointsArray.push([random(x, x + w), random(y, y + h)]);
+		newX = random(x, x + w);
+		newY = random(y, y + h);
+
+		pointsArray.push([newX, newY]);
 	}
 
 	strokeWeight(weight);
