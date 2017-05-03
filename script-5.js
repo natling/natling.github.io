@@ -1,7 +1,7 @@
 var letterHeight           =  35,
-	letterWidth            =  35,
+	letterWidth            =  25,
 	spaceBetweenLines      = -20,
-	spaceBetweenCharacters =  20,
+	spaceBetweenCharacters =  15,
 	rowHeight              = letterHeight + spaceBetweenLines,
 	columnWidth            = letterWidth + spaceBetweenCharacters;
 
