@@ -13,7 +13,7 @@ function setup() {
 	noCursor();
 
 	rows             = int(height / rowHeight) - 3;
-	columns          = int(width / columnWidth) - 8;
+	columns          = int(width / columnWidth) - 11;
 	marginVertical   = (height - rows * rowHeight) / 2;
 	marginHorizontal = (width - columns * columnWidth) / 2;
 
