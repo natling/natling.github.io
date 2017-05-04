@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>scripts</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="files/favicon.png"/>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    .cell {
+      position: fixed;
+      border: 0;
+    }
+
+    .row1    { height:     50%; top:       0%; }
+    .row2    { height:     50%; top:      50%; }
+    .column1 { width:  33.333%; left:      0%; }
+    .column2 { width:  33.333%; left: 33.333%; }
+    .column3 { width:  33.333%; left: 66.666%; }
+
+    .link {
+      position: inherit;
+      border: inherit;
+      height: inherit;
+      width: inherit;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cell row1 column1">
+    <iframe src="script-1.html" class="link"></iframe>
+    <a href="script-1" class="link"></a>
+  </div>
+  <div class="cell row1 column2">
+    <iframe src="script-2.html" class="link"></iframe>
+    <a href="script-2" class="link"></a>
+  </div>
+  <div class="cell row1 column3">
+    <iframe src="script-3.html" class="link"></iframe>
+    <a href="script-3" class="link"></a>
+  </div>
+  <div class="cell row2 column1">
+    <iframe src="script-4.html" class="link"></iframe>
+    <a href="script-4" class="link"></a>
+  </div>
+  <div class="cell row2 column2">
+    <iframe src="script-5.html" class="link"></iframe>
+    <a href="script-5" class="link"></a>
+  </div>
+  <div class="cell row2 column3">
+    <iframe src="script-6.html" class="link"></iframe>
+    <a href="script-6" class="link"></a>    
+  </div>
+</body>
+</html>
