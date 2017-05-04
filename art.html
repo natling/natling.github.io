@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>art</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="files/favicon.png"/>
+  <style>
+    @font-face {
+      font-family: 'Menlo';
+      font-style: normal;
+      src:
+        local('Menlo'),
+        local('Menlo Regular'),
+        url('../fonts/Menlo.otf') format("opentype");
+    }
+    body {
+      width: 100vw;
+      height: 100vh;
+
+      margin: 0;
+      border: 0;
+      padding: 0;
+
+      background-color: black;
+
+      font-family: Menlo;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    a:link, a:visited {
+      position: absolute;
+      color: white;
+      text-decoration: none;
+    }
+    a:hover {
+      color: black;
+      background-color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <a class="link" href="ascii">ascii</a>
+  <a class="link" href="clocks">clocks</a>
+  <a class="link" href="scripts">scripts</a>
+  <a class="link" href="spectrograms">spectrograms</a>
+
+  <script>
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+
+    var links = document.getElementsByClassName("link");
+
+    for (var i = 0; i < links.length; i++) {
+      var paddingVertical = (height - links[i].clientHeight) / 2;
+
+      links[i].style.padding = paddingVertical + 'px 0px';
+      links[i].style.width = width / links.length + 'px';
+      links[i].style.left = i * (width / links.length) + 'px';
+    }
+  </script>
+</body>
+</html>
