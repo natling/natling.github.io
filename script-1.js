@@ -11,8 +11,8 @@ function setup() {
 	createCanvas(windowWidth, windowHeight);
 	background(0);
 
-	rows             = int(height / rowHeight) - 3;
-	columns          = int(width / columnWidth) - 11;
+	rows             = int(height / rowHeight) - 2;
+	columns          = int(width / columnWidth) - 8;
 	marginVertical   = (height - rows * rowHeight) / 2;
 	marginHorizontal = (width - columns * columnWidth) / 2;
 
