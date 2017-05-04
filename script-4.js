@@ -10,7 +10,6 @@ var rows, columns, marginHorizontal, marginVertical, lineArray = [];
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	background(0);
-	noCursor();
 
 	rows             = int(height / rowHeight) - 3;
 	columns          = int(width / columnWidth) - 40;
