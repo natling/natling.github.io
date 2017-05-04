@@ -1,25 +1,26 @@
-var letterHeight           =  15,
-	letterWidth            =  70,
-	spaceBetweenLines      =   0,
-	spaceBetweenCharacters =  15,
+var letterHeight           = 15,
+	letterWidth            = 70,
+	spaceBetweenLines      =  0,
+	spaceBetweenCharacters = 15,
 	rowHeight              = letterHeight + spaceBetweenLines,
 	columnWidth            = letterWidth + spaceBetweenCharacters;
 
-var rows, columns, marginHorizontal, marginVertical, lineArray = [];
+var rows, columns, marginGlobal, marginHorizontal, marginVertical, lineArray = [];
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	background(0);
 
-	rows             = int(height / rowHeight) - 10;
-	columns          = int(width / columnWidth) - 1;
-	marginVertical   = (height - rows * rowHeight) / 2;
-	marginHorizontal = (width - columns * columnWidth) / 2;
+	marginGlobal     = 60;
+	rows             = int((height - marginGlobal * 2) / rowHeight);
+	columns          = int((width - marginGlobal * 2) / columnWidth);
+	marginVertical   = ((height - marginGlobal * 2) - rows * rowHeight) / 2;
+	marginHorizontal = ((width - marginGlobal * 2) - columns * columnWidth) / 2;
 
 	for (var j = 0; j < rows; j++) {
 		for (var i = 0; i < columns; i++) {
-			var x              = columnWidth * i + marginHorizontal + spaceBetweenCharacters / 2;
-			var y              = rowHeight   * j + marginVertical   + spaceBetweenLines      / 2;
+			var x              = columnWidth * i + marginGlobal + marginHorizontal + spaceBetweenCharacters / 2;
+			var y              = rowHeight   * j + marginGlobal + marginVertical   + spaceBetweenLines      / 2;
 			var w              = letterWidth;
 			var h              = letterHeight;
 			var numberOfPoints = int(random(5, 10));
