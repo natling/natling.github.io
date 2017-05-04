@@ -1,7 +1,7 @@
-var letterHeight           =  30,
-	letterWidth            = 100,
+var letterHeight           =  15,
+	letterWidth            =  70,
 	spaceBetweenLines      =   0,
-	spaceBetweenCharacters =  30,
+	spaceBetweenCharacters =  15,
 	rowHeight              = letterHeight + spaceBetweenLines,
 	columnWidth            = letterWidth + spaceBetweenCharacters;
 
@@ -11,7 +11,7 @@ function setup() {
 	createCanvas(windowWidth, windowHeight);
 	background(0);
 
-	rows             = int(height / rowHeight) - 5;
+	rows             = int(height / rowHeight) - 10;
 	columns          = int(width / columnWidth) - 1;
 	marginVertical   = (height - rows * rowHeight) / 2;
 	marginHorizontal = (width - columns * columnWidth) / 2;
