@@ -24,7 +24,7 @@ function setup() {
 			var w                = letterWidth;
 			var h                = letterHeight;
 			var numberOfArcs     = int(random(2, 3));
-			var weight           = random(0.5, 1.0);
+			var weight           = random(0.8, 1.5);
 			var circleDistortion = 4;
 			var arcDistortion    = 4;
 
