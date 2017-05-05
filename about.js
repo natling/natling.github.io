@@ -73,11 +73,11 @@ var speedHigh = 1.0;
 var step = 0.001;
 
 var strings = [
-	'natalie braginsky',
-	'music',
-	'poetry',
-	'art',
-	'code',
+	// 'natalie braginsky',
+	// 'music',
+	// 'poetry',
+	// 'art',
+	// 'code',
 	'\"an angry trans shit\"',
 	'\"a markov chain\"',
 	'\"road-side snapshots of robotic collisions\"',
@@ -85,6 +85,10 @@ var strings = [
 	'\"these are the brief shards of digital noise you\'ve been looking for\"',
 	'\"actual net art princess\"',
 	'\"noise music reminiscent of that time it was 1983 and you got sucked into your vectrex and the only way to escape was beating level 13 in mine storm\"',
+	'\"nice mix of pleasure and slight unpleasantness\"',
+	'\"strange short bursts of electrifying trash\"',
+	'\"leaves a frustrating impression\"',
+	'\"strange flashy sounds, liquid bits\"',
 ];
 
 var floatingStrings = [];
