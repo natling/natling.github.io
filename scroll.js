@@ -6,7 +6,7 @@ class Line {
 		this.direction      = direction;
 		this.speed          = speed;
 		this.characterArray = Array.from({length: length}, v => {
-			if (Math.random() < density) {
+			if (random() < density) {
 				return randomCharacter();
 			} else {
 				return ' ';
@@ -73,8 +73,8 @@ function draw() {
 
 function createLine() {
 	var length    = randomIntegerInclusive(1, columns);
-	var density   = Math.random();
-	var direction = Math.random() < 0.5;
+	var density   = random();
+	var direction = random() < 0.5;
 	var speed     = randomIntegerInclusive(speedMinimum, speedMaximum);
 
 	return new Line(length, density, direction, speed);
@@ -87,7 +87,7 @@ function randomCharacter() {
 function randomIntegerInclusive(min, max) {
 	min = Math.ceil(min);
 	max = Math.floor(max);
-	return Math.floor(Math.random() * (max - min + 1)) + min;
+	return Math.floor(random() * (max - min + 1)) + min;
 }
 
 function rotateArray(array, n, direction) {
