@@ -29,7 +29,11 @@ function setup() {
 	yCoefficient = random(1.0, 1.7);
 	direction    = random() < 0.5;
 
-	console.log(consistency, density, xCoefficient, yCoefficient, direction);
+	console.log('consistency ' + consistency);
+	console.log('density ' + density);
+	console.log('xCoefficient ' + xCoefficient);
+	console.log('yCoefficient ' + yCoefficient);
+	console.log('direction ' + direction);
 
 	currentCharacter = randomCharacter(density);
 
