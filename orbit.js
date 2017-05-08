@@ -29,6 +29,8 @@ function setup() {
 	yCoefficient = random(1.0, 1.7);
 	direction    = random() < 0.5;
 
+	console.log(consistency, density, xCoefficient, yCoefficient, direction);
+
 	currentCharacter = randomCharacter(density);
 
 	for (var i = 0; i < columns * rows; i++) {
