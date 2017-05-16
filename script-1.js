@@ -21,7 +21,7 @@ function setup() {
 		for (var i = 0; i < columns; i++) {
 			var x              = columnWidth * i + marginGlobal + marginHorizontal + spaceBetweenCharacters / 2;
 			var y              = rowHeight   * j + marginGlobal + marginVertical   + spaceBetweenLines      / 2;
-				var w              = letterWidth;
+			var w              = letterWidth;
 			var h              = letterHeight;
 			var numberOfPoints = int(random(6, 15));
 			var weight         = random(0.5, 1.0);
