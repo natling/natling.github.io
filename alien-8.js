@@ -10,7 +10,7 @@ var speed = 2;
 var rows, columns, marginGlobal, marginHorizontal, marginVertical, lineArray = [], spectrogram, imageBuffer, pixelsArraySize, frame = 0;
 
 function preload() {
-	spectrogram = loadImage('http://natalie.computer/files/spectrogram-2.png');
+	spectrogram = loadImage('files/spectrogram-2.png');
 }
 
 function setup() {
