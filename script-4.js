@@ -5,7 +5,7 @@ var letterHeight           =  60,
 	rowHeight              = letterHeight + spaceBetweenLines,
 	columnWidth            = letterWidth + spaceBetweenCharacters;
 
-var rows, columns, marginGlobal, marginHorizontal, marginVertical, lineArray = [];
+var rows, columns, marginGlobal, marginHorizontal, marginVertical;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
