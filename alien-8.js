@@ -7,7 +7,7 @@ var letterHeight           = 15,
 
 var speed = 2;
 
-var rows, columns, marginGlobal, marginHorizontal, marginVertical, lineArray = [], spectrogram, imageBuffer, pixelsArraySize;
+var rows, columns, marginGlobal, marginHorizontal, marginVertical, spectrogram, imageBuffer, pixelsArraySize;
 var frame = 0, writingDuration, pauseDuration = 100, fadeDuration = 300;
 
 function preload() {
