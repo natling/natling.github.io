@@ -7,7 +7,8 @@ var letterHeight           =  35,
 
 var speed = 5;
 
-var rows, columns, marginGlobal, marginHorizontal, marginVertical, lineArray = [], spectrogram, imageBuffer, pixelsArraySize, frame = 0;
+var rows, columns, marginGlobal, marginHorizontal, marginVertical, lineArray = [], spectrogram, imageBuffer, pixelsArraySize;
+var frame = 0, writingDuration, pauseDuration = 100, fadeDuration = 300;
 
 function preload() {
 	spectrogram = loadImage('files/spectrogram-3.png');
@@ -28,10 +29,12 @@ function setup() {
 	columns          = int((width - marginGlobal * 2) / columnWidth);
 	marginVertical   = 0;
 	marginHorizontal = 0;
+
+	writingDuration = rows * columns / speed;
 }
 
 function draw() {
-	if (frame < rows * columns / speed) {
+	if (frame < writingDuration) {
 		for (var j = 0; j < rows; j++) {
 			for (var i = 0; i < columns; i++) {
 				if (int((i * rows + j) / speed) == frame) {
@@ -61,9 +64,12 @@ function draw() {
 		}
 
 		updatePixels();
+
 	} else {
-		tint(255, frame - rows * columns / speed);
-		image(spectrogram, 0, 0, width, height);
+		if (frame > writingDuration + pauseDuration) {
+			tint(255, map(frame, writingDuration + pauseDuration, writingDuration + pauseDuration + fadeDuration, 0, 255));
+			image(spectrogram, 0, 0, width, height);
+		}
 	}
 
 	frame++;
