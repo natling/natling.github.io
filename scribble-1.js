@@ -1,12 +1,12 @@
 var letterHeight           = 80,
-	letterWidth            = 80,
+	letterWidth            = 40,
 	spaceBetweenLines      = 20,
-	spaceBetweenCharacters = 20,
+	spaceBetweenCharacters = 30,
 	rowHeight              = letterHeight + spaceBetweenLines,
 	columnWidth            = letterWidth + spaceBetweenCharacters;
 
 var rows, columns, marginGlobal, marginHorizontal, marginVertical, globalCurvesArray = [];
-var characterDuration = 50, cornerStrokeProbability = 1, connectedStrokeProbability = 1;
+var characterDuration = 50, cornerStrokeProbability = 0.7, connectedStrokeProbability = 0.3;
 
 var t = 0;
 
@@ -22,7 +22,7 @@ function setup() {
 
 	for (var j = 0; j < rows; j++) {
 		for (var i = 0; i < columns; i++) {
-			var characterNumber = j * columns + i;
+			var characterNumber = i * rows + j;
 
 			var x              = columnWidth * i + marginGlobal + marginHorizontal + spaceBetweenCharacters / 2;
 			var y              = rowHeight   * j + marginGlobal + marginVertical   + spaceBetweenLines      / 2;
