@@ -29,15 +29,15 @@ class AnimatedLine {
 
 class AnimatedCurve {
 
-	constructor(x1, y1, x2, y2, x3, y3, x4, y4, t1, t2, weight, col, resolution) {
-		this.x1         = x1;
-		this.y1         = y1;
-		this.x2         = x2;
-		this.y2         = y2;
-		this.x3         = x3;
-		this.y3         = y3;
-		this.x4         = x4;
-		this.y4         = y4;
+	constructor(x1c, y1c, x1p, y1p, x2p, y2p, x2c, y2c, t1, t2, weight, col, resolution) {
+		this.x1c        = x1c;
+		this.y1c        = y1c;
+		this.x1p        = x1p;
+		this.y1p        = y1p;
+		this.x2p        = x2p;
+		this.y2p        = y2p;
+		this.x2c        = x2c;
+		this.y2c        = y2c;
 		this.t1         = t1;
 		this.t2         = t2;
 		this.weight     = weight;
@@ -46,25 +46,27 @@ class AnimatedCurve {
 	}
 
 	draw() {
-		if (t > this.t2) {
+		if (t >= this.t2) {
 			noFill();
 			stroke(this.col);
 			strokeWeight(this.weight);
 
-			curve(this.x1, this.y1, this.x2, this.y2, this.x3, this.y3, this.x4, this.y4);
+			curve(this.x1c, this.y1c, this.x1p, this.y1p, this.x2p, this.y2p, this.x2c, this.y2c);
+
 		} else {
+
 			if (t >= this.t1) {
 				var progress = map(t, this.t1, this.t2, 0, 1);
 
-				var ax = this.x1;
-				var bx = this.x2;
-				var cx = this.x3;
-				var dx = this.x4;
+				var ax = this.x1c;
+				var bx = this.x1p;
+				var cx = this.x2p;
+				var dx = this.x2c;
 
-				var ay = this.y1;
-				var by = this.y2;
-				var cy = this.y3;
-				var dy = this.y4;
+				var ay = this.y1c;
+				var by = this.y1p;
+				var cy = this.y2p;
+				var dy = this.y2c;
 
 				for (var i = 0; i < progress; i += this.resolution) {
 					var xTemp = curvePoint(ax, bx, cx, dx, i);
@@ -106,21 +108,21 @@ class AnimatedCurve {
 // 	}
 
 // 	for (var i = 0; i < numberOfCurves; i++) {
-// 		var x1         = random(width);
-// 		var y1         = random(height);
-// 		var x2         = random(width);
-// 		var y2         = random(height);
-// 		var x3         = random(width);
-// 		var y3         = random(height);
-// 		var x4         = random(width);
-// 		var y4         = random(height);
+// 		var x1c        = random(width);
+// 		var y1c        = random(height);
+// 		var x1p        = random(width);
+// 		var y1p        = random(height);
+// 		var x2p        = random(width);
+// 		var y2p        = random(height);
+// 		var x2c        = random(width);
+// 		var y2c        = random(height);
 // 		var t1         = i * 50;
 // 		var t2         = t1 + 50;
 // 		var weight     = 1;
 // 		var col        = color(255, 255, 255);
 // 		var resolution = 0.001;
 
-// 		curvesArray.push(new AnimatedCurve(x1, y1, x2, y2, x3, y3, x4, y4, t1, t2, weight, col, resolution));
+// 		curvesArray.push(new AnimatedCurve(x1c, y1c, x1p, y1p, x2p, y2p, x2c, y2c, t1, t2, weight, col, resolution));
 // 	}
 // }
 
