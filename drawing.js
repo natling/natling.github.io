@@ -161,7 +161,7 @@ class AnimatedArc {
 		if (t > this.t2) {
 			arc(this.x, this.y, this.w, this.h, this.start, this.stop);
 		} else {
-			if (t >= this.t1) {
+			if (t > this.t1) {
 				if (this.direction) {
 					var stopTemp = map(t, this.t1, this.t2, this.start, this.stop);
 					arc(this.x, this.y, this.w, this.h, this.start, stopTemp);
@@ -245,10 +245,10 @@ class AnimatedArc {
 // 		var w         = random(100, 200);
 // 		var h         = w;
 // 		var start     = random(TAU);
-// 		var stop      = start + TAU * 0.5;
+// 		var stop      = start + TAU * 0.999;
 // 		var direction = random() < 0.5;
-// 		var t1        = random(100);
-// 		var t2        = t1 + random(100, 200);
+// 		var t1        = i * 100;
+// 		var t2        = t1 + 100;
 // 		var weight    = 1;
 // 		var col       = color(255, 255, 255);
 
