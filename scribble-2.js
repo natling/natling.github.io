@@ -1,7 +1,7 @@
-var letterHeight           = 80,
-	letterWidth            = 80,
-	spaceBetweenLines      = 20,
-	spaceBetweenCharacters = 20,
+var letterHeight           = 40,
+	letterWidth            = 40,
+	spaceBetweenLines      = 10,
+	spaceBetweenCharacters = 10,
 	rowHeight              = letterHeight + spaceBetweenLines,
 	columnWidth            = letterWidth + spaceBetweenCharacters;
 
