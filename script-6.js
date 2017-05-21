@@ -50,7 +50,7 @@ function drawCharacter(x, y, w, h, numberOfArcs, weight, circleDistortion, arcDi
 	noFill();
 
 	var ellipseX = x + w / 2;
-	var ellipseY = y + w / 2;
+	var ellipseY = y + h / 2;
 	var ellipseW = letterWidth;
 	var ellipseH = letterHeight;
 

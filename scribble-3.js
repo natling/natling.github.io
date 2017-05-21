@@ -6,7 +6,7 @@ var letterHeight           = 50,
 	columnWidth            = letterWidth + spaceBetweenCharacters;
 
 var rows, columns, marginGlobal, marginHorizontal, marginVertical;
-var globalArcsArray = [], characterDuration = 50, distortion = 4;
+var globalArcsArray = [], characterDuration = 100, distortion = 4;
 
 var t = 0;
 
@@ -63,7 +63,7 @@ function drawCharacter(x, y, w, h, numberOfArcSlots, t1Character, t2Character) {
 
 	for (var i = 0; i < layersArray.length; i++) {
 		var a         = x + w / 2;
-		var b         = y + w / 2;
+		var b         = y + h / 2;
 		var c         = letterWidth - layersArray[i] * 13 + int(random(-distortion, distortion));
 		var d         = letterHeight - layersArray[i] * 13 + int(random(-distortion, distortion));
 		var start     = random(TAU);
