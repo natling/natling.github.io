@@ -29,8 +29,8 @@ function setup() {
 			var w              = letterWidth;
 			var h              = letterHeight;
 			var numberOfCurves = int(random(4, 15));
-			var t1Character    = characterNumber * characterDuration;
-			var t2Character    = (characterNumber + 1) * characterDuration;
+			var t1Character    = characterDuration * characterNumber;
+			var t2Character    = characterDuration * (characterNumber + 1);
 
 			drawCharacter(x, y, w, h, numberOfCurves, t1Character, t2Character);
 		}
