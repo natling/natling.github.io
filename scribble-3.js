@@ -29,8 +29,8 @@ function setup() {
 			var w                = letterWidth;
 			var h                = letterHeight;
 			var numberOfArcSlots = int(random(3, 5));
-			var t1Character      = characterNumber * characterDuration;
-			var t2Character      = (characterNumber + 1) * characterDuration;
+			var t1Character      = characterDuration * characterNumber;
+			var t2Character      = characterDuration * (characterNumber + 1);
 
 			drawCharacter(x, y, w, h, numberOfArcSlots, t1Character, t2Character);
 		}
@@ -59,7 +59,7 @@ function drawCharacter(x, y, w, h, numberOfArcSlots, t1Character, t2Character) {
 		}
 	}
 
-	var arcDuration = int((t2Character - t1Character) / layersArray.length);
+	var arcDuration = (t2Character - t1Character) / layersArray.length;
 
 	for (var i = 0; i < layersArray.length; i++) {
 		var a         = x + w / 2;
