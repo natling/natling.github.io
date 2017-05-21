@@ -106,7 +106,7 @@ class AnimatedBezierCurve {
 			stroke(this.col);
 			strokeWeight(this.weight);
 
-			curve(this.x1p, this.y1p, this.x1c, this.y1c, this.x2c, this.y2c, this.x2p, this.y2p);
+			bezier(this.x1p, this.y1p, this.x1c, this.y1c, this.x2c, this.y2c, this.x2p, this.y2p);
 
 		} else {
 
@@ -124,8 +124,8 @@ class AnimatedBezierCurve {
 				var dy = this.y2p;
 
 				for (var i = 0; i < progress; i += this.resolution) {
-					var xTemp = curvePoint(ax, bx, cx, dx, i);
-					var yTemp = curvePoint(ay, by, cy, dy, i);
+					var xTemp = bezierPoint(ax, bx, cx, dx, i);
+					var yTemp = bezierPoint(ay, by, cy, dy, i);
 
 					fill(this.col);
 					noStroke();
@@ -224,21 +224,21 @@ class AnimatedArc {
 // 	}
 
 // 	for (var i = 0; i < numberOfBezierCurves; i++) {
-// 		var x1c        = random(width);
-// 		var y1c        = random(height);
 // 		var x1p        = random(width);
 // 		var y1p        = random(height);
-// 		var x2p        = random(width);
-// 		var y2p        = random(height);
+// 		var x1c        = random(width);
+// 		var y1c        = random(height);
 // 		var x2c        = random(width);
 // 		var y2c        = random(height);
+// 		var x2p        = random(width);
+// 		var y2p        = random(height);
 // 		var t1         = i * 50;
 // 		var t2         = t1 + 50;
 // 		var weight     = 1;
 // 		var col        = color(255, 255, 255);
 // 		var resolution = 0.001;
 
-// 		curvesArray.push(new AnimatedBezierCurve(x1c, y1c, x1p, y1p, x2p, y2p, x2c, y2c, t1, t2, weight, col, resolution));
+// 		bezierCurvesArray.push(new AnimatedBezierCurve(x1p, y1p, x1c, y1c, x2c, y2c, x2p, y2p, t1, t2, weight, col, resolution));
 // 	}
 
 // 	for (var i = 0; i < numberOfArcs; i++) {
@@ -270,7 +270,7 @@ class AnimatedArc {
 // 	}
 
 // 	for (var i = 0; i < numberOfBezierCurves; i++) {
-// 		curvesArray[i].draw();
+// 		bezierCurvesArray[i].draw();
 // 	}
 
 // 	for (var i = 0; i < numberOfArcs; i++) {
