@@ -15,7 +15,7 @@ class AnimatedLine {
 		strokeWeight(this.weight);
 		stroke(this.col);
 
-		if (t > this.t2) {
+		if (t >= this.t2) {
 			line(this.x1, this.y1, this.x2, this.y2);
 		} else {
 			if (t >= this.t1) {
@@ -82,13 +82,53 @@ class AnimatedCurve {
 	}
 }
 
+class AnimatedArc {
+
+	constructor(x, y, w, h, start, stop, direction, t1, t2, weight, col) {
+		this.x         = x;
+		this.y         = y;
+		this.w         = w;
+		this.h         = h;
+		this.start     = start;
+		this.stop      = stop;
+		this.direction = direction;
+		this.t1        = t1;
+		this.t2        = t2;
+		this.weight    = weight;
+		this.col       = col;
+	}
+
+	draw() {
+		noFill();
+		strokeWeight(this.weight);
+		stroke(this.col);
+
+		if (t >= this.t2) {
+			arc(this.x, this.y, this.w, this.h, this.start, this.stop);
+		} else {
+			if (t >= this.t1) {
+				if (this.direction) {
+					var stopTemp = map(t, this.t1, this.t2, this.start, this.stop);
+					arc(this.x, this.y, this.w, this.h, this.start, stopTemp);
+				} else {
+					var startTemp = map(t, this.t1, this.t2, this.stop, this.start);
+					arc(this.x, this.y, this.w, this.h, startTemp, this.stop);
+				}
+			}
+		}
+	}
+}
+
 // var t = 0;
 
 // var numberOfLines = 0;
 // var linesArray = [];
 
-// var numberOfCurves = 100;
+// var numberOfCurves = 0;
 // var curvesArray = [];
+
+// var numberOfArcs = 100;
+// var arcsArray = [];
 
 // function setup() {
 // 	createCanvas(windowWidth, windowHeight);
@@ -124,6 +164,22 @@ class AnimatedCurve {
 
 // 		curvesArray.push(new AnimatedCurve(x1c, y1c, x1p, y1p, x2p, y2p, x2c, y2c, t1, t2, weight, col, resolution));
 // 	}
+
+// 	for (var i = 0; i < numberOfArcs; i++) {
+// 		var x         = random(width);
+// 		var y         = random(height);
+// 		var w         = random(100, 200);
+// 		var h         = w;
+// 		var start     = random(TAU);
+// 		var stop      = start + TAU * 0.5;
+// 		var direction = random() < 0.5;
+// 		var t1        = random(100);
+// 		var t2        = t1 + random(100, 200);
+// 		var weight    = 1;
+// 		var col       = color(255, 255, 255);
+
+// 		arcsArray.push(new AnimatedArc(x, y, w, h, start, stop, direction, t1, t2, weight, col));
+// 	}
 // }
 
 // function draw() {
@@ -135,6 +191,10 @@ class AnimatedCurve {
 
 // 	for (var i = 0; i < numberOfCurves; i++) {
 // 		curvesArray[i].draw();
+// 	}
+
+// 	for (var i = 0; i < numberOfArcs; i++) {
+// 		arcsArray[i].draw();
 // 	}
 
 // 	t++;
