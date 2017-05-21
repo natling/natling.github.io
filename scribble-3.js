@@ -6,7 +6,7 @@ var letterHeight           = 50,
 	columnWidth            = letterWidth + spaceBetweenCharacters;
 
 var rows, columns, marginGlobal, marginHorizontal, marginVertical;
-var globalArcsArray = [], characterDuration = 0, distortion = 4;
+var globalArcsArray = [], characterDuration = 50, distortion = 4;
 
 var t = 0;
 
@@ -24,15 +24,15 @@ function setup() {
 		for (var i = 0; i < columns; i++) {
 			var characterNumber = j * columns + i;
 
-			var x            = columnWidth * i + marginGlobal + marginHorizontal + spaceBetweenCharacters / 2;
-			var y            = rowHeight   * j + marginGlobal + marginVertical   + spaceBetweenLines      / 2;
-			var w            = letterWidth;
-			var h            = letterHeight;
-			var numberOfArcs = int(random(2, 3));
-			var t1Character  = characterNumber * characterDuration;
-			var t2Character  = (characterNumber + 1) * characterDuration;
+			var x                = columnWidth * i + marginGlobal + marginHorizontal + spaceBetweenCharacters / 2;
+			var y                = rowHeight   * j + marginGlobal + marginVertical   + spaceBetweenLines      / 2;
+			var w                = letterWidth;
+			var h                = letterHeight;
+			var numberOfArcSlots = int(random(3, 5));
+			var t1Character      = characterNumber * characterDuration;
+			var t2Character      = (characterNumber + 1) * characterDuration;
 
-			drawCharacter(x, y, w, h, numberOfArcs, t1Character, t2Character);
+			drawCharacter(x, y, w, h, numberOfArcSlots, t1Character, t2Character);
 		}
 	}
 }
@@ -49,26 +49,28 @@ function draw() {
 	t++;
 }
 
-function drawCharacter(x, y, w, h, numberOfArcs, t1Character, t2Character) {
+function drawCharacter(x, y, w, h, numberOfArcSlots, t1Character, t2Character) {
 	arcsArray = [];
 	layersArray = [0];
 
-	var arcDuration = (t2Character - t1Character) / numberOfArcs;
-
-	for (var i = 0; i < numberOfArcs; i++) {
-		int(random(1, 4));
+	for (var i = 1; i < numberOfArcSlots; i++) {
+		if (random() < 0.8) {
+			layersArray.push(i);
+		}
 	}
 
-	for (var i = 0; i < numberOfArcs; i++) {
+	var arcDuration = int((t2Character - t1Character) / layersArray.length);
+
+	for (var i = 0; i < layersArray.length; i++) {
 		var a         = x + w / 2;
 		var b         = y + w / 2;
-		var c         = letterWidth - layersArray[i] * 13 + random(-distortion, distortion);
-		var d         = letterHeight - layersArray[i] * 13 + random(-distortion, distortion);
+		var c         = letterWidth - layersArray[i] * 13 + int(random(-distortion, distortion));
+		var d         = letterHeight - layersArray[i] * 13 + int(random(-distortion, distortion));
 		var start     = random(TAU);
 		if (i == 0) {
 			var stop  = start + TAU * 0.999;
 		} else {
-			var stop  = start + TAU * random(0.5, 0.75);			
+			var stop  = start + TAU * random(0.5, 0.75);
 		}
 		var direction = random() < 0.5;
 		var t1Arc     = t1Character + arcDuration * i;
