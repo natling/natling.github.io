@@ -6,7 +6,7 @@ var letterHeight           =  60,
 	columnWidth            = letterWidth + spaceBetweenCharacters;
 
 var rows, columns, marginGlobal, marginHorizontal, marginVertical;
-var globalCurvesArray = [], characterDuration = 10;
+var globalCurvesArray = [], characterDuration = 8;
 
 var t = 0;
 
