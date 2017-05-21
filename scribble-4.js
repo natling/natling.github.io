@@ -22,7 +22,7 @@ function setup() {
 
 	for (var j = 0; j < rows; j++) {
 		for (var i = 0; i < columns; i++) {
-			var characterNumber = j * columns + i;
+			var characterNumber = j * columns + (columns - i);
 
 			var x              = columnWidth * i + marginGlobal + marginHorizontal + spaceBetweenCharacters / 2;
 			var y              = rowHeight   * j + marginGlobal + marginVertical   + spaceBetweenLines      / 2;
