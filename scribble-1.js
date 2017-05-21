@@ -5,8 +5,8 @@ var letterHeight           = 80,
 	rowHeight              = letterHeight + spaceBetweenLines,
 	columnWidth            = letterWidth + spaceBetweenCharacters;
 
-var rows, columns, marginGlobal, marginHorizontal, marginVertical, globalCurvesArray = [];
-var characterDuration = 50, cornerStrokeProbability = 0.7, connectedStrokeProbability = 0.3;
+var rows, columns, marginGlobal, marginHorizontal, marginVertical;
+var globalCurvesArray = [], characterDuration = 50, cornerStrokeProbability = 0.7, connectedStrokeProbability = 0.3;
 
 var t = 0;
 
