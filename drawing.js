@@ -158,7 +158,7 @@ class AnimatedArc {
 		strokeWeight(this.weight);
 		stroke(this.col);
 
-		if (t >= this.t2) {
+		if (t > this.t2) {
 			arc(this.x, this.y, this.w, this.h, this.start, this.stop);
 		} else {
 			if (t >= this.t1) {
@@ -176,17 +176,15 @@ class AnimatedArc {
 
 // var t = 0;
 
-// var numberOfLines = 0;
-// var linesArray = [];
+// var numberOfLines        =   0;
+// var numberOfCurves       =   0;
+// var numberOfBezierCurves =   0;
+// var numberOfArcs         = 100;
 
-// var numberOfCurves = 0;
-// var curvesArray = [];
-
-// var numberOfBezierCurves = 100;
+// var linesArray        = [];
+// var curvesArray       = [];
 // var bezierCurvesArray = [];
-
-// var numberOfArcs = 0;
-// var arcsArray = [];
+// var arcsArray         = [];
 
 // function setup() {
 // 	createCanvas(windowWidth, windowHeight);
