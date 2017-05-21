@@ -1,12 +1,12 @@
-var letterHeight           = 80,
-	letterWidth            = 40,
-	spaceBetweenLines      = 20,
-	spaceBetweenCharacters = 30,
+var letterHeight           =  60,
+	letterWidth            =  20,
+	spaceBetweenLines      =   0,
+	spaceBetweenCharacters = -15,
 	rowHeight              = letterHeight + spaceBetweenLines,
 	columnWidth            = letterWidth + spaceBetweenCharacters;
 
 var rows, columns, marginGlobal, marginHorizontal, marginVertical;
-var globalCurvesArray = [], characterDuration = 50, cornerStrokeProbability = 0.7, connectedStrokeProbability = 0.3;
+var globalCurvesArray = [], characterDuration = 10;
 
 var t = 0;
 
@@ -22,13 +22,13 @@ function setup() {
 
 	for (var j = 0; j < rows; j++) {
 		for (var i = 0; i < columns; i++) {
-			var characterNumber = i * rows + j;
+			var characterNumber = j * columns + i;
 
 			var x              = columnWidth * i + marginGlobal + marginHorizontal + spaceBetweenCharacters / 2;
 			var y              = rowHeight   * j + marginGlobal + marginVertical   + spaceBetweenLines      / 2;
 			var w              = letterWidth;
 			var h              = letterHeight;
-			var numberOfCurves = int(random(4, 15));
+			var numberOfCurves = int(random(2, 3));
 			var t1Character    = characterDuration * characterNumber;
 			var t2Character    = characterDuration * (characterNumber + 1);
 
@@ -56,58 +56,38 @@ function drawCharacter(x, y, w, h, numberOfCurves, t1Character, t2Character) {
 	var curveDuration = (t2Character - t1Character) / numberOfCurves;
 
 	for (var i = 0; i < numberOfCurves + 1; i++) {
-		var newX, newY;
+		var x1c = random(x, x + w);
+		var y1c = y + h / 2;
+		var x2c = random(x, x + w);
+		var y2c = random(y, y + h);
+		var x2p = random(x, x + w);
+		var y2p = y + h / 2;
 
-		if (random() < cornerStrokeProbability) {
-			if (random() < 0.8) {
-				if (random() < 0.5) {
-					newX = x;
-				} else {
-					newX = x + w;
-				}
-			} else {
-				newX = x + w / 2;
-			}
-
-			if (random() < 0.8) {
-				if (random() < 0.5) {
-					newY = y;
-				} else {
-					newY = y + h;
-				}
-			} else {
-				newY = y + h / 2;
-			}
-
-		} else {
-			newX = random(x, x + w);
-			newY = random(y, y + h);
-		}
-
-		pointsArray.push({x: newX, y: newY});
+		pointsArray.push({x1c: x1c, y1c: y1c, x2c: x2c, y2c: y2c, x2p: x2p, y2p: y2p});
 	}
 
-	for (var i = 0; i < numberOfCurves; i++) {
-		var x1c         = random(x, x + w);
-		var y1c         = random(y, y + h);
-		if (random() < connectedStrokeProbability) {
-			var x1p     = pointsArray[i].x;
-			var y1p     = pointsArray[i].y;
+	for (var i = 0; i < pointsArray.length; i++) {
+		if (i == 0) {
+			var x1p    = random(x, x + w);
+			var y1p    = random(y, y + h);
 		} else {
-			var x1p     = random(x, x + w);
-			var y1p     = random(y, y + h);
+			var x1p    = pointsArray[i - 1].x2p;
+			var y1p    = pointsArray[i - 1].y2p;
 		}
-		var x2p         = pointsArray[i + 1].x;
-		var y2p         = pointsArray[i + 1].y;
-		var x2c         = random(x, x + w);
-		var y2c         = random(y, y + h);
-		var t1Curve     = t1Character + curveDuration * i;
-		var t2Curve     = t1Character + curveDuration * (i + 1);
-		var weight      = random(0.5, 1.0);
-		var col         = color(255, 255, 255);
-		var resolution  = 0.005;
+		var x1c        = pointsArray[i].x1c;
+		var y1c        = pointsArray[i].y1c;
+		var x2c        = pointsArray[i].x2c;
+		var y2c        = pointsArray[i].y2c;
+		var x2p        = pointsArray[i].x2p;
+		var y2p        = pointsArray[i].y2p;
+		var t1Curve    = t1Character + curveDuration * i;
+		var t2Curve    = t1Character + curveDuration * (i + 1);
+		var weight     = random(0.5, 1.0);
+		var col        = color(255, 255, 255);
+		var resolution = 0.005;
 
-		curvesArray.push(new AnimatedCurve(x1c, y1c, x1p, y1p, x2p, y2p, x2c, y2c, t1Curve, t2Curve, weight, col, resolution));
+
+		curvesArray.push(new AnimatedBezierCurve(x1p, y1p, x1c, y1c, x2c, y2c, x2p, y2p, t1Curve, t2Curve, weight, col, resolution));
 	}
 
 	globalCurvesArray.push(curvesArray);
