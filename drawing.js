@@ -137,6 +137,55 @@ class AnimatedBezierCurve {
 	}
 }
 
+class AnimatedBezierCurve2 {
+
+	constructor(x1p, y1p, x1c, y1c, x2c, y2c, x2p, y2p, t1, t2, weight, col, resolution) {
+		this.x1p        = x1p;
+		this.y1p        = y1p;
+		this.x1c        = x1c;
+		this.y1c        = y1c;
+		this.x2c        = x2c;
+		this.y2c        = y2c;
+		this.x2p        = x2p;
+		this.y2p        = y2p;
+		this.t1         = t1;
+		this.t2         = t2;
+		this.weight     = weight;
+		this.col        = col;
+		this.resolution = resolution;
+	}
+
+	draw() {
+		if (t >= this.t1 && t < this.t2) {
+			noFill();
+			stroke(this.col);
+			strokeWeight(this.weight);
+
+			var progress = map(t, this.t1, this.t2, 0, 1);
+
+			var ax = this.x1p;
+			var bx = this.x1c;
+			var cx = this.x2c;
+			var dx = this.x2p;
+
+			var ay = this.y1p;
+			var by = this.y1c;
+			var cy = this.y2c;
+			var dy = this.y2p;
+
+			for (var i = 0; i < progress; i += this.resolution) {
+				var xTemp = bezierPoint(ax, bx, cx, dx, i);
+				var yTemp = bezierPoint(ay, by, cy, dy, i);
+
+				fill(this.col);
+				noStroke();
+
+				ellipse(xTemp, yTemp, this.weight, this.weight);
+			}
+		}
+	}
+}
+
 class AnimatedArc {
 
 	constructor(x, y, w, h, start, stop, direction, t1, t2, weight, col) {
