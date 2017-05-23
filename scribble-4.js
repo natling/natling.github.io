@@ -38,7 +38,7 @@ function setup() {
 }
 
 function draw() {
-	background(0);
+	// background(0);
 
 	for (var i = 0; i < globalCurvesArray.length; i++) {
 		for (var j = 0; j < globalCurvesArray[i].length; j++) {
@@ -82,12 +82,12 @@ function drawCharacter(x, y, w, h, numberOfCurves, t1Character, t2Character) {
 		var y2p        = pointsArray[i].y2p;
 		var t1Curve    = t1Character + curveDuration * i;
 		var t2Curve    = t1Character + curveDuration * (i + 1);
-		var weight     = random(0.5, 1.0);
+		var weight     = 0.5;
 		var col        = color(255, 255, 255);
 		var resolution = 0.005;
 
 
-		curvesArray.push(new AnimatedBezierCurve(x1p, y1p, x1c, y1c, x2c, y2c, x2p, y2p, t1Curve, t2Curve, weight, col, resolution));
+		curvesArray.push(new AnimatedBezierCurve2(x1p, y1p, x1c, y1c, x2c, y2c, x2p, y2p, t1Curve, t2Curve, weight, col, resolution));
 	}
 
 	globalCurvesArray.push(curvesArray);

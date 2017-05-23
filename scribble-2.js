@@ -38,7 +38,7 @@ function setup() {
 }
 
 function draw() {
-	background(0);
+	// background(0);
 
 	for (var i = 0; i < globalCurvesArray.length; i++) {
 		for (var j = 0; j < globalCurvesArray[i].length; j++) {
@@ -103,11 +103,11 @@ function drawCharacter(x, y, w, h, numberOfCurves, t1Character, t2Character) {
 		var y2c         = random(y, y + h);
 		var t1Curve     = t1Character + curveDuration * i;
 		var t2Curve     = t1Character + curveDuration * (i + 1);
-		var weight      = random(0.5, 1.0);
+		var weight      = 0.5;
 		var col         = color(255, 255, 255);
 		var resolution  = 0.005;
 
-		curvesArray.push(new AnimatedCurve(x1c, y1c, x1p, y1p, x2p, y2p, x2c, y2c, t1Curve, t2Curve, weight, col, resolution));
+		curvesArray.push(new AnimatedCurve2(x1c, y1c, x1p, y1p, x2p, y2p, x2c, y2c, t1Curve, t2Curve, weight, col, resolution));
 	}
 
 	globalCurvesArray.push(curvesArray);
