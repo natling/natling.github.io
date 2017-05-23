@@ -4,6 +4,26 @@ function randomIntegerInclusive(min, max) {
 	return Math.floor(random() * (max - min + 1)) + min;
 }
 
+function coin(p) {
+	if (random() < p) {
+		return true
+	} else {
+		return false
+	}
+}
+
+function weightedAverage(values, weights) {
+	var weightedValuesSum = 0;
+	var weightsSum = 0;
+
+	for (var i = 0; i < values.length; i++) {
+		weightedValuesSum += values[i] * weights[i];
+		weightsSum += weights[i];
+	}
+
+	return weightedValuesSum / weightsSum;
+}
+
 function randomItem(array) {
 	return array[Math.floor(Math.random() * array.length)];
 }
@@ -29,10 +49,12 @@ function shuffleArray(array) {
 	return array;
 }
 
-function coin(p) {
-	if (random() < p) {
-		return true
-	} else {
-		return false
+function create2DArray(rows, columns) {
+	var x = new Array(rows);
+
+	for (var i = 0; i < rows; i++) {
+		x[i] = new Array(columns);
 	}
+
+	return x;
 }

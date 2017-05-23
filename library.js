@@ -84,16 +84,6 @@ function draw() {
 	}
 }
 
-function create2DArray(rows, columns) {
-	var x = new Array(rows);
-
-	for (var i = 0; i < rows; i++) {
-		x[i] = new Array(columns);
-	}
-
-	return x;
-}
-
 function randomWalk(start, low, high, step) {
 	while (true) {
 		var newStart = start + int(random(-(step + 1), step + 1));
@@ -101,16 +91,4 @@ function randomWalk(start, low, high, step) {
 			return newStart;
 		}
 	}
-}
-
-function weightedAverage(values, weights) {
-	var weightedValuesSum = 0;
-	var weightsSum = 0;
-
-	for (var i = 0; i < values.length; i++) {
-		weightedValuesSum += values[i] * weights[i];
-		weightsSum += weights[i];
-	}
-
-	return weightedValuesSum / weightsSum;
 }
