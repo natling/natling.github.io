@@ -58,17 +58,6 @@ function draw() {
 			text(characterArrays[r][i], width / 2 + x, height / 2 + y);
 		}
 
-		characterArrays[r] = arrayRotate(characterArrays[r], rotations[r][0], rotations[r][1]);
+		characterArrays[r] = rotateArray(characterArrays[r], rotations[r][0], rotations[r][1]);
 	}
-}
-
-function arrayRotate(array, distance, direction) {
-	for (var i = 0; i < distance; i++) {
-		if (direction) {
-			array.unshift(array.pop());
-		} else {
-			array.push(array.shift());
-		}
-	}
-	return array;
 }

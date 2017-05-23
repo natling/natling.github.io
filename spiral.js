@@ -58,7 +58,7 @@ function draw() {
 		// text('o', width / 2 + x, height / 2 + y);
 	}
 
-	// characterArray = arrayRotate(characterArray, 1, true);
+	// characterArray = rotateArray(characterArray, 1, true);
 
 	// a = walk(a, aLow, aHigh, aStep, aUp);
 	// b = walk(b, bLow, bHigh, bStep, bUp);
@@ -90,17 +90,6 @@ function draw() {
 			bUp = ! bUp;
 		}
 	}
-}
-
-function arrayRotate(array, distance, direction) {
-	for (var i = 0; i < distance; i++) {
-		if (direction) {
-			array.unshift(array.pop());
-		} else {
-			array.push(array.shift());
-		}
-	}
-	return array;
 }
 
 // function randomWalk(start, low, high, step) {

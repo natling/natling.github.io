@@ -18,7 +18,7 @@ class Line {
 		var string = this.characterArray.join('');
 		var paddedString;
 
-		if (! this.direction) {
+		if (this.direction) {
 			paddedString = string.padStart(columns);
 		} else {
 			paddedString = string.padEnd(columns);
@@ -82,24 +82,4 @@ function createLine() {
 
 function randomCharacter() {
 	return String.fromCharCode(randomIntegerInclusive(32, 127));
-}
-
-function randomIntegerInclusive(min, max) {
-	min = Math.ceil(min);
-	max = Math.floor(max);
-	return Math.floor(random() * (max - min + 1)) + min;
-}
-
-function rotateArray(array, n, direction) {
-	var rotatedArray = array;
-
-	for (var i = 0; i < n; i++) {
-		if (direction) {
-			rotatedArray.push(rotatedArray.shift());
-		} else {
-			rotatedArray.unshift(rotatedArray.pop());
-		}
-	}
-
-	return rotatedArray;
 }

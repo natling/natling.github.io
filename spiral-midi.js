@@ -70,16 +70,5 @@ function draw() {
 		// text(String.fromCharCode(random(32, 127)), width / 2 + x, height / 2 + y);
 	}
 
-	characterArray = arrayRotate(characterArray, 1, true);
-}
-
-function arrayRotate(array, distance, direction) {
-	for (var i = 0; i < distance; i++) {
-		if (direction) {
-			array.unshift(array.pop());
-		} else {
-			array.push(array.shift());
-		}
-	}
-	return array;
+	characterArray = rotateArray(characterArray, 1, true);
 }

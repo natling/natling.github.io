@@ -36,16 +36,5 @@ function draw() {
 		}
 	}
 
-	characterArray = arrayRotate(characterArray, speed);
-}
-
-function arrayRotate(array, distance, direction) {
-	for (var i = 0; i < distance; i++) {
-		if (direction) {
-			array.unshift(array.pop());
-		} else {
-			array.push(array.shift());
-		}
-	}
-	return array;
+	characterArray = rotateArray(characterArray, speed);
 }

@@ -1,13 +1,22 @@
+function randomIntegerInclusive(min, max) {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(random() * (max - min + 1)) + min;
+}
+
 function randomItem(array) {
 	return array[Math.floor(Math.random() * array.length)];
 }
 
-function coin(p) {
-	if (random() < p) {
-		return true
-	} else {
-		return false
+function rotateArray(array, distance, direction) {
+	for (var i = 0; i < distance; i++) {
+		if (direction) {
+			array.unshift(array.pop());
+		} else {
+			array.push(array.shift());
+		}
 	}
+	return array;
 }
 
 function shuffleArray(array) {
@@ -18,4 +27,12 @@ function shuffleArray(array) {
 		array[j] = temp;
 	}
 	return array;
+}
+
+function coin(p) {
+	if (random() < p) {
+		return true
+	} else {
+		return false
+	}
 }
