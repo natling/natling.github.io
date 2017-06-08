@@ -89,6 +89,7 @@ var strings = [
 	'\"strange short bursts of electrifying trash\"',
 	'\"leaves a frustrating impression\"',
 	'\"strange flashy sounds, liquid bits\"',
+	'\"a computer whose cooling fans aren\'t working\"',
 ];
 
 var floatingStrings = [];
