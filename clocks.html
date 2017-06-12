@@ -12,23 +12,14 @@
     }
 
     body {
-      background-color: #000000;
       margin: 0px;
-   }
-
-    section {
+      width: 100vw;
       height: 100vh;
-    }
-
-    .text p {
-      margin: 0px;
-      position: relative;
-      top: 50%;
-      transform: translateY(-50%);
-      -webkit-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-      transform-style: preserve-3d;
-    }
+      background-color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }
 
     p {
       font-family: Menlo, monospace;
@@ -37,26 +28,24 @@
     }
 
     a:link, a:visited {
-      color: #00f72c;
       padding: 0px 20px;
+      border: thin solid;
       text-decoration:none;
-      border-style: solid;
-      border-width: thin;
+      color: #00f72c;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     a:hover {
-      color: #000000;
       background-color: #00f72c;
+      color: black;
     }
   </style>
 </head>
 
 <body>
-  <section class="text">
-    <p>
-      <a href="clock-1">1</a>&nbsp<a href="clock-2">2</a>&nbsp<a href="clock-3">3</a>&nbsp<a href="clock-4">4</a>
-    </p>
-  </section>
+  <p>
+    <a href="clock-1">1</a>&nbsp<a href="clock-2">2</a>&nbsp<a href="clock-3">3</a>&nbsp<a href="clock-4">4</a>
+  </p>
 </body>
 
 </html>
