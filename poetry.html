@@ -13,25 +13,28 @@
         local('Menlo Regular'),
         url('../fonts/Menlo.otf') format("opentype");
     }
+
     body {
       margin: 0;
-      border: 0;
-      padding: 0;
+    }
 
-      background-color: #002b36;
-
+    a:link, a:visited {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-family: Menlo;
       font-size: 30px;
       text-align: center;
-    }
-    a:link, a:visited {
-      display: block;
-      color: #b58900;
       text-decoration: none;
+      background-color: #002b36;
+      color: #b58900;
+      transition: background-color 0.5s, color 0.5s;
     }
+
     a:hover {
-      color: #002b36;
       background-color: #b58900;
+      color: #002b36;
     }
   </style>
 </head>
@@ -50,12 +53,11 @@
     var height = window.innerHeight;
 
     var links = document.getElementsByClassName("link");
-    var linkHeight = links[0].clientHeight;
-
-    var padding = height / (links.length * 2) - linkHeight / 2;
 
     for (var i = 0; i < links.length; i++) {
-      links[i].style.padding = padding + 'px';
+      links[i].style.width = width + 'px';
+      links[i].style.height = height / links.length + 'px';
+      links[i].style.top = i * (height / links.length) + 'px';
     }
   </script>
 </body>

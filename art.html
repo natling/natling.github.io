@@ -13,29 +13,28 @@
         local('Menlo Regular'),
         url('../fonts/Menlo.otf') format("opentype");
     }
+
     body {
-      width: 100vw;
-      height: 100vh;
-
       margin: 0;
-      border: 0;
-      padding: 0;
-
-      background-color: black;
-
-      font-family: Menlo;
-      font-size: 16px;
-      text-align: center;
     }
 
     a:link, a:visited {
       position: absolute;
-      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Menlo;
+      font-size: 16px;
+      text-align: center;
       text-decoration: none;
+      background-color: black;
+      color: white;
+      transition: background-color 0.5s, color 0.5s;
     }
+
     a:hover {
-      color: black;
       background-color: white;
+      color: black;
     }
   </style>
 </head>
@@ -54,10 +53,8 @@
     var links = document.getElementsByClassName("link");
 
     for (var i = 0; i < links.length; i++) {
-      var paddingVertical = (height - links[i].clientHeight) / 2;
-
-      links[i].style.padding = paddingVertical + 'px 0px';
       links[i].style.width = width / links.length + 'px';
+      links[i].style.height = height + 'px';
       links[i].style.left = i * (width / links.length) + 'px';
     }
   </script>
