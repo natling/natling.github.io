@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>colors</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="files/favicon.png"/>
+  <style>
+    @font-face {
+      font-family: 'Gotham';
+      src:
+        local('Gotham'),
+        url('fonts/Gotham.otf');
+    }
+
+    div {
+      z-index: 0;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: z-index 0.5s, transform 0.5s, border-radius 0.5s;
+    }
+
+    div:hover {
+      z-index: 1000;
+      transform: scale(1.2, 1.2);
+      border-radius: 10px;
+    }
+
+    div:hover p {
+      opacity: 1;
+    }
+
+    p {
+      opacity: 0;
+      font-family: Gotham;
+      font-size: 20pt;
+      transition: opacity 1s;
+    }
+  </style>
+</head>
+
+<body>
+</body>
+
+<script>
+  var columns = 6;
+  var rows    = 4;
+
+  var colors = [ 'deface', 'dad', 'baccae', 'ebb', 'dab', 'facade', 'decade', 'fed', 'fee', 'add', 'efface', 'dabbed', 'bedded', 'baa', 'accede', 'fab', 'fad', 'ace', 'bed', 'bee', 'beaded', 'bad', 'cab', 'cad' ];
+
+  for (var i = 0; i < columns; i++) {
+    for (var j = 0; j < rows; j++) {
+      var hexString = "#" + colors[i + columns * j]
+
+      var div = document.createElement("div");
+
+      div.style.width           = 100 / columns + "%";
+      div.style.height          = 100 / rows + "%";
+      div.style.left            = i * 100 / columns + "%";
+      div.style.top             = j * 100 / rows + "%";
+      div.style.backgroundColor = hexString;
+
+      document.body.appendChild(div);
+
+      var label = document.createElement("p");
+      var labelText = document.createTextNode(hexString);
+
+      div.appendChild(label);
+      label.appendChild(labelText);
+    }
+  }
+</script>
+</html>
