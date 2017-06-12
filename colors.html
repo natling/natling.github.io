@@ -56,9 +56,9 @@
       var div = document.createElement("div");
 
       div.style.width           = 100 / columns + "%";
-      div.style.height          = 100 / rows + "%";
-      div.style.left            = i * 100 / columns + "%";
-      div.style.top             = j * 100 / rows + "%";
+      div.style.height          = 100 / rows    + "%";
+      div.style.left            = 100 / columns + "%" * i;
+      div.style.top             = 100 / rows    + "%" * j;
       div.style.backgroundColor = hexString;
 
       document.body.appendChild(div);
