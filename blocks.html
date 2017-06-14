@@ -1,0 +1,47 @@
+<link rel="shortcut icon" href="files/favicon.png"/>
+
+<style>
+  body {
+    overflow: hidden;
+  }
+</style>
+
+<body>
+</body>
+
+<script src="libraries/natalie.js"></script>
+<script src="libraries/randomColor.min.js"></script>
+
+<script>
+  // var width  = window.innerWidth;
+  // var height = window.innerHeight;
+
+  var columns = randomIntegerInclusive(1, 10);
+  var rows    = randomIntegerInclusive(1, 10);
+
+  var hueBackground = randomItem(["red", "orange", "yellow", "green", "blue", "purple", "pink", "monochrome"]);
+  var hueDiv        = randomItem(["red", "orange", "yellow", "green", "blue", "purple", "pink", "monochrome"]);
+
+  document.body.style.backgroundColor = randomColor({hue: hueBackground});
+  document.body.style.margin          = "0px";
+
+  for (var i = 0; i < columns; i++) {
+    var columnLuminosity = randomItem(["bright", "light", "dark"]);
+
+    for (var j = 0; j < rows; j++) {
+      if (coin(0.5)) {
+        var div = document.createElement("div");
+
+        div.style.position        = "absolute";
+        div.style.width           = 100 / columns + "%";
+        div.style.height          = 100 / rows + "%";
+        div.style.left            = i * 100 / columns + "%";
+        div.style.top             = j * 100 / rows + "%";
+        div.style.backgroundColor = randomColor({luminosity: columnLuminosity, hue: hueDiv});
+        // div.style.border          = "thin solid black";
+
+        document.body.appendChild(div);
+      }
+    }
+  }
+</script>
