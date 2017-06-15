@@ -1,10 +1,11 @@
 class Line {
 
-	constructor(length, density, direction, speed) {
+	constructor(length, density, direction, speed, col) {
 		this.length         = length;
 		this.density        = density;
 		this.direction      = direction;
 		this.speed          = speed;
+		this.col            = col;
 		this.characterArray = Array.from({length: length}, v => {
 			if (random() < density) {
 				return randomCharacter();
@@ -46,7 +47,7 @@ function setup() {
 	textFont('Menlo');
 	textSize(12);
 	textAlign(LEFT, TOP);
-	fill('#00f72c');
+	// fill('#00f72c');
 
 	columnWidth = Math.round(textWidth(' '));
 	rowHeight = 11;
@@ -63,6 +64,7 @@ function draw() {
 	background('#000000');
 
 	for (var i = 0; i < rows; i++) {
+		fill(lines[i].col);
 		text(lines[i].createPaddedString(), 0, i * rowHeight);
 		lines[i].move();
 	}
@@ -76,8 +78,9 @@ function createLine() {
 	var density   = random();
 	var direction = random() < 0.5;
 	var speed     = randomIntegerInclusive(speedMinimum, speedMaximum);
+	var col       = color(random(255), random(255), random(255));
 
-	return new Line(length, density, direction, speed);
+	return new Line(length, density, direction, speed, col);
 }
 
 function randomCharacter() {
