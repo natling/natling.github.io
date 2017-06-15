@@ -29,7 +29,7 @@ function setup() {
 
 	textFont('Menlo');
 	textAlign(CENTER, CENTER);
-	fill('#00f72c');
+	// fill('#00f72c');
 
 	a = map(0.5, 0, 1, aLow, aHigh);
 	b = map(0.5, 0, 1, bLow, bHigh);
@@ -52,6 +52,8 @@ function draw() {
 	for (var i = 0; i < n; i += 3) {
 		var x = a * e ** (b * i) * cos(i);
 		var y = a * e ** (b * i) * sin(i);
+
+		fill(color(random(255), random(255), random(255)));
 
 		// text(characterArray[i], width / 2 + x, height / 2 + y);
 		text(String.fromCharCode(random(32, 127)), width / 2 + x, height / 2 + y);
