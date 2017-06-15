@@ -1,0 +1,33 @@
+@font-face {
+  font-family: 'Menlo';
+  font-style: normal;
+  src:
+    local('Menlo'),
+    local('Menlo Regular'),
+    url('../fonts/Menlo.otf') format("opentype");
+}
+
+body {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+#box {
+  padding: 10px;
+  color: white;
+  font-family: Menlo;
+  font-size: 12px;
+  text-align: justify;
+  position: absolute;
+}
+
+p {
+  margin: 0px;
+  padding: 10px;
+  line-height: 120%;
+}
+
+#header {
+  text-align: right;
+}
