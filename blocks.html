@@ -1,10 +1,27 @@
-<link rel="shortcut icon" href="files/favicon.png"/>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>blocks</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="files/favicon.png"/>
+  <style>
+    body {
+      overflow: hidden;
+      margin: 0;
+    }
 
-<style>
-  body {
-    overflow: hidden;
-  }
-</style>
+    div {
+      position: absolute;
+      /*z-index: 0;*/
+      /*transition: z-index 0.2s, transform 0.2s;*/
+    }
+
+    div:hover {
+      /*z-index: 1000;*/
+      /*transform: scale(1.1, 1.1);*/
+    }
+  </style>
+</head>
 
 <body>
 </body>
@@ -23,7 +40,6 @@
   var hueDiv        = randomItem(["red", "orange", "yellow", "green", "blue", "purple", "pink", "monochrome"]);
 
   document.body.style.backgroundColor = randomColor({hue: hueBackground});
-  document.body.style.margin          = "0px";
 
   for (var i = 0; i < columns; i++) {
     var columnLuminosity = randomItem(["bright", "light", "dark"]);
@@ -32,7 +48,6 @@
       if (coin(0.5)) {
         var div = document.createElement("div");
 
-        div.style.position        = "absolute";
         div.style.width           = 100 / columns + "%";
         div.style.height          = 100 / rows + "%";
         div.style.left            = i * 100 / columns + "%";
@@ -45,3 +60,4 @@
     }
   }
 </script>
+</html>
