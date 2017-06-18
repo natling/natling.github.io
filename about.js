@@ -73,11 +73,6 @@ var speedHigh = 1.0;
 var step = 0.001;
 
 var strings = [
-	// 'natalie braginsky',
-	// 'music',
-	// 'poetry',
-	// 'art',
-	// 'code',
 	'\"an angry trans shit\"',
 	'\"a markov chain\"',
 	'\"road-side snapshots of robotic collisions\"',
@@ -89,7 +84,8 @@ var strings = [
 	'\"strange short bursts of electrifying trash\"',
 	'\"leaves a frustrating impression\"',
 	'\"strange flashy sounds, liquid bits\"',
-	'\"a computer whose cooling fans aren\'t working\"',
+	'\"a computer whose cooling fans weren\'t working\"',
+	'\"truth coming out of her well to shame mankind\"',
 ];
 
 var floatingStrings = [];
