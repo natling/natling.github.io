@@ -93,7 +93,7 @@
     setTimeout(clearRow, 10000);
   }
 
-  function writeRow(row) {
+  function rowTimer(row) {
     function activate() {
       if (coin(0.1)) {
         writeString(row);
@@ -103,8 +103,10 @@
     setInterval(activate, randomIntegerInclusive(5000, 10000));
   }
 
+  writeString(randomIntegerInclusive(0, rows - 1));
+
   for (var i = 0; i < rows; i++) {
-    writeRow(i);
+    rowTimer(i);
   }
 </script>
 </html>
