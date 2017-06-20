@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>blocks</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="files/favicon.png"/>
+  <style>
+    body {
+      overflow: hidden;
+      margin: 0;
+      background-color: black;
+    }
+
+    div {
+      position: absolute;
+    }
+
+    .leaf {
+      z-index: 0;
+      background-color: black;
+      transition: z-index 0.2s, background-color 0.2s;
+    }
+
+    .leaf:hover {
+      z-index: 1000;
+      background-color: lime;
+    }
+  </style>
+</head>
+
+<body>
+</body>
+
+<script src="libraries/natalie.js"></script>
+
+<script>
+  // var windowWidth  = window.innerWidth;
+  // var windowHeight = window.innerHeight;
+
+  // var columns = randomIntegerInclusive(1, 5);
+  // var rows    = randomIntegerInclusive(1, 5);
+
+  recursiveGrid(document.body, 2, 2, 5);
+
+  function recursiveGrid(parent, columns, rows, depth) {
+    for (var i = 0; i < columns; i++) {
+      for (var j = 0; j < rows; j++) {
+        var currentDepth = 1;
+
+        var div = document.createElement("div");
+
+        div.style.width  = 100 / columns + "%";
+        div.style.height = 100 / rows + "%";
+        div.style.left   = i * 100 / columns + "%";
+        div.style.top    = j * 100 / rows + "%";
+
+        if (currentDepth == depth) {
+          div.className = "leaf";
+        } else {
+          currentDepth++;
+          recursiveGrid(div, columns, rows, depth - currentDepth);
+        }
+      parent.appendChild(div);
+      }
+    }
+  }
+</script>
+</html>
