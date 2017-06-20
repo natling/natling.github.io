@@ -75,12 +75,12 @@
     p.style.left   = randomIntegerInclusive(0, width - string.length * characterWidth) + 'px';
     p.style.top    = row * characterHeight + 'px';
 
-    typeDuration       = string.length * typingSpeed + 's';
-    typeTimingFunction = 'steps(' + string.length + ')';
-    fadeDuration       = randomFloat(1.5, 4) + 's';
-    fadeDelay          = string.length * typingSpeed + randomFloat(0, 2) + 's';
+    typeDuration       = string.length * typingSpeed;
+    typeTimingFunction = string.length;
+    fadeDuration       = randomFloat(1.5, 4);
+    fadeDelay          = string.length * typingSpeed + randomFloat(0, 2);
 
-    p.style.animation         = 'type ' + typeDuration + ' ' + typeTimingFunction + ', fade ' + fadeDuration + ' ' + fadeDelay;
+    p.style.animation         = 'type ' + typeDuration + 's steps(' + typeTimingFunction + '), fade ' + fadeDuration + 's ' + fadeDelay + 's';
     p.style.animationFillMode = 'forwards';
 
     document.body.appendChild(p);
@@ -90,7 +90,11 @@
       document.body.removeChild(p);
     }
 
-    setTimeout(clearRow, 10000);
+    waitTime = typeDuration + fadeDelay + fadeDuration + 1;
+
+    console.log(waitTime);
+
+    setTimeout(clearRow, waitTime * 1000);
   }
 
   function rowTimer(row) {
