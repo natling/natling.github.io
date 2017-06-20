@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>not sure</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="files/favicon.png"/>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: black;
+    }
+
+    p {
+      position: absolute;
+      margin: 0;
+
+      white-space: nowrap;
+      overflow: hidden;
+
+      font-family: Menlo;
+      font-size: 12pt;
+      color: lime;
+    }
+
+    @keyframes type {
+      from {
+        width: 0;
+      }
+    }
+
+    @keyframes fade {
+      to {
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+</body>
+
+<script src="libraries/natalie.js"></script>
+<script src="not-sure.js"></script>
+
+<script>
+  var width  = window.innerWidth;
+  var height = window.innerHeight;
+
+  function getCharacterDimensions() {
+    var p = document.createElement('p');
+    p.appendChild(document.createTextNode('~'));
+    document.body.appendChild(p);
+    characterWidth = p.clientWidth;
+    characterHeight = p.clientHeight;
+    document.body.removeChild(p);
+    return [characterWidth, characterHeight];
+  }
+
+  var characterWidth  = getCharacterDimensions()[0];
+  var characterHeight = getCharacterDimensions()[1];
+
+  var rows = Math.floor(height / characterHeight);
+
+  var typingSpeed = 1 / 16;
+
+  function writeString(row) {
+    var string = randomItem(stringArray);
+
+    var p    = document.createElement('p');
+    var text = document.createTextNode(string);
+
+    p.style.width  = string.length * characterWidth + 'px';
+    p.style.height = characterHeight + 'px';
+    p.style.left   = randomIntegerInclusive(0, width - string.length * characterWidth) + 'px';
+    p.style.top    = row * characterHeight + 'px';
+
+    typeDuration       = string.length * typingSpeed + 's';
+    typeTimingFunction = 'steps(' + string.length + ')';
+    fadeDuration       = randomFloat(1.5, 4) + 's';
+    fadeDelay          = string.length * typingSpeed + randomFloat(0, 2) + 's';
+
+    p.style.animation         = 'type ' + typeDuration + ' ' + typeTimingFunction + ', fade ' + fadeDuration + ' ' + fadeDelay;
+    p.style.animationFillMode = 'forwards';
+
+    document.body.appendChild(p);
+    p.appendChild(text);
+
+    function clearRow() {
+      document.body.removeChild(p);
+    }
+
+    setTimeout(clearRow, 10000);
+  }
+
+  function writeRow(row) {
+    function activate() {
+      if (coin(0.1)) {
+        writeString(row);
+      }
+    }
+
+    setInterval(activate, randomIntegerInclusive(5000, 10000));
+  }
+
+  for (var i = 0; i < rows; i++) {
+    writeRow(i);
+  }
+</script>
+</html>
