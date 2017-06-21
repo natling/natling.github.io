@@ -11,11 +11,10 @@
       background-color: black;
     }
 
-    p {
+    pre {
       position: absolute;
       margin: 0;
 
-      white-space: nowrap;
       overflow: hidden;
 
       font-family: Menlo, monospace;
@@ -48,7 +47,7 @@
   var height = window.innerHeight;
 
   function getCharacterDimensions() {
-    var p = document.createElement('p');
+    var p = document.createElement('pre');
     p.appendChild(document.createTextNode('~'));
     document.body.appendChild(p);
     characterWidth = p.clientWidth;
@@ -67,7 +66,7 @@
   function writeString(row) {
     var string = randomItem(stringArray);
 
-    var p    = document.createElement('p');
+    var p    = document.createElement('pre');
     var text = document.createTextNode(string);
 
     p.style.width  = string.length * characterWidth + 'px';
@@ -102,7 +101,7 @@
       }
     }
 
-    setInterval(activate, randomIntegerInclusive(5000, 10000));
+    setInterval(activate, randomIntegerInclusive(3000, 6000));
   }
 
   writeString(randomIntegerInclusive(0, rows - 1));
