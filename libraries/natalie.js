@@ -62,3 +62,38 @@ function create2DArray(rows, columns) {
 
 	return x;
 }
+
+function last(array) {
+	return array[array.length - 1];
+}
+
+function flatten(ary, ret) {
+	ret = ret === undefined ? [] : ret;
+	for (var i = 0; i < ary.length; i++) {
+		if (Array.isArray(ary[i])) {
+			flatten(ary[i], ret);
+		} else {
+			ret.push(ary[i]);
+		}
+	}
+	return ret;
+}
+
+function interleave () {
+	var arrs = [].slice.call(arguments)
+	var maxLength = Math.max.apply(Math, arrs.map(function (arr) {
+		return arr.length
+	}))
+
+	var result = []
+
+	for (var i = 0; i < maxLength; ++i) {
+		arrs.forEach(function (arr) {
+			if (arr.length > i) {
+				result.push(arr[i])
+			}
+		})
+	}
+
+	return result
+}
