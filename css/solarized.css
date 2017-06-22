@@ -25,16 +25,19 @@ $green:     #859900;
     local('Menlo Regular'),
     url('../fonts/Menlo.otf') format("opentype");
 }
+
 body {
   background-color: #002b36;
   color: #b58900;
   font-family: Menlo, monospace;
   margin: 15px;
 }
+
 p {
   font-family: Menlo, monospace;
   margin-top: 0;
 }
+
 pre {
   font-family: Menlo, monospace;
   margin-top: 0;
