@@ -97,3 +97,21 @@ function interleave () {
 
 	return result
 }
+
+function randomWalkInteger(start, low, high, step) {
+	while (true) {
+		var newStart = start + randomIntegerInclusive(-step, step);
+		if (newStart >= low && newStart <= high) {
+			return newStart;
+		}
+	}
+}
+
+function randomWalkFloat(start, low, high, step) {
+	while (true) {
+		var newStart = start + randomFloat(-step, step);
+		if (newStart >= low && newStart <= high) {
+			return newStart;
+		}
+	}
+}
