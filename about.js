@@ -87,6 +87,7 @@ var strings = [
 	'\"a computer whose cooling fans weren\'t working\"',
 	'\"truth coming out of her well to shame mankind\"',
 	'«искусство требует жертв»',
+	'\"your computer is very sad. i want to give your computer a hug.\"',
 ];
 
 var floatingStrings = [];
