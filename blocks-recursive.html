@@ -16,17 +16,8 @@
     }
 
     .leaf {
-      /*z-index: 0;*/
-      /*background-color: black;*/
-      /*transition: z-index 0.2s, background-color 0.2s, transform 0.2s;*/
       transition: background-color 0.5s;
     }
-
-    /*.leaf:hover {*/
-      /*z-index: 1000;*/
-      /*transform: scale(1.2, 1.2);*/
-      /*background-color: lime;*/
-    /*}*/
   </style>
 </head>
 
@@ -37,12 +28,6 @@
 <script src="libraries/randomColor.min.js"></script>
 
 <script>
-  // var windowWidth  = window.innerWidth;
-  // var windowHeight = window.innerHeight;
-
-  // var columns = randomIntegerInclusive(1, 5);
-  // var rows    = randomIntegerInclusive(1, 5);
-
   recursiveGrid(document.body, 3, 3, 3);
 
   function recursiveGrid(parent, columns, rows, depth) {
