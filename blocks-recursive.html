@@ -28,7 +28,7 @@
 <script src="libraries/randomColor.min.js"></script>
 
 <script>
-  recursiveGrid(document.body, 3, 3, 3);
+  recursiveGrid(document.body, 3, 3, 5);
 
   function recursiveGrid(parent, columns, rows, depth) {
     for (var i = 0; i < columns; i++) {
@@ -47,9 +47,9 @@
         } else {
           currentDepth--;
           // recursiveGrid(div, columns, rows, currentDepth);
-          // recursiveGrid(div, randomIntegerInclusive(1, columns), randomIntegerInclusive(1, rows), currentDepth);
-          var levels = randomIntegerInclusive(1, columns);
-          recursiveGrid(div, levels, levels, currentDepth);
+          recursiveGrid(div, randomIntegerInclusive(1, columns), randomIntegerInclusive(1, rows), currentDepth);
+          // var levels = randomIntegerInclusive(1, columns);
+          // recursiveGrid(div, levels, levels, currentDepth);
         }
 
         parent.appendChild(div);
@@ -58,7 +58,6 @@
   }
 
   var leaves = document.getElementsByClassName("leaf");
-  // var hueOn  = randomItem(["red", "orange", "yellow", "green", "blue", "purple", "pink", "monochrome"]);
   var hueOn  = randomItem(["red", "orange", "yellow", "green", "blue", "purple", "pink"]);
   var hueOff = "monochrome";
 
