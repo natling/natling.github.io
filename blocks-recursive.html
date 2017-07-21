@@ -15,11 +15,12 @@
       position: absolute;
     }
 
-    /*.leaf {*/
+    .leaf {
       /*z-index: 0;*/
       /*background-color: black;*/
       /*transition: z-index 0.2s, background-color 0.2s, transform 0.2s;*/
-    /*}*/
+      transition: background-color 0.5s;
+    }
 
     /*.leaf:hover {*/
       /*z-index: 1000;*/
@@ -72,21 +73,37 @@
   }
 
   var leaves = document.getElementsByClassName("leaf");
-  var hue = randomItem(["red", "orange", "yellow", "green", "blue", "purple", "pink", "monochrome"]);
+  // var hueOn  = randomItem(["red", "orange", "yellow", "green", "blue", "purple", "pink", "monochrome"]);
+  var hueOn  = randomItem(["red", "orange", "yellow", "green", "blue", "purple", "pink"]);
+  var hueOff = "monochrome";
 
   for (var i = 0; i < leaves.length; i++) {
-    // var colorOff = randomColor({hue: hue});
-    // var colorOn  = randomColor({hue: hue});
+    (function(i) {
+      var colorOff = randomColor({hue: hueOff});
+      var colorOn  = randomColor({hue: hueOn});
 
-    leaves[i].style.backgroundColor = randomColor({hue: hue});
+      leaves[i].style.backgroundColor = colorOff;
 
-    leaves[i].onmouseover = function() {
-      this.style.backgroundColor = randomColor({hue: hue});
-    }
+      function changeState(element, direction, delay) {
+        function changeColor() {
+          if (direction) {
+            element.style.backgroundColor = colorOn;
+          } else {
+            element.style.backgroundColor = colorOff;
+          }
+        }
 
-    leaves[i].onmouseout = function() {
-      // this.style.backgroundColor = randomColor({hue: hue});
-    }
+        setTimeout(changeColor, delay * 1000);
+      }
+
+      leaves[i].onmouseover = function() {
+        changeState(this, true, 0)
+      }
+
+      leaves[i].onmouseout = function() {
+        changeState(this, false, 1)
+      }
+    })(i);
   }
 </script>
 </html>
