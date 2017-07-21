@@ -61,17 +61,21 @@
   var hueOn  = randomItem(["red", "orange", "yellow", "green", "blue", "purple", "pink"]);
   var hueOff = "monochrome";
 
+  window.onclick = function () {
+    hueOn = randomItem(["red", "orange", "yellow", "green", "blue", "purple", "pink"]);
+  }
+
   for (var i = 0; i < leaves.length; i++) {
     (function(i) {
       var colorOff = randomColor({hue: hueOff});
-      var colorOn  = randomColor({hue: hueOn});
+      function colorOn() {return randomColor({hue: hueOn})};
 
       leaves[i].style.backgroundColor = colorOff;
 
       function changeState(element, direction, delay) {
         function changeColor() {
           if (direction) {
-            element.style.backgroundColor = colorOn;
+            element.style.backgroundColor = colorOn();
           } else {
             element.style.backgroundColor = colorOff;
           }
@@ -85,7 +89,7 @@
       }
 
       leaves[i].onmouseout = function() {
-        changeState(this, false, 2)
+        changeState(this, false, 3)
       }
     })(i);
   }
