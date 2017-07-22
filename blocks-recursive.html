@@ -28,14 +28,13 @@
 <script src="libraries/randomColor.min.js"></script>
 
 <script>
-  var leaves, hue, luminosity;
+  var hue, luminosity;
 
   start();
 
   function start() {
     recursiveGrid(document.body, 5, 3, 5);
 
-    leaves     = document.getElementsByClassName("leaf");
     hue        = randomHue();
     luminosity = randomLuminosity();
 
@@ -73,6 +72,8 @@
   }
 
   function cycleColors() {
+    var leaves = document.getElementsByClassName("leaf");
+
     for (var i = 0; i < leaves.length; i++) {
       (function(i) {
         function changeColor() {
