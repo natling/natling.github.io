@@ -57,41 +57,40 @@
     }
   }
 
-  var leaves = document.getElementsByClassName("leaf");
-  var hueOn  = randomItem(["red", "orange", "yellow", "green", "blue", "purple", "pink"]);
-  var hueOff = "monochrome";
-
-  window.onclick = function () {
-    hueOn = randomItem(["red", "orange", "yellow", "green", "blue", "purple", "pink"]);
-  }
+  var leaves     = document.getElementsByClassName("leaf");
+  var hue        = randomHue();
+  var luminosity = randomLuminosity();
 
   for (var i = 0; i < leaves.length; i++) {
     (function(i) {
-      var colorOff = randomColor({hue: hueOff});
-      function colorOn() {return randomColor({hue: hueOn})};
-
-      leaves[i].style.backgroundColor = colorOff;
-
-      function changeState(element, direction, delay) {
-        function changeColor() {
-          if (direction) {
-            element.style.backgroundColor = colorOn();
-          } else {
-            element.style.backgroundColor = colorOff;
-          }
-        }
-
-        setTimeout(changeColor, delay * 1000);
+      function changeColor() {
+        leaves[i].style.backgroundColor = randomColor({hue: hue, luminosity: luminosity});
+        setTimeout(changeColor, randomFloat(0.0, 2.0) * 1000);
       }
 
-      leaves[i].onmouseover = function() {
-        changeState(this, true, 0)
-      }
-
-      leaves[i].onmouseout = function() {
-        changeState(this, false, 6)
-      }
+      setTimeout(changeColor, randomFloat(0.0, 3.0) * 1000);
     })(i);
+  }
+
+  setTimeout(changeHue, randomFloat(1.0, 5.0) * 1000);
+  setTimeout(changeLuminosity, randomFloat(1.0, 5.0) * 1000);
+
+  function changeHue() {
+    hue = randomHue();
+    setTimeout(changeHue, randomFloat(1.0, 5.0) * 1000);
+  }
+
+  function changeLuminosity() {
+    luminosity = randomLuminosity();
+    setTimeout(changeLuminosity, randomFloat(1.0, 5.0) * 1000);
+  }
+
+  function randomHue() {
+    return randomItem(["red", "orange", "yellow", "green", "blue", "purple", "pink", "monochrome"]);
+  }
+
+  function randomLuminosity() {
+    return randomItem(["bright", "light", "dark"]);
   }
 </script>
 </html>
