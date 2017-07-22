@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>blocks</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="files/favicon.png"/>
+  <style>
+    body {
+      overflow: hidden;
+      margin: 0;
+      background-color: black;
+    }
+
+    div {
+      position: absolute;
+    }
+
+    .leaf {
+      transition: background-color 0.5s;
+    }
+  </style>
+</head>
+
+<body>
+</body>
+
+<script src="libraries/natalie.js"></script>
+<script src="libraries/randomColor.min.js"></script>
+
+<script>
+  recursiveGrid(document.body, 5, 3, 5);
+
+  function recursiveGrid(parent, columns, rows, depth) {
+    for (var i = 0; i < columns; i++) {
+      for (var j = 0; j < rows; j++) {
+        var currentDepth = depth;
+
+        var div = document.createElement("div");
+
+        div.style.width  = 100 / columns + "%";
+        div.style.height = 100 / rows + "%";
+        div.style.left   = i * 100 / columns + "%";
+        div.style.top    = j * 100 / rows + "%";
+
+        if (currentDepth == 1) {
+          div.className = "leaf";
+        } else {
+          currentDepth--;
+          // recursiveGrid(div, columns, rows, currentDepth);
+          recursiveGrid(div, randomIntegerInclusive(1, columns), randomIntegerInclusive(1, rows), currentDepth);
+          // var levels = randomIntegerInclusive(1, columns);
+          // recursiveGrid(div, levels, levels, currentDepth);
+        }
+
+        parent.appendChild(div);
+      }
+    }
+  }
+
+  var leaves = document.getElementsByClassName("leaf");
+  var hueOn  = randomItem(["red", "orange", "yellow", "green", "blue", "purple", "pink"]);
+  var hueOff = "monochrome";
+
+  window.onclick = function () {
+    hueOn = randomItem(["red", "orange", "yellow", "green", "blue", "purple", "pink"]);
+  }
+
+  for (var i = 0; i < leaves.length; i++) {
+    (function(i) {
+      var colorOff = randomColor({hue: hueOff});
+      function colorOn() {return randomColor({hue: hueOn})};
+
+      leaves[i].style.backgroundColor = colorOff;
+
+      function changeState(element, direction, delay) {
+        function changeColor() {
+          if (direction) {
+            element.style.backgroundColor = colorOn();
+          } else {
+            element.style.backgroundColor = colorOff;
+          }
+        }
+
+        setTimeout(changeColor, delay * 1000);
+      }
+
+      leaves[i].onmouseover = function() {
+        changeState(this, true, 0)
+      }
+
+      leaves[i].onmouseout = function() {
+        changeState(this, false, 6)
+      }
+    })(i);
+  }
+</script>
+</html>
