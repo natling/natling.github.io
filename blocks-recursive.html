@@ -39,8 +39,8 @@
     hue        = randomHue();
     luminosity = randomLuminosity();
 
-    setTimeout(changeHue, randomFloat(1.0, 5.0) * 1000);
-    setTimeout(changeLuminosity, randomFloat(1.0, 5.0) * 1000);
+    setTimeout(cycleHue, randomFloat(1.0, 5.0) * 1000);
+    setTimeout(cycleLuminosity, randomFloat(1.0, 5.0) * 1000);
 
     cycleColors();
   }
@@ -85,14 +85,14 @@
     }
   }
 
-  function changeHue() {
+  function cycleHue() {
     hue = randomHue();
-    setTimeout(changeHue, randomFloat(1.0, 5.0) * 1000);
+    setTimeout(cycleHue, randomFloat(1.0, 5.0) * 1000);
   }
 
-  function changeLuminosity() {
+  function cycleLuminosity() {
     luminosity = randomLuminosity();
-    setTimeout(changeLuminosity, randomFloat(1.0, 5.0) * 1000);
+    setTimeout(cycleLuminosity, randomFloat(1.0, 5.0) * 1000);
   }
 
   function randomHue() {
