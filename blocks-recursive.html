@@ -28,7 +28,22 @@
 <script src="libraries/randomColor.min.js"></script>
 
 <script>
-  recursiveGrid(document.body, 5, 3, 5);
+  var leaves, hue, luminosity;
+
+  start();
+
+  function start() {
+    recursiveGrid(document.body, 5, 3, 5);
+
+    leaves     = document.getElementsByClassName("leaf");
+    hue        = randomHue();
+    luminosity = randomLuminosity();
+
+    setTimeout(changeHue, randomFloat(1.0, 5.0) * 1000);
+    setTimeout(changeLuminosity, randomFloat(1.0, 5.0) * 1000);
+
+    cycleColors();
+  }
 
   function recursiveGrid(parent, columns, rows, depth) {
     for (var i = 0; i < columns; i++) {
@@ -57,23 +72,18 @@
     }
   }
 
-  var leaves     = document.getElementsByClassName("leaf");
-  var hue        = randomHue();
-  var luminosity = randomLuminosity();
+  function cycleColors() {
+    for (var i = 0; i < leaves.length; i++) {
+      (function(i) {
+        function changeColor() {
+          leaves[i].style.backgroundColor = randomColor({hue: hue, luminosity: luminosity});
+          setTimeout(changeColor, randomFloat(0.0, 2.0) * 1000);
+        }
 
-  for (var i = 0; i < leaves.length; i++) {
-    (function(i) {
-      function changeColor() {
-        leaves[i].style.backgroundColor = randomColor({hue: hue, luminosity: luminosity});
-        setTimeout(changeColor, randomFloat(0.0, 2.0) * 1000);
-      }
-
-      setTimeout(changeColor, randomFloat(0.0, 3.0) * 1000);
-    })(i);
+        setTimeout(changeColor, randomFloat(0.0, 3.0) * 1000);
+      })(i);
+    }
   }
-
-  setTimeout(changeHue, randomFloat(1.0, 5.0) * 1000);
-  setTimeout(changeLuminosity, randomFloat(1.0, 5.0) * 1000);
 
   function changeHue() {
     hue = randomHue();
