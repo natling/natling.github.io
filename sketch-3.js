@@ -1,7 +1,7 @@
 var columns, rows;
 
-var columnWidth = 50;
-var rowHeight   = 50;
+var columnWidth = 40;
+var rowHeight   = 40;
 
 var squareSize;
 
