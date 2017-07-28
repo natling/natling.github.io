@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>base notes</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="files/favicon.png"/>
+  <style>
+    @font-face {
+      font-family: 'Menlo';
+      font-style: normal;
+      src:
+        local('Menlo'),
+        local('Menlo Regular'),
+        url('../fonts/Menlo.otf') format("opentype");
+    }
+
+    body {
+      margin: 0;
+      text-align: center;
+      transition: background-color 10s;
+    }
+
+    .label {
+      display: inline-block;
+      padding: 10px;
+    }
+
+    .modalBackground {
+      display: none;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s, background-color 1s;
+    }
+
+    .modalColumn {
+      position: absolute;
+      width: 0px;
+      height: 100%;
+      opacity: 0;
+      transition: width 1s, opacity 1s;
+    }
+
+    .modalContent {
+      padding: 10px;
+    }
+
+    p {
+      margin: 0px;
+      line-height: 120%;
+      color: white;
+      font-family: Menlo;
+      font-size: 12px;
+    }
+
+    p.body {
+      padding: 10px;
+      text-align: justify;
+    }
+
+    .header {
+      text-align: right;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+</body>
+
+<script src="libraries/randomColor.min.js"></script>
+<script src="base-notes.js"></script>
+
+<script>
+  function randomIntegerInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function getRandomFloat(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  function cycleBodyBackgroundColor() {
+    document.body.style.backgroundColor = randomColor({luminosity: 'dark'});
+    setTimeout(cycleBodyBackgroundColor, getRandomFloat(10, 20) * 1000);
+  }
+
+  cycleBodyBackgroundColor();
+
+  var width  = window.innerWidth;
+  var height = window.innerHeight;
+
+  var margin = 50;
+
+  var labelContainer = document.createElement("div");
+  labelContainer.id  = "labelContainer";
+  document.body.appendChild(labelContainer);
+
+  var modalContainer = document.createElement("div");
+  modalContainer.id  = "modalContainer";
+  document.body.appendChild(modalContainer);
+
+  for (var i = 0; i < data.length; i++) {
+    (function(i) {
+      var label = document.createElement("div");
+
+      var header = document.createElement("div");
+      header.className = "header";
+      label.appendChild(header);
+
+      var artist   = document.createElement("p");
+      var song     = document.createElement("p");
+      var album    = document.createElement("p");
+      var year     = document.createElement("p");
+      var duration = document.createElement("p");
+
+      artist.innerHTML   = data[i].artist;
+      song.innerHTML     = data[i].song;
+      album.innerHTML    = '<i>' + data[i].album + '</i>';
+      year.innerHTML     = data[i].year;
+      duration.innerHTML = data[i].duration;
+
+      header.appendChild(artist);
+      header.appendChild(song);
+      header.appendChild(album);
+      header.appendChild(year);
+      header.appendChild(duration);
+
+      label.style.margin          = randomIntegerInclusive(10, 60) + 'px';
+      label.style.backgroundColor = randomColor({hue: 'monochrome', luminosity: 'dark'});
+      label.className             = "label";
+
+      labelContainer.appendChild(label);
+
+      var modalContent    = label.cloneNode(true);
+      var modalColumn     = document.createElement("div");
+      var modalBackground = document.createElement("div");
+
+      var text = document.createElement("div");
+      text.innerHTML = data[i].text;
+      modalContent.appendChild(text);
+
+      modalColumn.style.backgroundColor     = randomColor({hue: 'monochrome', luminosity: 'dark'});
+      modalColumn.className                 = "modalColumn";
+      modalContent.style.backgroundColor    = "";
+      modalContent.style.margin             = "0px";
+      modalContent.className                = "modalContent";
+      modalBackground.style.backgroundColor = randomColor({luminosity: 'dark'});
+      modalBackground.className             = "modalBackground";
+
+      modalColumn.appendChild(modalContent);
+      modalBackground.appendChild(modalColumn);
+      modalContainer.appendChild(modalBackground);
+
+      label.onclick = function() {
+        modalBackground.style.display = "block";
+
+        setTimeout(function() {
+          modalBackground.style.opacity = "1";
+          modalColumn.style.opacity     = "1";
+
+          var modalWidth          = width * getRandomFloat(0.4, 0.6);
+          var modalLeft           = getRandomFloat(margin, width - modalWidth - margin);
+          modalColumn.style.width = modalWidth + 'px';
+          modalColumn.style.left  = modalLeft + 'px';
+        }, 10);
+      }
+
+      modalBackground.onclick = function() {
+        modalColumn.style.width       = "0px";
+        modalColumn.style.opacity     = "0";
+        modalBackground.style.opacity = "0";
+
+        setTimeout(function() {
+          modalBackground.style.display = "none";
+        }, 1000);
+      }
+    })(i);
+  }
+</script>
+
+</html>
