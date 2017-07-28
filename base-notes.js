@@ -92,18 +92,18 @@ var data = [
 		album    : 'The Radio',
 		year     : '1999',
 		duration : '18:33',
-		text     : `<p class="body">i made a cabinet.</p>
-		<p class="body">you can fit 5 flutes inside,</p>
-		<p class="body">and one flute broken into 3 pieces.</p>
-		<p class="body">when you put the flutes in, each flute learns a new song.</p>
-		<p class="body">one song is called ghost town with creaky shutters'</p>
-		<p class="body">one song is called flotsam of vinyl crackle'</p>
-		<p class="body">one song is called water nymph sailing on a stepping stone'</p>
-		<p class="body">one song is called chocolate bamboo in the evening'</p>
-		<p class="body">you close the cabinet using the knob.</p>
-		<p class="body">the knob is made of frog croaks.</p>
-		<p class="body">when it's closed, the cabinet starts to snore.</p>
-		<p class="body">when you're sleeping, it washes out to sea.</p>`,
+		text     : `<p class="body">i made a cabinet.<br>
+		you can fit 5 flutes inside,<br>
+		and one flute broken into 3 pieces.</p>
+		<p class="body">when you put the flutes in, each flute learns a new song.<br>
+		one song is called 'ghost town with creaky shutters'<br>
+		one song is called 'flotsam of vinyl crackle'<br>
+		one song is called 'water nymph sailing on a stepping stone'<br>
+		one song is called 'chocolate bamboo in the evening'</p>
+		<p class="body">you close the cabinet using the knob.<br>
+		the knob is made of frog croaks.<br>
+		when it's closed, the cabinet starts to snore.<br>
+		when you're sleeping, it washes out to sea.</p>`,
 	},
 
 	{
@@ -132,16 +132,16 @@ var data = [
 		album    : 'A Silent Stroll on Sombre St',
 		year     : '2012',
 		duration : '28:58',
-		text     : `<p class="body">a pine box, open at the top, is submerged, then turned over.</p>
-		<p class="body">deep below it, a pinhole in the ocean floor squeezes out tiny globes of air.</p>
-		<p class="body">they rise and come to rest inside the box, one at a time.</p>
-		<p class="body">the globes cluster like fish eggs, but don't pop.</p>
-		<p class="body">one day, the pine box fills up all the way with the globes.</p>
-		<p class="body">they press against other precariously, quivering,</p>
-		<p class="body">the surface tension ready at any moment to give out.</p>
-		<p class="body">someday, a wave will disturb the box.</p>
-		<p class="body">the globes will burst and merge into each other.</p>
-		<p class="body">the pine box will go from full to empty.</p>`,
+		text     : `<p class="body">a pine box, open at the top, is submerged, then turned over.<br>
+		deep below it, a pinhole in the ocean floor squeezes out tiny globes of air.<br>
+		they rise and come to rest inside the box, one at a time.<br>
+		the globes cluster like fish eggs, but don't pop.</p>
+		<p class="body">one day, the pine box fills up all the way with the globes.<br>
+		they press against other precariously, quivering,<br>
+		the surface tension ready at any moment to give out.</p>
+		<p class="body">someday, a wave will disturb the box.<br>
+		the globes will burst and merge into each other.<br>
+		the pine box will go from full to empty.</p>`,
 	},
 
 	{
@@ -150,16 +150,16 @@ var data = [
 		album    : 'The Haze In Your Eyes',
 		year     : '2010',
 		duration : '29:08',
-		text     : `<p class="body">there's a pond, but the pond water is a pinscreen.</p>
-		<p class="body">the tips of the pins are soft and ripple.</p>
-		<p class="body">i lay on a lilypad on the pinscreen.</p>
-		<p class="body">in my opinion, it's sunny.</p>
-		<p class="body">with a clean butter knife i smear the pond, then</p>
-		<p class="body">a blue jam clings to the blade, dripping.</p>
-		<p class="body">from outside a blue marble, the marble is hard.</p>
-		<p class="body">from inside a blue marble, the marble is jelly.</p>
-		<p class="body">on a soft sun day, i throw wide a bright door.</p>
-		<p class="body">i pass through the bright door a blue skin a blue sea</p>`,
+		text     : `<p class="body">there's a pond, but the pond water is a pinscreen.<br>
+		the tips of the pins are soft and ripple.<br>
+		i lay on a lilypad on the pinscreen.<br>
+		in my opinion, it's sunny.</p>
+		<p class="body">with a clean butter knife i smear the pond, then<br>
+		a blue jam clings to the blade, dripping.</p>
+		<p class="body">from outside a blue marble, the marble is hard.<br>
+		from inside a blue marble, the marble is jelly.<br>
+		on a soft sun day, i throw wide a bright door.<br>
+		i pass through the bright door a blue skin a blue sea</p>`,
 	},
 
 	{
@@ -179,24 +179,24 @@ var data = [
 		album    : 'Ra (Elsewhere)',
 		year     : '2015',
 		duration : '36:33',
-		text     : `<p class="body">I</p>
-		<p class="body">a knife and a motorbike are both cutting implements.</p>
-		<p class="body">a motorbike cuts slowly and cuts only one thing.</p>
-		<p class="body">it cuts so slowly, everyone forgets it cuts.</p>
-		<p class="body">a motorbike is a successful disguise.</p>
-		<p class="body">II</p>
-		<p class="body">there is a slim road of polished marble.</p>
-		<p class="body">the road is a ringworld, a halo.</p>
-		<p class="body">a motorbike glides round and over the halo.</p>
-		<p class="body">like from a singing glass, a sound comes out,</p>
-		<p class="body">getting richer with each go-round:</p>
-		<p class="body">the sound of mourning doves</p>
-		<p class="body">trapped in a church's vault</p>
-		<p class="body">swallowing organ tones</p>
-		<p class="body">becoming angels.</p>
-		<p class="body">III</p>
-		<p class="body">the halo splits in two, along the</p>
-		<p class="body">line traced by the motorbike.</p>`,
+		text     : `<p class="body">I<br>
+		a knife and a motorbike are both cutting implements.<br>
+		a motorbike cuts slowly and cuts only one thing.<br>
+		it cuts so slowly, everyone forgets it cuts.<br>
+		a motorbike is a successful disguise.</p>
+		<p class="body">II<br>
+		there is a slim road of polished marble.<br>
+		the road is a ringworld, a halo.<br>
+		a motorbike glides round and over the halo.<br>
+		like from a singing glass, a sound comes out,<br>
+		getting richer with each go-round:<br>
+		the sound of mourning doves<br>
+		trapped in a church's vault<br>
+		swallowing organ tones<br>
+		becoming angels.</p>
+		<p class="body">III<br>
+		the halo splits in two, along the<br>
+		line traced by the motorbike.</p>`,
 	},
 
 	{
@@ -218,13 +218,13 @@ var data = [
 		album    : 'Wild Flowers',
 		year     : '2013',
 		duration : '38:35',
-		text     : `<p class="body">88 tubes are harvested from a sparkling wreckage of wind chimes.</p>
-		<p class="body">the chimes are stretched taut and laid on their sides.</p>
-		<p class="body">then, a person with long fingers christens them keys.</p>
+		text     : `<p class="body">88 tubes are harvested from a sparkling wreckage of wind chimes.<br>
+		the chimes are stretched taut and laid on their sides.<br>
+		then, a person with long fingers christens them keys.</p>
 		<p class="body">now, the wind must pass through a human's fingers.</p>
-		<p class="body">the main difference between a wind chime and a piano is</p>
-		<p class="body">pianists forget that they are the wind, that a wind chime collects them,</p>
-		<p class="body">that the piano is only a wind chime in an advanced stage of forgetting.</p>`,
+		<p class="body">the main difference between a wind chime and a piano is<br>
+		pianists forget that they are the wind, that a wind chime collects them,<br>
+		that the piano is only a wind chime in an advanced stage of forgetting.</p>`,
 	},
 
 	{
@@ -292,12 +292,12 @@ var data = [
 		album    : 'Time Machines',
 		year     : '1998',
 		duration : '46:46',
-		text     : `<p class="body">7-methoxy-b-carboline (telepathine)</p>
-		<p class="body">there is a black machine egg. the egg hatches a massive digital cloud. perfectly vertical lightning bolts and hail-cubes begin to fall from the sky. down below, a fleet of antivirus snowplows is deployed to clear off the byways for the flow of internet traffic.</p>
-		<p class="body">2,5 dimethoxy-4-ethyl-amphetamine(hecate)</p>
-		<p class="body">remember when you were ten and you slept over at your friend's house for the first time. your friend's parents came in and told you lights out, so the two of you hid under the blankets and your friend brought out the laptop. your friend didn't say anything when he booted it up, and didn't say anything for the rest of the night. just insisted on showing you slow motion footage of a spring door-stop being flicked, over and over again, until you fell asleep.</p>
-		<p class="body">5-methoxy-n, n-dimethyl</p>
-		<p class="body">on moonless nights, it's said that certain somnambulists are seized by the urge to water their houseplants. they fumble in the freezer for ice cubes, stagger over to the windowsill, and gingerly arrange the cubes into neat little towers at the base of each plant.</p>`,
+		text     : `<p class="body">7-methoxy-b-carboline (telepathine)<br>
+		there is a black machine egg. the egg hatches a massive digital cloud. perfectly vertical lightning bolts and hail-cubes begin to fall from the sky. down below, a fleet of antivirus snowplows is deployed to clear off the byways for the flow of internet traffic.</p>
+		<p class="body">2,5 dimethoxy-4-ethyl-amphetamine(hecate)<br>
+		remember when you were ten and you slept over at your friend's house for the first time. your friend's parents came in and told you lights out, so the two of you hid under the blankets and your friend brought out the laptop. your friend didn't say anything when he booted it up, and didn't say anything for the rest of the night. just insisted on showing you slow motion footage of a spring door-stop being flicked, over and over again, until you fell asleep.</p>
+		<p class="body">5-methoxy-n, n-dimethyl<br>
+		on moonless nights, it's said that certain somnambulists are seized by the urge to water their houseplants. they fumble in the freezer for ice cubes, stagger over to the windowsill, and gingerly arrange the cubes into neat little towers at the base of each plant.</p>`,
 	},
 
 	{
@@ -306,15 +306,15 @@ var data = [
 		album    : 'Please Stop Loving Me',
 		year     : '1996',
 		duration : '47:33',
-		text     : `<p class="body">a voice i know is a stretched sky.</p>
-		<p class="body">the stretched sky runs a bath of moldy light.</p>
-		<p class="body">despite this, i see only grey cleanliness,</p>
-		<p class="body">grey satin, grey satin with the texture of air.</p>
-		<p class="body">if an organ pipe was sheathed in glass</p>
-		<p class="body">and sent down the sunniest river,</p>
-		<p class="body">i guess the reeds on its banks</p>
-		<p class="body">would straighten up</p>
-		<p class="body">and stretch open their throats.</p>`,
+		text     : `<p class="body">a voice i know is a stretched sky.<br>
+		the stretched sky runs a bath of moldy light.<br>
+		despite this, i see only grey cleanliness,<br>
+		grey satin, grey satin with the texture of air.</p>
+		<p class="body">if an organ pipe was sheathed in glass<br>
+		and sent down the sunniest river,<br>
+		i guess the reeds on its banks<br>
+		would straighten up<br>
+		and stretch open their throats.</p>`,
 	},
 
 	{
@@ -335,10 +335,10 @@ var data = [
 		year     : '2005',
 		duration : '48:31',
 		text     : `<p class="body">a can of beans consists of:</p>
-		<p class="body">-beans (in the middle)</p>
-		<p class="body">-floor (metal)</p>
-		<p class="body">-hat (metal, at the top)</p>
-		<p class="body">-curtain (metal, going around the beans)</p>
+		<p class="body">-beans (in the middle)<br>
+		-floor (metal)<br>
+		-hat (metal, at the top)<br>
+		-curtain (metal, going around the beans)</p>
 		<p class="body">think of all the millions of beans inside their curtains. in any one shipping container filled with beans, there are thousands of curtains, thousands of lonelinesses, all packed together, destined never to see one another. over the course of their travels the muffled sound of cranes and freight trains and trucks and shelf-stockers and shopping carts and hungry children will pass through the curtains, but no light.</p>`,
 	},
 
@@ -467,24 +467,24 @@ var data = [
 		album    : 'Triage',
 		year     : '2008',
 		duration : '59:39',
-		text     : `<p class="body">my name is po. welcome to my spaceship.</p>
-		<p class="body">my job is pastry chef. that's the only job here, and it's mine.</p>
-		<p class="body">i bake croissants all day on the spaceship.</p>
-		<p class="body">everyone else on the spaceship is cryogenically frozen right now.</p>
-		<p class="body">i have a few different kitchens to bake in.</p>
-		<p class="body">every kitchen is my favorite, because the lights there are pastry colored.</p>
-		<p class="body">they're so pastry colored that when i take the croissants out of the oven, they're really hard to see, almost invisible.</p>
-		<p class="body">when i take the croissants out, i seal them in sandwich bags and set them afloat in th spaceship.</p>
-		<p class="body">sometimes it's lonely. i look out of the telescopes.</p>
-		<p class="body">the telescopes are designed to point at nebulae.</p>
-		<p class="body">then, they pull the distant nebula light through the lens and out the eyepiece, like a string of kerchiefs out of a magic hat. the nebula comes out in soft rills and wafts through the ship.</p>
-		<p class="body">i like to gather up the nebulae and bunch them into pillows.</p>
-		<p class="body">i have a zero g greenhouse.</p>
-		<p class="body">it's filled with kudzu.</p>
-		<p class="body">the walls are garden beds, and grow lights float around, unmoored.</p>
-		<p class="body">the kudzu grow inward and make thick tangled clouds.</p>
-		<p class="body">sometimes i go in the greenhouse to watch the lights prowl.</p>
-		<p class="body">but usually there's only kudzu in there and no one else.</p>`,
+		text     : `<p class="body">my name is po. welcome to my spaceship.<br>
+		my job is pastry chef. that's the only job here, and it's mine.<br>
+		i bake croissants all day on the spaceship.<br>
+		everyone else on the spaceship is cryogenically frozen right now.</p>
+		<p class="body">i have a few different kitchens to bake in.<br>
+		every kitchen is my favorite, because the lights there are pastry colored.<br>
+		they're so pastry colored that when i take the croissants out of the oven, they're really hard to see, almost invisible.<br>
+		when i take the croissants out, i seal them in sandwich bags and set them afloat in th spaceship.</p>
+		<p class="body">sometimes it's lonely. i look out of the telescopes.<br>
+		the telescopes are designed to point at nebulae.<br>
+		then, they pull the distant nebula light through the lens and out the eyepiece, like a string of kerchiefs out of a magic hat. the nebula comes out in soft rills and wafts through the ship.<br>
+		i like to gather up the nebulae and bunch them into pillows.</p>
+		<p class="body">i have a zero g greenhouse.<br>
+		it's filled with kudzu.<br>
+		the walls are garden beds, and grow lights float around, unmoored.<br>
+		the kudzu grow inward and make thick tangled clouds.<br>
+		sometimes i go in the greenhouse to watch the lights prowl.<br>
+		but usually there's only kudzu in there and no one else.</p>`,
 	},
 
 	{
@@ -493,10 +493,10 @@ var data = [
 		album    : 'Tannenbaum',
 		year     : '2013',
 		duration : '1:00:00',
-		text     : `<p class="body">I</p>
-		<p class="body">you glow against a window. the window curves round you. it is dusty but sunglare on it. look around. sunglare has no source. the window curves all round you. you are the contents of a capsule. you are going down a dark throat. the body absorbs you. now you are the body. now you are conscious of being the body. look around. you glow against a window. the window curves round you.</p>
-		<p class="body">II</p>
-		<p class="body">a huge rippling tube of heavy cream, membraned with thin snot, worms through the dark searching for nutrients. then, each end of the mass bends back and finds the other. they merge and form a ring. the cream begins to mill inside its membrane in sluggish currents. amorphous pockets of white sourness bloom in the white cream.</p>`,
+		text     : `<p class="body">I<br>
+		you glow against a window. the window curves round you. it is dusty but sunglare on it. look around. sunglare has no source. the window curves all round you. you are the contents of a capsule. you are going down a dark throat. the body absorbs you. now you are the body. now you are conscious of being the body. look around. you glow against a window. the window curves round you.</p>
+		<p class="body">II<br>
+		a huge rippling tube of heavy cream, membraned with thin snot, worms through the dark searching for nutrients. then, each end of the mass bends back and finds the other. they merge and form a ring. the cream begins to mill inside its membrane in sluggish currents. amorphous pockets of white sourness bloom in the white cream.</p>`,
 	},
 
 	{
@@ -505,17 +505,17 @@ var data = [
 		album    : 'Watermusic',
 		year     : '2003',
 		duration : '1:00:03',
-		text     : `<p class="body">a frog is swimming in the river.</p>
-		<p class="body">with each kick, a bundle of toy xylophone keys</p>
-		<p class="body">appears in a puff of bubbles behind the frog's legs,</p>
-		<p class="body">and sinks into the murk.</p>
-		<p class="body">seated in the blue drawing room of a water balloon</p>
-		<p class="body">are a pair of trombones who have come to call.</p>
-		<p class="body">homuncular water balloon servants chuff in and out</p>
-		<p class="body">of the drawing room, making deep bows.</p>
-		<p class="body">the trombones pay them no mind.</p>
-		<p class="body">they're looking up. the ceiling has floated away.</p>
-		<p class="body">bundles of xylophone keys are pouring in from the opening.</p>`,
+		text     : `<p class="body">a frog is swimming in the river.<br>
+		with each kick, a bundle of toy xylophone keys<br>
+		appears in a puff of bubbles behind the frog's legs,<br>
+		and sinks into the murk.</p>
+		<p class="body">seated in the blue drawing room of a water balloon<br>
+		are a pair of trombones who have come to call.<br>
+		homuncular water balloon servants chuff in and out<br>
+		of the drawing room, making deep bows.</p>
+		<p class="body">the trombones pay them no mind.<br>
+		they're looking up. the ceiling has floated away.<br>
+		bundles of xylophone keys are pouring in from the opening.</p>`,
 	},
 
 	{
@@ -524,16 +524,16 @@ var data = [
 		album    : 'Through Horizon',
 		year     : '2013',
 		duration : '1:00:14',
-		text     : `<p class="body">I</p>
-		<p class="body">deep in the rainforest, a grid of upside down salt shakers is mounted on the ceiling of an abandoned warehouse. the floor is smooth steel.</p>
+		text     : `<p class="body">I<br>
+		deep in the rainforest, a grid of upside down salt shakers is mounted on the ceiling of an abandoned warehouse. the floor is smooth steel.</p>
 		<p class="body">a dehumidifier lives in the warehouse. every so often, it commands the shakers to shake up and down in unison, raining salt onto the floor, in order to lower humidity.</p>
 		<p class="body">downstairs, a hungry monster's belly hears the salt raining down. it replies with deep, swelling grumbles. the steel floor vibrates, and the salt grains drift into cymatic patterns. images of little milk cartons emerge.</p>
 		<p class="body">inside the milk cartons, frozen milk crystals begin to form. opaque tubes of gold light run through the milk. the crystals orbit the shafts in slow spirals.</p>
-		<p class="body">II</p>
-		<p class="body">in the instant before you accidentally snort water into your nose while swimming, time freezes. tiny flying saucers, their diameter just a hair smaller than your nostrils, appear out of the murk. they float into your nose.</p>
+		<p class="body">II<br>
+		in the instant before you accidentally snort water into your nose while swimming, time freezes. tiny flying saucers, their diameter just a hair smaller than your nostrils, appear out of the murk. they float into your nose.</p>
 		<p class="body">they perform repairs to the air bubbles in your nostrils, and inscribe microscopic glyphs on your nose hairs. then, time unfreezes, and you blow the water safely out your nose. the saucers are nowhere to be found.</p>
-		<p class="body">III</p>
-		<p class="body">a thousand tree squirrels try their hardest to pronounce the word myrtle over and over again. below the canopy, a leaky tarp drips water droplets over a crumpled plastic bag.</p>
+		<p class="body">III<br>
+		a thousand tree squirrels try their hardest to pronounce the word myrtle over and over again. below the canopy, a leaky tarp drips water droplets over a crumpled plastic bag.</p>
 		<p class="body">later, the bag has absorbed the squirrels' murmurings, causing each fold of the bag to harden into an extremely crackable knuckle.</p>
 		<p class="body">now, each water droplet that falls onto it instantly cracks the knuckles.</p>`,
 	},
@@ -544,12 +544,11 @@ var data = [
 		album    : 'Winter 1994',
 		year     : '1:01:05',
 		duration : '',
-		text     : `<p class="body">there is a white porthole which you are looking through.</p>
-		<p class="body">you see a pair of hairless thighs.</p>
-		<p class="body">they are wearing cellophane stockings, stretched taut and waxy.</p>
-		<p class="body">the thighs are straddling a glossy white cube.</p>
-		<p class="body">the cube's edges press creamy curves into the thighs.</p>
-		<p class="body">the cube sits motionless in a sea of milk.</p>`,
+		text     : `<p class="body">you see a pair of hairless thighs.<br>
+		they are wearing cellophane stockings, stretched taut and waxy.<br>
+		the thighs are straddling a glossy white cube.<br>
+		the cube's edges press creamy curves into the thighs.<br>
+		the cube sits motionless in a sea of milk.</p>`,
 	},
 
 	{
@@ -569,8 +568,8 @@ var data = [
 		year     : '2010',
 		duration : '1:04:07',
 		text     : `<p class="body">you could lay out each individual molecule comprising an animal in a perfectly flat, rectangular spread. these vast animal surfaces each generate unique biomes.</p>
-		<p class="body">if you did this with a wolf, there would be a tundra.</p>
-		<p class="body">the air would churn with papercuts, seething cicadas, and the pestling of gargoyles.</p>
+		<p class="body">if you did this with a wolf, there would be a tundra.<br>
+		the air would churn with papercuts, seething cicadas, and the pestling of gargoyles.</p>
 		<p class="body">if oysters themselves purify their environment - if from their insides they issue clarity, it's from the backs of their shells that they spew deadly squalls.</p>`,
 	},
 
@@ -590,25 +589,25 @@ var data = [
 		album    : 'Une Histoire de Bleu',
 		year     : '2013',
 		duration : '1:04:34',
-		text     : `<p class="body">Chapter I</p>
-		<p class="body">thin sheets of liquefied pearl slide down a large bell and cascade off its edges. forming a drape as it falls, the pearl collects in a saucer beneath the bell, where you are invited to bathe.</p>
-		<p class="body">Chapter II & Chapter III</p>
-		<p class="body">you could draw a straight line from the center of the earth out to the sky.</p>
-		<p class="body">you could draw it so that the line goes through a urn on the way.</p>
-		<p class="body">sometimes, a airplane will fly over the urn.</p>
-		<p class="body">the airplane would fly through the line, so the line touches the plane and urn at the same time.</p>
-		<p class="body">inside the urn, there's lots of ash.</p>
-		<p class="body">inside the airplane, there's lots of people flying in a airplane.</p>
-		<p class="body">Chapter IV</p>
-		<p class="body">it's possible to peel back the layers of a highway and get closer to a center.</p>
-		<p class="body">the top layer of a highway is the sun, which bakes on like a glaze.</p>
-		<p class="body">then there's a layer of heavy eyelids,</p>
-		<p class="body">then one of dust and rubber,</p>
-		<p class="body">then a very thin layer of flattened blood,</p>
-		<p class="body">then a layer of radio static,</p>
-		<p class="body">a layer of grey days,</p>
-		<p class="body">then blue light.</p>
-		<p class="body">from here, bumpy cars block the way down.</p>`,
+		text     : `<p class="body">Chapter I<br>
+		thin sheets of liquefied pearl slide down a large bell and cascade off its edges. forming a drape as it falls, the pearl collects in a saucer beneath the bell, where you are invited to bathe.</p>
+		<p class="body">Chapter II & Chapter III<br>
+		you could draw a straight line from the center of the earth out to the sky.<br>
+		you could draw it so that the line goes through a urn on the way.<br>
+		sometimes, a airplane will fly over the urn.<br>
+		the airplane would fly through the line, so the line touches the plane and urn at the same time.<br>
+		inside the urn, there's lots of ash.<br>
+		inside the airplane, there's lots of people flying in a airplane.</p>
+		<p class="body">Chapter IV<br>
+		it's possible to peel back the layers of a highway and get closer to a center.<br>
+		the top layer of a highway is the sun, which bakes on like a glaze.<br>
+		then there's a layer of heavy eyelids,<br>
+		then one of dust and rubber,<br>
+		then a very thin layer of flattened blood,<br>
+		then a layer of radio static,<br>
+		a layer of grey days,<br>
+		then blue light.<br>
+		from here, bumpy cars block the way down.</p>`,
 	},
 
 	{
@@ -626,37 +625,37 @@ var data = [
 		album    : 'Here, For Now',
 		year     : '2015',
 		duration : '1:09:59',
-		text     : `<p class="body">there's a raft in the ocean.</p>
-		<p class="body">the floor of the raft is a hole, but you can't pass through it.</p>
-		<p class="body">crawling out of the hole are transparent snails.</p>
-		<p class="body">you can see the snails under the raft, crawling.</p>
-		<p class="body">there used to be six friends on the raft.</p>
-		<p class="body">but one friend lay on the hole too long and disappeared.</p>
-		<p class="body">first their toes started to disappear, and then the rest of them.</p>
-		<p class="body">even though you might disappear, it's tempting to lie on the hole.</p>
-		<p class="body">lying on the hole soothes your body but contorts your muscles.</p>
-		<p class="body">now there are four friends in each corner.</p>
-		<p class="body">the fifth friend, po, lays down on the hole.</p>
-		<p class="body">po tries to disappear too.</p>
-		<p class="body">the four friends try to pull po off.</p>
-		<p class="body">po falls through the hole, and lands on a pile of transparent snails.</p>
-		<p class="body">light is coming from the snails.</p>
-		<p class="body">water drips down onto the snails and po's bald head.</p>
-		<p class="body">po looks up. the four friends are paddling and splashing.</p>
-		<p class="body">the raft is moving.</p>
-		<p class="body">the snail pile is moving.</p>
-		<p class="body">a squid comes over and sits down next to po.</p>
-		<p class="body">hey po it's been some time says the squid.</p>
-		<p class="body">the squid tumbles off the pile of snails,</p>
-		<p class="body">then keeps falling.</p>
-		<p class="body">po wonders what's inside of themself.</p>
-		<p class="body">po looks over the edge at the squid.</p>
-		<p class="body">po knows that whatever is inside the squid, is inside of them too.</p>
-		<p class="body">po wants to look inside the squid, but the squid keeps falling farther away.</p>
-		<p class="body">po watches the squid, then looks up at the four friends.</p>
-		<p class="body">po closes their eyes. when po opens their eyes,</p>
-		<p class="body">the squid is falling from above.</p>
-		<p class="body">po can see the inside of the squid, and it's nothing.</p>`,
+		text     : `<p class="body">there's a raft in the ocean.<br>
+		the floor of the raft is a hole, but you can't pass through it.<br>
+		crawling out of the hole are transparent snails.<br>
+		you can see the snails under the raft, crawling.<br>
+		there used to be six friends on the raft.<br>
+		but one friend lay on the hole too long and disappeared.<br>
+		first their toes started to disappear, and then the rest of them.<br>
+		even though you might disappear, it's tempting to lie on the hole.<br>
+		lying on the hole soothes your body but contorts your muscles.<br>
+		now there are four friends in each corner.<br>
+		the fifth friend, po, lays down on the hole.<br>
+		po tries to disappear too.<br>
+		the four friends try to pull po off.<br>
+		po falls through the hole, and lands on a pile of transparent snails.<br>
+		light is coming from the snails.<br>
+		water drips down onto the snails and po's bald head.<br>
+		po looks up. the four friends are paddling and splashing.<br>
+		the raft is moving.<br>
+		the snail pile is moving.</p>
+		<p class="body">a squid comes over and sits down next to po.<br>
+		hey po it's been some time says the squid.<br>
+		the squid tumbles off the pile of snails,<br>
+		then keeps falling.<br>
+		po wonders what's inside of themself.<br>
+		po looks over the edge at the squid.<br>
+		po knows that whatever is inside the squid, is inside of them too.<br>
+		po wants to look inside the squid, but the squid keeps falling farther away.<br>
+		po watches the squid, then looks up at the four friends.<br>
+		po closes their eyes. when po opens their eyes,<br>
+		the squid is falling from above.<br>
+		po can see the inside of the squid, and it's nothing.</p>`,
 	},
 
 	{
@@ -692,7 +691,7 @@ var data = [
 		text     : `<p class="body">-a seismograph 3d prints edible cereal pebbles whenever there's an earthquake. the severer the quake, the larger the cereals, the greater the waves in the milk lake they dump into, and the greater the alarm of the seismologists.</p>
 		<p class="body">-a giant sifting machine is dragged into the sky in by a huge cargo plane. they pass through clouds. the jet engines spit shredded nimbus into the mouth of the sifter behind. sheaves of wheat pass through the other end. nearly weightless, they fall out of the sky, unwetted by the clouds they touch.</p>
 		<p class="body">-a thunder bolt topples and crashes into a steelworks. hard hatted men pestle it into a mixture of raw gravel in a deep obsidian basin. then, a dollop of smelted iron is poured in to make a rough paste.</p>
-		<p class="body">-solar flares, clipped at the root and plucked from a tiny star, are dipped into mercury pools for rapid cooling. the plasma quickly dissolves, rendering the mercury colorless and viscous. the resulting solution is applied directly onto the eyes as contact lenses. rather than correct' vision, these lenses allow the wearer's vision to float slowly out of the body. the farther the vision departs from the body, though, the brighter everything becomes.</p>
+		<p class="body">-solar flares, clipped at the root and plucked from a tiny star, are dipped into mercury pools for rapid cooling. the plasma quickly dissolves, rendering the mercury colorless and viscous. the resulting solution is applied directly onto the eyes as contact lenses. rather than 'correct' vision, these lenses allow the wearer's vision to float slowly out of the body. the farther the vision departs from the body, though, the brighter everything becomes.</p>
 		<p class="body">-a pocket of ancient cave air, permanently rippled by the rushing water beneath it, meets in a dream the scuffed air of a train station. there is a roaring of train engines in the cavern. a flash flood breaks out on the train tracks.</p>
 		<p class="body">-tree trunks in a wood are split irregularly down their lengths and randomly recombine with the split trunks of other trees. insects and mosses that have made their homes in these trees are dislodged and shower onto the forest floor, disturbing the detritus below.</p>
 		<p class="body">-cymbals shrouded in manila envelopes are slipped through mail slots in the night. on the floor they squirm against their paper enclosures. the rusty mail slots are slightly agape. dense, sickly whispers filter in and spread like noxious fumes across the floors. the cymbals are infected. when opened, they will have corroded and warped into deformity.</p>`,
@@ -786,29 +785,29 @@ var data = [
 		album    : 'Long Ambients 1: Calm. Sleep.',
 		year     : '2016',
 		duration : '4:04:52',
-		text     : `<p class="body">I</p>
-		<p class="body">there is a huge icicle. (huge for bugs)</p>
-		<p class="body">a bug is cocooned in a floating camera.</p>
-		<p class="body">the bug uses a joystick to control the camera.</p>
-		<p class="body">the bug observes the icicle through the lens.</p>
-		<p class="body">the bug's uncle appears in the frame.</p>
-		<p class="body">he is driving a yellow dump truck across the icicle.</p>
-		<p class="body">the truck trundles up and down the ridges,</p>
-		<p class="body">throwing off corn kernels as it goes, in vigorous whiskers.</p>
-		<p class="body">II</p>
-		<p class="body">there's the beach, but the waves are different.</p>
-		<p class="body">the whole water is question marks, not water.</p>
-		<p class="body">the whole sand is a black tongue.</p>
-		<p class="body">the stars stick their long toothpicks into the clouds</p>
-		<p class="body">and push them across the sky, like mops.</p>
-		<p class="body">III</p>
-		<p class="body">a secret club exists.</p>
-		<p class="body">its membership is among the set of people who have said that something is firing on all</p>
-		<p class="body">cylinders'.</p>
-		<p class="body">of that set, the members of the secret club all have one thing in common:</p>
-		<p class="body">when they say this thing, they all see the same image in their minds -</p>
-		<p class="body">a perfect grey cylinder, moving up and down in slow motion, in a black vacuum.</p>
-		<p class="body">then, they all get very tired from seeing this.</p>
-		<p class="body">so, the secret club members usually avoid saying things like firing on all cylinders'.</p>`,
+		text     : `<p class="body">I<br>
+		there is a huge icicle. (huge for bugs)<br>
+		a bug is cocooned in a floating camera.<br>
+		the bug uses a joystick to control the camera.<br>
+		the bug observes the icicle through the lens.<br>
+		the bug's uncle appears in the frame.<br>
+		he is driving a yellow dump truck across the icicle.<br>
+		the truck trundles up and down the ridges,<br>
+		throwing off corn kernels as it goes, in vigorous whiskers.</p>
+		<p class="body">II<br>
+		there's the beach, but the waves are different.<br>
+		the whole water is question marks, not water.<br>
+		the whole sand is a black tongue.<br>
+		the stars stick their long toothpicks into the clouds<br>
+		and push them across the sky, like mops.</p>
+		<p class="body">III<br>
+		a secret club exists.<br>
+		its membership is among the set of people who have said that something is firing 'on all<br>
+		cylinders'.<br>
+		of that set, the members of the secret club all have one thing in common:<br>
+		when they say this thing, they all see the same image in their minds -<br>
+		a perfect grey cylinder, moving up and down in slow motion, in a black vacuum.<br>
+		then, they all get very tired from seeing this.<br>
+		so, the secret club members usually avoid saying things like 'firing on all cylinders'.</p>`,
 	},
 ];
