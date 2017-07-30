@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>base notes</title>
+  <title>o-o-o-o-o</title>
   <meta charset="UTF-8">
   <link rel="shortcut icon" href="files/favicon.png"/>
   <style>
@@ -36,16 +36,12 @@
       transition: opacity 1s, background-color 1s;
     }
 
-    .modalColumn {
-      position: absolute;
-      width: 0px;
-      height: 100%;
-      opacity: 0;
-      transition: width 1s, opacity 1s;
-    }
-
     .modalContent {
+      position: absolute;
       padding: 10px;
+      overflow: scroll;
+      width: 0px;
+      transition: width 1s;
     }
 
     p {
@@ -85,6 +81,16 @@
     return Math.random() * (max - min) + min;
   }
 
+  function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return array;
+  }
+
   function cycleBodyBackgroundColor() {
     document.body.style.backgroundColor = randomColor({luminosity: 'dark'});
     setTimeout(cycleBodyBackgroundColor, getRandomFloat(10, 20) * 1000);
@@ -104,6 +110,8 @@
   var modalContainer = document.createElement("div");
   modalContainer.id  = "modalContainer";
   document.body.appendChild(modalContainer);
+
+  data = shuffleArray(data);
 
   for (var i = 0; i < data.length; i++) {
     (function(i) {
@@ -138,23 +146,19 @@
       labelContainer.appendChild(label);
 
       var modalContent    = label.cloneNode(true);
-      var modalColumn     = document.createElement("div");
       var modalBackground = document.createElement("div");
 
       var text = document.createElement("div");
       text.innerHTML = data[i].text;
       modalContent.appendChild(text);
 
-      modalColumn.style.backgroundColor     = randomColor({hue: 'monochrome', luminosity: 'dark'});
-      modalColumn.className                 = "modalColumn";
-      modalContent.style.backgroundColor    = "";
+      modalContent.style.backgroundColor    = randomColor({hue: 'monochrome', luminosity: 'dark'});
       modalContent.style.margin             = "0px";
       modalContent.className                = "modalContent";
       modalBackground.style.backgroundColor = randomColor({luminosity: 'dark'});
       modalBackground.className             = "modalBackground";
 
-      modalColumn.appendChild(modalContent);
-      modalBackground.appendChild(modalColumn);
+      modalBackground.appendChild(modalContent);
       modalContainer.appendChild(modalBackground);
 
       label.onclick = function() {
@@ -162,18 +166,20 @@
 
         setTimeout(function() {
           modalBackground.style.opacity = "1";
-          modalColumn.style.opacity     = "1";
 
-          var modalWidth          = width * getRandomFloat(0.4, 0.6);
-          var modalLeft           = getRandomFloat(margin, width - modalWidth - margin);
-          modalColumn.style.width = modalWidth + 'px';
-          modalColumn.style.left  = modalLeft + 'px';
+          var modalWidth            = width * getRandomFloat(0.3, 0.5);
+          var modalHeight           = height * getRandomFloat(0.3, 0.5);
+          var modalLeft             = getRandomFloat(margin, width - modalWidth - margin);
+          var modalTop              = getRandomFloat(margin, height - modalHeight - margin);
+          modalContent.style.width  = modalWidth + 'px';
+          modalContent.style.height = modalHeight + 'px';
+          modalContent.style.left   = modalLeft + 'px';
+          modalContent.style.top    = modalTop + 'px';
         }, 10);
       }
 
       modalBackground.onclick = function() {
-        modalColumn.style.width       = "0px";
-        modalColumn.style.opacity     = "0";
+        modalContent.style.width      = "0px";
         modalBackground.style.opacity = "0";
 
         setTimeout(function() {
