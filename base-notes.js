@@ -418,7 +418,7 @@ var data = [
 		album    : 'Remnants From Paradise',
 		year     : '2008',
 		duration : '55:14',
-		text     : `<p class="body">if you give a bullfrog a guitar lesson, all the bullfrog will do is try to make bullfrog sounds on theguitar.</p>
+		text     : `<p class="body">if you give a bullfrog a guitar lesson, all the bullfrog will do is try to make bullfrog sounds on the guitar.</p>
 		<p class="body">lab bullfrogs' favorite time of the day in science classrooms everywhere is the end of class, when the sweet din of chair legs groaning and rumbling shakes the walls of their terrariums</p>`,
 	},
 
