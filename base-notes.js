@@ -802,8 +802,7 @@ var data = [
 		and push them across the sky, like mops.</p>
 		<p class="body">III<br>
 		a secret club exists.<br>
-		its membership is among the set of people who have said that something is firing 'on all<br>
-		cylinders'.<br>
+		its membership is among the set of people who have said that something is firing 'on all cylinders'.<br>
 		of that set, the members of the secret club all have one thing in common:<br>
 		when they say this thing, they all see the same image in their minds -<br>
 		a perfect grey cylinder, moving up and down in slow motion, in a black vacuum.<br>

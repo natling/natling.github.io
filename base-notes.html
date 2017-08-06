@@ -39,9 +39,9 @@
     .modalContent {
       position: absolute;
       padding: 10px;
-      overflow: scroll;
-      width: 0px;
-      transition: width 1s;
+      overflow: auto;
+      transform: scale(0, 0);
+      transition: transform 1s;
     }
 
     p {
@@ -64,6 +64,7 @@
 
     ::-webkit-scrollbar {
       width: 0px;
+      height: 0px;
       background: transparent;
     }
   </style>
@@ -108,29 +109,29 @@
 
   var margin = 50;
 
-  var labelContainer = document.createElement("div");
-  labelContainer.id  = "labelContainer";
+  var labelContainer = document.createElement('div');
+  labelContainer.id  = 'labelContainer';
   document.body.appendChild(labelContainer);
 
-  var modalContainer = document.createElement("div");
-  modalContainer.id  = "modalContainer";
+  var modalContainer = document.createElement('div');
+  modalContainer.id  = 'modalContainer';
   document.body.appendChild(modalContainer);
 
   data = shuffleArray(data);
 
   for (var i = 0; i < data.length; i++) {
     (function(i) {
-      var label = document.createElement("div");
+      var label = document.createElement('div');
 
-      var header = document.createElement("div");
-      header.className = "header";
+      var header = document.createElement('div');
+      header.className = 'header';
       label.appendChild(header);
 
-      var artist   = document.createElement("p");
-      var song     = document.createElement("p");
-      var album    = document.createElement("p");
-      var year     = document.createElement("p");
-      var duration = document.createElement("p");
+      var artist   = document.createElement('p');
+      var song     = document.createElement('p');
+      var album    = document.createElement('p');
+      var year     = document.createElement('p');
+      var duration = document.createElement('p');
 
       artist.innerHTML   = data[i].artist;
       song.innerHTML     = data[i].song;
@@ -146,49 +147,54 @@
 
       label.style.margin          = randomIntegerInclusive(10, 60) + 'px';
       label.style.backgroundColor = randomColor({hue: 'monochrome', luminosity: 'dark'});
-      label.className             = "label";
+      label.className             = 'label';
 
       labelContainer.appendChild(label);
 
       var modalContent    = label.cloneNode(true);
-      var modalBackground = document.createElement("div");
+      var modalBackground = document.createElement('div');
 
-      var text = document.createElement("div");
+      var text = document.createElement('div');
       text.innerHTML = data[i].text;
       modalContent.appendChild(text);
 
       modalContent.style.backgroundColor    = randomColor({hue: 'monochrome', luminosity: 'dark'});
-      modalContent.style.margin             = "0px";
-      modalContent.className                = "modalContent";
+      modalContent.style.margin             = '0px';
+      modalContent.className                = 'modalContent';
       modalBackground.style.backgroundColor = randomColor({luminosity: 'dark'});
-      modalBackground.className             = "modalBackground";
+      modalBackground.className             = 'modalBackground';
 
       modalBackground.appendChild(modalContent);
       modalContainer.appendChild(modalBackground);
 
       label.onclick = function() {
-        modalBackground.style.display = "block";
+        modalBackground.style.display = 'block';
 
-        setTimeout(function() {
-          modalBackground.style.opacity = "1";
+        if (modalContent.clientWidth >= width - margin * 2) {
+          modalContent.style.width = '400px';
+        }
 
-          var modalWidth            = width * getRandomFloat(0.3, 0.5);
-          var modalHeight           = height * getRandomFloat(0.3, 0.5);
-          var modalLeft             = getRandomFloat(margin, width - modalWidth - margin);
-          var modalTop              = getRandomFloat(margin, height - modalHeight - margin);
-          modalContent.style.width  = modalWidth + 'px';
-          modalContent.style.height = modalHeight + 'px';
-          modalContent.style.left   = modalLeft + 'px';
-          modalContent.style.top    = modalTop + 'px';
-        }, 10);
+        if (modalContent.clientHeight >= height - margin * 2) {
+          modalContent.style.height = '400px';
+        }
+
+        var modalWidth  = modalContent.clientWidth;
+        var modalHeight = modalContent.clientHeight;
+        var modalLeft   = getRandomFloat(margin, width - modalWidth - margin);
+        var modalTop    = getRandomFloat(margin, height - modalHeight - margin);
+
+        modalContent.style.left       = modalLeft + 'px';
+        modalContent.style.top        = modalTop + 'px';
+        modalContent.style.transform  = 'scale(1, 1)';
+        modalBackground.style.opacity = '1';
       }
 
       modalBackground.onclick = function() {
-        modalContent.style.width      = "0px";
-        modalBackground.style.opacity = "0";
+        modalContent.style.transform  = 'scale(0, 0)';
+        modalBackground.style.opacity = '0';
 
         setTimeout(function() {
-          modalBackground.style.display = "none";
+          modalBackground.style.display = 'none';
         }, 1000);
       }
     })(i);
