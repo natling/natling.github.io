@@ -244,7 +244,7 @@ var data = [
 		album    : 'Nuuk',
 		year     : '2004',
 		duration : '42:07',
-		text     : `<p class="body">when you create a new document on the computer, that blank white space doesn't generate out of nothing. something has been retrieved for you. once, it was part of a digital tundra - folded underneath mountains of binary - lost within infraworlds as yet unreachable to us. where the document was peeled off from the land, a 7x11 black hole remains. these checker the world, for now lightyears apart from each other, but when enough documents are made, the eventual super-concentration of black holes will turn this place inside-out.</p>`,
+		text     : `<p class="body">when you create a new document on the computer, that blank white space doesn't generate out of nothing. something has been retrieved for you. once, it was part of a digital tundra - folded underneath mountains of binary - lost within infraworlds as yet unreachable to us. where the document was peeled off from the land, a 7"x11" black hole remains. these checker the world, for now lightyears apart from each other, but when enough documents are made, the eventual super-concentration of black holes will turn this place inside-out.</p>`,
 	},
 
 	{
@@ -292,11 +292,11 @@ var data = [
 		album    : 'Time Machines',
 		year     : '1998',
 		duration : '46:46',
-		text     : `<p class="body">7-methoxy-b-carboline (telepathine)<br>
+		text     : `<p class="body">"7-methoxy-b-carboline (telepathine)"<br>
 		there is a black machine egg. the egg hatches a massive digital cloud. perfectly vertical lightning bolts and hail-cubes begin to fall from the sky. down below, a fleet of antivirus snowplows is deployed to clear off the byways for the flow of internet traffic.</p>
-		<p class="body">2,5 dimethoxy-4-ethyl-amphetamine(hecate)<br>
-		remember when you were ten and you slept over at your friend's house for the first time. your friend's parents came in and told you lights out, so the two of you hid under the blankets and your friend brought out the laptop. your friend didn't say anything when he booted it up, and didn't say anything for the rest of the night. just insisted on showing you slow motion footage of a spring door-stop being flicked, over and over again, until you fell asleep.</p>
-		<p class="body">5-methoxy-n, n-dimethyl<br>
+		<p class="body">"2,5 dimethoxy-4-ethyl-amphetamine(hecate)"<br>
+		remember when you were ten and you slept over at your friend's house for the first time. your friend's parents came in and told you "lights out", so the two of you hid under the blankets and your friend brought out the laptop. your friend didn't say anything when he booted it up, and didn't say anything for the rest of the night. just insisted on showing you slow motion footage of a spring door-stop being flicked, over and over again, until you fell asleep.</p>
+		<p class="body">"5-methoxy-n, n-dimethyl"<br>
 		on moonless nights, it's said that certain somnambulists are seized by the urge to water their houseplants. they fumble in the freezer for ice cubes, stagger over to the windowsill, and gingerly arrange the cubes into neat little towers at the base of each plant.</p>`,
 	},
 
@@ -323,7 +323,7 @@ var data = [
 		album    : 'Ama No Gawa',
 		year     : '1973',
 		duration : '47:42',
-		text     : `<p class="body">a lather usually refers to something light and foamy: a lather of soap, shaving cream, spume.</p>
+		text     : `<p class="body">a "lather" usually refers to something light and foamy: a lather of soap, shaving cream, spume.</p>
 		<p class="body">or: a lather of hot tar, ejecting out of a showerhead over the scalp. it comes out at such velocity that it pricks the skin, though not unpleasantly. it becomes difficult to breathe, you find yourself forgetting to breathe.</p>
 		<p class="body">at night, thousands line up along the golden gate bridge to drop large glass boxes into the water below. scuba divers float just beneath the surface, watching as the glass impacts and shatters, a prickly snow falling.</p>`,
 	},
@@ -391,13 +391,13 @@ var data = [
 		year     : '2001',
 		duration : '54:26',
 		text     : `<p class="body">first, state that it is possible that the sun will rise tomorrow.</p>
-		<p class="body">possible normally implies a degree of likelihood somewhere between unlikely and probable, such that the above would have been delivered as an understatement. empty out the word possible of all its denotations of degree of likelihood, until it denotes only the opposite of impossible.</p>
+		<p class="body">"possible" normally implies a degree of likelihood somewhere between unlikely and probable, such that the above would have been delivered as an understatement. empty out the word "possible" of all its denotations of degree of likelihood, until it denotes only the opposite of impossible.</p>
 		<p class="body">then, state that it is possible that the sun will rise tomorrow.</p>
-		<p class="body">now, put that excised meaning back into the word possible.</p>
+		<p class="body">now, put that excised meaning back into the word "possible".</p>
 		<p class="body">then, state that it is possible that tomorrow, the sun will rise but it will be a white block, and it will be much larger in the sky - perhaps disconcertingly so - than the regular sun.</p>
 		<p class="body">also state that it is possible this sun shines only as bright (and as blue) as the moon, but since its surface area is so large, it casts more light than the moon.</p>
 		<p class="body">also state it is possible that, tomorrow, the rising of this sun will effect absolutely no change in temperature. all animals' bodies will expect it to get warmer, but it won't - nor will it get colder. state that it is possible this will be confusing yet strangely comforting.</p>
-		<p class="body">next, take the word possible to denote any degree of likelihood you wish. repeat the above statements with this new version of the word possible.</p>
+		<p class="body">next, take the word "possible" to denote any degree of likelihood you wish. repeat the above statements with this new version of the word "possible."</p>
 		<p class="body">none of the statements you have made will have been false.</p>`,
 	},
 
@@ -418,7 +418,7 @@ var data = [
 		album    : 'Remnants From Paradise',
 		year     : '2008',
 		duration : '55:14',
-		text     : `<p class="body">if you give a bullfrog a guitar lesson, all the bullfrog will do is try to make bullfrog sounds on the guitar.</p>
+		text     : `<p class="body">if you give a bullfrog a guitar lesson, all the bullfrog will do is try to make bullfrog sounds on theguitar.</p>
 		<p class="body">lab bullfrogs' favorite time of the day in science classrooms everywhere is the end of class, when the sweet din of chair legs groaning and rumbling shakes the walls of their terrariums</p>`,
 	},
 
@@ -533,7 +533,7 @@ var data = [
 		in the instant before you accidentally snort water into your nose while swimming, time freezes. tiny flying saucers, their diameter just a hair smaller than your nostrils, appear out of the murk. they float into your nose.</p>
 		<p class="body">they perform repairs to the air bubbles in your nostrils, and inscribe microscopic glyphs on your nose hairs. then, time unfreezes, and you blow the water safely out your nose. the saucers are nowhere to be found.</p>
 		<p class="body">III<br>
-		a thousand tree squirrels try their hardest to pronounce the word myrtle over and over again. below the canopy, a leaky tarp drips water droplets over a crumpled plastic bag.</p>
+		a thousand tree squirrels try their hardest to pronounce the word "myrtle" over and over again. below the canopy, a leaky tarp drips water droplets over a crumpled plastic bag.</p>
 		<p class="body">later, the bag has absorbed the squirrels' murmurings, causing each fold of the bag to harden into an extremely crackable knuckle.</p>
 		<p class="body">now, each water droplet that falls onto it instantly cracks the knuckles.</p>`,
 	},
@@ -589,16 +589,16 @@ var data = [
 		album    : 'Une Histoire de Bleu',
 		year     : '2013',
 		duration : '1:04:34',
-		text     : `<p class="body">Chapter I<br>
+		text     : `<p class="body">"Chapter I"<br>
 		thin sheets of liquefied pearl slide down a large bell and cascade off its edges. forming a drape as it falls, the pearl collects in a saucer beneath the bell, where you are invited to bathe.</p>
-		<p class="body">Chapter II & Chapter III<br>
+		<p class="body">"Chapter II" & "Chapter III"<br>
 		you could draw a straight line from the center of the earth out to the sky.<br>
 		you could draw it so that the line goes through a urn on the way.<br>
 		sometimes, a airplane will fly over the urn.<br>
 		the airplane would fly through the line, so the line touches the plane and urn at the same time.<br>
 		inside the urn, there's lots of ash.<br>
 		inside the airplane, there's lots of people flying in a airplane.</p>
-		<p class="body">Chapter IV<br>
+		<p class="body">"Chapter IV"<br>
 		it's possible to peel back the layers of a highway and get closer to a center.<br>
 		the top layer of a highway is the sun, which bakes on like a glaze.<br>
 		then there's a layer of heavy eyelids,<br>
@@ -645,7 +645,7 @@ var data = [
 		the raft is moving.<br>
 		the snail pile is moving.</p>
 		<p class="body">a squid comes over and sits down next to po.<br>
-		hey po it's been some time says the squid.<br>
+		"hey po it's been some time" says the squid.<br>
 		the squid tumbles off the pile of snails,<br>
 		then keeps falling.<br>
 		po wonders what's inside of themself.<br>
@@ -752,7 +752,7 @@ var data = [
 		album    : 'Long Night',
 		year     : '2008',
 		duration : '2:37:19',
-		text     : `<p class="body">Long Night Part 1</p>
+		text     : `<p class="body">"Long Night Part 1"</p>
 		<p class="body">you are having a train ride. you relax, since the train ride is normal.</p>
 		<p class="body">for example, the train is a perfect brass sphere which you are inside.</p>
 		<p class="body">also, the train travels in no direction, but goes a long distance.</p>
@@ -760,8 +760,8 @@ var data = [
 		<p class="body">or rather, the stations were once like chocolate squares, but now they're like fondue.</p>
 		<p class="body">also, the other passengers are diamond spinning tops.</p>
 		<p class="body">when they finish spinning, they just rewind and start spinning again.</p>
-		<p class="body">the train conductor is a vhs tape. there's a label on it that says diamond spinning tops.</p>
-		<p class="body">Long Night Part 2</p>
+		<p class="body">the train conductor is a vhs tape. there's a label on it that says "diamond spinning tops".</p>
+		<p class="body">"Long Night Part 2"</p>
 		<p class="body">glow worms hanging from a cave are overrun by a murmuration of colorless burs.</p>
 		<p class="body">the burs cling to the glow worms. their insides are suddenly suffused with dim wormlight.</p>
 		<p class="body">the worms swallow the burs, whose prickles gradually shred the worms from the inside out.</p>
