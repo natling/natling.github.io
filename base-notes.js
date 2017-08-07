@@ -541,10 +541,11 @@ var data = [
 	{
 		artist   : 'Pete Namlook',
 		song     : '',
-		album    : 'Winter 1994',
-		year     : '1:01:05',
-		duration : '',
-		text     : `<p class="body">you see a pair of hairless thighs.<br>
+		album    : 'Winter',
+		year     : '1994',
+		duration : '1:01:05',
+		text     : `<p class="body">there is a white porthole which you are looking through.<br>
+		you see a pair of hairless thighs.<br>
 		they are wearing cellophane stockings, stretched taut and waxy.<br>
 		the thighs are straddling a glossy white cube.<br>
 		the cube's edges press creamy curves into the thighs.<br>
