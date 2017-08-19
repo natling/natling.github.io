@@ -14,12 +14,17 @@
     }
 
     table {
+      position: absolute;
       width: 100%;
       height: 100%;
       border-spacing: 30px;
+      opacity: 1;
+      z-index: 1;
+      transition: opacity 1s;
     }
 
     td {
+      padding: 0px;
       border-radius: 5px;
       background-position: center center;
       background-size: cover;
@@ -31,11 +36,25 @@
       width: 100%;
       height: 100%;
     }
+
+    #display {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-position: center center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0;
+      z-index: 0;
+      transition: opacity 1s;
+    }
   </style>
 </head>
 
 <body>
-  <table>
+  <div id="display"></div>
+
+  <table id="table">
     <tr>
       <td></td>
       <td></td>
@@ -48,14 +67,40 @@
 </body>
 
 <script>
-  var cells = document.getElementsByTagName('td');
+  var cells   = document.getElementsByTagName('td');
+  var display = document.getElementById('display');
+  var table   = document.getElementById('table');
 
   for (var i = 0; i < cells.length; i++) {
-    cells[i].style.backgroundImage = 'url(\'files/quilt-' + (i + 1) + '.jpg\')';
+    (function(i) {
+      var quiltURL = 'files/quilt-' + (i + 1) + '.jpg';
+      cells[i].style.backgroundImage = 'url(\'' + quiltURL + '\')';
 
-    var a = document.createElement('a');
-    a.href = 'quilt-' + (i + 1);
-    cells[i].appendChild(a);
+      cells[i].onclick = function() {
+        table.style.opacity   = '0';
+        table.style.zIndex    = '0';
+        display.style.opacity = '1';
+        display.style.zIndex  = '1';
+
+        display.style.backgroundImage = 'url(\'' + quiltURL + '\')';
+      }
+    })(i);
+  }
+
+  display.onclick = function() {
+    table.style.opacity   = '1';
+    table.style.zIndex    = '1';
+    display.style.opacity = '0';
+    display.style.zIndex  = '0';
+  }
+
+  document.onkeydown = function(event) {
+    if (event.keyCode == 27) {
+      table.style.opacity   = '1';
+      table.style.zIndex    = '1';
+      display.style.opacity = '0';
+      display.style.zIndex  = '0';
+    }
   }
 </script>
 
