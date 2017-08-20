@@ -16,15 +16,44 @@
       margin: 40px auto;
       border-radius: 40px;
     }
+
+    #container {
+      position: absolute;
+      width: 100%;
+      opacity: 1;
+      z-index: 1;
+      transition: opacity 2s;
+    }
+
+    #display {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background-position: center center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0;
+      z-index: 0;
+      transition: opacity 2s;
+    }
   </style>
 </head>
 
 <body>
+  <div id="container"></div>
+  <div id="display"></div>
 </body>
 
 <script src="libraries/natalie.js"></script>
 
 <script>
+  var display   = document.getElementById('display');
+  var container = document.getElementById('container');
+
+  var containerPadding = (window.innerWidth - 800) / 2 - 40;
+
+  container.style.padding = containerPadding + 'px 0px';
+
   var images = [
     'files/IMG_20170810_203536088.jpg',
     'files/IMG_20170810_203537430.jpg',
@@ -52,14 +81,37 @@
   images = shuffleArray(images);
 
   for (var i = 0; i < images.length; i++) {
-    var img = document.createElement('img');
-    img.src = images[i];
-    document.body.appendChild(img);
+    (function(i) {
+      var img = document.createElement('img');
+      img.src = images[i];
+      container.appendChild(img);
+
+      img.onclick = function() {
+        container.style.opacity = '0';
+        container.style.zIndex  = '0';
+        display.style.opacity   = '1';
+        display.style.zIndex    = '1';
+
+        display.style.backgroundImage = 'url(\'' + images[i] + '\')';
+      }
+    })(i);
   }
 
-  var margin = (window.innerWidth - 800) / 2 - 40;
+  display.onclick = function() {
+    container.style.opacity = '1';
+    container.style.zIndex  = '1';
+    display.style.opacity   = '0';
+    display.style.zIndex    = '0';
+  }
 
-  document.body.style.padding = margin + 'px 0px';
+  document.onkeydown = function(event) {
+    if (event.keyCode == 27) {
+      container.style.opacity = '1';
+      container.style.zIndex  = '1';
+      display.style.opacity   = '0';
+      display.style.zIndex    = '0';
+    }
+  }
 </script>
 
 </html>
