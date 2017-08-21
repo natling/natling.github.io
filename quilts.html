@@ -29,6 +29,7 @@
       background-position: center center;
       background-size: cover;
       background-repeat: no-repeat;
+      cursor: pointer;
     }
 
     #display {
@@ -67,8 +68,8 @@
 
   for (var i = 0; i < cells.length; i++) {
     (function(i) {
-      var quiltURL = 'files/quilt-' + (i + 1) + '.jpg';
-      cells[i].style.backgroundImage = 'url(\'' + quiltURL + '\')';
+      var imageURL = 'files/quilt-' + (i + 1) + '.jpg';
+      cells[i].style.backgroundImage = 'url(\'' + imageURL + '\')';
 
       cells[i].onclick = function() {
         table.style.opacity   = '0';
@@ -76,7 +77,7 @@
         display.style.opacity = '1';
         display.style.zIndex  = '1';
 
-        display.style.backgroundImage = 'url(\'' + quiltURL + '\')';
+        display.style.backgroundImage = 'url(\'' + imageURL + '\')';
       }
     })(i);
   }
