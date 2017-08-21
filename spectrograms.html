@@ -39,7 +39,7 @@
       background-repeat: no-repeat;
       opacity: 0;
       z-index: 0;
-      transition: opacity 1s;
+      transition: opacity 1s, background-image 0.5s;
     }
   </style>
 </head>
@@ -68,10 +68,19 @@
   var display = document.getElementById('display');
   var table   = document.getElementById('table');
 
+  var currentImage;
+
+  function imageURL(number) {
+    return 'files/spectrogram-' + (number + 1) + '.png';
+  }
+
+  function setDisplay(number) {
+    display.style.backgroundImage = 'url(\'' + imageURL(number) + '\')';    
+  }
+
   for (var i = 0; i < cells.length; i++) {
     (function(i) {
-      var imageURL = 'files/spectrogram-' + (i + 1) + '.png';
-      cells[i].style.backgroundImage = 'url(\'' + imageURL + '\')';
+      cells[i].style.backgroundImage = 'url(\'' + imageURL(i) + '\')';
 
       cells[i].onclick = function() {
         table.style.opacity   = '0';
@@ -79,7 +88,8 @@
         display.style.opacity = '1';
         display.style.zIndex  = '1';
 
-        display.style.backgroundImage = 'url(\'' + imageURL + '\')';
+        currentImage = i;
+        setDisplay(currentImage);
       }
     })(i);
   }
@@ -92,11 +102,23 @@
   }
 
   document.onkeydown = function(event) {
-    if (event.keyCode == 27) {
-      table.style.opacity   = '1';
-      table.style.zIndex    = '1';
-      display.style.opacity = '0';
-      display.style.zIndex  = '0';
+    switch (event.keyCode) {
+      case 27:
+        table.style.opacity   = '1';
+        table.style.zIndex    = '1';
+        display.style.opacity = '0';
+        display.style.zIndex  = '0';
+        break;
+
+      case 37:
+        currentImage = (currentImage - 1 + cells.length) % cells.length;
+        setDisplay(currentImage);
+        break;
+
+      case 39:
+        currentImage = (currentImage + 1 + cells.length) % cells.length;
+        setDisplay(currentImage);
+        break;
     }
   }
 </script>
