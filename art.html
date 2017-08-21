@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>art</title>
   <meta charset="UTF-8">
@@ -40,23 +41,25 @@
 </head>
 
 <body>
-  <a class="link" href="ascii">ascii</a>
-  <a class="link" href="clocks">clocks</a>
-  <a class="link" href="scripts">scripts</a>
-  <a class="link" href="scribbles">scribbles</a>
-  <a class="link" href="spectrograms">spectrograms</a>
-
-  <script>
-    var width = window.innerWidth;
-    var height = window.innerHeight;
-
-    var links = document.getElementsByClassName("link");
-
-    for (var i = 0; i < links.length; i++) {
-      links[i].style.width = width / links.length + 'px';
-      links[i].style.height = height + 'px';
-      links[i].style.left = i * (width / links.length) + 'px';
-    }
-  </script>
+  <a href="ascii">ascii</a>
+  <a href="clocks">clocks</a>
+  <a href="scripts">scripts</a>
+  <a href="scribbles">scribbles</a>
+  <a href="spectrograms">spectrograms</a>
+  <a href="scrapbook">scrapbook</a>
 </body>
+
+<script>
+  var width = window.innerWidth;
+  var height = window.innerHeight;
+
+  var links = document.getElementsByTagName('a');
+
+  for (var i = 0; i < links.length; i++) {
+    links[i].style.width = width / links.length + 'px';
+    links[i].style.height = height + 'px';
+    links[i].style.left = i * (width / links.length) + 'px';
+  }
+</script>
+
 </html>
