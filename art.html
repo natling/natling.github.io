@@ -47,18 +47,17 @@
   <a href="scribbles">scribbles</a>
   <a href="spectrograms">spectrograms</a>
   <a href="scrapbook">scrapbook</a>
+  <a href="quilts">quilts</a>
+  <a href="postcards">postcards</a>
 </body>
 
 <script>
-  var width = window.innerWidth;
-  var height = window.innerHeight;
-
   var links = document.getElementsByTagName('a');
 
   for (var i = 0; i < links.length; i++) {
-    links[i].style.width = width / links.length + 'px';
-    links[i].style.height = height + 'px';
-    links[i].style.left = i * (width / links.length) + 'px';
+    links[i].style.width = 100 / links.length + '%';
+    links[i].style.height = '100%';
+    links[i].style.left = i * (100 / links.length) + '%';
   }
 </script>
 
