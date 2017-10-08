@@ -12,7 +12,6 @@ var loss = [
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
-	noCursor();
 	background(0);
 	stroke(255);
 
