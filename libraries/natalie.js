@@ -8,6 +8,10 @@ function randomFloat(min, max) {
   return Math.random() * (max - min) + min;
 }
 
+function getBaseLog(x, y) {
+	return Math.log(y) / Math.log(x);
+}
+
 function coin(p) {
 	if (Math.random() < p) {
 		return true
