@@ -30,7 +30,7 @@ function recursiveLoss(level) {
 			push();
 			translate(loss[0].length ** level * i, loss.length ** level * j);
 
-			if (!! loss[j][i]) {
+			if (loss[j][i]) {
 				if (level > 0) {
 					recursiveLoss(level - 1);
 				} else {
