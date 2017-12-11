@@ -1,4 +1,4 @@
-var deRerumNatura = `BOOK I
+var corpus = `BOOK I
 
 
 
@@ -10321,10 +10321,13 @@ Place their own kin, and thrust the torch beneath
 Oft brawling with much bloodshed round about
 Rather than quit dead bodies loved in life.`;
 
-deRerumNatura = deRerumNatura.split('\n');
-deRerumNatura = deRerumNatura.map(function(line) {return line.replace(/[.,\/#!?$%\^&\*;:{}=\_`"~()]/g, '')});
-deRerumNatura = deRerumNatura.map(function(line) {return line.replace('--', ' ')});
-deRerumNatura = deRerumNatura.filter(function(line) {return ! line.match(/^[A-Z ]+$/g)});
-deRerumNatura = deRerumNatura.filter(function(line) {return line.length != 0});
-deRerumNatura = deRerumNatura.map(function(line) {return line.trim()});
-deRerumNatura = deRerumNatura.map(function(line) {return line.toLowerCase()});
+corpus = corpus.split('\n');
+corpus = corpus.map(function(line) {return line.replace(/[.,\/#!?$%\^&\*;:{}=\_`"~()]/g, '')});
+corpus = corpus.map(function(line) {return line.replace(/ *-- */g, ' ')});
+corpus = corpus.map(function(line) {return line.replace(/ +/g, ' ')});
+corpus = corpus.filter(function(line) {return ! line.match(/^[A-Z ]+$/g)});
+corpus = corpus.filter(function(line) {return line.length != 0});
+corpus = corpus.map(function(line) {return line.trim()});
+corpus = corpus.map(function(line) {return line.toLowerCase()});
+
+var deRerumNatura = corpus;

@@ -1,4 +1,4 @@
-﻿var paradiseLost = `Book I
+﻿var corpus = `Book I
 
 
 Of Man's first disobedience, and the fruit
@@ -10630,13 +10630,15 @@ Some natural tears they dropt, but wiped them soon;
 The world was all before them, where to choose
 Their place of rest, and Providence their guide:
 They, hand in hand, with wandering steps and slow,
-Through Eden took their solitary way.`
+Through Eden took their solitary way.`;
 
-paradiseLost = paradiseLost.split('\n');
-paradiseLost = paradiseLost.map(function(line) {return line.replace(/[.,\/#!?$%\^&\*;:{}=\_`"~()]/g, '')});
-paradiseLost = paradiseLost.map(function(line) {return line.replace('--', ' ')});
-paradiseLost = paradiseLost.map(function(line) {return line.replace('  ', ' ')});
-paradiseLost = paradiseLost.filter(function(line) {return ! line.match(/^Book [IVX]+/g)});
-paradiseLost = paradiseLost.filter(function(line) {return line.length != 0});
-paradiseLost = paradiseLost.map(function(line) {return line.trim()});
-paradiseLost = paradiseLost.map(function(line) {return line.toLowerCase()});
+corpus = corpus.split('\n');
+corpus = corpus.map(function(line) {return line.replace(/[.,\/#!?$%\^&\*;:{}=\_`"~()]/g, '')});
+corpus = corpus.map(function(line) {return line.replace(/ *-- */g, ' ')});
+corpus = corpus.map(function(line) {return line.replace(/ +/g, ' ')});
+corpus = corpus.filter(function(line) {return ! line.match(/^Book [IVX]+/g)});
+corpus = corpus.filter(function(line) {return line.length != 0});
+corpus = corpus.map(function(line) {return line.trim()});
+corpus = corpus.map(function(line) {return line.toLowerCase()});
+
+var paradiseLost = corpus;
