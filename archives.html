@@ -352,22 +352,19 @@
       (function(i) {
         setTimeout(function() {
 
-          function removeLetter() {
-            setTimeout(function() {
-              if (lines[i].innerHTML.length > 0) {
-                if (untypeDirection) {
-                  lines[i].innerHTML = lines[i].innerHTML.slice(0, -1);
-                } else {
-                  lines[i].innerHTML = lines[i].innerHTML.slice(1);
-                }
-                removeLetter();
-              }
-            }, lineDuration / lineLength);
-          }
-
           var lineLength = lines[i].length;
           removeLetter();
 
+          function removeLetter() {
+            if (lines[i].innerHTML.length > 0) {
+              if (untypeDirection) {
+                lines[i].innerHTML = lines[i].innerHTML.slice(0, -1);
+              } else {
+                lines[i].innerHTML = lines[i].innerHTML.slice(1);
+              }
+              setTimeout(removeLetter, lineDuration / lineLength);
+            }
+          }
         }, paragraphDuration / lines.length * (lines.length - i));
       })(i);
     }
