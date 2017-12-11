@@ -315,16 +315,16 @@
               }
             }
 
-            addLetter();
+            typeLine();
 
-            function addLetter() {
+            function typeLine() {
               if (line.innerHTML.length < lineLength) {
                 if (typeDirection) {
                   line.innerHTML = lines[i].slice(0, line.innerHTML.length + 1);
                 } else {
                   line.innerHTML = lines[i].slice(-(line.innerHTML.length + 1));
                 }
-                setTimeout(addLetter, lineDuration / lineLength);
+                setTimeout(typeLine, lineDuration / lineLength);
               }
             }
           }, paragraphDuration / lines.length * i);
@@ -353,16 +353,16 @@
         setTimeout(function() {
 
           var lineLength = lines[i].length;
-          removeLetter();
+          untypeLine();
 
-          function removeLetter() {
+          function untypeLine() {
             if (lines[i].innerHTML.length > 0) {
               if (untypeDirection) {
                 lines[i].innerHTML = lines[i].innerHTML.slice(0, -1);
               } else {
                 lines[i].innerHTML = lines[i].innerHTML.slice(1);
               }
-              setTimeout(removeLetter, lineDuration / lineLength);
+              setTimeout(untypeLine, lineDuration / lineLength);
             }
           }
         }, paragraphDuration / lines.length * (lines.length - i));
