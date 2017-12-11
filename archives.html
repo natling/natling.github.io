@@ -21,6 +21,7 @@
       height: 100vh;
       background-color: black;
       font-family: 'Menlo';
+      font-size: 10px;
     }
 
     .cell {
@@ -64,6 +65,8 @@
   var paragraphDuration  =  1000;
   var cycleDuration      = 10000;
   var delayBetweenCycles =  1000;
+
+  var variableFontSize = true;
 
   var width  = window.innerWidth;
   var height = window.innerHeight;
@@ -117,7 +120,10 @@
         cell.style.width    = columnWidth + 'px';
         cell.style.height   = rowHeight + 'px';
         cell.style.margin   = margin / 2 + 'px';
-        cell.style.fontSize = randomIntegerInclusive(8, 13) + 'px';
+
+        if (variableFontSize) {
+          cell.style.fontSize = randomIntegerInclusive(8, 13) + 'px';
+        }
 
         var cellLeft = i * columnWidth;
         var cellTop  = j * rowHeight;
@@ -203,7 +209,9 @@
     newCell.style.marginTop    = marginTop;
     newCell.style.marginBottom = marginBottom;
 
-    newCell.style.fontSize = randomIntegerInclusive(8, 13) + 'px';
+    if (variableFontSize) {
+      newCell.style.fontSize = randomIntegerInclusive(8, 13) + 'px';
+    }
 
     deleteNode(cell1);
     deleteNode(cell2);
