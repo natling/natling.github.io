@@ -52,8 +52,8 @@
   var corpora = [iliad, odyssey, aeneid, metamorphoses, deRerumNatura, paradiseLost, idyllsOfTheKing];
   var corpus = corpora.reduce((x, y) => x.concat(y));
 
-  var typingSpeed        =    20;
-  var paragraphSpeed     =  2000;
+  var lineDuration       =  2000;
+  var paragraphDuration  =  1000;
   var cycleDuration      = 10000;
   var delayBetweenCycles =  1000;
 
@@ -289,10 +289,10 @@
               if (typingCounter < lines[i].length) {
                 line.innerHTML += lines[i].charAt(typingCounter);
                 typingCounter++;
-                setTimeout(addLetter, typingSpeed);
+                setTimeout(addLetter, lineDuration / lines[i].length);
               }
             }
-          }, paragraphSpeed / lines.length * i);
+          }, paragraphDuration / lines.length * i);
         })(i);
       }
     }
@@ -323,12 +323,12 @@
                 lines[i].innerHTML = lines[i].innerHTML.slice(0, -1);
                 removeLetter();
               }
-            }, typingSpeed);
+            }, lineDuration / lines[i].length);
           }
 
           removeLetter();
 
-        }, paragraphSpeed / lines.length * (lines.length - i));
+        }, paragraphDuration / lines.length * (lines.length - i));
       })(i);
     }
 
