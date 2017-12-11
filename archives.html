@@ -42,6 +42,10 @@
       margin: 0px;
       text-align: justify;
     }
+
+    .line {
+      text-align-last: justify;
+    }
   </style>
 </head>
 
@@ -61,12 +65,21 @@
   var corpora = [iliad, odyssey, aeneid, metamorphoses, deRerumNatura, paradiseLost, idyllsOfTheKing];
   var corpus = corpora.reduce((x, y) => x.concat(y));
 
+  var splitCorpusByWords = true;
+
+  if (splitCorpusByWords) {
+    corpus = corpus.join(' ').split(' ');
+  }
+
   var lineDuration       =  2000;
   var paragraphDuration  =  1000;
   var cycleDuration      = 10000;
   var delayBetweenCycles =  1000;
 
   var variableFontSize = true;
+
+  typeDirection   = true;
+  untypeDirection = false;
 
   var width  = window.innerWidth;
   var height = window.innerHeight;
@@ -257,14 +270,14 @@
 
     var offset = randomIntegerInclusive(0, corpus.length - 1);
 
-    var pStringsCounter = 0;
+    var counter = 0;
 
     while (! (p.scrollHeight > p.clientHeight)) {
-      pStringsCounter++;
-      p.innerHTML = Array.from({length: pStringsCounter}, (v, i) => corpus[(i + offset) % corpus.length]).join(' ');
+      counter++;
+      p.innerHTML = Array.from({length: counter}, (v, i) => corpus[(i + offset) % corpus.length]).join(' ');
     }
 
-    p.innerHTML = Array.from({length: pStringsCounter - 1}, (v, i) => corpus[(i + offset) % corpus.length]).join(' ');
+    p.innerHTML = Array.from({length: counter - 1}, (v, i) => corpus[(i + offset) % corpus.length]).join(' ');
 
     if (typed) {
       typeBlock();
@@ -294,21 +307,24 @@
             line.className = 'line';
             line.innerHTML = '';
             cell.appendChild(line);
+            var lineLength = lines[i].length;
 
-            if (i < lines.length - 1) {
-              line.style.textAlignLast = 'justify';
-            } else {
-              line.style.textAlignLast = 'right';
+            if (! splitCorpusByWords) {
+              if (i == lines.length - 1) {
+                line.style.textAlignLast = 'right';
+              }
             }
 
-            var typingCounter = 0;
             addLetter();
 
             function addLetter() {
-              if (typingCounter < lines[i].length) {
-                line.innerHTML += lines[i].charAt(typingCounter);
-                typingCounter++;
-                setTimeout(addLetter, lineDuration / lines[i].length);
+              if (line.innerHTML.length < lineLength) {
+                if (typeDirection) {
+                  line.innerHTML = lines[i].slice(0, line.innerHTML.length + 1);
+                } else {
+                  line.innerHTML = lines[i].slice(-(line.innerHTML.length + 1));
+                }
+                setTimeout(addLetter, lineDuration / lineLength);
               }
             }
           }, paragraphDuration / lines.length * i);
@@ -339,12 +355,17 @@
           function removeLetter() {
             setTimeout(function() {
               if (lines[i].innerHTML.length > 0) {
-                lines[i].innerHTML = lines[i].innerHTML.slice(0, -1);
+                if (untypeDirection) {
+                  lines[i].innerHTML = lines[i].innerHTML.slice(0, -1);
+                } else {
+                  lines[i].innerHTML = lines[i].innerHTML.slice(1);
+                }
                 removeLetter();
               }
-            }, lineDuration / lines[i].length);
+            }, lineDuration / lineLength);
           }
 
+          var lineLength = lines[i].length;
           removeLetter();
 
         }, paragraphDuration / lines.length * (lines.length - i));
