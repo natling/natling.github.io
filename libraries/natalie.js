@@ -12,6 +12,16 @@ function getBaseLog(x, y) {
 	return Math.log(y) / Math.log(x);
 }
 
+function roundTo(n, digits) {
+	if (digits === undefined) {
+		digits = 0;
+	}
+
+	var multiplicator = Math.pow(10, digits);
+	n = parseFloat((n * multiplicator).toFixed(11));
+	return Math.round(n) / multiplicator;
+}
+
 function coin(p) {
 	if (Math.random() < p) {
 		return true
@@ -55,6 +65,31 @@ function shuffleArray(array) {
 		array[j] = temp;
 	}
 	return array;
+}
+
+function pairwiseDo(array, func) {
+	for (var i = 0; i < array.length - 1; i++) {
+		func(array[i], array[i + 1], i);
+	}
+}
+
+function separateArray(array, func = function() {return true}) {
+	var separatedArray = [];
+	var subArray = [];
+
+	pairwiseDo(array, function(a, b, i) {
+		subArray.push(a);
+
+		if (func(a, b, i)) {
+			separatedArray.push(subArray);
+			subArray = [];
+		}
+	})
+
+	subArray.push(last(array));
+	separatedArray.push(subArray);
+
+	return separatedArray;
 }
 
 function create2DArray(rows, columns) {
