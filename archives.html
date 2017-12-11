@@ -77,7 +77,7 @@
     columnWidth = (width - margin * (columns + 1)) / columns;
     rowHeight   = (height - margin * (rows + 1)) / rows;
 
-    var merged = randomIntegerInclusive(5, 15);
+    var merged = Math.floor(randomFloat(0.4, 1.0) * columns * rows);
 
     createGrid(columns, rows);
     mergeSomeCells(merged);
