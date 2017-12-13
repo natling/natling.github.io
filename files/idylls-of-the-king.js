@@ -11147,7 +11147,8 @@ Where all of high and holy dies away.`;
 
 corpus = corpus.replace(/[A-Za-z ]+\n\n/g, '');
 corpus = corpus.split('\n');
-corpus = corpus.map(function(line) {return line.replace(/[.,\/#!?$%\^&\*;:{}=\_`"~()]/g, '')});
+corpus = corpus.map(function(line) {return line.replace(/[.,\/#!?$%\^&\*;:{}=\_`"“”~()]/g, '')});
+corpus = corpus.map(function(line) {return line.replace(/’/g, '\'')});
 corpus = corpus.map(function(line) {return line.replace(/ *-- */g, ' ')});
 corpus = corpus.map(function(line) {return line.replace(/ +/g, ' ')});
 corpus = corpus.filter(function(line) {return line.length != 0});

@@ -15584,9 +15584,11 @@ corpus = corpus.split('\n');
 corpus = corpus.filter(function(line) {return line.match(/^    /g)});
 corpus = corpus.map(function(line) {return line.replace(/ +[0-9]+/g, '')});
 corpus = corpus.map(function(line) {return line.replace(/\[[0-9]+\]/g, '')});
-corpus = corpus.map(function(line) {return line.replace(/[.,\/#!?$%\^&\*;:{}=\_`"~()]/g, '')});
+corpus = corpus.map(function(line) {return line.replace(/[.,\/#!?$%\^&\*;:{}=\_`"“”~()]/g, '')});
+corpus = corpus.map(function(line) {return line.replace(/’/g, '\'')});
 corpus = corpus.map(function(line) {return line.replace(/ *-- */g, ' ')});
 corpus = corpus.map(function(line) {return line.replace(/ +/g, ' ')});
+corpus = corpus.filter(function(line) {return line.length != 0});
 corpus = corpus.map(function(line) {return line.trim()});
 corpus = corpus.map(function(line) {return line.toLowerCase()});
 

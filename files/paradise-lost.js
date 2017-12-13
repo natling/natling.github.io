@@ -10633,10 +10633,11 @@ They, hand in hand, with wandering steps and slow,
 Through Eden took their solitary way.`;
 
 corpus = corpus.split('\n');
-corpus = corpus.map(function(line) {return line.replace(/[.,\/#!?$%\^&\*;:{}=\_`"~()]/g, '')});
+corpus = corpus.filter(function(line) {return ! line.match(/^Book [IVX]+/g)});
+corpus = corpus.map(function(line) {return line.replace(/[.,\/#!?$%\^&\*;:{}=\_`"“”~()]/g, '')});
+corpus = corpus.map(function(line) {return line.replace(/’/g, '\'')});
 corpus = corpus.map(function(line) {return line.replace(/ *-- */g, ' ')});
 corpus = corpus.map(function(line) {return line.replace(/ +/g, ' ')});
-corpus = corpus.filter(function(line) {return ! line.match(/^Book [IVX]+/g)});
 corpus = corpus.filter(function(line) {return line.length != 0});
 corpus = corpus.map(function(line) {return line.trim()});
 corpus = corpus.map(function(line) {return line.toLowerCase()});

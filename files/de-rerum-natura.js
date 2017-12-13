@@ -10322,10 +10322,11 @@ Oft brawling with much bloodshed round about
 Rather than quit dead bodies loved in life.`;
 
 corpus = corpus.split('\n');
-corpus = corpus.map(function(line) {return line.replace(/[.,\/#!?$%\^&\*;:{}=\_`"~()]/g, '')});
+corpus = corpus.filter(function(line) {return ! line.match(/^[A-Z ]+$/g)});
+corpus = corpus.map(function(line) {return line.replace(/[.,\/#!?$%\^&\*;:{}=\_`"“”~()]/g, '')});
+corpus = corpus.map(function(line) {return line.replace(/’/g, '\'')});
 corpus = corpus.map(function(line) {return line.replace(/ *-- */g, ' ')});
 corpus = corpus.map(function(line) {return line.replace(/ +/g, ' ')});
-corpus = corpus.filter(function(line) {return ! line.match(/^[A-Z ]+$/g)});
 corpus = corpus.filter(function(line) {return line.length != 0});
 corpus = corpus.map(function(line) {return line.trim()});
 corpus = corpus.map(function(line) {return line.toLowerCase()});

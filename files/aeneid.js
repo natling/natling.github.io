@@ -14290,7 +14290,8 @@ And the disdainful soul came rushing thro' the wound.`;
 
 corpus = corpus.split('\n');
 corpus = corpus.filter(function(line) {return ! line.match(/^[A-Z ]+$/g, '')});
-corpus = corpus.map(function(line) {return line.replace(/[.,\/#!?$%\^&\*;:{}=\_`"~()]/g, '')});
+corpus = corpus.map(function(line) {return line.replace(/[.,\/#!?$%\^&\*;:{}=\_`"“”~()]/g, '')});
+corpus = corpus.map(function(line) {return line.replace(/’/g, '\'')});
 corpus = corpus.map(function(line) {return line.replace(/ *-- */g, ' ')});
 corpus = corpus.map(function(line) {return line.replace(/ +/g, ' ')});
 corpus = corpus.filter(function(line) {return line.length != 0});
