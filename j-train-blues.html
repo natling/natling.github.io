@@ -178,10 +178,16 @@
               displays[j].style.height   = '100%';
               displays[j].style.opacity  = '1';
 
-              if (j != 2) {
-                displays[j].style.width  = '100%';
-              } else {
-                displays[i].style.width  = '400px';
+              switch (j) {
+                case 0:
+                  displays[j].style.width  = '100%';
+                  break;
+                case 1:
+                  displays[j].style.width  = 'auto';
+                  break;
+                case 2:
+                  displays[i].style.width  = '90%';
+                  break;
               }
 
             } else {
