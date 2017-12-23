@@ -17,7 +17,7 @@
                 <h1><img src="http://cotejp.github.io/webmidi/images/webmidijs-logo-small.png" title="WebMidi"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 2.0.0-rc.4</em>
+            <em>API Docs for: 2.0.0-rc.11</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -138,7 +138,7 @@
    * @throws Error WebMidi is a singleton, it cannot be instantiated directly.
    *
    * @todo  Implement port statechange events.
-   * @todo  Test with the Node.js version of Jazz Plugin
+   * @todo  Test with the Node.js version of Jazz Plugin. Initial tests are promising.
    * @todo  Complete tests
    * @todo  Refine &quot;options&quot; param of addListener. Allow listening for specific controller change.
    * @todo  Add once() function.
@@ -148,6 +148,7 @@
    *        https://en.wikipedia.org/wiki/Scientific_pitch_notation
    * @todo  Add explicit support for universal system exclusive messages, real time (0x7F and non-real time)
    * @todo  Implement the show control protocol subset.
+   * @todo  Add methods for channel mode messages
    *
    */
   function WebMidi() {
@@ -481,7 +482,7 @@
       time: {
         enumerable: true,
         get: function() {
-          return window.performance.now();
+          return performance.now();
         }
       }
 
@@ -526,46 +527,11 @@
     // is not a fully-fledged Promise object. It does not support using catch() for example. This
     // means that, to provide a real Promise-based interface for the enable() method, we would need
     // to add a dependency in the form of a Promise polyfill. So, to keep things simpler, we will
-    // stick to the good old callback based enable() function. If the situation changes, the
-    // Promise-based version is ready below. Stupid IE.
+    // stick to the good old callback based enable() function.
 
-    // return new Promise(function(resolve, reject) {
-    //
-    //   if (this.enabled) {
-    //
-    //     resolve(this);
-    //
-    //   } else if (!this.supported) {
-    //
-    //     reject(new Error(&quot;The Web MIDI API is not supported by your browser.&quot;));
-    //
-    //   } else {
-    //
-    //     navigator
-    //       .requestMIDIAccess({&quot;sysex&quot;: sysex})
-    //       .then(function(midiAccess) {
-    //
-    //           this.interface = midiAccess;
-    //           this._resetInterfaceUserHandlers();
-    //           this.interface.onstatechange = this._onInterfaceStateChange.bind(this);
-    //           this._onInterfaceStateChange(null); // manually update inputs and outputs at beginning
-    //
-    //           resolve(this);
-    //
-    //         }.bind(this)
-    //
-    //       )
-    //       .catch(function(err) {
-    //         reject(err);
-    //       });
-    //
-    //   }
-    //
-    // }.bind(this));
+    if (this.enabled) return;
 
-    if (this.enabled) { return; }
-
-    if ( !this.supported ) {
+    if ( !this.supported) {
 
       if (typeof callback === &quot;function&quot;) {
         callback( new Error(&quot;The Web MIDI API is not supported by your browser.&quot;) );
@@ -579,12 +545,68 @@
 
       function(midiAccess) {
 
+        var events = [],
+            promises = [];
+
         this.interface = midiAccess;
         this._resetInterfaceUserHandlers();
-        this.interface.onstatechange = this._onInterfaceStateChange.bind(this);
-        this._onInterfaceStateChange(null); // manually update the inputs and outputs at beginning
 
-        if (typeof callback === &quot;function&quot;) { callback.call(this); }
+        // We setup a temporary &#x60;statechange&#x60; handler that will catch all events triggered while we
+        // setup. Those events will be re-triggered after calling the user&#x27;s callback. This will
+        // allow the user to listen to &quot;connected&quot; events which can be very convenient.
+        this.interface.onstatechange = function (e) {
+          events.push(e);
+        };
+
+        // Here we manually open the inputs and outputs. Usually, this is optional. When the ports
+        // are not explicitely opened, they will be opened automatically (and asynchonously) by
+        // setting a listener on &#x60;midimessage&#x60; (MIDIInput) or calling &#x60;send()&#x60; (MIDIOutput).
+        // However, we do not want that here. We want to be sure that &quot;connected&quot; events will be
+        // available in the user&#x27;s callback. So, what we do is open all input and output ports and
+        // wait until all promises are resolved. Then, we re-trigger the events after the user&#x27;s
+        // callback has been executed. This seems like the most sensible and practical way.
+        var inputs = midiAccess.inputs.values();
+        for (var input = inputs.next(); input &amp;&amp; !input.done; input = inputs.next()) {
+          promises.push(input.value.open());
+        }
+
+        var outputs = midiAccess.outputs.values();
+        for (var output = outputs.next(); output &amp;&amp; !output.done; output = outputs.next()) {
+          promises.push(output.value.open());
+        }
+
+        // Since this library can be used with JazzMidi with no support for promises, we must make
+        // sure it still works. The workaround is to use a timer to wait a little. Once the Web MIDI
+        // API is well implanted, we&#x27;ll get rid of that.
+        if (Promise) {
+          Promise.all(promises).then(onPortsOpen.bind(this));
+        } else {
+          setTimeout(onPortsOpen.bind(this), 200);
+        }
+
+        function onPortsOpen() {
+
+          this._updateInputsAndOutputs();
+          this.interface.onstatechange = this._onInterfaceStateChange.bind(this);
+
+          // We execute the callback and then re-trigger the statechange events.
+          if (typeof callback === &quot;function&quot;) { callback.call(this); }
+
+          events.forEach(function (event) {
+            this._onInterfaceStateChange(event);
+          }.bind(this));
+
+        }
+
+        // When MIDI access is requested, all input and output ports have their &quot;state&quot; set to
+        // &quot;connected&quot;. However, the value of their &quot;connection&quot; property is &quot;closed&quot;.
+        //
+        // A &#x60;MIDIInput&#x60; becomes &#x60;open&#x60; when you explicitely call its &#x60;open()&#x60; method or when you
+        // assign a listener to its &#x60;onmidimessage&#x60; property. A &#x60;MIDIOutput&#x60; becomes &#x60;open&#x60; when you
+        // use the &#x60;send()&#x60; method or when you can explicitely call its &#x60;open()&#x60; method.
+        //
+        // Calling &#x60;_updateInputsAndOutputs()&#x60; attaches listeners to all inputs. As per the spec,
+        // this triggers a &#x60;statechange&#x60; event on MIDIAccess.
 
       }.bind(this),
 
@@ -612,6 +634,7 @@
       throw new Error(&quot;The Web MIDI API is not supported by your browser.&quot;);
     }
 
+    if (this.interface) this.interface.onstatechange = undefined;
     this.interface = undefined; // also resets enabled, sysexEnabled
     this._inputs = [];
     this._outputs = [];
@@ -861,6 +884,28 @@
   };
 
   /**
+   * Returns the octave number for the specified MIDI note number. The returned value will be
+   * between -2 and 8.
+   *
+   * @method getOctave
+   * @static
+   *
+   * @param number {Number} An integer representing a valid MIDI note number (between 0 and 127).
+   *
+   * @returns {Number} The octave as an integer between -2 and 8. If the note number passed to
+   * &#x60;getOctave()&#x60; is invalid, &#x60;undefined&#x60; will be returned.
+   *
+   * @since 2.0.0-rc.6
+   */
+  WebMidi.prototype.getOctave = function(number) {
+
+    if (number &amp;&amp; number &gt;= 0 &amp;&amp; number &lt;= 127) {
+      return Math.floor(parseInt(number) / 12 - 1) - 1;
+    }
+
+  };
+
+  /**
    * Returns the first MIDI &#x60;Output&#x60; that matches the specified name.
    *
    * Please note that the port names change from one host to another. For example, Chrome does
@@ -1005,9 +1050,10 @@
 
     }
 
-    // Check for items to add in the existing inputs array because they jsut appeared in the MIDI
-    // back-end inputs list.
-    this.interface.inputs.forEach(function (nInput) {
+    // Check for items to add in the existing inputs array because they just appeared in the MIDI
+    // back-end inputs list. We must check for the existence of this.interface because it might
+    // have been closed via WebMidi.disable().
+    this.interface &amp;&amp; this.interface.inputs.forEach(function (nInput) {
 
       var add = true;
 
@@ -1053,8 +1099,9 @@
     }
 
     // Check for items to add in the existing inputs array because they just appeared in the MIDI
-    // back-end outputs list.
-    this.interface.outputs.forEach(function (nOutput) {
+    // back-end outputs list. We must check for the existence of this.interface because it might
+    // have been closed via WebMidi.disable().
+    this.interface &amp;&amp; this.interface.outputs.forEach(function (nOutput) {
 
       var add = true;
 
@@ -1099,36 +1146,9 @@
    * @static
    * @protected
    */
-  WebMidi.prototype._onInterfaceStateChange = function(e) {
-
-    // To prevent conflicts, statechange events are queued and parsed synchronously
-    this._stateChangeQueue.push(e);
-
-    // Check if we are already currently processing a state change. If so, return.
-    if (this._processingStateChange) { return; }
-
-    this._processingStateChange = true;
-
-    while(this._stateChangeQueue.length &gt; 0) {
-      this._processStateChange(this._stateChangeQueue.shift());
-    }
-
-    this._processingStateChange = false;
-
-  };
-
-  /**
-   * @method _processStateChange
-   * @static
-   * @protected
-   */
-  WebMidi.prototype._processStateChange = function(e) {
+   WebMidi.prototype._onInterfaceStateChange = function(e) {
 
     this._updateInputsAndOutputs();
-
-    // This is required because we need to manually update the inputs/outputs at the very beginning.
-    // In this scenario, we should not trigger an event.
-    if (e === null) { return; }
 
     /**
      * Event emitted when a MIDI port becomes available. This event is typically fired whenever a
@@ -1140,10 +1160,7 @@
      * @param {Number} event.timestamp The timestamp when the event occurred (in milliseconds since
      * the epoch).
      * @param {String} event.type The type of event that occurred.
-     * @param {String} event.id The ID of the device that triggered the event.
-     * @param {String} event.manufacturer The manufacturer of the device that triggered the event.
-     * @param {String} event.name The name of the device that triggered the event.
-     * @param {String} event.output The &#x60;Input&#x60; or &#x60;Output&#x60; object that triggered the event.
+     * @param {String} event.port The actual &#x60;Input&#x60; or &#x60;Output&#x60; object associated to the event.
      */
 
     /**
@@ -1156,25 +1173,31 @@
      * @param {Number} event.timestamp The timestamp when the event occurred (in milliseconds since
      * the epoch).
      * @param {String} event.type The type of event that occurred.
-     * @param {String} event.id The ID of the device that triggered the event.
-     * @param {String} event.manufacturer The manufacturer of the device that triggered the event.
-     * @param {String} event.name The name of the device that triggered the event.
-     * @param {String} event.output The &#x60;Input&#x60; or &#x60;Output&#x60; object that triggered the event.
+     * @param {String} event.port An generic object containing details about the port that triggered
+     * the event.
      */
     var event = {
       timestamp: e.timeStamp,
-      type: e.port.state,
-      id: e.port.id,
-      manufacturer: e.port.manufacturer,
-      name: e.port.name
+      type: e.port.state
     };
 
-    if (e.port.state === &quot;connected&quot;) {
+    if (this.interface &amp;&amp; e.port.state === &quot;connected&quot;) {
 
       if (e.port.type === &quot;output&quot;) {
-        event.output = this.getOutputById(e.port.id);
+        event.port = this.getOutputById(e.port.id);
       } else if (e.port.type === &quot;input&quot;) {
-        event.input = this.getInputById(e.port.id);
+        event.port = this.getInputById(e.port.id);
+      }
+
+    } else {
+
+      event.port = {
+        connection: &quot;closed&quot;,
+        id: e.port.id,
+        manufacturer: e.port.manufacturer,
+        name: e.port.name,
+        state: e.port.state,
+        type: e.port.type
       }
 
     }
@@ -1283,6 +1306,19 @@
         enumerable: true,
         get: function () {
           return that._midiInput.state;
+        }
+      },
+
+      /**
+       * [read-only] Type of the MIDI port (&#x60;input&#x60;)
+       *
+       * @property state
+       * @type String
+       */
+      type: {
+        enumerable: true,
+        get: function () {
+          return that._midiInput.type;
         }
       }
 
@@ -1647,7 +1683,7 @@
       event.note = {
         &quot;number&quot;: data1,
         &quot;name&quot;: wm._notes[data1 % 12],
-        &quot;octave&quot;: Math.floor(data1 / 12 - 1) - 3
+        &quot;octave&quot;: wm.getOctave(data1)
       };
       event.velocity = data2 / 127;
       event.rawVelocity = data2;
@@ -1681,7 +1717,7 @@
       event.note = {
         &quot;number&quot;: data1,
         &quot;name&quot;: wm._notes[data1 % 12],
-        &quot;octave&quot;: Math.floor(data1 / 12 - 1) - 3
+        &quot;octave&quot;: wm.getOctave(data1)
       };
       event.velocity = data2 / 127;
       event.rawVelocity = data2;
@@ -1713,7 +1749,7 @@
       event.note = {
         &quot;number&quot;: data1,
         &quot;name&quot;: wm._notes[data1 % 12],
-        &quot;octave&quot;: Math.floor(data1 / 12 - 1) - 3
+        &quot;octave&quot;: wm.getOctave(data1)
       };
       event.value = data2 / 127;
 
@@ -1941,7 +1977,23 @@
     if (command === wm.MIDI_SYSTEM_MESSAGES.sysex) {
 
       /**
-       * Event emitted when a system exclusive MIDI message has been received.
+       * Event emitted when a system exclusive MIDI message has been received. You should note that,
+       * to receive &#x60;sysex&#x60; events, you must call the &#x60;WebMidi.enable()&#x60; method with a second
+       * parameter set to &#x60;true&#x60;:
+       *
+       *     WebMidi.enable(function(err) {
+       *
+       *        if (err) {
+       *          console.log(&quot;WebMidi could not be enabled.&quot;);
+       *        }
+       *
+       *        var input = WebMidi.inputs[0];
+       *
+       *        input.addListener(&#x27;sysex&#x27;, &quot;all&quot;, function (e) {
+       *          console.log(e);
+       *        });
+       *
+       *     }, true);
        *
        * @event sysex
        *
@@ -1953,6 +2005,7 @@
        * @param {uint} event.timestamp The timestamp when the event occurred (in milliseconds since
        * the epoch).
        * @param {String} event.type The type of event that occurred.
+       *
        */
       event.type = &#x27;sysex&#x27;;
 
@@ -2258,6 +2311,19 @@
         get: function () {
           return that._midiOutput.state;
         }
+      },
+
+      /**
+       * [read-only] Type of the MIDI port (&#x60;output&#x60;)
+       *
+       * @property state
+       * @type String
+       */
+      type: {
+        enumerable: true,
+        get: function () {
+          return that._midiOutput.type;
+        }
       }
 
     });
@@ -2387,7 +2453,7 @@
     });
 
     data = manufacturer.concat(data, wm.MIDI_SYSTEM_MESSAGES.sysexend);
-    this.send(wm.MIDI_SYSTEM_MESSAGES.sysex, data, options.time);
+    this.send(wm.MIDI_SYSTEM_MESSAGES.sysex, data, this._parseTimeParameter(options.time));
 
     return this;
 
@@ -2417,7 +2483,7 @@
    */
   Output.prototype.sendTimecodeQuarterFrame = function(value, options) {
     options = options || {};
-    this.send(wm.MIDI_SYSTEM_MESSAGES.timecode, value, options.time);
+    this.send(wm.MIDI_SYSTEM_MESSAGES.timecode, value, this._parseTimeParameter(options.time));
     return this;
   };
 
@@ -2451,7 +2517,11 @@
     var msb = (value &gt;&gt; 7) &amp; 0x7F;
     var lsb = value &amp; 0x7F;
 
-    this.send(wm.MIDI_SYSTEM_MESSAGES.songposition, [msb, lsb], options.time);
+    this.send(
+      wm.MIDI_SYSTEM_MESSAGES.songposition,
+      [msb, lsb],
+      this._parseTimeParameter(options.time)
+    );
     return this;
 
   };
@@ -2489,7 +2559,7 @@
       throw new RangeError(&quot;The song number must be between 0 and 127.&quot;);
     }
 
-    this.send(wm.MIDI_SYSTEM_MESSAGES.songselect, [value], options.time);
+    this.send(wm.MIDI_SYSTEM_MESSAGES.songselect, [value], this._parseTimeParameter(options.time));
 
     return this;
 
@@ -2519,7 +2589,11 @@
    */
   Output.prototype.sendTuningRequest = function(options) {
     options = options || {};
-    this.send(wm.MIDI_SYSTEM_MESSAGES.tuningrequest, undefined, options.time);
+    this.send(
+      wm.MIDI_SYSTEM_MESSAGES.tuningrequest,
+      undefined,
+      this._parseTimeParameter(options.time)
+    );
     return this;
   };
 
@@ -2544,7 +2618,7 @@
    */
   Output.prototype.sendClock = function(options) {
     options = options || {};
-    this.send(wm.MIDI_SYSTEM_MESSAGES.clock, undefined, options.time);
+    this.send(wm.MIDI_SYSTEM_MESSAGES.clock, undefined, this._parseTimeParameter(options.time));
     return this;
   };
 
@@ -2569,7 +2643,7 @@
    */
   Output.prototype.sendStart = function(options) {
     options = options || {};
-    this.send(wm.MIDI_SYSTEM_MESSAGES.start, undefined, options.time);
+    this.send(wm.MIDI_SYSTEM_MESSAGES.start, undefined, this._parseTimeParameter(options.time));
     return this;
   };
 
@@ -2595,7 +2669,7 @@
    */
   Output.prototype.sendContinue = function(options) {
     options = options || {};
-    this.send(wm.MIDI_SYSTEM_MESSAGES.continue, undefined, options.time);
+    this.send(wm.MIDI_SYSTEM_MESSAGES.continue, undefined, this._parseTimeParameter(options.time));
     return this;
   };
 
@@ -2620,7 +2694,7 @@
    */
   Output.prototype.sendStop = function(options) {
     options = options || {};
-    this.send(wm.MIDI_SYSTEM_MESSAGES.stop, undefined, options.time);
+    this.send(wm.MIDI_SYSTEM_MESSAGES.stop, undefined, this._parseTimeParameter(options.time));
     return this;
   };
 
@@ -2646,7 +2720,11 @@
    */
   Output.prototype.sendActiveSensing = function(options) {
     options = options || {};
-    this.send(wm.MIDI_SYSTEM_MESSAGES.activesensing, undefined, options.time);
+    this.send(
+      wm.MIDI_SYSTEM_MESSAGES.activesensing,
+      undefined,
+      this._parseTimeParameter(options.time)
+    );
     return this;
   };
 
@@ -2671,7 +2749,7 @@
    */
   Output.prototype.sendReset = function(options) {
     options = options || {};
-    this.send(wm.MIDI_SYSTEM_MESSAGES.reset, undefined, options.time);
+    this.send(wm.MIDI_SYSTEM_MESSAGES.reset, undefined, this._parseTimeParameter(options.time));
     return this;
   };
 
@@ -2839,23 +2917,28 @@
 
     }
 
-    options.time = this._parseTimeParameter(options.time) || 0;
+    options.time = this._parseTimeParameter(options.time);
 
     // Send note on messages
     this._convertNoteToArray(note).forEach(function(item) {
 
       this._convertChannelToArray(channel).forEach(function(ch) {
         this.send(
-            (wm.MIDI_CHANNEL_MESSAGES.noteon &lt;&lt; 4) + (ch - 1),
-            [item, Math.round(nVelocity)],
+          (wm.MIDI_CHANNEL_MESSAGES.noteon &lt;&lt; 4) + (ch - 1),
+          [item, Math.round(nVelocity)],
           options.time
         );
       }.bind(this));
 
     }.bind(this));
 
-    // Send note off messages (only if a duration has been defined)
-    if (options.duration !== undefined) {
+
+    // Send note off messages (only if a valid duration has been defined)
+    options.duration = parseFloat(options.duration);
+
+    if (options.duration) {
+
+      if (options.duration &lt;= 0) { options.duration = 0; }
 
       var nRelease = 64;
 
@@ -2879,9 +2962,9 @@
 
         this._convertChannelToArray(channel).forEach(function(ch) {
           this.send(
-              (wm.MIDI_CHANNEL_MESSAGES.noteoff &lt;&lt; 4) + (ch - 1),
-              [item, Math.round(nRelease)],
-              options.time + options.duration
+            (wm.MIDI_CHANNEL_MESSAGES.noteoff &lt;&lt; 4) + (ch - 1),
+            [item, Math.round(nRelease)],
+            (options.time || wm.time) + options.duration
           );
         }.bind(this));
 
@@ -2949,9 +3032,9 @@
 
       that._convertChannelToArray(channel).forEach(function(ch) {
         that.send(
-            (wm.MIDI_CHANNEL_MESSAGES.keyaftertouch &lt;&lt; 4) + (ch - 1),
-            [item, nPressure],
-            that._parseTimeParameter(options.time)
+          (wm.MIDI_CHANNEL_MESSAGES.keyaftertouch &lt;&lt; 4) + (ch - 1),
+          [item, nPressure],
+          that._parseTimeParameter(options.time)
         );
       });
 
@@ -3088,9 +3171,9 @@
 
     this._convertChannelToArray(channel).forEach(function(ch) {
       this.send(
-          (wm.MIDI_CHANNEL_MESSAGES.controlchange &lt;&lt; 4) + (ch - 1),
-          [controller, value],
-          this._parseTimeParameter(options.time)
+        (wm.MIDI_CHANNEL_MESSAGES.controlchange &lt;&lt; 4) + (ch - 1),
+        [controller, value],
+        this._parseTimeParameter(options.time)
       );
     }.bind(this));
 
@@ -3819,10 +3902,8 @@
   };
 
   /**
-   * Sends a MIDI &#x60;channel mode&#x60; message to the specified channel(s).
-   *
-   * The channel mode message to send can be specified numerically or by using one of the following
-   * common names:
+   * Sends a MIDI &#x60;channel mode&#x60; message to the specified channel(s). The channel mode message to send can be specified
+   * numerically or by using one of the following common names:
    *
    *   * &#x60;allsoundoff&#x60; (#120)
    *   * &#x60;resetallcontrollers&#x60; (#121)
@@ -3833,39 +3914,40 @@
    *   * &#x60;monomodeon&#x60; (#126)
    *   * &#x60;polymodeon&#x60; (#127)
    *
+   * It should be noted that, per the MIDI specification, only &#x60;localcontrol&#x60; and &#x60;monomodeon&#x60; may require a value
+   * that&#x27;s not zero. For that reason, the &#x60;value&#x60; parameter is optional and defaults to 0.
+   *
    * @method sendChannelMode
    * @chainable
    *
-   * @param command {Number|String} The numerical identifier of the MIDI channel mode message
-   * (integer between 120-127) or its name as a string.
-   * @param value {Number} The value to send (integer between 0-127)
-   * @param [channel=all] {Number|Array|String} The MIDI channel number (between 1 and 16) or an
-   * array of channel numbers. If the special value &quot;all&quot; is used, the message will be sent to all
-   * 16 channels.
+   * @param command {Number|String} The numerical identifier of the channel mode message (integer between 120-127) or
+   * its name as a string.
+   * @param [value=0] {Number} The value to send (integer between 0-127).
+   * @param [channel=all] {Number|Array|String} The MIDI channel number (between 1 and 16) or an array of channel
+   * numbers. If the special value &quot;all&quot; is used, the message will be sent to all 16 channels.
    * @param {Object} [options={}]
-   * @param {DOMHighResTimeStamp|String} [options.time=undefined] This value can be one of two
-   * things. If the value is a string starting with the + sign and followed by a number, the request
-   * will be delayed by the specified number (in milliseconds). Otherwise, the value is considered a
-   * timestamp and the request will be scheduled at that timestamp. The &#x60;DOMHighResTimeStamp&#x60; value
-   * is relative to the navigation start of the document. To retrieve the current time, you can use
-   * &#x60;WebMidi.time&#x60;. If &#x60;time&#x60; is not present or is set to a time in the past, the request is to be
-   * sent as soon as possible.
+   * @param {DOMHighResTimeStamp|String} [options.time=undefined] This value can be one of two things. If the value is
+   * a string starting with the + sign and followed by a number, the request will be delayed by the specified number
+   * (in milliseconds). Otherwise, the value is considered a timestamp and the request will be scheduled at that
+   * timestamp. The &#x60;DOMHighResTimeStamp&#x60; value is relative to the navigation start of the document. To retrieve the
+   * current time, you can use &#x60;WebMidi.time&#x60;. If &#x60;time&#x60; is not present or is set to a time in the past, the request is
+   * to be sent as soon as possible.
    *
+   * @throws {TypeError} Invalid channel mode message name.
    * @throws {RangeError} Channel mode controller numbers must be between 120 and 127.
-   * @throws {RangeError} Value must be between 0 and 127.
+   * @throws {RangeError} Value must be an integer between 0 and 127.
    *
    * @return {Output} Returns the &#x60;Output&#x60; object so methods can be chained.
    *
    */
   Output.prototype.sendChannelMode = function(command, value, channel, options) {
 
-    var that = this;
-
     options = options || {};
 
     if (typeof command === &quot;string&quot;) {
 
       command = wm.MIDI_CHANNEL_MODE_MESSAGES[command];
+
       if (!command) {
         throw new TypeError(&quot;Invalid channel mode message name.&quot;);
       }
@@ -3873,28 +3955,28 @@
     } else {
 
       command = parseInt(command);
+
       if ( !(command &gt;= 120 &amp;&amp; command &lt;= 127) ) {
         throw new RangeError(&quot;Channel mode numerical identifiers must be between 120 and 127.&quot;);
       }
 
     }
 
+    value = parseInt(value) || 0;
 
-
-    value = parseInt(value);
-    if (isNaN(value) || value &lt; 0 || value &gt; 127) {
-      throw new RangeError(&quot;Value must be integers between 0 and 127.&quot;);
+    if (value &lt; 0 || value &gt; 127) {
+      throw new RangeError(&quot;Value must be an integer between 0 and 127.&quot;);
     }
 
     this._convertChannelToArray(channel).forEach(function(ch) {
 
-      that.send(
+      this.send(
           (wm.MIDI_CHANNEL_MESSAGES.channelmode &lt;&lt; 4) + (ch - 1),
           [command, value],
-          that._parseTimeParameter(options.time)
+          this._parseTimeParameter(options.time)
       );
 
-    });
+    }.bind(this));
 
     return this;
 
@@ -3940,9 +4022,9 @@
 
     this._convertChannelToArray(channel).forEach(function(ch) {
       that.send(
-          (wm.MIDI_CHANNEL_MESSAGES.programchange &lt;&lt; 4) + (ch - 1),
-          [program],
-          that._parseTimeParameter(options.time)
+        (wm.MIDI_CHANNEL_MESSAGES.programchange &lt;&lt; 4) + (ch - 1),
+        [program],
+        that._parseTimeParameter(options.time)
       );
     });
 
@@ -4043,9 +4125,9 @@
 
     this._convertChannelToArray(channel).forEach(function(ch) {
       that.send(
-          (wm.MIDI_CHANNEL_MESSAGES.pitchbend &lt;&lt; 4) + (ch - 1),
-          [lsb, msb],
-          that._parseTimeParameter(options.time)
+        (wm.MIDI_CHANNEL_MESSAGES.pitchbend &lt;&lt; 4) + (ch - 1),
+        [lsb, msb],
+        that._parseTimeParameter(options.time)
       );
     });
 
@@ -4054,29 +4136,32 @@
   };
 
   /**
+   * Returns a timestamp, relative to the navigation start of the document, derived from the &#x60;time&#x60;
+   * parameter. If the parameter is a string starting with the &quot;+&quot; sign and followed by a number,
+   * the resulting value will be the sum of the current timestamp plus that number. Otherwise, the
+   * value will be returned as is.
+   *
+   * If the calculated return value is 0, less than zero or an otherwise invalid value, &#x60;undefined&#x60;
+   * will be returned.
+   *
    * @method _parseTimeParameter
-   * @param [time=0] {Number|String}
+   * @param [time] {Number|String}
+   * @return DOMHighResTimeStamp
    * @protected
    */
   Output.prototype._parseTimeParameter = function(time) {
 
-    var parsed;
+    var parsed, value;
 
-    if (time === undefined) { return 0; }
-
-    if (time &amp;&amp; time.substring &amp;&amp; time.substring(0, 1) === &quot;+&quot;) {
-
+    if (typeof time === &#x27;string&#x27; &amp;&amp;  time.substring(0, 1) === &quot;+&quot;) {
       parsed = parseFloat(time);
-      if (!parsed) { throw new TypeError(&quot;Invalid relative time format.&quot;); }
-      return (parsed + wm.time);
-
+      if (parsed &amp;&amp; parsed &gt; 0) { value = wm.time + parsed; }
     } else {
-
       parsed = parseFloat(time);
-      if (!parsed) { throw new TypeError(&quot;Invalid absolute time format.&quot;); }
-      return parsed;
-
+      if (parsed &gt; wm.time) { value = parsed; }
     }
+
+    return value;
 
   };
 

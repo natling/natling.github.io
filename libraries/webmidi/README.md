@@ -35,12 +35,26 @@ It is possible to use this library in other browsers if you install version 1.4+
 [WebMIDIAPIShim](http://cwilso.github.io/WebMIDIAPIShim/) polyfill. This combination provides 
 support for the following additional browsers:
 
-* Firefox (Mac, GNU/Linux & Windows)
+* Firefox v51 or less (Mac, GNU/Linux & Windows)
 * Safari (Mac)
 * Internet Explorer (Windows)
 
 For details on how to use **WebMidi.js** with the Jazz-Plugin (and WebMIDIAPIShim, please skip ahead 
 to the [Using WebMidi.js with the Jazz-Plugin](#using-webmidijs-with-the-jazz-plugin) section.
+
+>Note: Firefox v52+ deactivated support for NPAPI plugins. This means the Jazz-MIDI plugin will not 
+>work in that version (and newer versions). An 
+>[extension](https://addons.mozilla.org/en-US/firefox/addon/jazz-midi/) has been created by Jazz-Soft, 
+>to alleviate this problem but this extension does not use the same API as their NPAPI plugin. 
+>Therefore, WebMIDIApiShim will need to be [updated](https://github.com/cotejp/webmidi/issues/16) 
+>before full support for Firefox is restored.
+
+## Node.js Support
+
+WebMidi.js is not officially supported in Node.js. However, there is hope. I managed to get most 
+parts of it working by using the [web-midi-api](https://www.npmjs.com/package/web-midi-api) npm 
+module. Check out this [comment](https://github.com/cotejp/webmidi/issues/15#issuecomment-322020295) 
+for more information. If anyone is interested in contributing, help would be more than welcome. 
 
 ## Caveat Emptor
 
@@ -87,6 +101,12 @@ perform the actual install:
 Finally, just add a `<script>` tag to your HTML page and make it point to:
 
     <script src="node_modules/webmidi/webmidi.min.js"></script>
+    
+#### Using with a Bundler
+
+If you are using a bundler such as WebPack, you can import **WebMidi.js** in your project in this way:
+
+    import WebMidi from 'path/to/webmidi';
 
 ## Quick Start
 
@@ -318,6 +338,14 @@ introduction of `Input` and `Output` objects.
 To use **WebMidi.js** on Safari, Firefox and Internet Explorer, you will first need to install 
 Jazz-Plugin. Simply [download the plugin](http://jazz-soft.net/download/Jazz-Plugin/) and run the 
 installer.
+
+> Users of Firefox v52+ are currently out of luck because Mozilla deactivated support for NPAPI
+> plugins. There is an add-on version of 
+> [Jazz-Midi](https://addons.mozilla.org/en-US/firefox/addon/jazz-midi/) but, unfortunately, the 
+> API is different and cannot be used as is. Firefox v52+ users will have to wait for native Web 
+> MIDI support to be finalized. 
+> [Reading from the comments on Bug 836897](https://bugzilla.mozilla.org/show_bug.cgi?id=836897), 
+> this might take a while...
 
 Then, you will need to add the plugin to the page with the following HTML code:
 
