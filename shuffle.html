@@ -30,23 +30,34 @@
 </head>
 
 <body>
-  <table id="table">
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-  </table>
 </body>
 
 <script src="libraries/natalie.js"></script>
 
 <script>
+  var rows    = 4;
+  var columns = 4;
+
+  createTable(rows, columns);
+
+  function createTable(rows, columns) {
+    var table = document.createElement('table');
+
+    for (var i = 0; i < rows; i++) {
+      var tr = document.createElement('tr');
+
+      for (var j = 0; j < columns; j++) {
+        var td = document.createElement('td');
+
+        tr.appendChild(td);
+      }
+
+      table.appendChild(tr);
+    }
+
+    document.body.appendChild(table);
+  }
+
   var cells = document.getElementsByTagName('td');
 
   for (var i = 0; i < cells.length; i++) {
