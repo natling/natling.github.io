@@ -20,7 +20,8 @@
 
     td {
       padding: 0px;
-      background-size: 1500px;
+      background-image: url('files/dogs.jpg');
+      background-size: 2500px;
       transition-property: background-position;
       transition-duration: 4s;
       transition-timing-function: linear;
@@ -48,18 +49,10 @@
 <script>
   var cells = document.getElementsByTagName('td');
 
-  function postcardURL(number) {
-    return 'files/postcard-' + (number + 1) + '.jpg';
-  }
-
-  function quiltURL(number) {
-    return 'files/quilt-' + (number + 1) + '.jpg';
-  }
-
   for (var i = 0; i < cells.length; i++) {
     (function(i) {
-      cells[i].style.backgroundImage = 'url(\'' + postcardURL(i) + '\')';
-      // cells[i].style.backgroundImage = 'url(\'' + quiltURL(i) + '\')';
+      randomPosition();
+      cyclePosition();
 
       function randomPosition() {
         var x = randomFloat(0, 100);
@@ -67,16 +60,12 @@
         cells[i].style.backgroundPosition = x + '% ' + y + '%';
       }
 
-      randomPosition();
-
       function cyclePosition() {
         var duration = randomFloat(1, 4) * 1000;
 
         setTimeout(randomPosition, 0);
         setTimeout(cyclePosition, duration);
       }
-
-      cyclePosition();
     })(i);
   }
 </script>
