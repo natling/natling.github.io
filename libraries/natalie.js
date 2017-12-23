@@ -22,6 +22,10 @@ function roundTo(n, digits) {
 	return Math.round(n) / multiplicator;
 }
 
+function linlin(value, inMin, inMax, outMin, outMax) {
+	return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);
+}
+
 function coin(p) {
 	if (Math.random() < p) {
 		return true
