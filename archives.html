@@ -53,39 +53,26 @@
 </body>
 
 <script src="libraries/natalie.js"></script>
-
-<script src="files/iliad.js"></script>
-<script src="files/odyssey.js"></script>
-<script src="files/ramayana.js"></script>
-<script src="files/de-rerum-natura.js"></script>
-<script src="files/aeneid.js"></script>
-<script src="files/metamorphoses.js"></script>
-<script src="files/beowulf.js"></script>
-<script src="files/the-song-of-roland.js"></script>
-<script src="files/nibelungenlied.js"></script>
-<script src="files/divine-comedy.js"></script>
-<script src="files/paradise-lost.js"></script>
-<script src="files/kalevala.js"></script>
-<script src="files/idylls-of-the-king.js"></script>
+<script src="files/epic-poetry.js"></script>
 
 <script>
-  var corpora = [
-    iliad,
-    odyssey,
-    ramayana,
-    deRerumNatura,
-    aeneid,
-    metamorphoses,
-    beowulf,
-    theSongOfRoland,
-    nibelungenlied,
-    divineComedy,
-    paradiseLost,
-    kalevala,
-    idyllsOfTheKing,
+  var corporaToUse = [
+    poems.iliad,
+    poems.odyssey,
+    poems.ramayana,
+    poems.deRerumNatura,
+    poems.aeneid,
+    poems.metamorphoses,
+    poems.beowulf,
+    poems.theSongOfRoland,
+    poems.nibelungenlied,
+    poems.divineComedy,
+    poems.paradiseLost,
+    poems.kalevala,
+    poems.idyllsOfTheKing,
   ];
 
-  var corpus = corpora.reduce((x, y) => x.concat(y));
+  var corpus = corporaToUse.reduce((x, y) => x.concat(y));
 
   var splitCorpusByWords = true;
 
