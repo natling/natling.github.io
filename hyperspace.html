@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>hyperspace</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="files/favicon.png"/>
+  <style>
+  	body {
+      margin: 0;
+      background-color: black;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    @keyframes perspective {
+      from { perspective: 10px; }
+      to   { perspective:  3px; }
+    }
+
+    #container {
+      width: 100vw;
+      height: 100vh;
+      animation: perspective 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes rotate {
+      from { transform: rotateZ(360deg); }
+      to   { transform: rotateZ(  0deg); }
+    }
+
+    #space {
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      animation: rotate 7s linear infinite;
+    }
+
+    @keyframes zoom {
+      from { background-size: 300% }
+      to   { background-size: 100% }
+    }
+
+    .surface {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      background-image: url('files/DSC_5761a.jpg');
+      animation: zoom 5s linear infinite alternate;
+    }
+
+    #back   { transform: rotateX(180deg) translateZ(25vw); }
+    #top    { transform: rotateX( 90deg) translateZ(25vw); }
+    #bottom { transform: rotateX(-90deg) translateZ(25vw); }
+    #right  { transform: rotateY( 90deg) translateZ(25vw); }
+    #left   { transform: rotateY(-90deg) translateZ(25vw); }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="space">
+      <div class="surface" id="back"></div>
+      <div class="surface" id="top"></div>
+      <div class="surface" id="bottom"></div>
+      <div class="surface" id="right"></div>
+      <div class="surface" id="left"></div>
+    </div>
+  </div>
+</body>
+
+</html>
