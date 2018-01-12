@@ -21,6 +21,11 @@ class Cell {
 
 		var neighbors = [];
 
+		// neighbors.push(cells[previousRow][this.column]);
+		// neighbors.push(cells[nextRow][this.column]);
+		// neighbors.push(cells[this.row][previousColumn]);
+		// neighbors.push(cells[this.row][nextColumn]);
+
 		neighbors.push(cells[previousRow][previousColumn]);
 		neighbors.push(cells[previousRow][nextColumn]);
 		neighbors.push(cells[nextRow][previousColumn]);
