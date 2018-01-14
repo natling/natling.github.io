@@ -85,7 +85,7 @@ var settings = {
 		max             :   1.0,
 		walkProbability :   0.1,
 		walkStep        :   0.2,
-		walkType        : 'int',
+		walkType        : 'float',
 	},
 
 	minS : {
