@@ -67,6 +67,8 @@ var settings = {
 	maxSeedSizeWalkStep                     :  10,
 
 	interpolationProbability                :   1.0,
+	interpolationProbabilityMin             :   0.0,
+	interpolationProbabilityMax             :   1.0,
 	interpolationProbabilityWalkProbability :   0.1,
 	interpolationProbabilityWalkStep        :   0.2,
 
@@ -166,34 +168,34 @@ function seed() {
 
 function walk() {
 	if (coin(settings.minSeedsPerFrameWalkProbability)) {
-		settings.minSeedsPerFrame = randomWalkInteger(settings.minSeedsPerFrame, settings.minSeedsPerFrameMin, settings.minSeedsPerFrameMax, settings.minSeedsPerFrameWalkStep);
+		settings.minSeedsPerFrame         = randomWalkInteger(settings.minSeedsPerFrame,         settings.minSeedsPerFrameMin,         settings.minSeedsPerFrameMax,         settings.minSeedsPerFrameWalkStep);
 	}
 
 	if (coin(settings.maxSeedsPerFrameWalkProbability)) {
-		settings.maxSeedsPerFrame = randomWalkInteger(settings.maxSeedsPerFrame, settings.maxSeedsPerFrameMin, settings.maxSeedsPerFrameMax, settings.maxSeedsPerFrameWalkStep);
+		settings.maxSeedsPerFrame         = randomWalkInteger(settings.maxSeedsPerFrame,         settings.maxSeedsPerFrameMin,         settings.maxSeedsPerFrameMax,         settings.maxSeedsPerFrameWalkStep);
 	}
 
 	if (coin(settings.maxSeedSizeWalkProbability)) {
-		settings.maxSeedSize = randomWalkInteger(settings.maxSeedSize, settings.maxSeedSizeMin, settings.maxSeedSizeMax, settings.maxSeedSizeWalkStep);
+		settings.maxSeedSize              = randomWalkInteger(settings.maxSeedSize,              settings.maxSeedSizeMin,              settings.maxSeedSizeMax,              settings.maxSeedSizeWalkStep);
 	}
 
 	if (coin(settings.interpolationProbabilityWalkProbability)) {
-		settings.interpolationProbability = randomWalkFloat(settings.interpolationProbability, 0, 1, settings.interpolationProbabilityWalkStep);
+		settings.interpolationProbability = randomWalkFloat(  settings.interpolationProbability, settings.interpolationProbabilityMin, settings.interpolationProbabilityMax, settings.interpolationProbabilityWalkStep);
 	}
 
 	if (coin(settings.minSWalkProbability)) {
-		settings.minS = randomWalkInteger(settings.minS, settings.minSMin, settings.minSMax, settings.minSWalkStep);
+		settings.minS                     = randomWalkInteger(settings.minS,                     settings.minSMin,                     settings.minSMax,                     settings.minSWalkStep);
 	}
 
 	if (coin(settings.maxSWalkProbability)) {
-		settings.maxS = randomWalkInteger(settings.maxS, settings.maxSMin, settings.maxSMax, settings.maxSWalkStep);
+		settings.maxS                     = randomWalkInteger(settings.maxS,                     settings.maxSMin,                     settings.maxSMax,                     settings.maxSWalkStep);
 	}
 
 	if (coin(settings.minBWalkProbability)) {
-		settings.minB = randomWalkInteger(settings.minB, settings.minBMin, settings.minBMax, settings.minBWalkStep);
+		settings.minB                     = randomWalkInteger(settings.minB,                     settings.minBMin,                     settings.minBMax,                     settings.minBWalkStep);
 	}
 
 	if (coin(settings.maxBWalkProbability)) {
-		settings.maxB = randomWalkInteger(settings.maxB, settings.maxBMin, settings.maxBMax, settings.maxBWalkStep);
+		settings.maxB                     = randomWalkInteger(settings.maxB,                     settings.maxBMin,                     settings.maxBMax,                     settings.maxBWalkStep);
 	}
 }
