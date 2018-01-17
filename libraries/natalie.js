@@ -28,9 +28,9 @@ function linlin(value, inMin, inMax, outMin, outMax) {
 
 function coin(p) {
 	if (Math.random() < p) {
-		return true
+		return true;
 	} else {
-		return false
+		return false;
 	}
 }
 
@@ -123,22 +123,22 @@ function flatten(ary, ret) {
 }
 
 function interleave () {
-	var arrs = [].slice.call(arguments)
+	var arrs = [].slice.call(arguments);
 	var maxLength = Math.max.apply(Math, arrs.map(function (arr) {
-		return arr.length
+		return arr.length;
 	}))
 
-	var result = []
+	var result = [];
 
 	for (var i = 0; i < maxLength; ++i) {
 		arrs.forEach(function (arr) {
 			if (arr.length > i) {
-				result.push(arr[i])
+				result.push(arr[i]);
 			}
 		})
 	}
 
-	return result
+	return result;
 }
 
 function randomWalkInteger(start, low, high, step) {
