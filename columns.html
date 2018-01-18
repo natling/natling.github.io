@@ -19,6 +19,13 @@
       font-family: 'Gotham', sans-serif;
     }
 
+    #header p {
+      color: white;
+      font-size: 20px;
+      text-align: center;
+      letter-spacing: 3px;
+    }
+
     .column {
       position: absolute;
     }
@@ -41,6 +48,9 @@
 </head>
 
 <body>
+  <div id="header">
+    <p>I am sitting in a room different from the one you are in now.</p>
+  </div>
 </body>
 
 <script src="libraries/natalie.js"></script>
@@ -50,19 +60,25 @@
 
   var sentences = Array.from({length: 10}, () => text).join(' ').split('. ').map(x => (x.slice(-1)[0] != '.') ?  x + '.' : x);
 
-  var columns = randomIntegerInclusive(3, 5);
-  var margin  = 2;
+  var columns      = randomIntegerInclusive(3, 5);
+  var columnMargin = 2;
+  var headerMargin = 8;
+
+  var header = document.getElementById('header');
+
+  header.style.marginTop    = headerMargin                + '%';
+  header.style.marginBottom = headerMargin - columnMargin + '%';
 
   for (var i = 0; i < columns; i++) {
     var column = document.createElement('div');
     column.className = 'column';
     document.body.appendChild(column);
 
-    columnWidth = (100 - (columns + 1) * margin) / columns;
+    columnWidth = (100 - (columns + 1) * columnMargin) / columns;
 
-    column.style.margin = margin                     + '%';
-    column.style.width  = columnWidth                + '%';
-    column.style.left   = (columnWidth + margin) * i + '%';
+    column.style.margin = columnMargin + '%';
+    column.style.width  = columnWidth  + '%';
+    column.style.left   = (columnWidth + columnMargin) * i + '%';
 
     var paragraphs = separateArray(sentences, x => coin(0.5)).map(x => x.join(' '));
 
