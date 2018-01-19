@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>textbox</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="files/favicon.png"/>
+  <style>
+  	body {
+      margin: 0;
+      background-color: black;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #container {
+      perspective: 1000px;
+    }
+
+    #space {
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+    }
+
+    .surface {
+      position: absolute;
+    }
+
+    p {
+      position: absolute;
+      margin: 0px;
+      font-family: 'Courier New';
+      font-size: 100px;
+      color: lime;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="space">
+      <div class="surface" id="back"></div>
+      <div class="surface" id="ceiling"></div>
+      <div class="surface" id="floor"></div>
+      <div class="surface" id="right"></div>
+      <div class="surface" id="left"></div>
+    </div>
+  </div>
+</body>
+
+<script src="libraries/natalie.js"></script>
+
+<script>
+  var container = document.getElementById('container');
+  var back      = document.getElementById('back');
+  var ceiling   = document.getElementById('ceiling');
+  var floor     = document.getElementById('floor');
+  var left      = document.getElementById('left');
+  var right     = document.getElementById('right');
+
+  var windowWidth  = window.innerWidth;
+  var windowHeight = window.innerHeight;
+
+  var depth = 3000;
+
+  container.style.width  = windowWidth                + 'px';
+  container.style.height = windowHeight               + 'px';
+
+  back.style.width       = windowWidth                + 'px';
+  back.style.height      = windowHeight               + 'px';
+
+  ceiling.style.width    = windowWidth                + 'px';
+  floor.style.width      = windowWidth                + 'px';
+  ceiling.style.height   = depth                      + 'px';
+  floor.style.height     = depth                      + 'px';
+
+  left.style.width       = depth                      + 'px';
+  right.style.width      = depth                      + 'px';
+  left.style.height      = windowHeight               + 'px';
+  right.style.height     = windowHeight               + 'px';
+
+  ceiling.style.top      = (windowHeight - depth) / 2 + 'px';
+  floor.style.top        = (windowHeight - depth) / 2 + 'px';
+  left.style.left        = (windowWidth  - depth) / 2 + 'px';
+  right.style.left       = (windowWidth  - depth) / 2 + 'px';
+
+  back.style.transform    = 'rotateX(180deg) translateZ(' + depth        / 2 + 'px)';
+  ceiling.style.transform = 'rotateX( 90deg) translateZ(' + windowHeight / 2 + 'px)';
+  floor.style.transform   = 'rotateX(-90deg) translateZ(' + windowHeight / 2 + 'px)';
+  right.style.transform   = 'rotateY( 90deg) translateZ(' + windowWidth  / 2 + 'px)';
+  left.style.transform    = 'rotateY(-90deg) translateZ(' + windowWidth  / 2 + 'px)';
+</script>
+
+<script>
+  var shades = ['2591', '2592', '2593'].map(x => String.fromCharCode(parseInt(x, 16)));
+
+  var [characterWidth, characterHeight] = getCharacterDimensions();
+
+  var surfaces = document.getElementsByClassName('surface');
+
+  for (var k = 0; k < surfaces.length; k++) {
+    var width  = surfaces[k].clientWidth;
+    var height = surfaces[k].clientHeight;
+
+    var margin = 0;
+
+    var columns = Math.ceil((width  - margin * 2) / characterWidth);
+    var rows    = Math.ceil((height - margin * 2) / characterHeight);
+
+    for (var i = 0; i < rows; i++) {
+      for (var j = 0; j < columns; j++) {
+        var p = document.createElement('p');
+        surfaces[k].appendChild(p);
+        // p.innerHTML = randomItem(shades);
+        p.style.left = characterWidth  * j + margin + 'px';
+        p.style.top  = characterHeight * i + margin + 'px';
+      }
+    }
+  }
+
+  var cells = document.getElementsByTagName('p');
+
+  for (var i = 0; i < cells.length; i++) {
+    (function(i) {
+      var delay = randomIntegerInclusive(100, 1000);
+
+      function changeShade() {
+        cells[i].innerHTML = randomItem(shades);
+
+        // if (coin(0.5)) {
+        //   cells[i].style.color           = 'lime';
+        //   cells[i].style.backgroundColor = 'black';
+        // } else {
+        //   cells[i].style.color           = 'black';
+        //   cells[i].style.backgroundColor = 'lime';
+        // }
+
+        // setTimeout(changeShade, delay);
+      }
+
+      changeShade();
+    })(i);
+  }
+
+  function getCharacterDimensions() {
+    var p = document.createElement('p');
+    p.appendChild(document.createTextNode('~'));
+    document.body.appendChild(p);
+    p.style.position = 'absolute';
+    var characterWidth  = p.clientWidth;
+    var characterHeight = p.clientHeight;
+    document.body.removeChild(p);
+    return [characterWidth, characterHeight];
+  }
+</script>
+
+</html>
