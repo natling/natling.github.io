@@ -14,8 +14,14 @@
       overflow: hidden;
     }
 
+    @keyframes perspective {
+      from { perspective: 10000px; }
+      to   { perspective:     1px; }
+    }
+
     #container {
-      perspective: 1000px;
+      /*perspective: 1000px;*/
+      animation: perspective 10s ease infinite alternate;
     }
 
     #space {
@@ -33,7 +39,7 @@
       margin: 0px;
       font-family: 'Courier New';
       font-size: 100px;
-      color: lime;
+      /*color: lime;*/
     }
   </style>
 </head>
@@ -51,6 +57,7 @@
 </body>
 
 <script src="libraries/natalie.js"></script>
+<script src="getCharacterDimensions.js"></script>
 
 <script>
   var container = document.getElementById('container');
@@ -60,43 +67,52 @@
   var left      = document.getElementById('left');
   var right     = document.getElementById('right');
 
+  var [characterWidth, characterHeight] = getCharacterDimensions();
+
   var windowWidth  = window.innerWidth;
   var windowHeight = window.innerHeight;
 
+  var containerWidth  = Math.floor(windowWidth  / characterWidth)  * characterWidth;
+  var containerHeight = Math.floor(windowHeight / characterHeight) * characterHeight;
+
+  var offsetHorizontal = (windowWidth  - containerWidth)  / 2;
+  var offsetVertical   = (windowHeight - containerHeight) / 2;
+
   var depth = 3000;
+  var depth = Math.min(Math.floor(depth / characterWidth) * characterWidth, Math.floor(depth / characterHeight) * characterHeight);
 
-  container.style.width  = windowWidth                + 'px';
-  container.style.height = windowHeight               + 'px';
+  container.style.width  = containerWidth                + 'px';
+  container.style.height = containerHeight               + 'px';
 
-  back.style.width       = windowWidth                + 'px';
-  back.style.height      = windowHeight               + 'px';
+  back.style.width       = containerWidth                + 'px';
+  back.style.height      = containerHeight               + 'px';
 
-  ceiling.style.width    = windowWidth                + 'px';
-  floor.style.width      = windowWidth                + 'px';
-  ceiling.style.height   = depth                      + 'px';
-  floor.style.height     = depth                      + 'px';
+  ceiling.style.width    = containerWidth                + 'px';
+  floor.style.width      = containerWidth                + 'px';
+  ceiling.style.height   = depth                         + 'px';
+  floor.style.height     = depth                         + 'px';
 
-  left.style.width       = depth                      + 'px';
-  right.style.width      = depth                      + 'px';
-  left.style.height      = windowHeight               + 'px';
-  right.style.height     = windowHeight               + 'px';
+  left.style.width       = depth                         + 'px';
+  right.style.width      = depth                         + 'px';
+  left.style.height      = containerHeight               + 'px';
+  right.style.height     = containerHeight               + 'px';
 
-  ceiling.style.top      = (windowHeight - depth) / 2 + 'px';
-  floor.style.top        = (windowHeight - depth) / 2 + 'px';
-  left.style.left        = (windowWidth  - depth) / 2 + 'px';
-  right.style.left       = (windowWidth  - depth) / 2 + 'px';
+  ceiling.style.top      = (containerHeight - depth) / 2 + 'px';
+  floor.style.top        = (containerHeight - depth) / 2 + 'px';
+  left.style.left        = (containerWidth  - depth) / 2 + 'px';
+  right.style.left       = (containerWidth  - depth) / 2 + 'px';
 
-  back.style.transform    = 'rotateX(180deg) translateZ(' + depth        / 2 + 'px)';
-  ceiling.style.transform = 'rotateX( 90deg) translateZ(' + windowHeight / 2 + 'px)';
-  floor.style.transform   = 'rotateX(-90deg) translateZ(' + windowHeight / 2 + 'px)';
-  right.style.transform   = 'rotateY( 90deg) translateZ(' + windowWidth  / 2 + 'px)';
-  left.style.transform    = 'rotateY(-90deg) translateZ(' + windowWidth  / 2 + 'px)';
-</script>
+  back.style.transform    = 'rotateX(180deg) translateZ(' + depth           / 2 + 'px)';
+  ceiling.style.transform = 'rotateX( 90deg) translateZ(' + containerHeight / 2 + 'px)';
+  floor.style.transform   = 'rotateX(-90deg) translateZ(' + containerHeight / 2 + 'px)';
+  right.style.transform   = 'rotateY( 90deg) translateZ(' + containerWidth  / 2 + 'px)';
+  left.style.transform    = 'rotateY(-90deg) translateZ(' + containerWidth  / 2 + 'px)';
 
-<script>
+  container.style.transform = 'translateX(' + offsetHorizontal + 'px) translateY(' + offsetVertical + 'px)';
+
   var shades = ['2591', '2592', '2593'].map(x => String.fromCharCode(parseInt(x, 16)));
 
-  var [characterWidth, characterHeight] = getCharacterDimensions();
+  var colorWords = [ 'deface', 'dad', 'baccae', 'ebb', 'dab', 'facade', 'decade', 'fed', 'fee', 'add', 'efface', 'dabbed', 'bedded', 'baa', 'accede', 'fab', 'fad', 'ace', 'bed', 'bee', 'beaded', 'bad', 'cab', 'cad' ];
 
   var surfaces = document.getElementsByClassName('surface');
 
@@ -109,51 +125,43 @@
     var columns = Math.ceil((width  - margin * 2) / characterWidth);
     var rows    = Math.ceil((height - margin * 2) / characterHeight);
 
+    var color = '#' + randomItem(colorWords);
+
     for (var i = 0; i < rows; i++) {
       for (var j = 0; j < columns; j++) {
         var p = document.createElement('p');
         surfaces[k].appendChild(p);
-        // p.innerHTML = randomItem(shades);
-        p.style.left = characterWidth  * j + margin + 'px';
-        p.style.top  = characterHeight * i + margin + 'px';
+        p.innerHTML   = randomItem(shades);
+        p.style.color = color;
+        p.style.left  = characterWidth  * j + margin + 'px';
+        p.style.top   = characterHeight * i + margin + 'px';
       }
     }
   }
 
-  var cells = document.getElementsByTagName('p');
+  // var cells = document.getElementsByTagName('p');
 
-  for (var i = 0; i < cells.length; i++) {
-    (function(i) {
-      var delay = randomIntegerInclusive(100, 1000);
+  // for (var i = 0; i < cells.length; i++) {
+  //   (function(i) {
+  //     var delay = randomIntegerInclusive(100, 1000);
 
-      function changeShade() {
-        cells[i].innerHTML = randomItem(shades);
+  //     function changeShade() {
+  //       cells[i].innerHTML = randomItem(shades);
 
-        // if (coin(0.5)) {
-        //   cells[i].style.color           = 'lime';
-        //   cells[i].style.backgroundColor = 'black';
-        // } else {
-        //   cells[i].style.color           = 'black';
-        //   cells[i].style.backgroundColor = 'lime';
-        // }
+  //       // if (coin(0.5)) {
+  //       //   cells[i].style.color           = 'lime';
+  //       //   cells[i].style.backgroundColor = 'black';
+  //       // } else {
+  //       //   cells[i].style.color           = 'black';
+  //       //   cells[i].style.backgroundColor = 'lime';
+  //       // }
 
-        // setTimeout(changeShade, delay);
-      }
+  //       // setTimeout(changeShade, delay);
+  //     }
 
-      changeShade();
-    })(i);
-  }
-
-  function getCharacterDimensions() {
-    var p = document.createElement('p');
-    p.appendChild(document.createTextNode('~'));
-    document.body.appendChild(p);
-    p.style.position = 'absolute';
-    var characterWidth  = p.clientWidth;
-    var characterHeight = p.clientHeight;
-    document.body.removeChild(p);
-    return [characterWidth, characterHeight];
-  }
+  //     changeShade();
+  //   })(i);
+  // }
 </script>
 
 </html>
