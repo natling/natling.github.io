@@ -79,7 +79,7 @@
 
   var containerWidth  = Math.floor(windowWidth  / characterWidth)  * characterWidth;
   // var containerHeight = Math.floor(windowHeight / characterHeight) * characterHeight;
-  var containerHeight = containerWidth;
+  var containerHeight = Math.floor(containerWidth / characterHeight) * characterHeight;
 
   var offsetHorizontal = (windowWidth  - containerWidth)  / 2;
   var offsetVertical   = (windowHeight - containerHeight) / 2;
