@@ -158,3 +158,14 @@ function randomWalkFloat(start, low, high, step) {
 		}
 	}
 }
+
+function getCharacterDimensions() {
+	var p = document.createElement('p');
+	p.appendChild(document.createTextNode('~'));
+	document.body.appendChild(p);
+	p.style.position = 'absolute';
+	var characterWidth  = p.clientWidth;
+	var characterHeight = p.clientHeight;
+	document.body.removeChild(p);
+	return [characterWidth, characterHeight];
+}
