@@ -24,10 +24,16 @@
       animation: perspective 10s ease infinite alternate;
     }
 
+    @keyframes rotate {
+      from { transform: rotateZ(360deg); }
+      to   { transform: rotateZ(  0deg); }
+    }
+
     #space {
       width: 100%;
       height: 100%;
       transform-style: preserve-3d;
+      animation: rotate 7s linear infinite reverse;
     }
 
     .surface {
@@ -72,7 +78,8 @@
   var windowHeight = window.innerHeight;
 
   var containerWidth  = Math.floor(windowWidth  / characterWidth)  * characterWidth;
-  var containerHeight = Math.floor(windowHeight / characterHeight) * characterHeight;
+  // var containerHeight = Math.floor(windowHeight / characterHeight) * characterHeight;
+  var containerHeight = containerWidth;
 
   var offsetHorizontal = (windowWidth  - containerWidth)  / 2;
   var offsetVertical   = (windowHeight - containerHeight) / 2;
