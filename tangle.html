@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>tangle</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="files/favicon.png"/>
+  <style>
+    @font-face {
+      font-family: 'asemic1';
+      font-style: normal;
+      src:
+        url('fonts/asemic1.otf') format('opentype');
+    }
+
+    body {
+      margin: 0px;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(to top, rgba(0, 0, 0, 1.0), rgba(0, 0, 0, 0.6));
+    }
+
+    p {
+      position: absolute;
+      margin: 0px;
+      font-family: 'asemic1';
+      font-size: 70px;
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+</body>
+
+<script src="libraries/natalie.js"></script>
+
+<script>
+  var glyphs = 'abcdefghijklmnop'.split('');
+
+  var width  = window.innerWidth;
+  var height = window.innerHeight;
+
+  var gridSize = 48;
+
+  var columns = Math.ceil(width  / gridSize) + 2;
+  var rows    = Math.ceil(height / gridSize) + 2;
+
+  for (var j = 0; j < rows; j++) {
+    for (var i = 0; i < columns; i++) {
+      var p = document.createElement('p');
+      document.body.appendChild(p);
+      p.innerHTML = randomItem(glyphs);
+      p.style.left = gridSize * (i - 0.6) + 'px';
+      p.style.top  = gridSize * (j - 0.6) + 'px';
+    }
+  }
+</script>
+
+</html>
