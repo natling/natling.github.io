@@ -159,9 +159,9 @@ function randomWalkFloat(start, low, high, step) {
 	}
 }
 
-function getCharacterDimensions() {
+function getCharacterDimensions(character) {
 	var p = document.createElement('p');
-	p.appendChild(document.createTextNode('~'));
+	p.appendChild(document.createTextNode(character));
 	document.body.appendChild(p);
 	p.style.position = 'absolute';
 	var characterWidth  = p.clientWidth;

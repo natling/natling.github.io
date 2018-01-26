@@ -47,18 +47,7 @@
   var width  = window.innerWidth;
   var height = window.innerHeight;
 
-  function getCharacterDimensions() {
-    var p = document.createElement('p');
-    p.appendChild(document.createTextNode('~'));
-    document.body.appendChild(p);
-    characterWidth = p.clientWidth;
-    characterHeight = p.clientHeight;
-    document.body.removeChild(p);
-    return [characterWidth, characterHeight];
-  }
-
-  var characterWidth  = getCharacterDimensions()[0];
-  var characterHeight = getCharacterDimensions()[1];
+  var [characterWidth, characterHeight] = getCharacterDimensions('~');
 
   var rows = Math.floor(height / characterHeight);
 
