@@ -24,8 +24,7 @@
       background-color: black;
     }
 
-    p {
-      margin: 0px;
+    div {
       font-family: 'cursive';
       font-size: 40px;
       color: white;
@@ -42,13 +41,63 @@
 <script>
   var glyphs = [];
 
-  for (var i = parseInt('0021', 16); i < parseInt('0037', 16) + 1; i++) {
+  for (var i = parseInt('0041', 16); i < parseInt('0059', 16) + 1; i++) {
     glyphs.push(String.fromCharCode(i));
   }
 
-  var p = document.createElement('p');
-  document.body.appendChild(p);
-  p.innerHTML = Array.from({length: 10}, () => Array.from({length: 30}, () => randomItem(glyphs)).join('')).join('<br>');
+  var glyphWidths = {
+    A : 1,
+    B : 1,
+    C : 1,
+    D : 1,
+    E : 1,
+    F : 2,
+    G : 2,
+    H : 2,
+    I : 2,
+    J : 2,
+    K : 3,
+    L : 3,
+    M : 3,
+    N : 3,
+    O : 3,
+    P : 4,
+    Q : 4,
+    R : 4,
+    S : 4,
+    T : 4,
+    U : 5,
+    V : 5,
+    W : 5,
+    X : 5,
+    Y : 5,
+  };
+
+  var div = document.createElement('div');
+  document.body.appendChild(div);
+  div.innerHTML = Array.from({length: 8}, () => line(120)).join('<br>')
+
+  function line(width) {
+    var content = [];
+
+    function getWidth(content) {
+      if (content.length > 0) {
+        return content.map(x => glyphWidths[x]).reduce((a, b) => a + b);
+      } else {
+        return 0;
+      }
+    }
+
+    while (getWidth(content) != width) {
+      content.push(randomItem(glyphs));
+
+      if (getWidth(content) > width) {
+        content.pop();
+      }
+    }
+
+    return content.join('');
+  }
 </script>
 
 </html>
