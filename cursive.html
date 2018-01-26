@@ -24,7 +24,8 @@
       background-color: black;
     }
 
-    div {
+    p {
+      margin: 0px;
       font-family: 'cursive';
       font-size: 40px;
       color: white;
@@ -73,9 +74,9 @@
     Y : 5,
   };
 
-  var div = document.createElement('div');
-  document.body.appendChild(div);
-  div.innerHTML = Array.from({length: 8}, () => line(120)).join('<br>')
+  var p = document.createElement('p');
+  document.body.appendChild(p);
+  p.innerHTML = Array.from({length: 8}, () => line(120)).join('<br>')
 
   function line(width) {
     var content = [];
