@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>runes</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="files/favicon.png"/>
+  <style>
+    @font-face {
+      font-family: 'runes';
+      font-style: normal;
+      src:
+        url('fonts/runes.ttf') format('truetype');
+    }
+
+    body {
+      margin: 0px;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background-color: black;
+    }
+
+    p {
+      margin: 0px;
+      font-family: 'runes';
+      font-size: 40px;
+      color: white;
+      line-height: 50px;
+      letter-spacing: 8px;
+    }
+  </style>
+</head>
+
+<body>
+</body>
+
+<script src="libraries/natalie.js"></script>
+
+<script>
+  var glyphs = [];
+
+  for (var i = parseInt('0041', 16); i < parseInt('0058', 16) + 1; i++) {
+    glyphs.push(String.fromCharCode(i));
+  }
+
+  var p = document.createElement('p');
+  document.body.appendChild(p);
+  p.innerHTML = Array.from({length: 10}, () => Array.from({length: 20}, () => randomItem(glyphs)).join('')).join('<br>');
+</script>
+
+</html>
