@@ -33,26 +33,23 @@
 </head>
 
 <body>
-  <a class="link" href="evaluation">evaluation</a>
-  <a class="link" href="okc">okc</a>
-  <a class="link" href="pronouns">pronouns</a>
-  <a class="link" href="love">things we say around love</a>
-  <a class="link" href="why">why</a>
-  <a class="link" href="notsure">not sure</a>
-  <a class="link" href="you">you</a>
-
-  <script>
-    var width = window.innerWidth;
-    var height = window.innerHeight;
-
-    var links = document.getElementsByClassName("link");
-
-    for (var i = 0; i < links.length; i++) {
-      links[i].style.width = width + 'px';
-      links[i].style.height = height / links.length + 'px';
-      links[i].style.top = i * (height / links.length) + 'px';
-    }
-  </script>
+  <a href="evaluation">evaluation</a>
+  <a href="okc">okc</a>
+  <a href="pronouns">pronouns</a>
+  <a href="love">things we say around love</a>
+  <a href="why">why</a>
+  <a href="notsure">not sure</a>
+  <a href="you">you</a>
 </body>
+
+<script>
+  var links = document.getElementsByTagName('a');
+
+  for (var i = 0; i < links.length; i++) {
+    links[i].style.width  = 100                    + '%';
+    links[i].style.height = 100 / links.length     + '%';
+    links[i].style.top    = 100 / links.length * i + '%';
+  }
+</script>
 
 </html>
