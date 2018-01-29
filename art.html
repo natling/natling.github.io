@@ -12,30 +12,24 @@
       src:
         local('Menlo'),
         local('Menlo Regular'),
-        url('../fonts/Menlo.otf') format("opentype");
+        url('../fonts/Menlo.otf') format('opentype');
     }
 
     body {
       margin: 0;
+      background-color: black;
     }
 
-    a:link, a:visited {
+    a {
       position: absolute;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: 'Menlo';
-      font-size: 16px;
+      font-size: 26px;
       text-align: center;
       text-decoration: none;
-      background-color: black;
       color: white;
-      transition: background-color 0.5s, color 0.5s;
-    }
-
-    a:hover {
-      background-color: white;
-      color: black;
     }
   </style>
 </head>
@@ -43,22 +37,45 @@
 <body>
   <a href="ascii">ascii</a>
   <a href="clocks">clocks</a>
+  <a href="colors">colors</a>
+  <a href="smudge">smudge</a>
+  <a href="scrapbook">scrapbook</a>
   <a href="scripts">scripts</a>
   <a href="scribbles">scribbles</a>
   <a href="spectrograms">spectrograms</a>
-  <a href="scrapbook">scrapbook</a>
   <a href="quilts">quilts</a>
   <a href="postcards">postcards</a>
-  <a href="smudge">smudge</a>
 </body>
 
 <script>
+  var rows    = 2;
+  var columns = 5;
+
   var links = document.getElementsByTagName('a');
 
-  for (var i = 0; i < links.length; i++) {
-    links[i].style.width  = 100 / links.length     + '%';
-    links[i].style.height = 100                    + '%';
-    links[i].style.left   = 100 / links.length * i + '%';
+  for (var i = 0; i < rows; i++) {
+    for (var j = 0; j < columns; j++) {
+      var link = links[j + i * columns];
+
+      (function(link) {
+        link.style.width  = 100 / columns     + '%';
+        link.style.height = 100 / rows        + '%';
+        link.style.left   = 100 / columns * j + '%';
+        link.style.top    = 100 / rows    * i + '%';
+
+        link.onmouseover = function() {
+          link.style.transition    = 'color 1s, letter-spacing 1s';
+          link.style.color         = 'lime';
+          link.style.letterSpacing = '2px';
+        }
+
+        link.onmouseout = function() {
+          link.style.transition    = 'color 5s, letter-spacing 3s';
+          link.style.color         = 'white';
+          link.style.letterSpacing = '0px';
+        }
+      })(link);
+    }
   }
 </script>
 
