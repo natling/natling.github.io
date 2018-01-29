@@ -5,7 +5,7 @@ function randomIntegerInclusive(min, max) {
 }
 
 function randomFloat(min, max) {
-  return Math.random() * (max - min) + min;
+	return Math.random() * (max - min) + min;
 }
 
 function getBaseLog(x, y) {
