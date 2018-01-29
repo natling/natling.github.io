@@ -16,29 +16,3 @@ $blue:      #268bd2;
 $cyan:      #2aa198;
 $green:     #859900;
 */
-
-@font-face {
-  font-family: 'Menlo';
-  font-style: normal;
-  src:
-    local('Menlo'),
-    local('Menlo Regular'),
-    url('../fonts/Menlo.otf') format("opentype");
-}
-
-body {
-  background-color: #002b36;
-  color: #b58900;
-  font-family: Menlo, monospace;
-  margin: 15px;
-}
-
-p {
-  font-family: Menlo, monospace;
-  margin-top: 0;
-}
-
-pre {
-  font-family: Menlo, monospace;
-  margin-top: 0;
-}
