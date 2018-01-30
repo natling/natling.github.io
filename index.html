@@ -22,69 +22,63 @@
   <style>
     body {
       margin: 0px;
+      width: 100vw;
+      height: 100vh;
       overflow: hidden;
-    }
-
-    img {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: auto;
+      background-image: url('files/2017.04.08 b.jpg');
+      background-repeat: no-repeat;
+      background-position: left bottom;
+      background-size: 100% auto;
     }
 
     @media only screen and (orientation: portrait) {
-      img {
-        position: absolute;
-        right: 0;
-        width: auto;
-        height: 100%;
+      body {
+        background-position: right bottom;
+        background-size: auto 100%;
       }
     }
 
-    .box {
-      padding: 10px;
-
+    #box {
       position: absolute;
       top: 5vw;
       left: 5vw;
-      z-index: 1;
-
-      font-family: Menlo, monospace;
+      padding: 10px;
+      background-color: black;
+      font-family: 'Menlo', monospace;
       font-size: 11pt;
       color: white;
-      background-color: black;
     }
 
     p {
       margin: 0px;
     }
 
-    .links {
+    #links {
       columns: 2;
     }
 
-    a:link, a:visited {
-      color: white;
+    a {
       text-decoration: none;
-      transition: color 0.2s;
+      color: white;
+      transition: color 1s;
     }
 
     a:hover {
       color: gray;
+      transition: color 0.2s;
     }
   </style>
 </head>
 
 <body>
-  <img src="files/2017.04.08 b.jpg" alt="" title="">
-  <div class="box">
+  <div id="box">
     <p>
       natalie braginsky makes music +<br>
       art + poems + computer programs.<br>
       she lives in brooklyn.
     </p>
     <br>
-    <div class="links">
+    <div id="links">
       <a href="http://natalie.computer/about">about</a>
       <br><a href="http://natalie.computer/poetry">poetry</a>
       <br><a href="http://natalie.computer/art">art</a>
