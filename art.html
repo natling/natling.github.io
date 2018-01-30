@@ -22,6 +22,14 @@
       text-align: center;
       text-decoration: none;
       color: white;
+      letter-spacing: 0px;
+      transition: color 5s, letter-spacing 3s;
+    }
+
+    a:hover {
+      color: lime;
+      letter-spacing: 2px;
+      transition: color 1s, letter-spacing 1s;
     }
   </style>
 </head>
@@ -53,24 +61,10 @@
     for (var j = 0; j < columns; j++) {
       var link = links[j + i * columns];
 
-      (function(link) {
-        link.style.width  = 100 / columns     + '%';
-        link.style.height = 100 / rows        + '%';
-        link.style.left   = 100 / columns * j + '%';
-        link.style.top    = 100 / rows    * i + '%';
-
-        link.onmouseover = function() {
-          link.style.transition    = 'color 1s, letter-spacing 1s';
-          link.style.color         = 'lime';
-          link.style.letterSpacing = '2px';
-        }
-
-        link.onmouseout = function() {
-          link.style.transition    = 'color 5s, letter-spacing 3s';
-          link.style.color         = 'white';
-          link.style.letterSpacing = '0px';
-        }
-      })(link);
+      link.style.width  = 100 / columns     + '%';
+      link.style.height = 100 / rows        + '%';
+      link.style.left   = 100 / columns * j + '%';
+      link.style.top    = 100 / rows    * i + '%';
     }
   }
 </script>
