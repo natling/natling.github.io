@@ -2,15 +2,15 @@
 <html>
 
 <head>
-  <title>runes</title>
+  <title>font 0</title>
   <meta charset="UTF-8">
   <link rel="shortcut icon" href="files/favicon.png"/>
   <style>
     @font-face {
-      font-family: 'runes';
+      font-family: 'font-0';
       font-style: normal;
       src:
-        url('fonts/runes.ttf') format('truetype');
+        url('fonts/font-0.ttf') format('truetype');
     }
 
     body {
@@ -26,11 +26,10 @@
 
     p {
       margin: 0px;
-      font-family: 'runes';
+      font-family: 'font-0';
       font-size: 40px;
       color: white;
-      line-height: 50px;
-      letter-spacing: 8px;
+      line-height: 120%;
     }
   </style>
 </head>
@@ -43,13 +42,13 @@
 <script>
   var glyphs = [];
 
-  for (var i = parseInt('0041', 16); i < parseInt('0058', 16) + 1; i++) {
+  for (var i = parseInt('0021', 16); i < parseInt('0037', 16) + 1; i++) {
     glyphs.push(String.fromCharCode(i));
   }
 
   var p = document.createElement('p');
   document.body.appendChild(p);
-  p.innerHTML = Array.from({length: 10}, () => Array.from({length: 20}, () => randomItem(glyphs)).join('')).join('<br>');
+  p.innerHTML = Array.from({length: 10}, () => Array.from({length: 30}, () => randomItem(glyphs)).join('')).join('<br>');
 </script>
 
 </html>
