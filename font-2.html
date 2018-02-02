@@ -10,23 +10,29 @@
       font-family: 'font-2';
       font-style: normal;
       src:
-        url('fonts/font-2.otf') format('opentype');
+        url('fonts/font-2.ttf') format('truetype');
     }
 
     body {
       margin: 0px;
       width: 100vw;
       height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       overflow: hidden;
-      background: linear-gradient(to top, rgba(0, 0, 0, 1.0), rgba(0, 0, 0, 0.6));
+      background-color: LightGray;
     }
 
     p {
-      position: absolute;
+      position: relative;
+      left: -11px;
       margin: 0px;
       font-family: 'font-2';
       font-size: 70px;
       color: black;
+      line-height: 48px;
+      letter-spacing: -22px;
     }
   </style>
 </head>
@@ -37,25 +43,22 @@
 <script src="libraries/natalie.js"></script>
 
 <script>
-  var glyphs = 'abcdefghijklmnop'.split('');
+  var glyphs = [];
 
-  var width  = window.innerWidth;
-  var height = window.innerHeight;
+  for (var i = parseInt('0041', 16); i < parseInt('0050', 16) + 1; i++) {
+    glyphs.push(String.fromCharCode(i));
+  }
+
+  var margin = parent.margin || 100;
 
   var gridSize = 48;
 
-  var columns = Math.ceil(width  / gridSize) + 2;
-  var rows    = Math.ceil(height / gridSize) + 2;
+  var rows    = Math.round((window.innerHeight - margin * 2) / gridSize) - 1;
+  var columns = Math.round((window.innerWidth  - margin * 2) / gridSize) - 1;
 
-  for (var j = 0; j < rows; j++) {
-    for (var i = 0; i < columns; i++) {
-      var p = document.createElement('p');
-      document.body.appendChild(p);
-      p.innerHTML = randomItem(glyphs);
-      p.style.left = gridSize * (i - 0.6) + 'px';
-      p.style.top  = gridSize * (j - 0.6) + 'px';
-    }
-  }
+  var p = document.createElement('p');
+  document.body.appendChild(p);
+  p.innerHTML = Array.from({length: rows}, () => Array.from({length: columns}, () => randomItem(glyphs)).join('')).join('<br>');
 </script>
 
 </html>

@@ -21,14 +21,14 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
-      background-color: black;
+      background-color: LightGray;
     }
 
     p {
       margin: 0px;
       font-family: 'font-1';
       font-size: 40px;
-      color: white;
+      color: black;
       line-height: 120%;
     }
   </style>
@@ -74,9 +74,17 @@
     Y : 5,
   };
 
+  var margin = parent.margin || 100;
+
+  var characterWidthMin = 8;
+  var characterHeight   = 48;
+
+  var rows    = Math.round((window.innerHeight - margin * 2) / characterHeight);
+  var columns = Math.round((window.innerWidth  - margin * 2) / characterWidthMin);
+
   var p = document.createElement('p');
   document.body.appendChild(p);
-  p.innerHTML = Array.from({length: 8}, () => line(120)).join('<br>')
+  p.innerHTML = Array.from({length: rows}, () => line(columns)).join('<br>')
 
   function line(width) {
     var content = [];

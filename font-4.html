@@ -21,14 +21,14 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
-      background-color: black;
+      background-color: LightGray;
     }
 
     p {
       margin: 0px;
       font-family: 'font-4';
       font-size: 50px;
-      color: white;
+      color: black;
       line-height: 60px;
       letter-spacing: 12px;
     }
@@ -47,9 +47,17 @@
     glyphs.push(String.fromCharCode(i));
   }
 
+  var margin = parent.margin || 100;
+
+  var characterWidth  = 42;
+  var characterHeight = 60;
+
+  var rows    = Math.round((window.innerHeight - margin * 2) / characterHeight);
+  var columns = Math.round((window.innerWidth  - margin * 2) / characterWidth);
+
   var p = document.createElement('p');
   document.body.appendChild(p);
-  p.innerHTML = Array.from({length: 7}, () => Array.from({length: 19}, () => randomItem(glyphs)).join('')).join('<br>');
+  p.innerHTML = Array.from({length: rows}, () => Array.from({length: columns}, () => randomItem(glyphs)).join('')).join('<br>');
 </script>
 
 </html>
