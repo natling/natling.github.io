@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>gates</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="files/favicon.png"/>
+  <style>
+    body {
+      margin: 0px;
+      overflow: hidden;
+      background-color: black;
+    }
+
+    p {
+      position: absolute;
+      margin: 0px;
+      font-family: 'Courier New';
+      transform: scale(1.01, 1.01);
+    }
+  </style>
+</head>
+
+<body>
+</body>
+
+<script src="libraries/natalie.js"></script>
+
+<script>
+  var colors = ['RebeccaPurple', 'RoyalBlue', 'Lime', 'DarkRed'];
+  shuffleArray(colors);
+
+  var [baseWidth, baseHeight] = getCharacterDimensions(String.fromCharCode(parseInt('254B', 16)));
+
+  var glyphs = [];
+
+  for (var i = parseInt('250C', 16); i < parseInt('254B', 16) + 1; i++) {
+    var glyph = String.fromCharCode(i);
+    var [glyphWidth, glyphHeight] = getCharacterDimensions(glyph);
+
+    if (glyphWidth == baseWidth && glyphHeight == baseHeight) {
+      glyphs.push(glyph);
+    }
+  }
+
+  var smallestGrid = 30;
+  var gridSizes    = [0, 1, 2, 3].map(x => 2 ** x * smallestGrid);
+
+  for (var i = 0; i < gridSizes.length; i++) {
+    createGrid(gridSizes[i], colors[i]);
+  }
+
+  cycleGlyphs();
+
+  function createGrid(fontSize, color) {
+    var rows    = Math.round(window.innerHeight / fontSize) + 1;
+    var columns = Math.round(window.innerWidth  / fontSize) + 1;
+
+    for (var y = 0; y < rows; y++) {
+      for (var x = 0; x < columns; x++) {
+        var cell = document.createElement('p');
+        document.body.appendChild(cell);
+
+        cell.innerHTML = randomItem(glyphs);
+
+        cell.style.fontSize   = fontSize     + 'px';
+        cell.style.lineHeight = fontSize     + 'px';
+        cell.style.left       = fontSize * x + 'px';
+        cell.style.top        = fontSize * y + 'px';
+        cell.style.color      = color;
+      }
+    }
+  }
+
+  function cycleGlyphs() {
+    var cells = document.getElementsByTagName('p');
+
+    for (var i = 0; i < cells.length; i++) {
+      (function(i) {
+        changeGlyph();
+
+        function changeGlyph() {
+          cells[i].innerHTML = randomItem(glyphs);
+          var delay = randomIntegerInclusive(1, 1000);
+          setTimeout(changeGlyph, delay);
+        }
+      })(i);
+    }
+  }
+</script>
+
+</html>
