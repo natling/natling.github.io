@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>cage</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="files/favicon.png"/>
+  <style>
+  	body {
+      margin: 0;
+      background-color: black;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    @keyframes perspective {
+      from { perspective: 10000px; }
+      to   { perspective:     1px; }
+    }
+
+    #container {
+      /*perspective: 1000px;*/
+      animation: perspective 10s ease infinite alternate;
+    }
+
+    @keyframes rotate {
+      from { transform: rotateZ(360deg); }
+      to   { transform: rotateZ(  0deg); }
+    }
+
+    #space {
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      animation: rotate 7s linear infinite reverse;
+    }
+
+    .surface {
+      position: absolute;
+    }
+
+    p {
+      position: absolute;
+      margin: 0px;
+      font-family: 'Courier New';
+      font-size: 100px;
+      line-height: 50px;
+      /*color: lime;*/
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="space">
+      <div class="surface" id="back"></div>
+      <div class="surface" id="ceiling"></div>
+      <div class="surface" id="floor"></div>
+      <div class="surface" id="right"></div>
+      <div class="surface" id="left"></div>
+    </div>
+  </div>
+</body>
+
+<script src="libraries/natalie.js"></script>
+
+<script>
+  var container = document.getElementById('container');
+  var back      = document.getElementById('back');
+  var ceiling   = document.getElementById('ceiling');
+  var floor     = document.getElementById('floor');
+  var left      = document.getElementById('left');
+  var right     = document.getElementById('right');
+
+  var [characterWidth, characterHeight] = getCharacterDimensions('~');
+
+  var windowWidth  = window.innerWidth;
+  var windowHeight = window.innerHeight;
+
+  var containerWidth  = Math.floor(windowWidth  / characterWidth)  * characterWidth;
+  // var containerHeight = Math.floor(windowHeight / characterHeight) * characterHeight;
+  var containerHeight = Math.floor(containerWidth / characterHeight) * characterHeight;
+
+  var offsetHorizontal = (windowWidth  - containerWidth)  / 2;
+  var offsetVertical   = (windowHeight - containerHeight) / 2;
+
+  var depth = 3000;
+  var depth = Math.min(Math.floor(depth / characterWidth) * characterWidth, Math.floor(depth / characterHeight) * characterHeight);
+
+  container.style.width  = containerWidth                + 'px';
+  container.style.height = containerHeight               + 'px';
+
+  back.style.width       = containerWidth                + 'px';
+  back.style.height      = containerHeight               + 'px';
+
+  ceiling.style.width    = containerWidth                + 'px';
+  floor.style.width      = containerWidth                + 'px';
+  ceiling.style.height   = depth                         + 'px';
+  floor.style.height     = depth                         + 'px';
+
+  left.style.width       = depth                         + 'px';
+  right.style.width      = depth                         + 'px';
+  left.style.height      = containerHeight               + 'px';
+  right.style.height     = containerHeight               + 'px';
+
+  ceiling.style.top      = (containerHeight - depth) / 2 + 'px';
+  floor.style.top        = (containerHeight - depth) / 2 + 'px';
+  left.style.left        = (containerWidth  - depth) / 2 + 'px';
+  right.style.left       = (containerWidth  - depth) / 2 + 'px';
+
+  back.style.transform    = 'rotateX(180deg) translateZ(' + depth           / 2 + 'px)';
+  ceiling.style.transform = 'rotateX( 90deg) translateZ(' + containerHeight / 2 + 'px)';
+  floor.style.transform   = 'rotateX(-90deg) translateZ(' + containerHeight / 2 + 'px)';
+  right.style.transform   = 'rotateY( 90deg) translateZ(' + containerWidth  / 2 + 'px)';
+  left.style.transform    = 'rotateY(-90deg) translateZ(' + containerWidth  / 2 + 'px)';
+
+  container.style.transform = 'translateX(' + offsetHorizontal + 'px) translateY(' + offsetVertical + 'px)';
+
+  // var shades = ['2591', '2592', '2593'].map(x => String.fromCharCode(parseInt(x, 16)));
+  var shades = ['A66E'].map(x => String.fromCharCode(parseInt(x, 16)));
+
+  var colorWords = [ 'deface', 'dad', 'baccae', 'ebb', 'dab', 'facade', 'decade', 'fed', 'fee', 'add', 'efface', 'dabbed', 'bedded', 'baa', 'accede', 'fab', 'fad', 'ace', 'bed', 'bee', 'beaded', 'bad', 'cab', 'cad' ];
+
+  var surfaces = document.getElementsByClassName('surface');
+
+  for (var k = 0; k < surfaces.length; k++) {
+    var width  = surfaces[k].clientWidth;
+    var height = surfaces[k].clientHeight;
+
+    var margin = 0;
+
+    var columns = Math.ceil((width  - margin * 2) / characterWidth);
+    var rows    = Math.ceil((height - margin * 2) / characterHeight);
+
+    var color = '#' + randomItem(colorWords);
+
+    for (var i = 0; i < rows; i++) {
+      for (var j = 0; j < columns; j++) {
+        var p = document.createElement('p');
+        surfaces[k].appendChild(p);
+        p.innerHTML   = randomItem(shades);
+        p.style.color = color;
+        p.style.left  = characterWidth  * j + margin + 'px';
+        p.style.top   = characterHeight * i + margin + 'px';
+      }
+    }
+  }
+</script>
+
+</html>
