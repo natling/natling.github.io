@@ -150,32 +150,32 @@ function createGrid() {
 
 	cells = create2DArray(settings.rows, settings.columns);
 
-	for (var i = 0; i < settings.rows; i++) {
-		for (var j = 0; j < settings.columns; j++) {
-			var row    = i;
-			var column = j;
+	for (var y = 0; y < settings.rows; y++) {
+		for (var x = 0; x < settings.columns; x++) {
+			var row    = y;
+			var column = x;
 			var h      = randomIntegerInclusive(0, 360);
 			var s      = randomIntegerInclusive(settings.minS.value, settings.maxS.value);
 			var b      = 0;
 
-			cells[i][j] = new Cell(row, column, h, s, b);
+			cells[y][x] = new Cell(row, column, h, s, b);
 		}
 	}
 }
 
 function displayGrid() {
-	for (var i = 0; i < settings.rows; i++) {
-		for (var j = 0; j < settings.columns; j++) {
-			cells[i][j].display();
+	for (var y = 0; y < settings.rows; y++) {
+		for (var x = 0; x < settings.columns; x++) {
+			cells[y][x].display();
 		}
 	}
 }
 
 function interpolateGrid() {
-	for (var i = 0; i < settings.rows; i++) {
-		for (var j = 0; j < settings.columns; j++) {
+	for (var y = 0; y < settings.rows; y++) {
+		for (var x = 0; x < settings.columns; x++) {
 			if (coin(settings.interpolationProbability.value)) {
-				cells[i][j].interpolate();
+				cells[y][x].interpolate();
 			}
 		}
 	}
@@ -190,24 +190,24 @@ function createSeeds() {
 }
 
 function seed() {
-	var i1 = randomIntegerInclusive(0, settings.rows    - 1);
-	var j1 = randomIntegerInclusive(0, settings.columns - 1);
+	var y1 = randomIntegerInclusive(0, settings.rows    - 1);
+	var x1 = randomIntegerInclusive(0, settings.columns - 1);
 
 	var iOffset = randomIntegerInclusive(-settings.maxSeedSize.value, settings.maxSeedSize.value);
 	var jOffset = randomIntegerInclusive(-settings.maxSeedSize.value, settings.maxSeedSize.value);
 
-	var i2 = constrain(i1 + iOffset, 0, settings.rows    - 1);
-	var j2 = constrain(j1 + jOffset, 0, settings.columns - 1);
+	var y2 = constrain(y1 + iOffset, 0, settings.rows    - 1);
+	var x2 = constrain(x1 + jOffset, 0, settings.columns - 1);
 
 	var h = randomIntegerInclusive(0, 360);
 	var s = randomIntegerInclusive(settings.minS.value, settings.maxS.value);
 	var b = randomIntegerInclusive(settings.minB.value, settings.maxB.value);
 
-	for (var i = i1; i < i2 - 1; i++) {
-		for (var j = j1; j < j2 - 1; j++) {
-			cells[i][j].h = h;
-			cells[i][j].s = s;
-			cells[i][j].b = b;
+	for (var y = y1; y < y2 + 1; y++) {
+		for (var x = x1; x < x2 + 1; x++) {
+			cells[y][x].h = h;
+			cells[y][x].s = s;
+			cells[y][x].b = b;
 		}
 	}
 }
