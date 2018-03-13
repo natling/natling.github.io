@@ -48,11 +48,12 @@ class Cell {
 }
 
 var settings = {
-	loop : true,
+	checkerboard : true,
+
+	loop    : true,
+	readout : false,
 
 	gridSize : 10,
-
-	checkerboard : true,
 
 	minSeedsPerFrame : {
 		value           :   0,
@@ -131,17 +132,30 @@ var cells;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
+	cursor(CROSS);
 	colorMode(HSB);
+	background(0);
 	noStroke();
 	textFont('Menlo', 12);
 	createGrid();
 }
 
 function draw() {
+	if (settings.loop) {
+		advanceFrame();
+	}
+
+	displayGrid();
+
+	if (settings.readout) {
+		readout();
+	}
+}
+
+function advanceFrame() {
 	interpolateGrid();
 	createSeeds();
 	walk();
-	displayGrid();
 }
 
 function createGrid() {
@@ -228,10 +242,10 @@ function walk() {
 	}
 }
 
-function displayReadout() {
-	var row    = Math.floor(mouseY / settings.gridSize);
-	var column = Math.floor(mouseX / settings.gridSize);
-	var cell   = cells[row][column];
+function readout() {
+	var {row, column} = mouseCoordinates();
+
+	var cell = cells[row][column];
 
 	var cellColor = color(cell.h, cell.s, cell.b);
 
@@ -247,7 +261,7 @@ function displayReadout() {
 	var readoutLine2 = 'S ' + hsb[1] + ' G ' + rgb[1];
 	var readoutLine3 = 'B ' + hsb[2] + ' B ' + rgb[2];
 
-	var readout = [readoutLine1, readoutLine2, readoutLine3].join('\n');
+	var readoutText = [readoutLine1, readoutLine2, readoutLine3].join('\n');
 
 	var textW = Math.ceil(textWidth(readoutLine1));
 	var textH = textLeading() * 3 - 2;
@@ -281,41 +295,38 @@ function displayReadout() {
 
 	fill(0, 0, 100);
 	textAlign(LEFT, TOP);
-	text(readout, textX, textY);
+	text(readoutText, textX, textY);
 }
 
 function keyPressed() {
 	switch (keyCode) {
 		case 32:
-			if (settings.loop) {
-				settings.loop = false;
-				noLoop();
-				cursor(CROSS);
-			} else {
-				settings.loop = true;
-				loop();
-				cursor(ARROW);
-			}
+			settings.loop = ! settings.loop;
+			settings.readout = false;
 			break;
 
 		case RIGHT_ARROW:
 			if (! settings.loop) {
-				redraw();
+				advanceFrame();
 			}
 			break;
 
 		case DOWN_ARROW:
-			if (! settings.loop) {
-				displayGrid();
-				save();
-			}
+			displayGrid();
+			save();
 			break;
 	}
 }
 
 function mouseMoved() {
 	if (! settings.loop) {
-		displayGrid();
-		displayReadout();
+		settings.readout = true;
+	}
+}
+
+function mouseCoordinates() {
+	return {
+		row    : Math.floor(mouseY / settings.gridSize),
+		column : Math.floor(mouseX / settings.gridSize),
 	}
 }
