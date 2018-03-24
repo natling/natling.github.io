@@ -10,27 +10,29 @@ var loss = [
 	[ 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
 ];
 
+var [lossWidth, lossHeight] = [loss[0], loss].map(x => x.length);
+
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	background(0);
 	stroke(255);
 
-	var levels = Math.min(...[getBaseLog(loss[0].length, width), getBaseLog(loss.length, height)].map(Math.round)) - 1;
+	var levels = Math.min(...[getBaseLog(lossWidth, width), getBaseLog(lossHeight, height)].map(Math.round)) - 1;
 
-	var marginX = (width  - loss[0].length ** (levels + 1)) / 2;
-	var marginY = (height - loss.length    ** (levels + 1)) / 2;
+	var marginX = (width  - lossWidth  ** (levels + 1)) / 2;
+	var marginY = (height - lossHeight ** (levels + 1)) / 2;
 
 	translate(marginX, marginY);
 	recursiveLoss(levels);
 }
 
 function recursiveLoss(level) {
-	for (var j = 0; j < loss.length; j++) {
-		for (var i = 0; i < loss[0].length; i++) {
+	for (var j = 0; j < lossHeight; j++) {
+		for (var i = 0; i < lossWidth; i++) {
 			push();
 
-			var x = loss[0].length ** level * i;
-			var y = loss.length    ** level * j;
+			var x = lossWidth  ** level * i;
+			var y = lossHeight ** level * j;
 
 			translate(x, y);
 
