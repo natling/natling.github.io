@@ -17,16 +17,18 @@ function setup() {
 	background(0);
 	stroke(255);
 
-	var levels = Math.min(...[getBaseLog(lossWidth, width), getBaseLog(lossHeight, height)].map(Math.round)) - 1;
+	var levels = Math.min(...[getBaseLog(lossWidth, width), getBaseLog(lossHeight, height)].map(Math.floor));
 
-	var marginX = (width  - lossWidth  ** (levels + 1)) / 2;
-	var marginY = (height - lossHeight ** (levels + 1)) / 2;
+	var marginX = (width  - lossWidth  ** levels) / 2;
+	var marginY = (height - lossHeight ** levels) / 2;
 
 	translate(marginX, marginY);
 	recursiveLoss(levels);
 }
 
 function recursiveLoss(level) {
+	level--;
+
 	for (var j = 0; j < lossHeight; j++) {
 		for (var i = 0; i < lossWidth; i++) {
 			push();
@@ -38,7 +40,7 @@ function recursiveLoss(level) {
 
 			if (loss[j][i]) {
 				if (level > 0) {
-					recursiveLoss(level - 1);
+					recursiveLoss(level);
 				} else {
 					point(0, 0);
 				}
