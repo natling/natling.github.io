@@ -1,159 +1,159 @@
 class FloatingString {
 
-	constructor(string, x, y, col, horizontalDirection, verticalDirection, speed) {
-		this.string              = string;
-		this.x                   = x;
-		this.y                   = y;
-		this.col                 = col;
-		this.horizontalDirection = horizontalDirection;
-		this.verticalDirection   = verticalDirection;
-		this.speed               = speed;
+	constructor(string) {
+		this.string = string;
+		this.initialize();
 	}
 
-	display() {
-		var xLiteral = map(this.x, 0, 1, horizontalMargin, width - horizontalMargin);
-		var yLiteral = map(this.y, 0, 1, verticalMargin, height - verticalMargin);
-		fill(this.col);
-		text(this.string, xLiteral, yLiteral, 200, 90);
+	initialize() {
+		this.createDiv();
+		this.newCoordinates();
+		this.newVector();
+		this.setAnimationDelay();
+		this.move();
+	}
+
+	createDiv() {
+		this.div = document.createElement('div');
+		this.newColor();
+		this.div.innerHTML = this.string;
+		document.body.appendChild(this.div);
+		[this.width, this.height] = [this.div.clientWidth, this.div.clientHeight];
+	}
+
+	newCoordinates() {
+		var x = randomIntegerInclusive(0, settings.width  - this.width);
+		var y = randomIntegerInclusive(0, settings.height - this.height);
+
+		this.coordinates = {x, y};
+	}
+
+	newVector() {
+		this.vector = randomVector();
+	}
+
+	newColor() {
+		var color = randomItem(['yellow', 'orange', 'red', 'magenta', 'violet', 'blue', 'cyan', 'green']);
+		this.div.style.color = settings.solarized[color];
+	}
+
+	setAnimationDelay() {
+		this.div.style.animationDelay = randomFloat(0, 3) + 's';
 	}
 
 	move() {
-		switch(this.horizontalDirection) {
-			case 'left':
-				this.x -= step * this.speed;
-				break;
-			case 'right':
-				this.x += step * this.speed;
-				break;
+		if (settings.frame % this.vector.x == 0) {
+			this.coordinates.x += Math.sign(this.vector.x);
 		}
 
-		switch(this.verticalDirection) {
-			case 'up':
-				this.y -= step * this.speed;
-				break;
-			case 'down':
-				this.y += step * this.speed;
-				break;
+		if (settings.frame % this.vector.y == 0) {
+			this.coordinates.y += Math.sign(this.vector.y);
 		}
 
-		if (this.x <= 0 || this.x >= 1) {
-			this.col = randomDifferentItem(solarizedAccent, this.col);
-			this.speed = random(speedLow, speedHigh);
+		if (! this.inBounds()) {
+			this.coordinates.x = constrain(this.coordinates.x, 0, settings.width  - this.width);
+			this.coordinates.y = constrain(this.coordinates.y, 0, settings.height - this.height);
 
-			if (this.horizontalDirection == 'left') {
-				this.horizontalDirection = 'right';
-				this.x += step * speedHigh;
-			} else {
-				this.horizontalDirection = 'left';
-				this.x -= step * speedHigh;
-			}
+			this.bounce();
 		}
 
-		if (this.y <= 0 || this.y >= 1) {
-			this.col = randomDifferentItem(solarizedAccent, this.col);
-			this.speed = random(speedLow, speedHigh);
+		this.updatePosition();
 
-			if (this.verticalDirection == 'up') {
-				this.verticalDirection = 'down';
-				this.y += step * speedHigh;
-			} else {
-				this.verticalDirection = 'up';
-				this.y -= step * speedHigh;
-			}
-		}
+		setTimeout(this.move.bind(this), settings.frameDuration);
+	}
+
+	inBounds() {
+		var x = this.coordinates.x > 0 && this.coordinates.x < settings.width  - this.width;
+		var y = this.coordinates.y > 0 && this.coordinates.y < settings.height - this.height;
+
+		return x && y;
+	}
+
+	bounce() {
+		this.newColor();
+		this.newVector();
+	}
+
+	updatePosition() {
+		var {x, y} = this.coordinates;
+
+		this.div.style.left = x + 'px';
+		this.div.style.top  = y + 'px';
 	}
 }
 
-var horizontalMargin = 100;
-var verticalMargin = 30;
+var settings = {
+	width          : window.innerWidth,
+	height         : window.innerHeight,
+	frame          :  0,
+	frameDuration  : 20,
+	stringSpeedMin :  3,
 
-var speedLow = 0.3;
-var speedHigh = 1.0;
+	solarized : {
+		base03  : '#002b36',
+		base02  : '#073642',
+		base01  : '#586e75',
+		base00  : '#657b83',
+		base0   : '#839496',
+		base1   : '#93a1a1',
+		base2   : '#eee8d5',
+		base3   : '#fdf6e3',
+		yellow  : '#b58900',
+		orange  : '#cb4b16',
+		red     : '#dc322f',
+		magenta : '#d33682',
+		violet  : '#6c71c4',
+		blue    : '#268bd2',
+		cyan    : '#2aa198',
+		green   : '#859900'
+	},
 
-var step = 0.001;
-
-var strings = [
-	'\"an angry trans shit\"',
-	'\"a markov chain\"',
-	'\"road-side snapshots of robotic collisions\"',
-	'\"sad-toned circuits failing in public\"',
-	'\"these are the brief shards of digital noise you\'ve been looking for\"',
-	'\"actual net art princess\"',
-	'\"noise music reminiscent of that time it was 1983 and you got sucked into your vectrex and the only way to escape was beating level 13 in mine storm\"',
-	'\"nice mix of pleasure and slight unpleasantness\"',
-	'\"strange short bursts of electrifying trash\"',
-	'\"leaves a frustrating impression\"',
-	'\"strange flashy sounds, liquid bits\"',
-	'\"a computer whose cooling fans weren\'t working\"',
-	'\"truth coming out of her well to shame mankind\"',
-	'«искусство требует жертв»',
-	'\"your computer is very sad. i want to give your computer a hug.\"',
-];
-
-var floatingStrings = [];
-
-var solarized = {
-	'base03':  '#002b36',
-	'base02':  '#073642',
-	'base01':  '#586e75',
-	'base00':  '#657b83',
-	'base0':   '#839496',
-	'base1':   '#93a1a1',
-	'base2':   '#eee8d5',
-	'base3':   '#fdf6e3',
-	'yellow':  '#b58900',
-	'orange':  '#cb4b16',
-	'red':     '#dc322f',
-	'magenta': '#d33682',
-	'violet':  '#6c71c4',
-	'blue':    '#268bd2',
-	'cyan':    '#2aa198',
-	'green':   '#859900'
+	strings : [
+		'\"an angry trans shit\"',
+		'\"a markov chain\"',
+		'\"road-side snapshots of robotic collisions\"',
+		'\"sad-toned circuits failing in public\"',
+		'\"these are the brief shards of digital noise you\'ve been looking for\"',
+		'\"actual net art princess\"',
+		'\"noise music reminiscent of that time it was 1983 and you got sucked into your vectrex and the only way to escape was beating level 13 in mine storm\"',
+		'\"nice mix of pleasure and slight unpleasantness\"',
+		'\"strange short bursts of electrifying trash\"',
+		'\"leaves a frustrating impression\"',
+		'\"strange flashy sounds, liquid bits\"',
+		'\"a computer whose cooling fans weren\'t working\"',
+		'\"truth coming out of her well to shame mankind\"',
+		'«искусство требует жертв»',
+		'\"your computer is very sad. i want to give your computer a hug.\"',
+		'\"a beautiful alien language\"',
+		'\"robot spiders swarming, fire and water, rushing in your ears, dense and sensual\"',
+		'\"reverberant metallic clangs and scrapes, floating stretched harmonies, light glitching, filling up the space\"',
+	],
 };
 
-var solarizedBase = [ 'base03', 'base02', 'base01', 'base00', 'base0', 'base1', 'base2', 'base3' ].map(function(key) {return solarized[key]});
-var solarizedAccent = [ 'yellow', 'orange', 'red', 'magenta', 'violet', 'blue', 'cyan', 'green' ].map(function(key) {return solarized[key]});
+initialize();
 
-function setup() {
-	createCanvas(windowWidth, windowHeight);
-	noCursor();
-	background(solarized['base03']);
+function initialize() {
+	document.body.style.background = settings.solarized.base03;
+	settings.floatingStrings = settings.strings.map(string => new FloatingString(string));
+	advanceFrame();
+}
 
-	textFont('Menlo');
-	textAlign(CENTER, CENTER);
-	rectMode(CENTER);
+function advanceFrame() {
+	settings.frame++;
+	setTimeout(advanceFrame, settings.frameDuration);
+}
 
-	for (var i = 0; i < strings.length; i++) {
-		var string              = strings[i];
-		var x                   = random();
-		var y                   = random();
-		var col                 = randomItem(solarizedAccent);
-		var horizontalDirection = randomItem(['left', 'right']);
-		var verticalDirection   = randomItem(['up', 'down']);
-		var speed               = random(speedLow, speedHigh);
+function randomVector() {
+	var x = randomIntegerInclusive(-settings.stringSpeedMin, settings.stringSpeedMin);
+	var y = randomIntegerInclusive(-settings.stringSpeedMin, settings.stringSpeedMin);
 
-		floatingStrings.push(new FloatingString(string, x, y, col, horizontalDirection, verticalDirection, speed));
+	if (! (x == 0 && y == 0)) {
+		return {x, y};
+	} else {
+		return randomVector();
 	}
 }
 
-function draw() {
-	background(solarized['base03']);
-
-	for (var i = 0; i < floatingStrings.length; i++) {
-		floatingStrings[i].display();
-		floatingStrings[i].move();
-	}
-}
-
-function windowResized() {
-	resizeCanvas(windowWidth, windowHeight);
-}
-
-function randomDifferentItem(array, item) {
-	while (true) {
-		var candidate = randomItem(array);
-		if (candidate != item) {
-			return candidate;
-		}
-	}
+function constrain(value, min, max) {
+	return Math.min(max, Math.max(value, min));
 }
