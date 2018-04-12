@@ -18,12 +18,13 @@ class FloatingString {
 		this.newColor();
 		this.div.innerHTML = this.string;
 		document.body.appendChild(this.div);
-		[this.width, this.height] = [this.div.clientWidth, this.div.clientHeight];
+		this.width  = this.div.clientWidth  / settings.width  * 100;
+		this.height = this.div.clientHeight / settings.height * 100;
 	}
 
 	newCoordinates() {
-		var x = randomIntegerInclusive(0, settings.width  - this.width);
-		var y = randomIntegerInclusive(0, settings.height - this.height);
+		var x = randomFloat(0, 100 - this.width);
+		var y = randomFloat(0, 100 - this.height);
 
 		this.coordinates = {x, y};
 	}
@@ -42,17 +43,12 @@ class FloatingString {
 	}
 
 	move() {
-		if (settings.frame % this.vector.x == 0) {
-			this.coordinates.x += Math.sign(this.vector.x);
-		}
-
-		if (settings.frame % this.vector.y == 0) {
-			this.coordinates.y += Math.sign(this.vector.y);
-		}
+		this.coordinates.x += this.vector.x;
+		this.coordinates.y += this.vector.y;
 
 		if (! this.inBounds()) {
-			this.coordinates.x = constrain(this.coordinates.x, 0, settings.width  - this.width);
-			this.coordinates.y = constrain(this.coordinates.y, 0, settings.height - this.height);
+			this.coordinates.x = constrain(this.coordinates.x, 0, 100 - this.width);
+			this.coordinates.y = constrain(this.coordinates.y, 0, 100 - this.height);
 
 			this.bounce();
 		}
@@ -63,8 +59,8 @@ class FloatingString {
 	}
 
 	inBounds() {
-		var x = this.coordinates.x > 0 && this.coordinates.x < settings.width  - this.width;
-		var y = this.coordinates.y > 0 && this.coordinates.y < settings.height - this.height;
+		var x = this.coordinates.x > 0 && this.coordinates.x < 100 - this.width;
+		var y = this.coordinates.y > 0 && this.coordinates.y < 100 - this.height;
 
 		return x && y;
 	}
@@ -77,17 +73,17 @@ class FloatingString {
 	updatePosition() {
 		var {x, y} = this.coordinates;
 
-		this.div.style.left = x + 'px';
-		this.div.style.top  = y + 'px';
+		this.div.style.left = x + '%';
+		this.div.style.top  = y + '%';
 	}
 }
 
 var settings = {
-	width          : window.innerWidth,
-	height         : window.innerHeight,
-	frame          :  0,
-	frameDuration  : 20,
-	stringSpeedMin :  3,
+	width         : window.innerWidth,
+	height        : window.innerHeight,
+	frameDuration : 20,
+	speedMin      :  0.04,
+	speedMax      :  0.1,
 
 	solarized : {
 		base03  : '#002b36',
@@ -135,23 +131,17 @@ initialize();
 function initialize() {
 	document.body.style.background = settings.solarized.base03;
 	settings.floatingStrings = settings.strings.map(string => new FloatingString(string));
-	advanceFrame();
-}
-
-function advanceFrame() {
-	settings.frame++;
-	setTimeout(advanceFrame, settings.frameDuration);
 }
 
 function randomVector() {
-	var x = randomIntegerInclusive(-settings.stringSpeedMin, settings.stringSpeedMin);
-	var y = randomIntegerInclusive(-settings.stringSpeedMin, settings.stringSpeedMin);
+	var x = randomFloat(settings.speedMin, settings.speedMax) * randomSign();
+	var y = randomFloat(settings.speedMin, settings.speedMax) * randomSign();
 
-	if (! (x == 0 && y == 0)) {
-		return {x, y};
-	} else {
-		return randomVector();
-	}
+	return {x, y};
+}
+
+function randomSign() {
+	return coin(0.5) ? -1 : 1;
 }
 
 function constrain(value, min, max) {
