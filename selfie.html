@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>selfie</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="files/favicon.png"/>
+  <style>
+    body {
+      margin: 0px;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: black;
+    }
+
+    img {
+      position: absolute;
+      width: 105%;
+      height: 105%;
+    }
+  </style>
+</head>
+
+<body>
+</body>
+
+<script src="libraries/natalie.js"></script>
+
+<script>
+  var settings = {
+    image : 'files/2017.01.21 b.jpg',
+
+    layers : 5,
+
+    probability : 0.95,
+
+    delay : {
+      image : {
+        min : 100,
+        max : 200,
+      },
+
+      body : {
+        min :  100,
+        max : 1000,
+      },
+    },
+
+    blur : {
+      default : 0,
+      altered : 2,
+    },
+
+    brightness : {
+      default :  100,
+      altered : 1000,
+    },
+
+    contrast : {
+      default :  100,
+      altered : 1000,
+    },
+
+    saturate : {
+      default :  100,
+      altered : 1000,
+    },
+
+    invert : {
+      default :   0,
+      altered : 100,
+    },
+
+    translate : {
+      x : 10,
+      y : 10,
+
+      multiply : {
+        default :  1,
+        altered : 10,
+      },
+    },
+
+    scale : {
+      default : 1,
+      altered : 2,
+    },
+
+    opacity : {
+      min : 0.5,
+      max : 1.0,
+    },
+
+    blendModes : [
+      'normal',
+      'multiply',
+      'screen',
+      'overlay',
+      'darken',
+      'lighten',
+      'color-dodge',
+      'color-burn',
+      'hard-light',
+      'soft-light',
+      'difference',
+      'exclusion',
+      'hue',
+      'saturation',
+      'color',
+      'luminosity',
+    ],
+  };
+
+  styleBody();
+
+  function styleBody() {
+    var blur       = coin(settings.probability) ? settings.blur.default       : settings.blur.altered;
+    var brightness = coin(settings.probability) ? settings.brightness.default : settings.brightness.altered;
+    var contrast   = coin(settings.probability) ? settings.contrast.default   : settings.contrast.altered;
+    var saturate   = coin(settings.probability) ? settings.saturate.default   : settings.saturate.altered;
+    var invert     = coin(settings.probability) ? settings.invert.default     : settings.invert.altered;
+
+    blur       = 'blur('       + blur       + 'px)';
+    brightness = 'brightness(' + brightness + '%)';
+    contrast   = 'contrast('   + contrast   + '%)';
+    saturate   = 'saturate('   + saturate   + '%)';
+    invert     = 'invert('     + invert     + '%)';
+
+    var filter = [blur, brightness, contrast, saturate, invert].join(' ');
+    document.body.style.filter = filter;
+
+    var delay = randomIntegerInclusive(settings.delay.body.min, settings.delay.body.max);
+    setTimeout(styleBody, delay);
+  }
+
+  for (var i = 0; i < settings.layers; i++) {
+    (function(i) {
+      var img = document.createElement('img');
+      document.body.appendChild(img);
+      img.src = settings.image;
+
+      styleImage();
+
+      function styleImage() {
+        var translate = {};
+
+        translate.x = randomIntegerInclusive(-settings.translate.x, settings.translate.x);
+        translate.y = randomIntegerInclusive(-settings.translate.y, settings.translate.y);
+
+        translate.multiply = coin(settings.probability) ? settings.translate.multiply.default : settings.translate.multiply.altered;
+
+        [translate.x, translate.y] = [translate.x, translate.y].map(n => n * translate.multiply);
+
+        translate = 'translate(' + translate.x + 'px, ' + translate.y + 'px)';
+
+        var scale = {};
+
+        scale.x = coin(settings.probability) ? settings.scale.default : settings.scale.altered;
+        scale.y = coin(settings.probability) ? settings.scale.default : settings.scale.altered;
+
+        scale = 'scale(' + scale.x + ', ' + scale.y + ')';
+
+        var transform    = [translate, scale].join(' ');
+        var opacity      = randomFloat(settings.opacity.min, settings.opacity.max);
+        var mixBlendMode = randomItem(settings.blendModes);
+
+        img.style.transform    = transform;
+        img.style.opacity      = opacity;
+        img.style.mixBlendMode = mixBlendMode;
+
+        var delay = randomIntegerInclusive(settings.delay.image.min, settings.delay.image.max);
+        setTimeout(styleImage, delay);
+      }
+    })(i);
+  }
+</script>
+
+</html>
