@@ -27,11 +27,7 @@ function linlin(value, inMin, inMax, outMin, outMax) {
 }
 
 function coin(p) {
-	if (Math.random() < p) {
-		return true;
-	} else {
-		return false;
-	}
+	return Math.random() < p;
 }
 
 function weightedAverage(values, weights) {
