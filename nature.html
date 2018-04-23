@@ -142,8 +142,6 @@
   }
 
   function addMessage() {
-    settings.message = {};
-
     var p = document.createElement('p');
     document.body.appendChild(p);
 
@@ -161,8 +159,11 @@
     document.body.removeChild(p);
 
     end--;
-    settings.message.complete = corpus.slice(start, end).join(' ');
-    settings.message.typed    = '';
+
+    settings.message = {
+      complete : corpus.slice(start, end).join(' '),
+      typed    : '',
+    };
 
     type();
   }
