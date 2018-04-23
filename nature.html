@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>nature</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="files/favicon.png"/>
+  <style>
+    body {
+      margin: 0px;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: black;
+      filter: blur(1px);
+    }
+
+    p {
+      position: absolute;
+      margin: 0px;
+      text-align: justify;
+      font-family: 'Courier';
+      font-size: 35pt;
+      overflow: scroll;
+      mix-blend-mode: color-dodge;
+    }
+
+    @keyframes blink {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .cursor {
+      animation: blink 0.5s ease infinite alternate;
+    }
+  </style>
+</head>
+
+<body>
+</body>
+
+<script src="libraries/natalie.js"></script>
+<script src="files/de-rerum-natura.js"></script>
+
+<script>
+  function populateVoiceList() {
+    if(typeof speechSynthesis === 'undefined') {
+      return;
+    }
+
+    voices = speechSynthesis.getVoices();
+  }
+
+  populateVoiceList();
+
+  if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = populateVoiceList;
+  }
+</script>
+
+<script>
+  var settings = {
+    width  : window.innerWidth,
+    height : window.innerHeight,
+
+    margin : 200,
+
+    jitter : {
+      x : 3,
+      y : 1,
+    },
+
+    delay : {
+      style : {
+        min : 100,
+        max : 200,
+      },
+
+      message : {
+        add    : 2000,
+        remove : 2000,
+      },
+
+      character : {
+        add    : 50,
+        remove : 30,
+      },
+    },
+  };
+
+  createLayers();
+
+  function createLayers() {
+    for (var i = 0; i < 4; i++) {
+      (function(i) {
+        var p = document.createElement('p');
+        document.body.appendChild(p);
+
+        p.style.width  = (1 - settings.margin * 2 / settings.width)  * 100 + '%';
+        p.style.height = (1 - settings.margin * 2 / settings.height) * 100 + '%';
+
+        var text = document.createElement('span');
+        p.appendChild(text);
+        text.className = 'text';
+
+        var cursor = document.createElement('span');
+        p.appendChild(cursor);
+        cursor.className = 'cursor';
+        cursor.innerHTML = '|';
+
+        style();
+
+        function style() {
+          var x = randomIntegerInclusive(-settings.jitter.x, settings.jitter.x);
+          var y = randomIntegerInclusive(-settings.jitter.y, settings.jitter.y);
+
+          p.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+
+          var r = randomIntegerInclusive(0, 255);
+          var g = randomIntegerInclusive(0, 255);
+          var b = randomIntegerInclusive(0, 255);
+
+          var color = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+
+          p.style.color = color;
+
+          var delay = randomIntegerInclusive(settings.delay.style.min, settings.delay.style.max);
+          setTimeout(style, delay);
+        }
+      })(i);
+    }
+
+    setTimeout(addMessage, settings.delay.message.add);
+  }
+
+  function addMessage() {
+    settings.message = {};
+
+    var p = document.createElement('p');
+    document.body.appendChild(p);
+
+    p.style.width  = (1 - settings.margin * 2 / settings.width)  * 100 + '%';
+    p.style.height = (1 - settings.margin * 2 / settings.height) * 100 + '%';
+
+    var start = randomIntegerInclusive(0, corpus.length - 1);
+    var end   = start;
+
+    while (! (p.scrollHeight > p.clientHeight)) {
+      end++;
+      p.innerHTML = corpus.slice(start, end).join(' ');
+    }
+
+    document.body.removeChild(p);
+
+    end--;
+    settings.message.complete = corpus.slice(start, end).join(' ');
+    settings.message.typed    = '';
+
+    type();
+  }
+
+  function type() {
+    addCharacter();
+    speak();
+
+    var delay = settings.message.complete.length * settings.delay.character.add + settings.delay.message.remove;
+    setTimeout(removeMessage, delay);
+
+    function addCharacter() {
+      if (settings.message.typed.length < settings.message.complete.length) {
+        settings.message.typed = settings.message.complete.slice(0, settings.message.typed.length + 1);
+
+        var texts = document.getElementsByClassName('text');
+
+        for (var i = 0; i < texts.length; i++) {
+          (function(i) {
+            texts[i].innerHTML = settings.message.typed;
+          })(i);
+        }
+
+        setTimeout(addCharacter, settings.delay.character.add);
+      }
+    }
+
+    function speak() {
+      setTimeout(function () {
+        var fred = voices.find(voice => voice.name == 'Fred');
+
+        var speech = new SpeechSynthesisUtterance();
+
+        speech.text  = settings.message.complete;
+        speech.voice = fred;
+        speech.pitch = 1.5;
+
+        window.speechSynthesis.speak(speech);
+      }, 0);
+    }
+  }
+
+  function removeMessage() {
+    removeCharacter();
+
+    var delay = settings.message.complete.length * settings.delay.character.remove + settings.delay.message.add;
+    setTimeout(addMessage, delay);
+
+    function removeCharacter() {
+      var texts = document.getElementsByClassName('text');
+
+      if (texts[0].innerHTML.length > 0) {
+        for (var i = 0; i < texts.length; i++) {
+          texts[i].innerHTML = texts[i].innerHTML.slice(0, -1);
+        }
+
+        setTimeout(removeCharacter, settings.delay.character.remove);
+      }
+    }
+  }
+</script>
+
+</html>
