@@ -81,7 +81,7 @@
 
       message : {
         add    : 2000,
-        remove : 2000,
+        remove : 4000,
       },
 
       character : {
@@ -192,17 +192,15 @@
     }
 
     function speak() {
-      setTimeout(function () {
-        var fred = voices.find(voice => voice.name == 'Fred');
+      var fred = voices.find(voice => voice.name == 'Fred');
 
-        var speech = new SpeechSynthesisUtterance();
+      var speech = new SpeechSynthesisUtterance();
 
-        speech.text  = settings.message.complete;
-        speech.voice = fred;
-        speech.pitch = 1.5;
+      speech.text  = settings.message.complete;
+      speech.voice = fred;
+      speech.pitch = 1.5;
 
-        window.speechSynthesis.speak(speech);
-      }, 0);
+      window.speechSynthesis.speak(speech);
     }
   }
 
