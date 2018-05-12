@@ -123,6 +123,7 @@ var settings = {
 		'\"a beautiful alien language\"',
 		'\"robot spiders swarming, fire and water, rushing in your ears, dense and sensual\"',
 		'\"reverberant metallic clangs and scrapes, floating stretched harmonies, light glitching, filling up the space\"',
+		'\"this is the sound nebulas make\"',
 	],
 };
 
