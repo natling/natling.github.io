@@ -74,13 +74,7 @@ function toggleCell(cell) {
 }
 
 function randomCell(status) {
-	var exists;
-
-	if (status) {
-		exists = ! gridEmpty();
-	} else {
-		exists = ! gridFull();
-	}
+	var exists = status ? ! gridEmpty() : ! gridFull();
 
 	if (exists) {
 		var x = randomIntegerInclusive(0, grid.width  - 1);
