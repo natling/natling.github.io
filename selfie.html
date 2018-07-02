@@ -146,10 +146,10 @@
       styleImage();
 
       function styleImage() {
-        var translate = {};
-
-        translate.x = randomIntegerInclusive(-settings.translate.x, settings.translate.x);
-        translate.y = randomIntegerInclusive(-settings.translate.y, settings.translate.y);
+        var translate = {
+          x : randomIntegerInclusive(-settings.translate.x, settings.translate.x),
+          y : randomIntegerInclusive(-settings.translate.y, settings.translate.y),
+        };
 
         translate.multiply = coin(settings.probability) ? settings.translate.multiply.default : settings.translate.multiply.altered;
 
@@ -157,10 +157,10 @@
 
         translate = 'translate(' + translate.x + 'px, ' + translate.y + 'px)';
 
-        var scale = {};
-
-        scale.x = coin(settings.probability) ? settings.scale.default : settings.scale.altered;
-        scale.y = coin(settings.probability) ? settings.scale.default : settings.scale.altered;
+        var scale = {
+          x : coin(settings.probability) ? settings.scale.default : settings.scale.altered,
+          y : coin(settings.probability) ? settings.scale.default : settings.scale.altered,
+        };
 
         scale = 'scale(' + scale.x + ', ' + scale.y + ')';
 
