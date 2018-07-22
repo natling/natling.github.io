@@ -137,6 +137,27 @@ function interleave () {
 	return result;
 }
 
+function permutations(array) {
+	var output = [];
+
+	if (array.length == 1) {
+		return array;
+	}
+
+	for (var i = 0; i < array.length; i++) {
+		var first = array[i];
+		var rest  = array.slice(0, i).concat(array.slice(i + 1));
+
+		var innerPermutations = permutations(rest);
+
+		for (var j = 0; j < innerPermutations.length; j++) {
+			output.push(([first].concat(innerPermutations[j])));
+		}
+	}
+
+	return output;
+}
+
 function randomWalkInteger(start, low, high, step) {
 	while (true) {
 		var newStart = start + randomIntegerInclusive(-step, step);
