@@ -42,6 +42,9 @@ class Graph {
 			if (atBottom && ! atLeft)   {node.x -= this.speed}
 			if (atRight  && ! atBottom) {node.y += this.speed}
 			if (atLeft   && ! atTop)    {node.y -= this.speed}
+
+			node.x = constrain(node.x, 0, width  - 1);
+			node.y = constrain(node.y, 0, height - 1);
 		});
 	}
 }
