@@ -1,22 +1,21 @@
 class Graph {
 
-	constructor(speed, color) {
+	constructor(order, speed, color) {
+		this.order = order;
 		this.speed = speed;
 		this.color = color;
-		this.nodes = [];
 
-		for (var i = 0; i < 2; i++) {
-			for (var j = 0; j < 2; j++) {
-				var x = i ? 0 : width  - 1;
-				var y = j ? 0 : height - 1;
+		this.nodes = Array.from({length: this.order}, () => ({x: 0, y: 0}));
+		this.edges = combinations(Array.from({length: this.order}, (v, i) => i), 4).map(combination => permutations(combination)).reduce((a, c) => a.concat(c));
 
-				this.nodes.push({x, y});
-			}
-		}
+		this.nodes.forEach((node, i) => {
+			var distance = (size * 4 - 4) / this.order * i;
+			this.move(node, distance);
+		});
 	}
 
 	render() {
-		edges.forEach(edge => {
+		this.edges.forEach(edge => {
 			var [
 				{x: x1, y: y1},
 				{x: x2, y: y2},
@@ -31,25 +30,24 @@ class Graph {
 		});
 	}
 
-	move() {
-		this.nodes.forEach(node => {
+	move(node, distance) {
+		for (var i = 0; i < distance; i++) {
 			var atLeft   = node.x <= 0;
-			var atRight  = node.x >= width  - 1;
+			var atRight  = node.x >= size - 1;
 			var atTop    = node.y <= 0;
-			var atBottom = node.y >= height - 1;
+			var atBottom = node.y >= size - 1;
 
-			if (atTop    && ! atRight)  {node.x += this.speed}
-			if (atBottom && ! atLeft)   {node.x -= this.speed}
-			if (atRight  && ! atBottom) {node.y += this.speed}
-			if (atLeft   && ! atTop)    {node.y -= this.speed}
+			if (atTop    && ! atRight)  {node.x++}
+			if (atBottom && ! atLeft)   {node.x--}
+			if (atRight  && ! atBottom) {node.y++}
+			if (atLeft   && ! atTop)    {node.y--}
+		}
+	}
 
-			node.x = constrain(node.x, 0, width  - 1);
-			node.y = constrain(node.y, 0, height - 1);
-		});
+	rotate() {
+		this.nodes.forEach(node => this.move(node, this.speed));
 	}
 }
-
-var edges = permutations([0, 1, 2, 3]);
 
 var colors = [
 	[   0, 255, 255 ],
@@ -57,15 +55,20 @@ var colors = [
 	[ 255, 255,   0 ],
 ];
 
-var graphs;
+var graphs, size;
 
 function setup() {
-	var size = Math.min(windowWidth, windowHeight) * 0.9;
+	size = Math.min(windowWidth, windowHeight) * 0.9;
 
 	createCanvas(size, size);
 	background(0);
 
-	graphs = colors.map((color, i) => new Graph((i + 1) * 3, color));
+	graphs = colors.map((color, i) => {
+		var order = 4;
+		var speed = (i + 1) * 3;
+
+		return new Graph(order, speed, color);
+	});
 }
 
 function draw() {
@@ -73,6 +76,6 @@ function draw() {
 
 	graphs.forEach(graph => {
 		graph.render();
-		graph.move();
+		graph.rotate();
 	});
 }
