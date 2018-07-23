@@ -137,12 +137,31 @@ function interleave () {
 	return result;
 }
 
-function permutations(array) {
-	var output = [];
+function combinations(array, k) {
+	if (k == 0) {
+		return [[]];
+	}
 
+	if (k == array.length) {
+		return [array];
+	}
+
+	var output = combinations(array.slice(0, array.length - 1), k);
+	var subset = combinations(array.slice(0, array.length - 1), k - 1);
+
+	for (var i = 0; i < subset.length; i++) {
+		output.push(subset[i].concat(array[array.length - 1]));
+	}
+
+	return output;
+}
+
+function permutations(array) {
 	if (array.length == 1) {
 		return array;
 	}
+
+	var output = [];
 
 	for (var i = 0; i < array.length; i++) {
 		var first = array[i];
