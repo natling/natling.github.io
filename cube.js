@@ -12,7 +12,6 @@ function draw() {
 		rotateY(frameCount * 0.002 * 0.5);
 		rotateZ(frameCount * 0.003 * 0.5);
 
-		normalMaterial();
 		box(Math.min(width, height) * 0.4);
 	}
 }
