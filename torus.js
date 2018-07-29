@@ -12,7 +12,7 @@ function draw() {
 		rotateY(frameCount * 0.002 * direction);
 		rotateZ(frameCount * 0.003 * direction);
 
-		torus(Math.min(width, height) * 0.4, 1, 64, 64);
+		torus(Math.min(width, height) * 0.35, 1, 64, 64);
 	}
 }
 
