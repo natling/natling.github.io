@@ -5,8 +5,6 @@ function setup() {
 }
 
 function draw() {
-	background(0);
-
 	for (var i = 0; i < n; i++) {
 		rotateX(frameCount * 0.001 * 0.5);
 		rotateY(frameCount * 0.002 * 0.5);
