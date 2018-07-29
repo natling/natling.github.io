@@ -124,6 +124,7 @@ var settings = {
 		'\"robot spiders swarming, fire and water, rushing in your ears, dense and sensual\"',
 		'\"reverberant metallic clangs and scrapes, floating stretched harmonies, light glitching, filling up the space\"',
 		'\"this is the sound nebulas make\"',
+		'\"this is really wrinkling my braincicles\"',
 	],
 };
 
