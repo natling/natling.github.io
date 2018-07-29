@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>geometry</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="files/favicon.png"/>
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+    }
+
+    a, iframe {
+      position: absolute;
+      border: none;
+    }
+
+    iframe::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+</body>
+
+<script>
+  var pages = [
+    'cube',
+    'torus',
+    'cylinder',
+    'plane',
+  ];
+
+  var rows    = 2;
+  var columns = 2;
+
+  for (var i = 0; i < rows; i++) {
+    for (var j = 0; j < columns; j++) {
+      var counter = j + i * columns;
+
+      var iframe = document.createElement('iframe');
+      document.body.appendChild(iframe);
+
+      iframe.src = pages[counter] + '.html';
+
+      iframe.style.width  = 100 / columns     + '%';
+      iframe.style.height = 100 / rows        + '%';
+      iframe.style.left   = 100 / columns * j + '%';
+      iframe.style.top    = 100 / rows    * i + '%';
+
+      var a = document.createElement('a');
+      document.body.appendChild(a);
+
+      a.href = pages[counter] + '.html';
+
+      a.style.width  = 100 / columns     + '%';
+      a.style.height = 100 / rows        + '%';
+      a.style.left   = 100 / columns * j + '%';
+      a.style.top    = 100 / rows    * i + '%';
+    }
+  }
+</script>
+
+</html>
