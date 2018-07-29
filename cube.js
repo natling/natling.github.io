@@ -1,4 +1,4 @@
-var n = 4;
+var n = 16;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight, WEBGL);
@@ -7,15 +7,13 @@ function setup() {
 function draw() {
 	background(0);
 
-	for (var y = 0; y < n; y++) {
-		for (var x = 0; x < n; x++) {
-			rotateX(frameCount * 0.001 * 0.5);
-			rotateY(frameCount * 0.002 * 0.5);
-			rotateZ(frameCount * 0.003 * 0.5);
+	for (var i = 0; i < n; i++) {
+		rotateX(frameCount * 0.001 * 0.5);
+		rotateY(frameCount * 0.002 * 0.5);
+		rotateZ(frameCount * 0.003 * 0.5);
 
-			normalMaterial();
-			box(Math.min(width, height) * 0.4);
-		}
+		normalMaterial();
+		box(Math.min(width, height) * 0.4);
 	}
 }
 
