@@ -146,12 +146,14 @@ function combinations(array, k) {
 		return [array];
 	}
 
-	var output = combinations(array.slice(0, array.length - 1), k);
-	var subset = combinations(array.slice(0, array.length - 1), k - 1);
+	var output = [];
+	var subset = combinations(array.slice(1), k - 1);
 
 	for (var i = 0; i < subset.length; i++) {
-		output.push(subset[i].concat(array[array.length - 1]));
+		output.push([array[0]].concat(subset[i]));
 	}
+
+	output.push(...combinations(array.slice(1), k));
 
 	return output;
 }
