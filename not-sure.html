@@ -26,15 +26,11 @@
     }
 
     @keyframes type {
-      from {
-        width: 0;
-      }
+      from { width: 0; }
     }
 
     @keyframes fade {
-      to {
-        opacity: 0;
-      }
+      to { opacity: 0; }
     }
   </style>
 </head>
@@ -46,25 +42,28 @@
 <script src="not-sure.js"></script>
 
 <script>
-  var width  = window.innerWidth;
-  var height = window.innerHeight;
+  const strings = poem.split('\n').filter(string => string);
 
-  var [characterWidth, characterHeight] = getCharacterDimensions('~');
+  const width  = window.innerWidth;
+  const height = window.innerHeight;
 
-  var rows = Math.floor(height / characterHeight);
+  const [characterWidth, characterHeight] = getCharacterDimensions('~');
 
-  var typingSpeed = 1 / 16;
+  const rows = Math.floor(height / characterHeight);
 
-  function writeString(row) {
-    var string = randomItem(stringArray);
+  const typingSpeed = 1 / 16;
 
-    var p    = document.createElement('p');
-    var text = document.createTextNode(string);
+  const writeString = row => {
+    const string = randomItem(strings);
 
-    p.style.width  = string.length * characterWidth + 'px';
-    p.style.height = characterHeight + 'px';
+    const p = document.createElement('p');
+    document.body.appendChild(p);
+    p.innerHTML = string;
+
+    p.style.width  = string.length * characterWidth                                    + 'px';
+    p.style.height = characterHeight                                                   + 'px';
     p.style.left   = randomIntegerInclusive(0, width - string.length * characterWidth) + 'px';
-    p.style.top    = row * characterHeight + 'px';
+    p.style.top    = row * characterHeight                                             + 'px';
 
     typeDuration       = string.length * typingSpeed;
     typeTimingFunction = string.length;
@@ -74,20 +73,13 @@
     p.style.animation         = 'type ' + typeDuration + 's steps(' + typeTimingFunction + '), fade ' + fadeDuration + 's ' + fadeDelay + 's';
     p.style.animationFillMode = 'forwards';
 
-    document.body.appendChild(p);
-    p.appendChild(text);
-
-    function clearRow() {
-      document.body.removeChild(p);
-    }
-
-    waitTime = typeDuration + fadeDelay + fadeDuration + 1;
-
-    setTimeout(clearRow, waitTime * 1000);
+    clearRow = () => document.body.removeChild(p)
+    const delay = typeDuration + fadeDelay + fadeDuration + 1;
+    setTimeout(clearRow, delay * 1000);
   }
 
-  function rowTimer(row) {
-    function activate() {
+  const rowTimer = row => {
+    const activate = () => {
       if (coin(0.1)) {
         writeString(row);
       }
@@ -98,7 +90,7 @@
 
   writeString(randomIntegerInclusive(0, rows - 1));
 
-  for (var i = 0; i < rows; i++) {
+  for (let i = 0; i < rows; i++) {
     rowTimer(i);
   }
 </script>

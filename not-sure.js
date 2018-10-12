@@ -1,4 +1,4 @@
-var poem = `why do you come here
+const poem = `why do you come here
 why do you do this
 why do you hate me
 why do you keep calling
@@ -102,5 +102,3 @@ i am still here
 i am still trying
 i am still in love
 i am still not sure`;
-
-var stringArray = poem.split('\n').filter(function(string) {return string != ""});
