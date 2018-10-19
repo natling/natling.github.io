@@ -1,4 +1,4 @@
-var grid = {
+const grid = {
 	square : false,
 	on     : true,
 };
@@ -15,13 +15,13 @@ if (grid.square) {
 
 grid.data = Array.from({length: grid.height}, () => Array.from({length: grid.width}, () => false));
 
-function setup() {
+setup = () => {
 	createCanvas(grid.width ** grid.depth, grid.height ** grid.depth);
 	background(0);
 	stroke(255);
 }
 
-function draw() {
+draw = () => {
 	background(0);
 
 	if (grid.on) {
@@ -31,16 +31,16 @@ function draw() {
 	fractal(grid.depth);
 }
 
-function fractal(level) {
+const fractal = level => {
 	level--;
 
-	for (var j = 0; j < grid.height; j++) {
-		for (var i = 0; i < grid.width; i++) {
+	for (let j = 0; j < grid.height; j++) {
+		for (let i = 0; i < grid.width; i++) {
 			if (grid.data[j][i]) {
 				push();
 
-				var x = grid.width  ** level * i;
-				var y = grid.height ** level * j;
+				const x = grid.width  ** level * i;
+				const y = grid.height ** level * j;
 
 				translate(x, y);
 
@@ -56,7 +56,7 @@ function fractal(level) {
 	}
 }
 
-function evolve() {
+const evolve = () => {
 	if (gridEmpty()) {
 		toggleCell(randomCell(false));
 	} else {
@@ -68,17 +68,17 @@ function evolve() {
 	}
 }
 
-function toggleCell(cell) {
-	var {x, y} = cell;
+const toggleCell = cell => {
+	const {x, y} = cell;
 	grid.data[y][x] = ! grid.data[y][x];
 }
 
-function randomCell(status) {
-	var exists = status ? ! gridEmpty() : ! gridFull();
+const randomCell = status => {
+	const exists = status ? ! gridEmpty() : ! gridFull();
 
 	if (exists) {
-		var x = randomIntegerInclusive(0, grid.width  - 1);
-		var y = randomIntegerInclusive(0, grid.height - 1);
+		const x = randomIntegerInclusive(0, grid.width  - 1);
+		const y = randomIntegerInclusive(0, grid.height - 1);
 
 		if (grid.data[y][x] == status) {
 			return {x, y};
@@ -88,8 +88,8 @@ function randomCell(status) {
 	}
 }
 
-function randomCellWithNeighbors(status) {
-	var cell = randomCell(status);
+const randomCellWithNeighbors = status => {
+	const cell = randomCell(status);
 
 	if (hasNeighbors(cell)) {
 		return cell;
@@ -98,13 +98,13 @@ function randomCellWithNeighbors(status) {
 	}
 }
 
-function hasNeighbors(cell) {
-	var {x, y} = cell;
+const hasNeighbors = cell => {
+	const {x, y} = cell;
 
-	var neighbors = [];
+	const neighbors = [];
 
-	for (var j = y - 1; j < y + 2; j++) {
-		for (var i = x - 1; i < x + 2; i++) {
+	for (let j = y - 1; j < y + 2; j++) {
+		for (let i = x - 1; i < x + 2; i++) {
 			if (! (i == x && j == y)) {
 				if (i >= 0 && i <= grid.width - 1) {
 					if (j >= 0 && j <= grid.height - 1) {
@@ -118,15 +118,10 @@ function hasNeighbors(cell) {
 	return neighbors.some(x => x);
 }
 
-function gridEmpty() {
-	return flatten(grid.data).every(x => ! x);
-}
+const gridEmpty = () => flatten(grid.data).every(x => ! x)
+const gridFull  = () => flatten(grid.data).every(x =>   x)
 
-function gridFull() {
-	return flatten(grid.data).every(x => x);
-}
-
-function keyPressed() {
+keyPressed = () => {
 	switch (keyCode) {
 		case 32:
 			grid.on = ! grid.on;
@@ -134,6 +129,10 @@ function keyPressed() {
 
 		case RIGHT_ARROW:
 			evolve();
+			break;
+
+		case DOWN_ARROW:
+			save();
 			break;
 	}
 }
