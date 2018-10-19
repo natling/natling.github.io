@@ -79,23 +79,13 @@ const randomCell = status => {
 	if (exists) {
 		const x = randomIntegerInclusive(0, grid.width  - 1);
 		const y = randomIntegerInclusive(0, grid.height - 1);
-
-		if (grid.data[y][x] == status) {
-			return {x, y};
-		} else {
-			return randomCell(status);
-		}
+		return grid.data[y][x] == status ? {x, y} : randomCell(status);
 	}
 }
 
 const randomCellWithNeighbors = status => {
 	const cell = randomCell(status);
-
-	if (hasNeighbors(cell)) {
-		return cell;
-	} else {
-		return randomCellWithNeighbors(status);
-	}
+	return hasNeighbors(cell) ? cell : randomCellWithNeighbors(status);
 }
 
 const hasNeighbors = cell => {
