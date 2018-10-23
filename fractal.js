@@ -23,11 +23,7 @@ setup = () => {
 
 draw = () => {
 	background(0);
-
-	if (grid.on) {
-		evolve();
-	}
-
+	if (grid.on) {evolve()}
 	fractal(grid.depth);
 }
 
