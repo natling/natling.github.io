@@ -39,27 +39,30 @@
   <a href="archives">archives</a>
   <a href="scripts">scripts</a>
   <a href="scribbles">scribbles</a>
+  <a href="https://writepoetry.online">write poetry</a>
 
-  <a href="http://smudge.ink">smudge.ink</a>
+  <a href="https://smudge.ink">smudge.ink</a>
   <a href="colors">colors</a>
   <a href="not-sure">not sure</a>
   <a href="clocks">clocks</a>
+  <a href="geometry">geometry</a>
 
   <a href="spectrograms">spectrograms</a>
   <a href="quilts">quilts</a>
   <a href="postcards">postcards</a>
   <a href="scrapbook">scrapbook</a>
+  <a href="https://undesi.red">undesired</a>
 </body>
 
 <script>
-  var rows    = 3;
-  var columns = 4;
+  const rows    = 3;
+  const columns = 5;
 
-  var links = document.getElementsByTagName('a');
+  const links = document.getElementsByTagName('a');
 
-  for (var i = 0; i < rows; i++) {
-    for (var j = 0; j < columns; j++) {
-      var link = links[j + i * columns];
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < columns; j++) {
+      const link = links[j + i * columns];
 
       link.style.width  = 100 / columns     + '%';
       link.style.height = 100 / rows        + '%';
