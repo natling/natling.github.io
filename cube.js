@@ -1,11 +1,11 @@
-var n = 16;
+const n = 16;
 
-function setup() {
+setup = () => {
 	createCanvas(windowWidth, windowHeight, WEBGL);
 }
 
-function draw() {
-	for (var i = 0; i < n; i++) {
+draw = () => {
+	for (let i = 0; i < n; i++) {
 		rotateX(frameCount * 0.001 * 0.5);
 		rotateY(frameCount * 0.002 * 0.5);
 		rotateZ(frameCount * 0.003 * 0.5);
@@ -14,6 +14,6 @@ function draw() {
 	}
 }
 
-function windowResized() {
+windowResized = () => {
 	resizeCanvas(windowWidth, windowHeight);
 }
