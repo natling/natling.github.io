@@ -23,8 +23,8 @@ class FloatingString {
 	}
 
 	newCoordinates() {
-		var x = randomFloat(0, 100 - this.width);
-		var y = randomFloat(0, 100 - this.height);
+		const x = randomFloat(0, 100 - this.width);
+		const y = randomFloat(0, 100 - this.height);
 
 		this.coordinates = {x, y};
 	}
@@ -34,7 +34,7 @@ class FloatingString {
 	}
 
 	newColor() {
-		var color = randomItem(['yellow', 'orange', 'red', 'magenta', 'violet', 'blue', 'cyan', 'green']);
+		const color = randomItem(['yellow', 'orange', 'red', 'magenta', 'violet', 'blue', 'cyan', 'green']);
 		this.div.style.color = settings.solarized[color];
 	}
 
@@ -46,11 +46,17 @@ class FloatingString {
 		this.coordinates.x += this.vector.x;
 		this.coordinates.y += this.vector.y;
 
-		if (! this.inBounds()) {
+		if (
+			this.coordinates.x < 0                 ||
+			this.coordinates.x > 100 - this.width  ||
+			this.coordinates.y < 0                 ||
+			this.coordinates.y > 100 - this.height
+		) {
 			this.coordinates.x = constrain(this.coordinates.x, 0, 100 - this.width);
 			this.coordinates.y = constrain(this.coordinates.y, 0, 100 - this.height);
 
-			this.bounce();
+			this.newColor();
+			this.newVector();
 		}
 
 		this.updatePosition();
@@ -58,27 +64,15 @@ class FloatingString {
 		setTimeout(this.move.bind(this), settings.frameDuration);
 	}
 
-	inBounds() {
-		var x = this.coordinates.x > 0 && this.coordinates.x < 100 - this.width;
-		var y = this.coordinates.y > 0 && this.coordinates.y < 100 - this.height;
-
-		return x && y;
-	}
-
-	bounce() {
-		this.newColor();
-		this.newVector();
-	}
-
 	updatePosition() {
-		var {x, y} = this.coordinates;
+		const {x, y} = this.coordinates;
 
 		this.div.style.left = x + '%';
 		this.div.style.top  = y + '%';
 	}
 }
 
-var settings = {
+const settings = {
 	width         : window.innerWidth,
 	height        : window.innerHeight,
 	frameDuration : 20,
@@ -128,24 +122,20 @@ var settings = {
 	],
 };
 
-initialize();
-
-function initialize() {
+const initialize = () => {
 	document.body.style.background = settings.solarized.base03;
 	settings.floatingStrings = settings.strings.map(string => new FloatingString(string));
 }
 
-function randomVector() {
-	var x = randomFloat(settings.speedMin, settings.speedMax) * randomSign();
-	var y = randomFloat(settings.speedMin, settings.speedMax) * randomSign();
+const randomVector = () => {
+	const x = randomFloat(settings.speedMin, settings.speedMax) * randomSign();
+	const y = randomFloat(settings.speedMin, settings.speedMax) * randomSign();
 
 	return {x, y};
 }
 
-function randomSign() {
-	return coin(0.5) ? -1 : 1;
-}
+const randomSign = () => coin(0.5) ? -1 : 1
 
-function constrain(value, min, max) {
-	return Math.min(max, Math.max(value, min));
-}
+const constrain = (value, min, max) => Math.min(max, Math.max(value, min))
+
+initialize();
