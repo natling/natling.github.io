@@ -26,7 +26,7 @@
 </body>
 
 <script>
-  var pages = [
+  const pages = [
     'plane',
     'cube',
     'cylinder',
@@ -35,27 +35,25 @@
     'torus',
   ];
 
-  var rows    = 2;
-  var columns = 3;
+  const rows    = 2;
+  const columns = 3;
 
-  for (var i = 0; i < rows; i++) {
-    for (var j = 0; j < columns; j++) {
-      var counter = j + i * columns;
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < columns; j++) {
+      const page = pages[j + i * columns];
 
-      var iframe = document.createElement('iframe');
+      const iframe = document.createElement('iframe');
       document.body.appendChild(iframe);
-
-      iframe.src = pages[counter] + '.html';
+      iframe.src = page + '.html';
 
       iframe.style.width  = 100 / columns     + '%';
       iframe.style.height = 100 / rows        + '%';
       iframe.style.left   = 100 / columns * j + '%';
       iframe.style.top    = 100 / rows    * i + '%';
 
-      var a = document.createElement('a');
+      const a = document.createElement('a');
       document.body.appendChild(a);
-
-      a.href = pages[counter];
+      a.href = page;
 
       a.style.width  = 100 / columns     + '%';
       a.style.height = 100 / rows        + '%';
