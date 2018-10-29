@@ -1,63 +1,45 @@
-var density = 0.7;
-var layers = 100;
-var scale;
-var characterArrays = [], rotations = [], colors = [];
+const settings = {
+	density :   0.7,
+	layers  : 100,
+	scale   :   9,
+};
 
-function setup() {
+setup = () => {
 	createCanvas(windowWidth, windowHeight);
-	noCursor();
 	background('#000000');
 
 	textFont('Menlo');
 	textAlign(CENTER, CENTER);
 	// fill('#00f72c');
 
-	scale = 9;
+	settings.characterArrays = Array.from({length: settings.layers}, (_, r) => {
+		return Array.from({length: r * 5}, () => coin(settings.density) ? String.fromCharCode(random(32, 127)) : ' ');
+	});
 
-	for (var r = 0; r < layers; r++) {
-		var n = r * 5;
+	settings.rotations = Array.from({length: settings.layers}, (_, r) => {
+		const speed     = int(random(1, 3));
+		const direction = coin(0.5);
 
-		var characterArray = [];
+		return {speed, direction};
+	});
 
-		for (var i = 0; i < n; i++) {
-			if (random() < density) {
-				characterArray.push(String.fromCharCode(random(32, 127)));
-			} else {
-				characterArray.push(' ');
-			}
-		}
-
-		characterArrays.push(characterArray);
-
-		var rotationSpeed = int(random(1, 2));
-		var rotationDirection;
-
-		if (random() < 0.5) {
-			rotationDirection = true;
-		} else {
-			rotationDirection = false;
-		}
-
-		rotations.push([rotationSpeed, rotationDirection]);
-
-		colors.push(color(random(255), random(255), random(255)));
-	}
+	settings.colors = Array.from({length: settings.layers}, (_, r) => color(random(255), random(255), random(255)));
 }
 
-function draw() {
+draw = () => {
 	background('#000000');
 
-	for (var r = 0; r < layers; r++) {
-		var n = r * 5;
+	for (let r = 0; r < settings.layers; r++) {
+		const n = r * 5;
 		
-		for (var i = 0; i < n; i++) {
-			var x = r * scale * cos(TAU / n * i);
-			var y = r * scale * sin(TAU / n * i);
+		for (let i = 0; i < n; i++) {
+			const x = r * settings.scale * cos(TAU / n * i);
+			const y = r * settings.scale * sin(TAU / n * i);
 
-			fill(colors[r]);
-			text(characterArrays[r][i], width / 2 + x, height / 2 + y);
+			fill(settings.colors[r]);
+			text(settings.characterArrays[r][i], width / 2 + x, height / 2 + y);
 		}
 
-		characterArrays[r] = rotateArray(characterArrays[r], rotations[r][0], rotations[r][1]);
+		settings.characterArrays[r] = rotateArray(settings.characterArrays[r], settings.rotations[r].speed, settings.rotations[r].direction);
 	}
 }

@@ -1,40 +1,41 @@
-var speed = 10;
+const settings = {
+	speed : 10,
+};
 
-var columns, rows, columnWidth, rowHeight, characterArray = [];
-
-function setup() {
+setup = () => {
 	createCanvas(windowWidth, windowHeight);
-	noCursor();
 	background('#000000');
 
 	textFont('Menlo');
 	textAlign(LEFT, TOP);
 	fill('#00f72c');
 
-	columnWidth = Math.round(textWidth(' '));
-	rowHeight = 11;
+	settings.columnWidth = Math.round(textWidth(' '));
+	settings.rowHeight   = 11;
 
-	columns = Math.floor(width / columnWidth);
-	rows = Math.floor(height / rowHeight);
+	settings.columns = Math.ceil(width  / settings.columnWidth);
+	settings.rows    = Math.ceil(height / settings.rowHeight);
 
-	currentCharacter = String.fromCharCode(random(32, 127));
+	let currentCharacter = String.fromCharCode(randomIntegerInclusive(32, 127));
 
-	for (var i = 0; i < columns * rows; i++) {
-		characterArray.push(currentCharacter);
-		if (random() < 0.1) {
-			currentCharacter = String.fromCharCode(random(32, 127));
+	settings.characters = [];
+
+	for (let i = 0; i < settings.columns * settings.rows; i++) {
+		settings.characters.push(currentCharacter);
+		if (coin(0.1)) {
+			currentCharacter = String.fromCharCode(randomIntegerInclusive(32, 127));
 		}
 	}
 }
 
-function draw() {
+draw = () => {
 	background('#000000');
 
-	for (var j = 0; j < rows; j++) {
-		for (var i = 0; i < columns; i++) {
-			text(characterArray[i * j + i], i * columnWidth, j * rowHeight);
+	for (let j = 0; j < settings.rows; j++) {
+		for (let i = 0; i < settings.columns; i++) {
+			text(settings.characters[i * j + i], i * settings.columnWidth, j * settings.rowHeight);
 		}
 	}
 
-	characterArray = rotateArray(characterArray, speed);
+	settings.characters = rotateArray(settings.characters, settings.speed);
 }

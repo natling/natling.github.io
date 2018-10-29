@@ -1,30 +1,24 @@
-var t = 0;
+const settings = {
+	scale : {
+		x : randomFloat(0.005, 0.03),
+		y : randomFloat(0.005, 0.03),
+		t : 0.005,
+	},
 
-var xScale  = randomFloat(0.005, 0.03);
-var yScale  = randomFloat(0.005, 0.03);
-var tScale  = 0.005;
-var variety = randomIntegerInclusive(3, 10);
+	variety : randomIntegerInclusive(3, 10),
 
-var threshold            = 0.4;
-var characterChangeSpeed = 0.1;
+	threshold            : 0.4,
+	characterChangeSpeed : 0.1,
+};
 
-console.log(xScale, yScale, tScale, variety);
+console.log(settings.scale.x, settings.scale.y, settings.scale.t, settings.variety);
 
-var characters = [];
+settings.characters = Array.from({length: 127 - 33}, (_, i) => String.fromCharCode(33 + i));
 
-for (var i = 33; i < 127; i++) {
-	characters.push(String.fromCharCode(i));
-}
+settings.currentCharacters = Array.from({length: settings.variety}, () => randomItem(settings.characters));
 
-var currentCharacters = [];
-
-for (var i = 0; i < variety; i++) {
-	currentCharacters.push(randomItem(characters));
-}
-
-function setup() {
+setup = () => {
 	createCanvas(windowWidth, windowHeight);
-	noCursor();
 	background('#000000');
 
 	textFont('Menlo');
@@ -32,30 +26,28 @@ function setup() {
 	textSize(16);
 	fill('#00f72c');
 
-	columnWidth = Math.round(textWidth(' '));
-	rowHeight = 15;
+	settings.columnWidth = Math.round(textWidth(' '));
+	settings.rowHeight   = 15;
 
-	columns = Math.floor(width / columnWidth);
-	rows = Math.floor(height / rowHeight);
+	settings.columns = Math.ceil(width  / settings.columnWidth);
+	settings.rows    = Math.ceil(height / settings.rowHeight);
 }
 
-function draw() {
+draw = () => {
 	background('#000000');
 
-	for (var y = 0; y < rows; y++) {
-		for (var x = 0; x < columns; x++) {
-			var noiseRaw = noise(x * xScale, y * yScale, t * tScale);
-			if (noiseRaw < threshold) {
-				text(randomItem(currentCharacters), x * columnWidth, y * rowHeight);
+	for (let y = 0; y < settings.rows; y++) {
+		for (let x = 0; x < settings.columns; x++) {
+			const noiseRaw = noise(x * settings.scale.x, y * settings.scale.y, frameCount * settings.scale.t);
+			if (noiseRaw < settings.threshold) {
+				text(randomItem(settings.currentCharacters), x * settings.columnWidth, y * settings.rowHeight);
 			}
 		}
 	}
 
-	if (coin(characterChangeSpeed)) {
-		shuffleArray(currentCharacters);
-		currentCharacters.pop();
-		currentCharacters.push(randomItem(characters));
+	if (coin(settings.characterChangeSpeed)) {
+		shuffleArray(settings.currentCharacters);
+		settings.currentCharacters.pop();
+		settings.currentCharacters.push(randomItem(settings.characters));
 	}
-
-	t++;
 }

@@ -1,27 +1,21 @@
-var t = 0;
+const settings = {
+	scale : {
+		x : randomFloat(0.005, 0.03),
+		y : randomFloat(0.005, 0.03),
+		t : randomFloat(0.005, 0.03),
+	},
 
-var xScale  = randomFloat(0.005, 0.03);
-var yScale  = randomFloat(0.005, 0.03);
-var tScale  = randomFloat(0.005, 0.03);
-var density = randomFloat(0.1, 1.0);
+	density : randomFloat(0.1, 1.0),
+};
 
-console.log(xScale, yScale, tScale, density);
+console.log(settings.scale.x, settings.scale.y, settings.scale.t, settings.density);
 
-var characters = [];
+settings.characters = Array.from({length: 128 - 32}, (_, i) => coin(settings.density) ? String.fromCharCode(32 + i) : ' ');
 
-for (var i = 32; i < 128; i++) {
-	if (coin(density)) {
-		characters.push(String.fromCharCode(i));
-	} else {
-		characters.push(' ');
-	}
-}
+shuffleArray(settings.characters);
 
-shuffleArray(characters);
-
-function setup() {
+setup = () => {
 	createCanvas(windowWidth, windowHeight);
-	noCursor();
 	background('#000000');
 
 	textFont('Menlo');
@@ -29,23 +23,21 @@ function setup() {
 	textSize(16);
 	fill('#00f72c');
 
-	columnWidth = Math.round(textWidth(' '));
-	rowHeight = 15;
+	settings.columnWidth = Math.round(textWidth(' '));
+	settings.rowHeight   = 15;
 
-	columns = Math.floor(width / columnWidth);
-	rows = Math.floor(height / rowHeight);
+	settings.columns = Math.ceil(width  / settings.columnWidth);
+	settings.rows    = Math.ceil(height / settings.rowHeight);
 }
 
-function draw() {
+draw = () => {
 	background('#000000');
 
-	for (var y = 0; y < rows; y++) {
-		for (var x = 0; x < columns; x++) {
-			var noiseRaw = noise(x * xScale, y * yScale, t * tScale);
-			var noiseMapped = int(map(noiseRaw, 0, 1, 0, characters.length));
-			text(characters[noiseMapped], x * columnWidth, y * rowHeight);
+	for (let y = 0; y < settings.rows; y++) {
+		for (let x = 0; x < settings.columns; x++) {
+			const noiseRaw = noise(x * settings.scale.x, y * settings.scale.y, frameCount * settings.scale.t);
+			const noiseMapped = int(map(noiseRaw, 0, 1, 0, settings.characters.length));
+			text(settings.characters[noiseMapped], x * settings.columnWidth, y * settings.rowHeight);
 		}
 	}
-
-	t++;
 }

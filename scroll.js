@@ -1,31 +1,17 @@
 class Line {
 
-	constructor(length, density, direction, speed, col) {
+	constructor(length, density, direction, speed, color) {
 		this.length         = length;
 		this.density        = density;
 		this.direction      = direction;
 		this.speed          = speed;
-		this.col            = col;
-		this.characterArray = Array.from({length: length}, v => {
-			if (random() < density) {
-				return randomCharacter();
-			} else {
-				return ' ';
-			}
-		});
+		this.color          = color;
+		this.characterArray = Array.from({length: length}, v => coin(density) ? randomCharacter() : ' ');
 	}
 
-	createPaddedString() {
-		var string = this.characterArray.join('');
-		var paddedString;
-
-		if (this.direction) {
-			paddedString = string.padStart(columns);
-		} else {
-			paddedString = string.padEnd(columns);
-		}
-
-		return paddedString;
+	paddedString() {
+		const string = this.characterArray.join('');
+		return this.direction ? string.padStart(settings.columns) : string.padEnd(settings.columns);
 	}
 
 	move() {
@@ -33,14 +19,15 @@ class Line {
 	}
 }
 
-var lines = [];
+const settings = {
+	speed : {
+		min : 1,
+		max : 5,
+	},
+};
 
-var speedMinimum = 1;
-var speedMaximum = 5;
-
-function setup() {
+setup = () => {
 	createCanvas(windowWidth, windowHeight);
-	noCursor();
 	frameRate(30);
 	background('#000000');
 
@@ -49,40 +36,36 @@ function setup() {
 	textAlign(LEFT, TOP);
 	// fill('#00f72c');
 
-	columnWidth = Math.round(textWidth(' '));
-	rowHeight = 11;
+	settings.columnWidth = Math.round(textWidth(' '));
+	settings.rowHeight   = 11;
 
-	columns = Math.floor(width / columnWidth);
-	rows = Math.floor(height / rowHeight);
+	settings.columns = Math.ceil(width  / settings.columnWidth);
+	settings.rows    = Math.ceil(height / settings.rowHeight);
 
-	for (var i = 0; i < rows; i++) {
-		lines.push(createLine());
-	}
+	settings.lines = Array.from({length: settings.rows}, () => createLine());
 }
 
-function draw() {
+draw = () => {
 	background('#000000');
 
-	for (var i = 0; i < rows; i++) {
-		fill(lines[i].col);
-		text(lines[i].createPaddedString(), 0, i * rowHeight);
-		lines[i].move();
+	for (let i = 0; i < settings.rows; i++) {
+		fill(settings.lines[i].color);
+		text(settings.lines[i].paddedString(), 0, i * settings.rowHeight);
+		settings.lines[i].move();
 	}
 
-	lines.shift();
-	lines.push(createLine());
+	settings.lines.shift();
+	settings.lines.push(createLine());
 }
 
-function createLine() {
-	var length    = randomIntegerInclusive(1, columns);
-	var density   = random();
-	var direction = random() < 0.5;
-	var speed     = randomIntegerInclusive(speedMinimum, speedMaximum);
-	var col       = color(random(255), random(255), random(255));
+const createLine = () => {
+	const length    = randomIntegerInclusive(1, settings.columns);
+	const density   = random();
+	const direction = coin(0.5);
+	const speed     = randomIntegerInclusive(settings.speed.min, settings.speed.max);
+	const col       = color(random(255), random(255), random(255));
 
 	return new Line(length, density, direction, speed, col);
 }
 
-function randomCharacter() {
-	return String.fromCharCode(randomIntegerInclusive(32, 127));
-}
+const randomCharacter = () => String.fromCharCode(randomIntegerInclusive(32, 127))

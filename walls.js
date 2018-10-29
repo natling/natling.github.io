@@ -16,8 +16,8 @@ class Stream {
 			}
 		} else {
 			this.column += this.speed;
-			if (this.column > columns - 1) {
-				this.column = columns - 1;
+			if (this.column > settings.columns - 1) {
+				this.column = settings.columns - 1;
 				this.bounce();
 			}
 		}
@@ -25,7 +25,7 @@ class Stream {
 
 	bounce() {
 		this.direction = ! this.direction;
-		this.speed = int(random(1, maximumSpeed));
+		this.speed = int(random(1, settings.maximumSpeed));
 		this.changeCharacter();
 	}
 
@@ -34,14 +34,13 @@ class Stream {
 	}
 }
 
-numberOfStreams = 10;
-maximumSpeed = 5;
+const settings = {
+	numberOfStreams : 10,
+	maximumSpeed    :  5,
+};
 
-streamsArray = [], lineArray = [];
-
-function setup() {
+setup = () => {
 	createCanvas(windowWidth, windowHeight);
-	noCursor();
 	frameRate(30);
 	background('#000000');
 
@@ -50,52 +49,42 @@ function setup() {
 	textAlign(LEFT, TOP);
 	fill('#00f72c');
 
-	columnWidth = Math.round(textWidth(' '));
-	rowHeight = 11;
+	settings.columnWidth = Math.round(textWidth(' '));
+	settings.rowHeight   = 11;
 
-	columns = Math.floor(width / columnWidth);
-	rows = Math.floor(height / rowHeight);
+	settings.columns = Math.ceil(width  / settings.columnWidth);
+	settings.rows    = Math.ceil(height / settings.rowHeight);
 
-	for (var i = 0; i < rows; i++) {
-		lineArray.push(emptyLine(columns));
-	}
+	settings.lines = Array.from({length: settings.rows}, () => emptyLine(settings.columns));
 
-	for (var i = 0; i < numberOfStreams; i++) {
-		var column    = int(random(0, columns - 1));
-		var direction = random() < 0.5;
-		var speed     = int(random(1, maximumSpeed));
-		var character = randomCharacter();
+	settings.streams = Array.from({length: settings.numberOfStreams}, () => {
+		const column    = int(random(0, settings.columns - 1));
+		const direction = coin(0.5);
+		const speed     = int(random(1, settings.maximumSpeed));
+		const character = randomCharacter();
 
-		newStream = new Stream(column, direction, speed, character);
-
-		streamsArray.push(newStream);
-	}
+		return new Stream(column, direction, speed, character);
+	});
 }
 
-function draw() {
+draw = () => {
 	background('#000000');
 
-	for (var i = 0; i < rows; i++) {
-		text(lineArray[i].join(''), 0, i * rowHeight);
+	for (let i = 0; i < settings.rows; i++) {
+		text(settings.lines[i].join(''), 0, i * settings.rowHeight);
 	}
 
-	var newLine = emptyLine(columns);
+	const newLine = emptyLine(settings.columns);
 
-	for (var i = 0; i < numberOfStreams; i++) {
-		newLine[streamsArray[i].column] = streamsArray[i].character;
-		streamsArray[i].move();
+	for (let i = 0; i < settings.numberOfStreams; i++) {
+		newLine[settings.streams[i].column] = settings.streams[i].character;
+		settings.streams[i].move();
 	}
 
-	lineArray.shift();
-	lineArray.push(newLine);
+	settings.lines.shift();
+	settings.lines.push(newLine);
 }
 
-function emptyLine(width) {
-	var line = new Array(width);
-	line.fill(' ');
-	return line;
-}
+const emptyLine = width => Array.from({length: width}, () => ' ')
 
-function randomCharacter() {
-	return String.fromCharCode(random(32, 127))
-}
+const randomCharacter = () => String.fromCharCode(random(32, 127))

@@ -1,61 +1,38 @@
 class Snake {
 
-	constructor(column, row, speedX, speedY, character) {
-		this.column    = column;
-		this.row       = row;
-		this.speedX    = speedX;
-		this.speedY    = speedY;
-		this.character = character;
+	constructor(coordinates, vector, character) {
+		this.coordinates = coordinates;
+		this.vector      = vector;
+		this.character   = character;
 	}
 
 	display() {
-		text(this.character, this.column * columnWidth, this.row * rowHeight);
+		text(this.character, this.coordinates.x * settings.columnWidth, this.coordinates.y * settings.rowHeight);
 	}
 
 	move() {
-		this.column += this.speedX;
-		this.row    += this.speedY;
+		this.coordinates.x += this.vector.x;
+		this.coordinates.y += this.vector.y;
 
-		if (this.column < 0) {
-			this.column = 0;
-			this.bounce();
+		if (
+			this.coordinates.x < 0                    ||
+			this.coordinates.x > settings.columns - 1 ||
+			this.coordinates.y < 0                    ||
+			this.coordinates.y > settings.rows    - 1
+		) {
+			this.vector    = randomVector();
+			this.character = randomCharacter();
 		}
-
-		if (this.column > columns - 1) {
-			this.column = columns - 1;
-			this.bounce();
-		}
-
-		if (this.row < 0) {
-			this.row = 0;
-			this.bounce();
-		}
-
-		if (this.row > rows - 1) {
-			this.row = rows - 1;
-			this.bounce();
-		}
-	}
-
-	bounce() {
-		this.speedX = randomSpeed();
-		this.speedY = randomSpeed();
-		this.changeCharacter();
-	}
-
-	changeCharacter() {
-		this.character = randomCharacter();
 	}
 }
 
-var numberOfSnakes = 20;
-var maximumSpeed = 3;
+const settings = {
+	numberOfSnakes : 20,
+	maximumSpeed   :  3,
+};
 
-var snakes = [];
-
-function setup() {
+setup = () => {
 	createCanvas(windowWidth, windowHeight);
-	noCursor();
 	frameRate(30);
 	background('#000000');
 
@@ -64,40 +41,39 @@ function setup() {
 	textSize(12);
 	fill('#00f72c');
 
-	columnWidth = Math.round(textWidth(' '));
-	rowHeight = 11;
+	settings.columnWidth = Math.round(textWidth(' '));
+	settings.rowHeight   = 11;
 
-	columns = Math.floor(width / columnWidth);
-	rows = Math.floor(height / rowHeight);
+	settings.columns = Math.ceil(width  / settings.columnWidth);
+	settings.rows    = Math.ceil(height / settings.rowHeight);
 
-	for (var i = 0; i < numberOfSnakes; i++) {
-		var column    = randomIntegerInclusive(0, columns - 1);
-		var row       = randomIntegerInclusive(0, rows - 1);
-		var speedX    = randomSpeed();
-		var speedY    = randomSpeed();
-		var character = randomCharacter();
+	settings.snakes = Array.from({length: settings.numberOfSnakes}, () => {
+		const coordinates = randomCoordinates();
+		const vector      = randomVector();
+		const character   = randomCharacter();
 
-		snakes.push(new Snake(column, row, speedX, speedY, character));
-	}
+		return new Snake(coordinates, vector, character);
+	});
 }
 
-function draw() {
+draw = () => {
 	background(0, 20);
 
-	for (var i = 0; i < snakes.length; i++) {
-		snakes[i].display();
-		snakes[i].move();
-	}
+	settings.snakes.forEach(snake => {
+		snake.display();
+		snake.move();
+	});
 }
 
-function randomCharacter() {
-	return String.fromCharCode(random(32, 127))
+const randomCharacter = () => String.fromCharCode(randomIntegerInclusive(32, 127))
+
+const randomCoordinates = () => {
+	const x = randomIntegerInclusive(0, settings.columns - 1);
+	const y = randomIntegerInclusive(0, settings.rows    - 1);
+	return {x, y};
 }
 
-function randomSpeed() {
-	if (coin(0.5)) {
-		return randomIntegerInclusive(-1, -maximumSpeed);
-	} else {
-		return randomIntegerInclusive(1, maximumSpeed);
-	}
+const randomVector = () => {
+	const [x, y] = Array.from({length: 2}, () => randomIntegerInclusive(1, settings.maximumSpeed) * (coin(0.5) ? -1 : 1));
+	return {x, y};
 }

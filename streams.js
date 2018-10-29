@@ -1,11 +1,9 @@
-numberOfStreams = 50;
-probabilityOfMoving = 0.9;
+const settings = {
+	numberOfStreams : 50,
+};
 
-lineArray = [], locationsOfStreams = [];
-
-function setup() {
+setup = () => {
 	createCanvas(windowWidth, windowHeight);
-	noCursor();
 	background('#000000');
 
 	textFont('Menlo');
@@ -13,55 +11,46 @@ function setup() {
 	textAlign(LEFT, TOP);
 	fill('#00f72c');
 
-	columnWidth = Math.round(textWidth(' '));
-	rowHeight = 30;
+	settings.columnWidth = Math.round(textWidth(' '));
+	settings.rowHeight   = 30;
 
-	columns = Math.floor(width / columnWidth);
-	rows = Math.floor(height / rowHeight);
+	settings.columns = Math.ceil(width  / settings.columnWidth);
+	settings.rows    = Math.ceil(height / settings.rowHeight);
 
-	var emptyLine = new Array(columns);
-	emptyLine.fill(' ');
-
-	for (var i = 0; i < rows; i++) {
-		lineArray.push(emptyLine);
-	}
-
-	for (var i = 0; i < numberOfStreams; i++) {
-		locationsOfStreams[i] = int(random(columns));
-	}
+	settings.lines              = Array.from({length: settings.rows}, () => emptyLine());
+	settings.locationsOfStreams = Array.from({length: settings.numberOfStreams}, () => int(random(settings.columns)));
 }
 
-function draw() {
+draw = () => {
 	background('#000000');
 
-	for (var i = 0; i < rows; i++) {
-		text(lineArray[i].join(''), 0, i * rowHeight);
+	for (let i = 0; i < settings.rows; i++) {
+		text(settings.lines[i].join(''), 0, i * settings.rowHeight);
 	}
 
-	var newLine = new Array(columns);
-	newLine.fill(' ');
+	const newLine = emptyLine();
 
-	for (var i = 0; i < numberOfStreams; i++) {
-		newLine[locationsOfStreams[i]] = String.fromCharCode(random(32, 127));
-		locationsOfStreams[i] = walk(locationsOfStreams[i], 0.9, 0, columns - 1);
+	for (let i = 0; i < settings.numberOfStreams; i++) {
+		newLine[settings.locationsOfStreams[i]] = String.fromCharCode(random(32, 127));
+		settings.locationsOfStreams[i] = walk(settings.locationsOfStreams[i], 0.9, 0, settings.columns - 1);
 	}
 
-	lineArray.shift();
-	lineArray.push(newLine);
+	settings.lines.shift();
+	settings.lines.push(newLine);
 }
 
-function walk(start, p, low, high) {
+const walk = (start, p, low, high) => {
 	while (true) {
-		newStart = start;
-		if (random() < p) {
-			if (random() < 0.5) {
-				newStart++;
-			} else {
-				newStart--;
-			}
+		let newStart = start;
+
+		if (coin(p)) {
+			newStart += coin(0.5) ? 1 : -1;
 		}
+
 		if (newStart >= low && newStart <= high) {
 			return newStart;
 		}
 	}
 }
+
+const emptyLine = () => Array.from({length: settings.columns}, () => ' ')

@@ -1,92 +1,85 @@
-var charWidth,
-	gridWidth,
-	gridHeight,
+const settings = {
+	colors : 3,
 
-	colors = 3,
+	colorSpeed  : 10,
+	centerSpeed :  4,
+};
 
-	colorSpeed = 10,
-	centerSpeed = 4,
+settings.rgb     = create2DArray(3, settings.colors);
+settings.centers = create2DArray(settings.colors, 2);
 
-	columns,
-	rows,
-
-	rgb = create2DArray(3, colors),
-	centers = create2DArray(colors, 2);
-
-function setup() {
+setup = () => {
 	createCanvas(windowWidth, windowHeight);
 	background(0);
-	noCursor();
 	frameRate(10);
 
 	textFont('Menlo');
 	textAlign(LEFT, TOP);
 	textSize(20);
 
-	charWidth = textWidth(' ');
+	settings.charWidth = textWidth(' ');
 
-	gridWidth = charWidth * 1.3;
-	gridHeight = charWidth * 1.7;
+	settings.gridWidth  = settings.charWidth * 1.3;
+	settings.gridHeight = settings.charWidth * 1.7;
 
-	columns = int(width / gridWidth);
-	rows = int(height / gridHeight);
+	settings.columns = int(width  / settings.gridWidth);
+	settings.rows    = int(height / settings.gridHeight);
 
-	for (var i = 0; i < colors; i++) {
-		for (var j = 0; j < 3; j++) {
-			rgb[j][i] = int(random(256));
+	for (let i = 0; i < settings.colors; i++) {
+		for (let j = 0; j < 3; j++) {
+			settings.rgb[j][i] = int(random(256));
 		}
 	}
 
-	for (var i = 0; i < colors; i++) {
-		centers[i][0] = int(random(columns));
-		centers[i][1] = int(random(rows));
+	for (let i = 0; i < settings.colors; i++) {
+		settings.centers[i][0] = int(random(settings.columns));
+		settings.centers[i][1] = int(random(settings.rows));
 	};
 }
 
-function draw() {
+draw = () => {
 	background(0);
 
-	for (var i = 0; i < columns; i++) {
-		for (var j = 0; j < rows; j++) {
+	for (let i = 0; i < settings.columns; i++) {
+		for (let j = 0; j < settings.rows; j++) {
 
-			if (random(1) < 0.5) {
+			if (coin(0.5)) {
+				const weights = new Array(settings.colors);
 
-				var weights = new Array(colors);
-
-				for (var m = 0; m < colors; m++) {
-					var distance = sqrt(sq(i - centers[m][0]) + sq(j - centers[m][1]));
+				for (let m = 0; m < settings.colors; m++) {
+					const distance = sqrt(sq(i - settings.centers[m][0]) + sq(j - settings.centers[m][1]));
 					//weights[m] = 1 / (distance + 1);
 					weights[m] = 1 / sq(distance + 1);
 				};
 
 				fill(
-					weightedAverage(rgb[0], weights),
-					weightedAverage(rgb[1], weights),
-					weightedAverage(rgb[2], weights),
+					weightedAverage(settings.rgb[0], weights),
+					weightedAverage(settings.rgb[1], weights),
+					weightedAverage(settings.rgb[2], weights),
 					random(256)
 				);
 
-				randomCharacter = String.fromCharCode(random(32, 127));
-				text(randomCharacter, i * gridWidth, j * gridHeight);
+				const randomCharacter = String.fromCharCode(random(32, 127));
+				text(randomCharacter, i * settings.gridWidth, j * settings.gridHeight);
 			}
 		}
 	}
 
-	for (var i = 0; i < colors; i++) {
-		for (var j = 0; j < 3; j++) {
-			rgb[j][i] = randomWalk(rgb[j][i], 0, 255, colorSpeed);
+	for (let i = 0; i < settings.colors; i++) {
+		for (let j = 0; j < 3; j++) {
+			settings.rgb[j][i] = randomWalk(settings.rgb[j][i], 0, 255, settings.colorSpeed);
 		}
 	}
 
-	for (var i = 0; i < colors; i++) {
-		centers[i][0] = randomWalk(centers[i][0], 0, columns, centerSpeed);
-		centers[i][1] = randomWalk(centers[i][1], 0, rows, centerSpeed);
+	for (let i = 0; i < settings.colors; i++) {
+		settings.centers[i][0] = randomWalk(settings.centers[i][0], 0, settings.columns, settings.centerSpeed);
+		settings.centers[i][1] = randomWalk(settings.centers[i][1], 0, settings.rows, settings.centerSpeed);
 	}
 }
 
-function randomWalk(start, low, high, step) {
+const randomWalk = (start, low, high, step) => {
 	while (true) {
-		var newStart = start + int(random(-(step + 1), step + 1));
+		const newStart = start + int(random(-(step + 1), step + 1));
 		if (newStart >= low && newStart <= high) {
 			return newStart;
 		}

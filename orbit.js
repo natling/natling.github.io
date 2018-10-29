@@ -1,66 +1,61 @@
-var speed = 10;
-var consistency, density, xCoefficient, yCoefficient, direction;
-var columns, rows, columnWidth, rowHeight, characterArray = [];
+const settings = {
+	speed : 10,
 
-function setup() {
+	characterArray : [],
+};
+
+setup = () => {
 	createCanvas(windowWidth, windowHeight);
-	noCursor();
 	background('#000000');
 
 	textFont('Menlo');
 	textAlign(LEFT, TOP);
 	fill('#00f72c');
 
-	columnWidth = Math.round(textWidth(' '));
-	rowHeight = 11;
+	settings.columnWidth = Math.round(textWidth(' '));
+	settings.rowHeight   = 11;
 
-	columns = Math.floor(width / columnWidth);
-	rows = Math.floor(height / rowHeight);
+	settings.columns = Math.ceil(width  / settings.columnWidth);
+	settings.rows    = Math.ceil(height / settings.rowHeight);
 
-	// consistency  = 0.07;
-	// density      = 0.6;
-	// xCoefficient = 1.5;
-	// yCoefficient = 1.5;
-	// direction    = false;
+	// settings.consistency  = 0.07;
+	// settings.density      = 0.6;
+	// settings.xCoefficient = 1.5;
+	// settings.yCoefficient = 1.5;
+	// settings.direction    = false;
 
-	consistency  = random(0.01, 0.1);
-	density      = random(0.1, 1.0);
-	xCoefficient = random(1.0, 1.7);
-	yCoefficient = random(1.0, 1.7);
-	direction    = random() < 0.5;
+	settings.consistency  = random(0.01, 0.1);
+	settings.density      = random(0.1, 1.0);
+	settings.xCoefficient = random(1.0, 1.7);
+	settings.yCoefficient = random(1.0, 1.7);
+	settings.direction    = coin(0.5);
 
-	console.log('consistency ' + consistency);
-	console.log('density ' + density);
-	console.log('xCoefficient ' + xCoefficient);
-	console.log('yCoefficient ' + yCoefficient);
-	console.log('direction ' + direction);
+	console.log('consistency '  + settings.consistency);
+	console.log('density '      + settings.density);
+	console.log('xCoefficient ' + settings.xCoefficient);
+	console.log('yCoefficient ' + settings.yCoefficient);
+	console.log('direction '    + settings.direction);
 
-	currentCharacter = randomCharacter(density);
+	let currentCharacter = randomCharacter(settings.density);
 
-	for (var i = 0; i < columns * rows; i++) {
-		characterArray.push(currentCharacter);
-		if (random() < consistency) {
-			currentCharacter = randomCharacter(density);
+	for (let i = 0; i < settings.columns * settings.rows; i++) {
+		settings.characterArray.push(currentCharacter);
+		if (coin(settings.consistency)) {
+			currentCharacter = randomCharacter(settings.density);
 		}
 	}
 }
 
-function draw() {
+draw = () => {
 	background('#000000');
 
-	for (var j = 0; j < rows; j++) {
-		for (var i = 0; i < columns; i++) {
-			text(characterArray[Math.round(i ** xCoefficient + j ** yCoefficient) % characterArray.length], i * columnWidth, j * rowHeight);
+	for (let j = 0; j < settings.rows; j++) {
+		for (let i = 0; i < settings.columns; i++) {
+			text(settings.characterArray[Math.round(i ** settings.xCoefficient + j ** settings.yCoefficient) % settings.characterArray.length], i * settings.columnWidth, j * settings.rowHeight);
 		}
 	}
 
-	characterArray = rotateArray(characterArray, speed, direction);
+	settings.characterArray = rotateArray(settings.characterArray, settings.speed, settings.direction);
 }
 
-function randomCharacter(p) {
-	if (random() < p) {
-		return String.fromCharCode(random(32, 127));
-	} else {
-		return ' ';
-	}
-}
+const randomCharacter = p => coin(p) ? String.fromCharCode(random(32, 127)) : ' '

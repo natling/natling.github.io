@@ -1,121 +1,76 @@
-var aLow  = 0.01,
-	aHigh = 10,
-	bLow  = 0.0004,
-	bHigh = 0.001,
+const settings = {
+	n : 30000,
 
-	resolution = 128,
+	e : 2.71828,
 
-	aStep = (aHigh - aLow) / resolution,
-	bStep = (bHigh - bLow) / resolution,
+	resolution : 128,
 
-	aUp = true,
-	bUp = true;
+	a : {
+		min :  0.01,
+		max : 10,
 
-var a, b;
+		direction : true,
+	},
 
-var n = 30000;
+	b : {
+		min : 0.0004,
+		max : 0.001,
 
-var e = 2.71828;
+		direction : true,
+	},
+};
 
-var density = 1.0;
-// var characterArray = [];
-// var colorArray = [];
-
-function setup() {
+setup = () => {
 	createCanvas(windowWidth, windowHeight);
-	noCursor();
 	background('#000000');
 	frameRate(10);
 
 	textFont('Menlo');
 	textAlign(CENTER, CENTER);
-	// fill('#00f72c');
 
-	a = map(0.5, 0, 1, aLow, aHigh);
-	b = map(0.5, 0, 1, bLow, bHigh);
+	settings.a.step = (settings.a.max - settings.a.min) / settings.resolution;
+	settings.b.step = (settings.b.max - settings.b.min) / settings.resolution;
 
-	// a = aLow;
-	// b = bLow;
-
-	// for (var i = 0; i < n; i++) {
-	// 	if (random() < density) {
-	// 		characterArray.push(String.fromCharCode(random(32, 127)));
-	// 	} else {
-	// 		characterArray.push(' ');
-	// 	}
-	// }
+	settings.a.value = map(0.5, 0, 1, settings.a.min, settings.a.max);
+	settings.b.value = map(0.5, 0, 1, settings.b.min, settings.b.max);
 }
 
-function draw() {
+draw = () => {
 	background('#000000');
 
-	for (var i = 0; i < n; i += 3) {
-		var x = a * e ** (b * i) * cos(i);
-		var y = a * e ** (b * i) * sin(i);
+	for (let i = 0; i < settings.n; i += 3) {
+		const x = settings.a.value * settings.e ** (settings.b.value * i) * cos(i);
+		const y = settings.a.value * settings.e ** (settings.b.value * i) * sin(i);
 
 		fill(color(random(255), random(255), random(255)));
-
-		// text(characterArray[i], width / 2 + x, height / 2 + y);
 		text(String.fromCharCode(random(32, 127)), width / 2 + x, height / 2 + y);
-		// text('o', width / 2 + x, height / 2 + y);
 	}
 
-	// characterArray = rotateArray(characterArray, 1, true);
-
-	// a = walk(a, aLow, aHigh, aStep, aUp);
-	// b = walk(b, bLow, bHigh, bStep, bUp);
-
-	if (aUp) {
-		if (a < aHigh) {
-			a += aStep;
+	if (settings.a.direction) {
+		if (settings.a.value < settings.a.max) {
+			settings.a.value += settings.a.step;
 		} else {
-			aUp = ! aUp;
+			settings.a.direction = ! settings.a.direction;
 		}
 	} else {
-		if (a > aLow) {
-			a -= aStep;
+		if (settings.a.value > settings.a.min) {
+			settings.a.value -= settings.a.step;
 		} else {
-			aUp = ! aUp;
+			settings.a.direction = ! settings.a.direction;
 		}
 	}
 
-	if (bUp) {
-		if (b < bHigh) {
-			b += bStep;
+	if (settings.b.direction) {
+		if (settings.b.value < settings.b.max) {
+			settings.b.value += settings.b.step;
 		} else {
-			bUp = ! bUp;
+			settings.b.direction = ! settings.b.direction;
 		}
 	} else {
-		if (b > aLow) {
-			b -= bStep;
+		if (settings.b.value > settings.a.min) {
+			settings.b.value -= settings.b.step;
 		} else {
-			bUp = ! bUp;
+			settings.b.direction = ! settings.b.direction;
 		}
 	}
 }
-
-// function randomWalk(start, low, high, step) {
-// 	while (true) {
-// 		var newStart = start + int(random(-(step + 1), (step + 1)));
-// 		if (newStart >= low && newStart <= high) {
-// 			return newStart;
-// 		}
-// 	}
-// }
-
-// function walk(currentValue, low, high, step, direction) {
-// 	if (direction) {
-// 		if (currentValue < high) {
-// 			newValue = currentValue + step;
-// 		} else {
-// 			direction = ! direction;
-// 		}
-// 	} else {
-// 		if (currentValue > low) {
-// 			newValue = currentValue - step;
-// 		} else {
-// 			direction = ! direction;
-// 		}
-// 	}
-// 	return newValue;
-// }

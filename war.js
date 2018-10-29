@@ -1,82 +1,64 @@
-var uniqueCharacters = 10,
-	speedMax         = 3,
-	speedMin         = 7;
+const settings = {
+	uniqueCharacters : 10,
 
-var columns, rows, columnWidth, rowHeight, characterArray = [], centers = [], speeds = [], densities = [];
+	speed : {
+		min : 7,
+		max : 3,
+	},
+};
 
-function setup() {
+setup = () => {
 	createCanvas(windowWidth, windowHeight);
-	noCursor();
 	background('#000000');
 
 	textFont('Menlo');
 	textAlign(LEFT, TOP);
 	fill('#00f72c');
 
-	columnWidth = Math.round(textWidth(' '));
-	rowHeight = 11;
+	settings.columnWidth = Math.round(textWidth(' '));
+	settings.rowHeight   = 11;
 
-	columns = Math.floor(width / columnWidth);
-	rows = Math.floor(height / rowHeight);
+	settings.columns = Math.ceil(width  / settings.columnWidth);
+	settings.rows    = Math.ceil(height / settings.rowHeight);
 
-	for (var i = 0; i < uniqueCharacters; i++) {
-		if (random() < 0.6) {
-			characterArray.push(String.fromCharCode(random(32, 127)));
-		} else {
-			characterArray.push(' ');
-		}
-		centers.push([int(random(columns)), int(random(rows))]);
-		speeds.push(int(random(speedMin, speedMax)));
-		densities.push(random());
-	}
+	settings.characterArray = Array.from({length: settings.uniqueCharacters}, () => coin(0.6) ? String.fromCharCode(random(32, 127)) : ' ');
+	settings.centers        = Array.from({length: settings.uniqueCharacters}, () => [int(random(settings.columns)), int(random(settings.rows))]);
+	settings.speeds         = Array.from({length: settings.uniqueCharacters}, () => int(random(settings.speed.min, settings.speed.max)));
+	settings.densities      = Array.from({length: settings.uniqueCharacters}, () => random());
 }
 
-function draw() {
+draw = () => {
 	background('#000000');
 
-	for (var j = 0; j < rows; j++) {
-		for (var i = 0; i < columns; i++) {
-			var distances = [];
+	for (let j = 0; j < settings.rows; j++) {
+		for (let i = 0; i < settings.columns; i++) {
+			settings.distances = Array.from({length: settings.uniqueCharacters}, (_, k) => distanceBetweenCells([[i, j], settings.centers[k]]));
 
-			for (var k = 0; k < uniqueCharacters; k++) {
-				distances.push(distanceBetweenCells([[i, j], centers[k]]));
-			}
+			const army = settings.distances.indexOf(Math.min(...settings.distances));
 
-			var army = minIndex(distances);
-
-			if (random() < densities[army]) {
-				text(characterArray[army], i * columnWidth, j * rowHeight);
+			if (coin(settings.densities[army])) {
+				text(settings.characterArray[army], i * settings.columnWidth, j * settings.rowHeight);
 			}
 		}
 	}
 
-	for (var i = 0; i < uniqueCharacters; i++) {
-		centers[i][0] = randomWalk(centers[i][0], 0, columns, speeds[i]);
-		centers[i][1] = randomWalk(centers[i][1], 0, rows, speeds[i]);
+	for (let i = 0; i < settings.uniqueCharacters; i++) {
+		settings.centers[i][0] = randomWalk(settings.centers[i][0], 0, settings.columns, settings.speeds[i]);
+		settings.centers[i][1] = randomWalk(settings.centers[i][1], 0, settings.rows,    settings.speeds[i]);
 	}
 }
 
-function distanceBetweenCells (coordinateArray) {
-	var x1 = coordinateArray[0][0];
-	var y1 = coordinateArray[0][1];
-	var x2 = coordinateArray[1][0];
-	var y2 = coordinateArray[1][1];
+const distanceBetweenCells = coordinateArray => {
+	const x1 = coordinateArray[0][0];
+	const y1 = coordinateArray[0][1];
+	const x2 = coordinateArray[1][0];
+	const y2 = coordinateArray[1][1];
 	return sqrt(((x2 - x1) ** 2) + ((y2 - y1) ** 2));
 }
 
-function minIndex(array) {
-	var minIndex = 0;
-	for (var i = 0; i < array.length; i++) {
-		if (array[i] < array[minIndex]) {
-			minIndex = i;
-		}
-	}
-	return minIndex;
-}
-
-function randomWalk(start, low, high, step) {
+const randomWalk = (start, low, high, step) => {
 	while (true) {
-		var newStart = start + int(random(-(step + 1), (step + 1)));
+		const newStart = start + int(random(-(step + 1), (step + 1)));
 		if (newStart >= low && newStart <= high) {
 			return newStart;
 		}
