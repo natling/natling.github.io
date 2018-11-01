@@ -87,39 +87,40 @@ body .il { color: #f99b15 } /* Literal.Number.Integer.Long */
 
   </style>
 </head>
-
 <body>
-<div class="highlight"><pre><span></span><span class="p">(</span>
-<span class="o">~</span><span class="nx">buffers</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;keyboard 1.aif&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;keyboard 2.aif&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;keyboard 3.aif&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;keyboard 4.aif&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;keyboard 5.aif&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;keyboard 6.aif&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;keyboard 7.aif&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;keyboard 8.aif&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;mouse 1.aif&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;mouse 2.aif&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;mouse 3.aif&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;mouse 4.aif&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;mouse 5.aif&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;mouse 6.aif&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;mouse 7.aif&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;null.aif&quot;</span><span class="p">,</span>
-<span class="p">]</span>
-<span class="p">.</span><span class="nx">collect</span><span class="p">{</span><span class="kd">arg</span> <span class="nx">i</span><span class="p">;</span> <span class="nb">thisProcess</span><span class="p">.</span><span class="nx">nowExecutingPath</span><span class="p">.</span><span class="nx">dirname</span> <span class="o">+</span><span class="sr">/+ &quot;sounds&quot; +/</span><span class="o">+</span> <span class="nx">i</span><span class="p">}</span>
-<span class="p">.</span><span class="nx">collect</span><span class="p">{</span><span class="kd">arg</span> <span class="nx">i</span><span class="p">;</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">read</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="nx">i</span><span class="p">)};</span>
-<span class="p">)</span>
+<h2></h2>
 
-<span class="p">(</span>
+<div class="highlight"><pre><span></span><span class="p">(</span>
+<span class="nx">Buffer</span><span class="p">.</span><span class="nx">freeAll</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
+
+<span class="nx">z</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="nx">buffers</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;keyboard&#39;</span><span class="p">,</span> <span class="s1">&#39;mouse&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span><span class="p">].</span><span class="nx">collect</span><span class="p">{</span>
+        <span class="kd">arg</span> <span class="nx">category</span><span class="p">;</span>
+        <span class="nx">category</span> <span class="o">-&gt;</span> <span class="nx">PathName</span><span class="p">(</span><span class="nb">thisProcess</span><span class="p">.</span><span class="nx">nowExecutingPath</span><span class="p">.</span><span class="nx">dirname</span> <span class="o">+/+</span> <span><span class="nx">category</span>).<span class="nx">files</span>.<span class="nx">collect</span>{
+            <span class="kd">arg</span> <span class="nx">file</span><span class="p">;</span>
+            <span class="nx">Buffer</span><span class="p">.</span><span class="nx">read</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="nx">file</span><span class="p">.</span><span class="nx">fullPath</span><span class="p">);</span>
+        <span class="p">};</span>
+    <span class="p">}.</span><span class="nx">asDict</span><span class="p">(</span><span class="kr">class</span><span class="o">:</span> <span class="nx">Event</span><span class="p">),</span>
+
+    <span class="nx">null</span><span class="o">:</span> <span class="p">(</span>
+        <span class="nx">layers</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="p">),</span>
+
+    <span class="nx">segments</span><span class="o">:</span> <span class="p">(</span>
+        <span class="nx">levels</span><span class="o">:</span> <span class="p">(</span>
+            <span class="nx">low</span><span class="o">:</span>  <span class="p">[</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.01</span> <span class="p">],</span>
+            <span class="nx">high</span><span class="o">:</span> <span class="p">[</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.01</span> <span class="p">],</span>
+        <span class="p">),</span>
+
+        <span class="nx">durations</span><span class="o">:</span> <span class="p">[</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">2</span> <span class="p">]</span> <span class="o">*</span> <span class="mi">60</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">);</span>
+
 <span class="nx">SynthDef</span><span class="p">(</span><span class="ss">\playBuf</span><span class="p">,</span>
     <span class="p">{</span>
         <span class="o">|</span> <span class="nx">out</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">bufnum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">rate</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">startPos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">loop</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">spread</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">center</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">amp</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span>
 
-        <span class="kd">var</span> <span class="nx">player</span><span class="p">;</span>
-
-        <span class="nx">player</span> <span class="o">=</span> <span class="nx">PlayBuf</span><span class="p">.</span><span class="nx">ar</span><span class="p">(</span>
+        <span class="kd">var</span> <span class="nx">signal</span> <span class="o">=</span> <span class="nx">PlayBuf</span><span class="p">.</span><span class="nx">ar</span><span class="p">(</span>
             <span class="nx">numChannels</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
             <span class="nx">bufnum</span><span class="o">:</span> <span class="nx">bufnum</span><span class="p">,</span>
             <span class="nx">rate</span><span class="o">:</span> <span class="nx">rate</span><span class="p">,</span>
@@ -128,58 +129,46 @@ body .il { color: #f99b15 } /* Literal.Number.Integer.Long */
             <span class="nx">doneAction</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
         <span class="p">);</span>
 
-        <span class="nx">player</span> <span class="o">=</span> <span class="nx">Splay</span><span class="p">.</span><span class="nx">ar</span><span class="p">(</span><span class="nx">inArray</span><span class="o">:</span> <span class="nx">player</span><span class="p">,</span> <span class="nx">spread</span><span class="o">:</span> <span class="nx">spread</span><span class="p">,</span> <span class="nx">level</span><span class="o">:</span> <span class="nx">amp</span><span class="p">,</span> <span class="nx">center</span><span class="o">:</span> <span class="nx">center</span><span class="p">);</span>
-        <span class="nx">Out</span><span class="p">.</span><span class="nx">ar</span><span class="p">(</span><span class="nx">out</span><span class="p">,</span> <span class="nx">player</span><span class="p">);</span>
+        <span class="nx">signal</span> <span class="o">=</span> <span class="nx">Splay</span><span class="p">.</span><span class="nx">ar</span><span class="p">(</span><span class="nx">inArray</span><span class="o">:</span> <span class="nx">signal</span><span class="p">,</span> <span class="nx">spread</span><span class="o">:</span> <span class="nx">spread</span><span class="p">,</span> <span class="nx">level</span><span class="o">:</span> <span class="nx">amp</span><span class="p">,</span> <span class="nx">center</span><span class="o">:</span> <span class="nx">center</span><span class="p">);</span>
+        <span class="nx">Out</span><span class="p">.</span><span class="nx">ar</span><span class="p">(</span><span class="nx">out</span><span class="p">,</span> <span class="nx">signal</span><span class="p">);</span>
     <span class="p">};</span>
 <span class="p">).</span><span class="nx">add</span><span class="p">;</span>
 <span class="p">)</span>
 
 <span class="p">(</span>
-<span class="kd">var</span> <span class="nx">keyboard</span><span class="p">,</span> <span class="nx">mouse</span><span class="p">,</span> <span class="nx">null</span><span class="p">,</span> <span class="nx">nullInstances</span><span class="p">,</span> <span class="nx">nullInstancesN</span><span class="p">,</span> <span class="nx">player</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">segmentLevelsLow</span><span class="p">,</span> <span class="nx">segmentLevelsHigh</span><span class="p">,</span> <span class="nx">segmentDurs</span><span class="p">;</span>
+<span class="nx">z</span><span class="p">.</span><span class="nx">null</span><span class="p">.</span><span class="nx">player</span> <span class="o">=</span> <span class="nx">Task</span><span class="p">{</span>
+    <span class="nx">z</span><span class="p">.</span><span class="nx">null</span><span class="p">.</span><span class="nx">instances</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="nx">null</span><span class="p">.</span><span class="nx">layers</span><span class="p">.</span><span class="nx">collect</span><span class="p">{</span>
+        <span class="kd">arg</span> <span class="nx">i</span><span class="p">;</span>
 
-<span class="nx">keyboard</span> <span class="o">=</span> <span class="o">~</span><span class="nx">buffers</span><span class="p">[</span><span class="mi">0</span><span class="p">..</span><span class="mi">7</span><span class="p">];</span>
-<span class="nx">mouse</span>    <span class="o">=</span> <span class="o">~</span><span class="nx">buffers</span><span class="p">[</span><span class="mi">8</span><span class="p">..</span><span class="mi">14</span><span class="p">];</span>
-<span class="nx">null</span>     <span class="o">=</span> <span class="o">~</span><span class="nx">buffers</span><span class="p">[</span><span class="mi">15</span><span class="p">];</span>
-
-<span class="nx">nullInstancesN</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-
-<span class="nx">nullInstances</span> <span class="o">=</span> <span class="nx">nullInstancesN</span><span class="p">.</span><span class="nx">collect</span><span class="p">{</span>
-    <span class="kd">arg</span> <span class="nx">i</span><span class="p">;</span>
-
-    <span class="nx">Synth</span><span class="p">(</span><span class="ss">\playBuf</span><span class="p">,</span>
-        <span class="p">[</span>
-            <span class="nx">bufnum</span><span class="o">:</span> <span class="nx">null</span><span class="p">,</span>
-            <span class="nx">startPos</span><span class="o">:</span> <span class="nx">i</span><span class="p">.</span><span class="nx">linlin</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">nullInstancesN</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
-            <span class="nx">loop</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="nx">spread</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="nx">center</span><span class="o">:</span> <span class="nx">i</span><span class="p">.</span><span class="nx">linlin</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">nullInstancesN</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
-            <span class="nx">amp</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="p">];</span>
-    <span class="p">);</span>
+        <span class="nx">Synth</span><span class="p">(</span><span class="ss">\playBuf</span><span class="p">,</span>
+            <span class="p">[</span>
+                <span class="nx">bufnum</span><span class="o">:</span> <span class="nx">z</span><span class="p">.</span><span class="nx">buffers</span><span class="p">.</span><span class="nx">null</span><span class="p">.</span><span class="nx">unbubble</span><span class="p">,</span>
+                <span class="nx">startPos</span><span class="o">:</span> <span class="nx">i</span><span class="p">.</span><span class="nx">linlin</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">z</span><span class="p">.</span><span class="nx">null</span><span class="p">.</span><span class="nx">layers</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+                <span class="nx">loop</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="nx">spread</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="nx">center</span><span class="o">:</span> <span class="nx">i</span><span class="p">.</span><span class="nx">linlin</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">z</span><span class="p">.</span><span class="nx">null</span><span class="p">.</span><span class="nx">layers</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+                <span class="nx">amp</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">);</span>
+    <span class="p">};</span>
 <span class="p">};</span>
 
-<span class="nx">segmentLevelsLow</span>  <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">];</span>
-<span class="nx">segmentLevelsHigh</span> <span class="o">=</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">];</span>
-
-<span class="nx">segmentDurs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mi">60</span><span class="p">;</span>
-
-<span class="nx">player</span> <span class="o">=</span> <span class="nx">Pbind</span><span class="p">(</span>
+<span class="nx">z</span><span class="p">.</span><span class="nx">segments</span><span class="p">.</span><span class="nx">player</span> <span class="o">=</span> <span class="nx">Pbind</span><span class="p">(</span>
     <span class="ss">\instrument</span><span class="p">,</span> <span class="ss">\playBuf</span><span class="p">,</span>
     <span class="ss">\bufnum</span><span class="p">,</span> <span class="nx">Pif</span><span class="p">(</span>
-        <span class="nx">condition</span><span class="o">:</span> <span class="nx">Pfunc</span><span class="p">({</span><span class="mf">0.5</span><span class="p">.</span><span class="nx">coin</span><span class="p">}),</span>
-        <span class="nx">iftrue</span><span class="o">:</span>  <span class="nx">Prand</span><span class="p">(</span><span class="nx">keyboard</span><span class="p">,</span> <span class="kc">inf</span><span class="p">),</span>
-        <span class="nx">iffalse</span><span class="o">:</span> <span class="nx">Prand</span><span class="p">(</span><span class="nx">mouse</span><span class="p">,</span> <span class="kc">inf</span><span class="p">),</span>
+        <span class="nx">condition</span><span class="o">:</span> <span class="nx">Pfunc</span><span class="p">{</span><span class="mf">0.5</span><span class="p">.</span><span class="nx">coin</span><span class="p">},</span>
+        <span class="nx">iftrue</span><span class="o">:</span>  <span class="nx">Prand</span><span class="p">(</span><span class="nx">z</span><span class="p">.</span><span class="nx">buffers</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">,</span> <span class="kc">inf</span><span class="p">),</span>
+        <span class="nx">iffalse</span><span class="o">:</span> <span class="nx">Prand</span><span class="p">(</span><span class="nx">z</span><span class="p">.</span><span class="nx">buffers</span><span class="p">.</span><span class="nx">mouse</span><span class="p">,</span>    <span class="kc">inf</span><span class="p">),</span>
     <span class="p">),</span>
     <span class="ss">\delta</span><span class="p">,</span> <span class="nx">Pwhite</span><span class="p">(</span>
         <span class="nx">lo</span><span class="o">:</span> <span class="nx">Pseg</span><span class="p">(</span>
-            <span class="nx">levels</span><span class="o">:</span> <span class="nx">Pseq</span><span class="p">(</span><span class="nx">segmentLevelsLow</span><span class="p">),</span>
-            <span class="nx">durs</span><span class="o">:</span> <span class="nx">Pseq</span><span class="p">(</span><span class="nx">segmentDurs</span><span class="p">),</span>
+            <span class="nx">levels</span><span class="o">:</span> <span class="nx">Pseq</span><span class="p">(</span><span class="nx">z</span><span class="p">.</span><span class="nx">segments</span><span class="p">.</span><span class="nx">levels</span><span class="p">.</span><span class="nx">low</span><span class="p">),</span>
+            <span class="nx">durs</span><span class="o">:</span>   <span class="nx">Pseq</span><span class="p">(</span><span class="nx">z</span><span class="p">.</span><span class="nx">segments</span><span class="p">.</span><span class="nx">durations</span><span class="p">),</span>
             <span class="nx">curves</span><span class="o">:</span> <span class="s1">&#39;exp&#39;</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="nx">hi</span><span class="o">:</span> <span class="nx">Pseg</span><span class="p">(</span>
-            <span class="nx">levels</span><span class="o">:</span> <span class="nx">Pseq</span><span class="p">(</span><span class="nx">segmentLevelsHigh</span><span class="p">),</span>
-            <span class="nx">durs</span><span class="o">:</span> <span class="nx">Pseq</span><span class="p">(</span><span class="nx">segmentDurs</span><span class="p">),</span>
+            <span class="nx">levels</span><span class="o">:</span> <span class="nx">Pseq</span><span class="p">(</span><span class="nx">z</span><span class="p">.</span><span class="nx">segments</span><span class="p">.</span><span class="nx">levels</span><span class="p">.</span><span class="nx">high</span><span class="p">),</span>
+            <span class="nx">durs</span><span class="o">:</span>   <span class="nx">Pseq</span><span class="p">(</span><span class="nx">z</span><span class="p">.</span><span class="nx">segments</span><span class="p">.</span><span class="nx">durations</span><span class="p">),</span>
             <span class="nx">curves</span><span class="o">:</span> <span class="s1">&#39;exp&#39;</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">),</span>
@@ -188,19 +177,30 @@ body .il { color: #f99b15 } /* Literal.Number.Integer.Long */
     <span class="ss">\amp</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
 <span class="p">);</span>
 
-<span class="nx">TempoClock</span><span class="p">.</span><span class="nx">tempo</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nx">z</span><span class="p">.</span><span class="nx">player</span> <span class="o">=</span> <span class="nx">Task</span><span class="p">{</span>
+    <span class="nx">z</span><span class="p">.</span><span class="nx">null</span><span class="p">.</span><span class="nx">player</span><span class="p">.</span><span class="nx">play</span><span class="p">;</span>
+    <span class="mi">5</span><span class="p">.</span><span class="nx">wait</span><span class="p">;</span>
+    <span class="nx">z</span><span class="p">.</span><span class="nx">segments</span><span class="p">.</span><span class="nx">player</span><span class="p">.</span><span class="nx">play</span><span class="p">;</span>
+    <span class="nx">z</span><span class="p">.</span><span class="nx">segments</span><span class="p">.</span><span class="nx">durations</span><span class="p">.</span><span class="nx">sum</span><span class="p">.</span><span class="nx">wait</span><span class="p">;</span>
+    <span class="mi">5</span><span class="p">.</span><span class="nx">wait</span><span class="p">;</span>
+    <span class="nx">z</span><span class="p">.</span><span class="nx">null</span><span class="p">.</span><span class="nx">instances</span><span class="p">.</span><span class="k">do</span><span class="p">(</span><span class="nx">_</span><span class="p">.</span><span class="nx">free</span><span class="p">);</span>
+<span class="p">};</span>
 
-<span class="nx">Task</span><span class="p">({</span>
+<span class="nx">z</span><span class="p">.</span><span class="nx">recorder</span> <span class="o">=</span> <span class="nx">Task</span><span class="p">{</span>
     <span class="nx">s</span><span class="p">.</span><span class="nx">prepareForRecord</span><span class="p">;</span>
+    <span class="mi">2</span><span class="p">.</span><span class="nx">wait</span><span class="p">;</span>
     <span class="nx">s</span><span class="p">.</span><span class="nx">record</span><span class="p">;</span>
+    <span class="mi">3</span><span class="p">.</span><span class="nx">wait</span><span class="p">;</span>
+    <span class="nx">z</span><span class="p">.</span><span class="nx">player</span><span class="p">.</span><span class="nx">play</span><span class="p">;</span>
     <span class="mi">5</span><span class="p">.</span><span class="nx">wait</span><span class="p">;</span>
-    <span class="nx">player</span><span class="p">.</span><span class="nx">play</span><span class="p">;</span>
-    <span class="nx">segmentDurs</span><span class="p">.</span><span class="nx">sum</span><span class="p">.</span><span class="nx">wait</span><span class="p">;</span>
+    <span class="nx">z</span><span class="p">.</span><span class="nx">segments</span><span class="p">.</span><span class="nx">durations</span><span class="p">.</span><span class="nx">sum</span><span class="p">.</span><span class="nx">wait</span><span class="p">;</span>
     <span class="mi">5</span><span class="p">.</span><span class="nx">wait</span><span class="p">;</span>
-    <span class="nx">nullInstances</span><span class="p">.</span><span class="k">do</span><span class="p">{</span><span class="kd">arg</span> <span class="nx">i</span><span class="p">;</span> <span class="nx">i</span><span class="p">.</span><span class="nx">free</span><span class="p">};</span>
     <span class="mi">3</span><span class="p">.</span><span class="nx">wait</span><span class="p">;</span>
     <span class="nx">s</span><span class="p">.</span><span class="nx">stopRecording</span><span class="p">;</span>
-<span class="p">}).</span><span class="nx">play</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">TempoClock</span><span class="p">.</span><span class="nx">tempo</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nx">z</span><span class="p">.</span><span class="nx">player</span><span class="p">.</span><span class="nx">play</span><span class="p">;</span>
 <span class="p">)</span>
 </pre></div>
 </body>
