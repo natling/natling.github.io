@@ -6,17 +6,10 @@ body {
 }
 
 #grid {
+	width: 100%;
+	height: 100%;
 	box-sizing: border-box;
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-	grid-gap: 30px;
-	padding: 30px;
-}
-
-.cell {
-	height: 300px;
-	background-size: 100% 100%;
-	border-radius: 3px;
 }
 
 #modal {

@@ -1,3 +1,5 @@
+paths = paths.map(file => 'url(\"' + file + '\")');
+
 const grid = document.createElement('div');
 document.body.appendChild(grid);
 grid.id = 'grid';
