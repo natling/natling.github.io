@@ -5,122 +5,30 @@
   <title>postcards</title>
   <meta charset="UTF-8">
   <link rel="shortcut icon" href="files/favicon.png"/>
+  <link rel="stylesheet" type="text/css" href="css/gallery.css">
   <style>
-    body {
-      margin: 0px;
-      width: 100vw;
-      height: 100vh;
-      background-color: black;
+    #grid {
+      grid-template: repeat(2, 1fr) / repeat(3, 1fr);
+      grid-gap: 30px;
+      padding: 30px;
     }
 
-    table {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-spacing: 30px;
-      opacity: 1;
-      z-index: 1;
-      transition: opacity 1s;
-    }
-
-    td {
-      padding: 0px;
-      border-radius: 5px;
-      background-position: center center;
+    .cell {
       background-size: cover;
-      background-repeat: no-repeat;
-      cursor: pointer;
-    }
-
-    #display {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-position: center center;
-      background-size: contain;
-      background-repeat: no-repeat;
-      opacity: 0;
-      z-index: 0;
-      transition: opacity 1s, background-image 0.5s;
+      background-position: center;
+      border-radius: 5px;
     }
   </style>
 </head>
 
 <body>
-  <div id="display"></div>
-
-  <table id="table">
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-  </table>
 </body>
 
 <script>
-  var cells   = document.getElementsByTagName('td');
-  var display = document.getElementById('display');
-  var table   = document.getElementById('table');
-
-  var currentImage;
-
-  function imageURL(number) {
-    return 'files/postcard-' + (number + 1) + '.jpg';
-  }
-
-  function setDisplay(number) {
-    display.style.backgroundImage = 'url(\'' + imageURL(number) + '\')';    
-  }
-
-  for (var i = 0; i < cells.length; i++) {
-    (function(i) {
-      cells[i].style.backgroundImage = 'url(\'' + imageURL(i) + '\')';
-
-      cells[i].onclick = function() {
-        table.style.opacity   = '0';
-        table.style.zIndex    = '0';
-        display.style.opacity = '1';
-        display.style.zIndex  = '1';
-
-        currentImage = i;
-        setDisplay(currentImage);
-      }
-    })(i);
-  }
-
-  display.onclick = function() {
-    table.style.opacity   = '1';
-    table.style.zIndex    = '1';
-    display.style.opacity = '0';
-    display.style.zIndex  = '0';
-  }
-
-  document.onkeydown = function(event) {
-    switch (event.keyCode) {
-      case 27:
-        table.style.opacity   = '1';
-        table.style.zIndex    = '1';
-        display.style.opacity = '0';
-        display.style.zIndex  = '0';
-        break;
-
-      case 37:
-        currentImage = (currentImage - 1 + cells.length) % cells.length;
-        setDisplay(currentImage);
-        break;
-
-      case 39:
-        currentImage = (currentImage + 1 + cells.length) % cells.length;
-        setDisplay(currentImage);
-        break;
-    }
-  }
+  let paths = Array.from({length: 6}, (_, i) => 'files/postcard-' + (i + 1) + '.jpg');
 </script>
+
+<script src="libraries/natalie.js"></script>
+<script src="gallery.js"></script>
 
 </html>
