@@ -9,13 +9,14 @@
   <style>
     #grid {
       grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      grid-auto-rows: 300px;
       grid-gap: 30px;
       padding: 30px;
     }
 
-    .cell {
-      height: 300px;
-      background-size: 100% 100%;
+    img {
+      width: 100%;
+      height: 100%;
       border-radius: 3px;
     }
   </style>
@@ -36,6 +37,7 @@
     'noises-i-made-without-using-my-vocal-cords.png',
     'please-make-those-annoying-sounds-quieter-or-turn-them-off.png',
     'teleonomy.png',
+    'the-harvest-is-past-the-summer-is-ended.png',
     'total-emotional-collapse-number-four.png',
   ].map(file => 'files/spectrograms/' + file);
 </script>

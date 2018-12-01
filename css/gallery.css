@@ -24,3 +24,11 @@ body {
 	transition: opacity 1s, background-image 0.5s;
 	opacity: 0;
 }
+
+#modal[opacity] {
+	opacity: 1;
+}
+
+#modal[display] {
+	display: block;
+}

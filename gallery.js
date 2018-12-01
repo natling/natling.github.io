@@ -1,5 +1,3 @@
-paths = paths.map(file => 'url(\"' + file + '\")');
-
 const grid = document.createElement('div');
 document.body.appendChild(grid);
 grid.id = 'grid';
@@ -9,35 +7,28 @@ document.body.appendChild(modal);
 modal.id = 'modal';
 
 const showModal = () => {
-	modal.style.display = 'block';
-
-	setTimeout(() => {
-		modal.style.opacity = 1;
-	}, 0);
+	modal.setAttribute('display', '');
+	setTimeout(() => modal.setAttribute('opacity', ''), 0);
 }
 
 const hideModal = () => {
-	modal.style.opacity = 0;
-
-	setTimeout(() => {
-		modal.style.display = 'none';
-	}, 500);
+	modal.removeAttribute('opacity');
+	setTimeout(() => modal.removeAttribute('display', ''), 1000);
 }
 
 const scroll = direction => {
-	const currentIndex = paths.indexOf(modal.style.backgroundImage);
+	const currentIndex = paths.indexOf(modal.style.backgroundImage.split('"')[1]);
 	const newIndex = mod(currentIndex + (direction ? 1 : -1), paths.length);
-	modal.style.backgroundImage = paths[newIndex];
+	modal.style.backgroundImage = 'url(' + paths[newIndex] + ')';
 }
 
 paths.forEach(path => {
-	const cell = document.createElement('div');
-	grid.appendChild(cell);
-	cell.className = 'cell';
-	cell.style.backgroundImage = path;
+	const image = document.createElement('img');
+	grid.appendChild(image);
+	image.src = path;
 
-	cell.onclick = () => {
-		modal.style.backgroundImage = path;
+	image.onclick = () => {
+		modal.style.backgroundImage = 'url(' + path + ')';
 		showModal();
 	}
 });
