@@ -25,7 +25,10 @@
       width: 100vw;
       height: 100vh;
       overflow: hidden;
-      background: url('files/2017.04.08 b.jpg') right bottom / cover no-repeat, black;
+      background-position: right bottom;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-color: black;
     }
 
     #box {
@@ -80,6 +83,17 @@
     </div>
   </div>
 </body>
+
+<script src="libraries/natalie.js"></script>
+
+<script>
+  const backgrounds = [
+    '2017.04.08 b.jpg',
+    '2018.12.22 b.jpg',
+  ];
+
+  document.body.style.backgroundImage = 'url(\'files/' + randomItem(backgrounds) + '\')';
+</script>
 
 <script src="trap.js"></script>
 
