@@ -5,113 +5,52 @@
   <title>scrapbook</title>
   <meta charset="UTF-8">
   <link rel="shortcut icon" href="files/favicon.png"/>
+  <link rel="stylesheet" type="text/css" href="css/gallery.css">
   <style>
-    body {
-      margin: 0px;
-      background-color: black;
+    #grid {
+      padding: calc((100% - 800px) / 2);
+      grid-gap: 40px;
     }
 
     img {
-      display: block;
-      margin: 40px auto;
       border-radius: 40px;
-    }
-
-    #container {
-      position: absolute;
-      width: 100%;
-      opacity: 1;
-      z-index: 1;
-      transition: opacity 2s;
-    }
-
-    #display {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background-position: center center;
-      background-size: contain;
-      background-repeat: no-repeat;
-      opacity: 0;
-      z-index: 0;
-      transition: opacity 2s;
     }
   </style>
 </head>
 
 <body>
-  <div id="container"></div>
-  <div id="display"></div>
 </body>
 
 <script src="libraries/natalie.js"></script>
 
 <script>
-  var display   = document.getElementById('display');
-  var container = document.getElementById('container');
+  let paths = [
+    'IMG_20170810_203536088.jpg',
+    'IMG_20170810_203537430.jpg',
+    'IMG_20170810_203544594.jpg',
+    'IMG_20170810_203640631.jpg',
+    'IMG_20170810_203648369.jpg',
+    'IMG_20170810_203720349.jpg',
+    'IMG_20170810_203818123.jpg',
+    'IMG_20170810_203848859.jpg',
+    'IMG_20170810_203912318.jpg',
+    'IMG_20170810_203924350.jpg',
+    'IMG_20170810_203929408.jpg',
+    'IMG_20170810_203956119.jpg',
+    'IMG_20170810_204033913.jpg',
+    'IMG_20170810_204037425.jpg',
+    'IMG_20170810_204059775.jpg',
+    'IMG_20170810_204102063.jpg',
+    'IMG_20170810_204115206.jpg',
+    'IMG_20170810_204119324.jpg',
+    'IMG_20170810_204123452.jpg',
+    'IMG_20170810_204200678.jpg',
+    'IMG_20170810_204206333.jpg',
+  ].map(file => 'files/' + file);
 
-  var containerPadding = (window.innerWidth - 800) / 2 - 40;
-
-  container.style.padding = containerPadding + 'px 0px';
-
-  var images = [
-    'files/IMG_20170810_203536088.jpg',
-    'files/IMG_20170810_203537430.jpg',
-    'files/IMG_20170810_203544594.jpg',
-    'files/IMG_20170810_203640631.jpg',
-    'files/IMG_20170810_203648369.jpg',
-    'files/IMG_20170810_203720349.jpg',
-    'files/IMG_20170810_203818123.jpg',
-    'files/IMG_20170810_203848859.jpg',
-    'files/IMG_20170810_203912318.jpg',
-    'files/IMG_20170810_203924350.jpg',
-    'files/IMG_20170810_203929408.jpg',
-    'files/IMG_20170810_203956119.jpg',
-    'files/IMG_20170810_204033913.jpg',
-    'files/IMG_20170810_204037425.jpg',
-    'files/IMG_20170810_204059775.jpg',
-    'files/IMG_20170810_204102063.jpg',
-    'files/IMG_20170810_204115206.jpg',
-    'files/IMG_20170810_204119324.jpg',
-    'files/IMG_20170810_204123452.jpg',
-    'files/IMG_20170810_204200678.jpg',
-    'files/IMG_20170810_204206333.jpg',
-  ];
-
-  images = shuffleArray(images);
-
-  for (var i = 0; i < images.length; i++) {
-    (function(i) {
-      var img = document.createElement('img');
-      img.src = images[i];
-      container.appendChild(img);
-
-      img.onclick = function() {
-        container.style.opacity = '0';
-        container.style.zIndex  = '0';
-        display.style.opacity   = '1';
-        display.style.zIndex    = '1';
-
-        display.style.backgroundImage = 'url(\'' + images[i] + '\')';
-      }
-    })(i);
-  }
-
-  display.onclick = function() {
-    container.style.opacity = '1';
-    container.style.zIndex  = '1';
-    display.style.opacity   = '0';
-    display.style.zIndex    = '0';
-  }
-
-  document.onkeydown = function(event) {
-    if (event.keyCode == 27) {
-      container.style.opacity = '1';
-      container.style.zIndex  = '1';
-      display.style.opacity   = '0';
-      display.style.zIndex    = '0';
-    }
-  }
+  paths = shuffleArray(paths);
 </script>
+
+<script src="gallery.js"></script>
 
 </html>
