@@ -13,7 +13,7 @@ const showModal = () => {
 
 const hideModal = () => {
 	modal.removeAttribute('opacity');
-	setTimeout(() => modal.removeAttribute('display', ''), 1000);
+	setTimeout(() => modal.removeAttribute('display'), 1000);
 }
 
 const scroll = direction => {
