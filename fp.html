@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>⧜</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="files/favicon.png"/>
+  <style>
+    body {
+      margin: 0px;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background-color: black;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+  <iframe id="frame"></iframe>
+</body>
+
+<script src="libraries/natalie.js"></script>
+
+<script>
+  const frame = document.getElementById('frame');
+
+  const paths = [
+    'https://undesi.red/v',
+    'https://forgetting.space/',
+    'https://arcane.services/',
+  ];
+
+  const newPath = () => {
+    const path = randomItem(paths);
+    return path != frame.src ? path : newPath();
+  }
+
+  const switchPath = () => {
+    frame.src = newPath();
+    const delay = randomIntegerInclusive(...[1, 4].map(n => n * 60 * 1000));
+    setTimeout(switchPath, delay);
+  }
+
+  switchPath();
+</script>
+
+</html>
