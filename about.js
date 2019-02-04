@@ -121,6 +121,7 @@ const settings = {
 		'\"this is really wrinkling my braincicles\"',
 		'\"a pink noise wind tunnel that is slowly being enclosed by a wall of cosmic waves\"',
 		'\"irresponsible music\"',
+		'\"like staring into an actual black hole of sound\"',
 	],
 };
 
