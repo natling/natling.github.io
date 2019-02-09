@@ -9,16 +9,18 @@
   <style>
     body {
       margin: 0;
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      grid-template: repeat(7, 1fr) / repeat(1, 1fr);
     }
 
     a:link, a:visited {
-      position: absolute;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       font-family: 'Menlo';
       font-size: 30px;
-      text-align: center;
       text-decoration: none;
       background-color: #002b36;
       color: #b58900;
@@ -42,15 +44,5 @@
   <a href="notsure">not sure</a>
   <a href="you">you</a>
 </body>
-
-<script>
-  var links = document.getElementsByTagName('a');
-
-  for (var i = 0; i < links.length; i++) {
-    links[i].style.width  = 100                    + '%';
-    links[i].style.height = 100 / links.length     + '%';
-    links[i].style.top    = 100 / links.length * i + '%';
-  }
-</script>
 
 </html>
