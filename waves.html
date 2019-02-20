@@ -18,11 +18,14 @@
       width: 100%;
       height: 100%;
       display: grid;
+      grid-template: repeat(auto-fill, 50px) / repeat(auto-fill, 50px);
       justify-content: center;
       align-content: center;
     }
 
     .cell {
+      width: 50px;
+      height: 50px;
       animation: rotate linear infinite, fade linear infinite alternate;
     }
 
@@ -43,25 +46,14 @@
 </body>
 
 <script>
-  const linlin = (value, inMin, inMax, outMin, outMax) => {
-    return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);
-  }
-
-  const gridSize = 50;
-
-  const columns = Math.floor(window.innerWidth  / gridSize);
-  const rows    = Math.floor(window.innerHeight / gridSize);
-
-  const container = document.getElementById('container');
-  container.style.gridTemplateRows = container.style.gridTemplateColumns = 'repeat(auto-fill, ' + gridSize + 'px)';
+  const [columns, rows] = [window.innerWidth, window.innerHeight].map(n => Math.floor(n / 50));
 
   for (let y = 0; y < rows; y++) {
     for (let x = 0; x < columns; x++) {
       const cell = document.createElement('div');
       container.appendChild(cell);
       cell.className = 'cell';
-      cell.style.width = cell.style.height = gridSize;
-      cell.style.animationDuration = linlin(Math.abs(x - y), 0, Math.max(columns, rows), 7, 8) + 's';
+      cell.style.animationDuration = Math.abs(x - y) / Math.max(columns, rows) + 7 + 's';
     }
   }
 </script>
