@@ -39,6 +39,7 @@
 </head>
 
 <body>
+  <div id="container"></div>
 </body>
 
 <script>
@@ -51,9 +52,7 @@
   const columns = Math.floor(window.innerWidth  / gridSize);
   const rows    = Math.floor(window.innerHeight / gridSize);
 
-  const container = document.createElement('div');
-  document.body.appendChild(container);
-  container.id = 'container';
+  const container = document.getElementById('container');
   container.style.gridTemplateRows = container.style.gridTemplateColumns = 'repeat(auto-fill, ' + gridSize + 'px)';
 
   for (let y = 0; y < rows; y++) {
