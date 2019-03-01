@@ -40,9 +40,7 @@ const weightedAverage = (values, weights) => {
 	return weightedValuesSum / weightsSum;
 }
 
-const randomItem = array => {
-	return array[Math.floor(Math.random() * array.length)];
-}
+const randomItem = array => array[Math.floor(Math.random() * array.length)]
 
 const rotateArray = (array, distance, direction) => {
 	for (let i = 0; i < distance; i++) {
@@ -58,9 +56,7 @@ const rotateArray = (array, distance, direction) => {
 const shuffleArray = array => {
 	for (let i = array.length - 1; i > 0; i--) {
 		var j = Math.floor(Math.random() * (i + 1));
-		var temp = array[i];
-		array[i] = array[j];
-		array[j] = temp;
+		[array[i], array[j]] = [array[j], array[i]];
 	}
 	return array;
 }
