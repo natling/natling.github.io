@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>events</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="files/favicon.png"/>
+  <link rel="stylesheet" type="text/css" href="css/menlo.css">
+  <style>
+    body {
+      margin: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: black;
+    }
+
+    #grid {
+      justify-content: center;
+      padding: 50px;
+      box-sizing: border-box;
+      display: grid;
+      grid-template-columns: repeat(3, fit-content(100%));
+      grid-gap: 20px 40px;
+    }
+
+    div {
+      font-family: 'Menlo';
+      font-size: 10pt;
+      color: gray;
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="grid"></div>
+</body>
+
+<script src="events.js"></script>
+
+<script>
+  const grid = document.getElementById('grid');
+  const now  = new Date();
+
+  events.forEach(event => {
+    if (event.time > now) {
+      for (const parameter in event) {
+        const div = document.createElement('div');
+        grid.appendChild(div);
+        div.className = parameter;
+
+        switch (parameter) {
+          case 'main':
+            if (event.main.link) {
+              const a = document.createElement('a');
+              div.appendChild(a);
+              a.innerHTML = event.main.name;
+              a.href      = event.main.link;
+            } else {
+              div.innerHTML = event.main.name;
+            }
+            break;
+          case 'time':
+            div.innerHTML = new Intl.DateTimeFormat('en-US', {
+              year    : 'numeric',
+              month   : 'long',
+              day     : 'numeric',
+              weekday : 'long',
+              hour    : 'numeric',
+            }).format(event.time).replace(/,/g, '').toLowerCase();
+            break;
+          case 'location':
+            if (event.location.link) {
+              const a = document.createElement('a');
+              div.appendChild(a);
+              a.innerHTML = event.location.name;
+              a.href      = event.location.link;
+            } else {
+              div.innerHTML = event.location.name;
+            }
+            break;
+        }
+      }
+    }
+  });
+</script>
+
+</html>
