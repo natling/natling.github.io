@@ -20,4 +20,15 @@ const events = [
 			link : 'https://www.aretevenue.com',
 		},
 	},
+
+	{
+		time     : new Date(2019, 6, 16, 20),
+		main     : {
+			name : 'Bodymilk Tapes NOISE PROM',
+		},
+		location : {
+			name : 'No Nation',
+			link : 'https://www.facebook.com/NoNationUnspaceLab',
+		},
+	},
 ];
