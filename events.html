@@ -54,44 +54,44 @@
   const grid = document.getElementById('grid');
   const now  = new Date();
 
-  events.forEach(event => {
-    if (event.time > now) {
-      for (const parameter in event) {
-        const div = document.createElement('div');
-        grid.appendChild(div);
-        div.className = parameter;
+  events.sort((a, b) => a.time - b.time);
 
-        switch (parameter) {
-          case 'main':
-            if (event.main.link) {
-              const a = document.createElement('a');
-              div.appendChild(a);
-              a.innerHTML = event.main.name;
-              a.href      = event.main.link;
-            } else {
-              div.innerHTML = event.main.name;
-            }
-            break;
-          case 'time':
-            div.innerHTML = new Intl.DateTimeFormat('en-US', {
-              year    : 'numeric',
-              month   : 'long',
-              day     : 'numeric',
-              weekday : 'long',
-              hour    : 'numeric',
-            }).format(event.time).replace(/,/g, '').toLowerCase();
-            break;
-          case 'location':
-            if (event.location.link) {
-              const a = document.createElement('a');
-              div.appendChild(a);
-              a.innerHTML = event.location.name;
-              a.href      = event.location.link;
-            } else {
-              div.innerHTML = event.location.name;
-            }
-            break;
-        }
+  events.filter(event => event.time > now).forEach(event => {
+    for (const parameter in event) {
+      const div = document.createElement('div');
+      grid.appendChild(div);
+      div.className = parameter;
+
+      switch (parameter) {
+        case 'main':
+          if (event.main.link) {
+            const a = document.createElement('a');
+            div.appendChild(a);
+            a.innerHTML = event.main.name;
+            a.href      = event.main.link;
+          } else {
+            div.innerHTML = event.main.name;
+          }
+          break;
+        case 'time':
+          div.innerHTML = new Intl.DateTimeFormat('en-US', {
+            year    : 'numeric',
+            month   : 'long',
+            day     : 'numeric',
+            weekday : 'long',
+            hour    : 'numeric',
+          }).format(event.time).replace(/,/g, '').toLowerCase();
+          break;
+        case 'location':
+          if (event.location.link) {
+            const a = document.createElement('a');
+            div.appendChild(a);
+            a.innerHTML = event.location.name;
+            a.href      = event.location.link;
+          } else {
+            div.innerHTML = event.location.name;
+          }
+          break;
       }
     }
   });
