@@ -25,6 +25,8 @@
 <body>
 </body>
 
+<script src="libraries/natalie.js"></script>
+
 <script>
   let paths = [
     '18fc4d371f750aa77e20206081ac1fb3',
@@ -42,6 +44,7 @@
     'i-love-you-into-the-sea',
     'i-wish-i-could-breathe-like-you',
     'if-you-please-we-will-commit-ourselves-to-this-void',
+    'jordans-pocket',
     'noises-i-made-without-using-my-vocal-cords',
     'please-make-those-annoying-sounds-quieter-or-turn-them-off',
     'teleonomy',
@@ -50,9 +53,10 @@
     'tunafish-sandwich-piece',
     'with-the-great-unconscious-gravity-of-a-girl',
   ].map(file => 'files/spectrograms/' + file + '.png');
+
+  shuffleArray(paths);
 </script>
 
-<script src="libraries/natalie.js"></script>
 <script src="gallery.js"></script>
 
 </html>
