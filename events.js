@@ -43,4 +43,27 @@ const events = [
 			name : 'dm for address',
 		},
 	},
+
+	{
+		time     : new Date(2019, 4, 17, 22),
+		main     : {
+			name : 'drones and chill in natalie\'s backyard vol. ii',
+			link : 'https://www.facebook.com/events/2241293942572840/',
+		},
+		location : {
+			name : 'dm for address',
+		},
+	},
+
+	{
+		time     : new Date(2019, 4, 31, 19),
+		main     : {
+			name : 'Bluestockings 20th Birthday Party',
+			link : 'https://www.facebook.com/events/803925943324909/',
+		},
+		location : {
+			name : 'Bluestockings',
+			link : 'http://bluestockings.com',
+		},
+	},
 ];
