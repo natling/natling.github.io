@@ -26,6 +26,7 @@ const events = [
 		time     : new Date(2019, 5, 16, 20),
 		main     : {
 			name : 'Bodymilk Tapes NOISE PROM',
+			link : 'https://www.facebook.com/events/544160135988417/',
 		},
 		location : {
 			name : 'No Nation',
