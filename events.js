@@ -3,6 +3,7 @@ const events = [
 		time     : new Date(2019, 5, 7, 20),
 		main     : {
 			name : 'William Kurtis Chang / Daniel Lawrence / elska / natalie[dot]computer',
+			link : 'https://www.facebook.com/events/1265807746906064/',
 		},
 		location : {
 			name : 'Magick City',
