@@ -68,4 +68,16 @@ const events = [
 			link : 'http://bluestockings.com',
 		},
 	},
+
+	{
+		time     : new Date(2019, 7, 1, 20),
+		main     : {
+			name : 'drones and chill in transmitter park',
+			link : 'https://www.facebook.com/events/807409526319791/',
+		},
+		location : {
+			name : 'transmitter park',
+			link : 'https://en.wikipedia.org/wiki/WNYC_Transmitter_Park',
+		},
+	},
 ];
