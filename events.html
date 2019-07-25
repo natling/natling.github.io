@@ -57,7 +57,8 @@
 
   events
   .sort((a, b) => a.time - b.time)
-  .filter(event => event.time - now > threshold).forEach(event => {
+  .filter(event => event.time - now > threshold)
+  .forEach(event => {
     for (const parameter in event) {
       const div = document.createElement('div');
       grid.appendChild(div);
