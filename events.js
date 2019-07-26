@@ -80,4 +80,16 @@ const events = [
 			link : 'https://en.wikipedia.org/wiki/WNYC_Transmitter_Park',
 		},
 	},
+
+	{
+		time     : new Date(2019, 7, 9, 20),
+		main     : {
+			name : 'livecode.nyc algorave',
+			link : 'https://www.facebook.com/events/346500522914959/',
+		},
+		location : {
+			name : 'Wonderville',
+			link : 'https://www.wonderville.nyc',
+		},
+	},
 ];
