@@ -34,11 +34,11 @@
 <script src="libraries/natalie.js"></script>
 
 <script>
-  shuffleArray(Array.from({length: 194}, (_, i) => 'files/treatise/' + (i + 1).toString().padStart(3, '0') + '.jpg')).forEach((page, i) => {
+  shuffleArray(Array.from({length: 194}, (_, i) => `files/treatise/${(i + 1).toString().padStart(3, '0')}.jpg`)).forEach((page, i) => {
     const div = document.createElement('div');
     document.body.appendChild(div);
-    div.style.backgroundImage = 'url(' + page + ')';
-    div.style.filter = 'sepia(1000%) saturate(1000%) hue-rotate(' + randomIntegerInclusive(0, 360) + 'deg)';
+    div.style.backgroundImage = `url(${page})`;
+    div.style.filter = `sepia(1000%) saturate(1000%) hue-rotate(${randomIntegerInclusive(0, 360)}deg)`;
     setTimeout(() => div.style.opacity = 1, i * 4000 + 10);
   });
 </script>
