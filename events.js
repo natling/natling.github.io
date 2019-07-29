@@ -82,13 +82,25 @@ const events = [
 	},
 
 	{
+		time     : new Date(2019, 7, 3, 20),
+		main     : {
+			name : 'déjà vu?',
+			link : 'https://www.facebook.com/events/1694611320672272/',
+		},
+		location : {
+			name : 'synesthesia',
+			link : 'http://synesthesia.space',
+		},
+	},
+
+	{
 		time     : new Date(2019, 7, 9, 20),
 		main     : {
 			name : 'livecode.nyc algorave',
 			link : 'https://www.facebook.com/events/346500522914959/',
 		},
 		location : {
-			name : 'Wonderville',
+			name : 'wonderville',
 			link : 'https://www.wonderville.nyc',
 		},
 	},
