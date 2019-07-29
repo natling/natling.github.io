@@ -96,7 +96,7 @@ const events = [
 	{
 		time     : new Date(2019, 7, 9, 20),
 		main     : {
-			name : 'livecode.nyc algorave',
+			name : 'algorave with livecode.nyc',
 			link : 'https://www.facebook.com/events/346500522914959/',
 		},
 		location : {
