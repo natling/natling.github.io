@@ -1,19 +1,16 @@
 const grid = {
+	depth  : randomIntegerInclusive(3, 6),
 	square : false,
 	on     : true,
 };
 
-grid.depth = randomIntegerInclusive(3, 6);
-
-[grid.width, grid.height] = [window.innerWidth, window.innerHeight].map(x => Math.floor(Math.pow(x, 1 / grid.depth)));
+[grid.width, grid.height] = [window.innerWidth, window.innerHeight].map(n => Math.floor(Math.pow(n, 1 / grid.depth)));
 
 if (grid.square) {
-	grid.width = grid.height = Math.min(...[grid.width, grid.height]);
+	grid.width = grid.height = Math.min(grid.width, grid.height);
 }
 
-[grid.columnWidth, grid.rowHeight] = [grid.width, grid.height].map(x => x ** (grid.depth - 1));
-
-grid.data = Array.from({length: grid.height}, () => Array.from({length: grid.width}, () => false));
+grid.state = Array.from({length: grid.height}, () => Array.from({length: grid.width}, () => false));
 
 setup = () => {
 	createCanvas(grid.width ** grid.depth, grid.height ** grid.depth);
@@ -23,25 +20,25 @@ setup = () => {
 
 draw = () => {
 	background(0);
-	if (grid.on) {evolve()}
+	if (grid.on) {evolve()};
 	fractal(grid.depth);
 }
 
-const fractal = level => {
-	level--;
+const fractal = depth => {
+	depth--;
 
 	for (let j = 0; j < grid.height; j++) {
 		for (let i = 0; i < grid.width; i++) {
-			if (grid.data[j][i]) {
+			if (grid.state[j][i]) {
 				push();
 
-				const x = grid.width  ** level * i;
-				const y = grid.height ** level * j;
+				const x = grid.width  ** depth * i;
+				const y = grid.height ** depth * j;
 
 				translate(x, y);
 
-				if (level > 0) {
-					fractal(level);
+				if (depth > 0) {
+					fractal(depth);
 				} else {
 					point(0, 0);
 				}
@@ -53,59 +50,39 @@ const fractal = level => {
 }
 
 const evolve = () => {
-	if (gridEmpty()) {
-		toggleCell(randomCell(false));
-	} else {
-		if (frameRate() > 20) {
-			toggleCell(randomCellWithNeighbors(false));
-		} else {
-			toggleCell(randomCell(true));
-		}
+	const {x, y} = frameCount == 1
+		? randomCell(false)
+		: frameRate() < 15
+		? randomCell(true)
+		: randomCellWithNeighbors(false);
+
+	grid.state[y][x] = ! grid.state[y][x];
+}
+
+const randomCell = state => {
+	if (flatten(grid.state).some(cell => cell == state)) {
+		const [x, y] = [grid.width, grid.height].map(n => randomIntegerInclusive(0, n - 1));
+		return grid.state[y][x] == state ? {x, y} : randomCell(state);
 	}
 }
 
-const toggleCell = cell => {
-	const {x, y} = cell;
-	grid.data[y][x] = ! grid.data[y][x];
-}
+const randomCellWithNeighbors = state => {
+	if (flatten(grid.state).some(Boolean)) {
+		const {x, y} = randomCell(state);
 
-const randomCell = status => {
-	const exists = status ? ! gridEmpty() : ! gridFull();
+		const hasNeighbors = flatten(
+			Array.from({length: 3}, (_, b) => Array.from({length: 3}, (_, a) => {
+				const [i, j] = [a + x, b + y].map(n => n - 1);
+				return {i, j};
+			}))
+		)
+		.filter(({i, j}) => i >= 0 && i <= grid.width  - 1)
+		.filter(({i, j}) => j >= 0 && j <= grid.height - 1)
+		.some(({i, j}) => grid.state[j][i]);
 
-	if (exists) {
-		const x = randomIntegerInclusive(0, grid.width  - 1);
-		const y = randomIntegerInclusive(0, grid.height - 1);
-		return grid.data[y][x] == status ? {x, y} : randomCell(status);
+		return hasNeighbors ? {x, y} : randomCellWithNeighbors(state);
 	}
 }
-
-const randomCellWithNeighbors = status => {
-	const cell = randomCell(status);
-	return hasNeighbors(cell) ? cell : randomCellWithNeighbors(status);
-}
-
-const hasNeighbors = cell => {
-	const {x, y} = cell;
-
-	const neighbors = [];
-
-	for (let j = y - 1; j < y + 2; j++) {
-		for (let i = x - 1; i < x + 2; i++) {
-			if (! (i == x && j == y)) {
-				if (i >= 0 && i <= grid.width - 1) {
-					if (j >= 0 && j <= grid.height - 1) {
-						neighbors.push(grid.data[j][i]);
-					}
-				}
-			}
-		}
-	}
-
-	return neighbors.some(x => x);
-}
-
-const gridEmpty = () => flatten(grid.data).every(x => ! x)
-const gridFull  = () => flatten(grid.data).every(x =>   x)
 
 keyPressed = () => {
 	switch (keyCode) {
