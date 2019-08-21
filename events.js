@@ -104,4 +104,16 @@ const events = [
 			link : 'https://www.wonderville.nyc',
 		},
 	},
+
+	{
+		time     : new Date(2019, 7, 25, 20),
+		main     : {
+			name : 'drones and chill in transmitter park vol. ii',
+			link : 'https://www.facebook.com/events/1414148922061028/',
+		},
+		location : {
+			name : 'transmitter park',
+			link : 'https://en.wikipedia.org/wiki/WNYC_Transmitter_Park',
+		},
+	},
 ];
