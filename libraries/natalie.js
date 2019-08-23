@@ -26,6 +26,10 @@ const linlin = (value, inMin, inMax, outMin, outMax) => {
 	return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);
 }
 
+const linexp = (value, inMin, inMax, outMin, outMax) => {
+	return outMin * (outMax - outMin) ** ((value - inMin) / (inMax - inMin));
+}
+
 const coin = p => Math.random() < p
 
 const weightedAverage = (values, weights) => {
@@ -109,6 +113,8 @@ const flatten = (ary, ret) => {
 	}
 	return ret;
 }
+
+const transpose = matrix => matrix[0].map((_, column) => matrix.map(row => row[column]))
 
 const interleave = () => {
 	var arrs = [].slice.call(arguments);
