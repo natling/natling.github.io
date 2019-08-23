@@ -27,7 +27,7 @@ const linlin = (value, inMin, inMax, outMin, outMax) => {
 }
 
 const linexp = (value, inMin, inMax, outMin, outMax) => {
-	return outMin * (outMax - outMin) ** ((value - inMin) / (inMax - inMin));
+	return outMin * (outMax / outMin) ** ((value - inMin) / (inMax - inMin));
 }
 
 const coin = p => Math.random() < p
