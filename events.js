@@ -116,4 +116,28 @@ const events = [
 			link : 'https://en.wikipedia.org/wiki/WNYC_Transmitter_Park',
 		},
 	},
+
+	{
+		time     : new Date(2019, 7, 23, 12),
+		main     : {
+			name : 'NDLSS SMMR ~ 24 hour show ~ my set is 9:30 am saturday',
+			link : 'https://www.facebook.com/events/2479635025421639/',
+		},
+		location : {
+			name : 'DRTY SMMR',
+			link : 'https://www.drtysmmr.com',
+		},
+	},
+
+	{
+		time     : new Date(2019, 8, 20, 20),
+		main     : {
+			name : 'Live from Area 69',
+			link : 'https://www.facebook.com/events/372072943673313/',
+		},
+		location : {
+			name : 'Babycastles',
+			link : 'https://babycastles.com',
+		},
+	},
 ];
