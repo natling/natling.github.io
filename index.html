@@ -61,6 +61,12 @@
       color: gray;
       transition: color 0.2s;
     }
+
+    iframe {
+      border: none;
+      width: 100%;
+      height: 100%;
+    }
   </style>
 </head>
 
@@ -89,9 +95,15 @@
   const backgrounds = [
     '2017.04.08 b.jpg',
     '2018.12.22 b.jpg',
-  ];
+  ].map(file => `files/${file}`);
 
-  document.body.style.backgroundImage = 'url(\'files/' + randomItem(backgrounds) + '\')';
+  if (Math.random() < 0.83) {
+    document.body.style.backgroundImage = `url('${randomItem(backgrounds)}')`;
+  } else {
+    const iframe = document.createElement('iframe');
+    document.body.appendChild(iframe);
+    iframe.src = 'https://trap.codes';
+  }
 </script>
 
 <script src="trap.js"></script>
