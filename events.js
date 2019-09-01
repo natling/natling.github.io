@@ -140,4 +140,16 @@ const events = [
 			link : 'https://babycastles.com',
 		},
 	},
+
+	{
+		time     : new Date(2019, 8, 21, 20),
+		main     : {
+			name : 'Ambient Chaos',
+			link : 'https://www.facebook.com/events/2264461233853235/',
+		},
+		location : {
+			name : 'Spectrum',
+			link : 'http://www.spectrumnyc.com',
+		},
+	},
 ];
