@@ -152,4 +152,16 @@ const events = [
 			link : 'http://www.spectrumnyc.com',
 		},
 	},
+
+	{
+		time     : new Date(2019, 8, 28, 19),
+		main     : {
+			name : 'Samstock 2019: A Benefit Show for Sam\'s Surgery & Name Change!',
+			link : 'https://www.facebook.com/events/738795109893469/',
+		},
+		location : {
+			name : 'Babycastles',
+			link : 'https://babycastles.com',
+		},
+	},
 ];
