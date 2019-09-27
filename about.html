@@ -6,15 +6,13 @@
   <meta charset="UTF-8">
   <link rel="shortcut icon" href="files/favicon.png"/>
   <link rel="stylesheet" type="text/css" href="css/menlo.css">
-  <link rel="stylesheet" type="text/css" href="css/sketches.css">
   <style>
     body {
       margin: 0px;
-    }
-
-    @keyframes scale {
-      from { transform: scale(1.0); }
-      to   { transform: scale(1.2); }
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: black;
     }
 
     div {
@@ -23,13 +21,17 @@
       font-family: 'Menlo';
       font-size: 9pt;
       text-align: center;
-      letter-spacing: 0px;
       transition: letter-spacing 1s, color 1s;
       animation: scale 7s linear infinite alternate;
     }
 
     div:hover {
       letter-spacing: 10px;
+    }
+
+    @keyframes scale {
+      from { transform: scale(1.0); }
+        to { transform: scale(2.0); }
     }
   </style>
 </head>
@@ -38,6 +40,77 @@
 </body>
 
 <script src="libraries/natalie.js"></script>
-<script src="about.js"></script>
+
+<script>
+  [
+    `"an angry trans shit"`,
+    `"a markov chain"`,
+    `"road-side snapshots of robotic collisions"`,
+    `"sad-toned circuits failing in public"`,
+    `"these are the brief shards of digital noise you've been looking for"`,
+    `"actual net art princess"`,
+    `"noise music reminiscent of that time it was 1983 and you got sucked into your vectrex and the only way to escape was beating level 13 in mine storm"`,
+    `"nice mix of pleasure and slight unpleasantness"`,
+    `"strange short bursts of electrifying trash"`,
+    `"leaves a frustrating impression"`,
+    `"strange flashy sounds, liquid bits"`,
+    `"a computer whose cooling fans weren't working"`,
+    `"truth coming out of her well to shame mankind"`,
+    `«искусство требует жертв»`,
+    `"your computer is very sad. i want to give your computer a hug."`,
+    `"a beautiful alien language"`,
+    `"robot spiders swarming, fire and water, rushing in your ears, dense and sensual"`,
+    `"reverberant metallic clangs and scrapes, floating stretched harmonies, light glitching, filling up the space"`,
+    `"this is the sound nebulas make"`,
+    `"this is really wrinkling my braincicles"`,
+    `"a pink noise wind tunnel that is slowly being enclosed by a wall of cosmic waves"`,
+    `"irresponsible music"`,
+    `"like staring into an actual black hole of sound"`,
+    `"a sorceress emerging from the abyss"`,
+    `"has other agendas besides harm"`,
+    `"it would have been seriously psychologically damaging to wake up to this"`,
+  ].forEach(string => {
+    const div = document.createElement('div');
+    document.body.appendChild(div);
+    div.innerHTML = string;
+    div.style.animationDelay = `${randomFloat(-7, 7)}s`;
+
+    const randomizeVector = () => {
+      const [x, y] = Array.from({length: 2}, () => randomFloat(0.1, 1) * (coin(0.5) ? -1 : 1));
+      Object.assign(vector, {x, y});
+    }
+
+    const vector = {};
+    randomizeVector();
+
+    const [x, y] = ['width', 'height']
+    .map(axis => [document.body, div].map(element => element.getBoundingClientRect()[axis]))
+    .map(([body, div]) => body - div)
+    .map(max => ({min: 0, max}));
+
+    const range = {x, y};
+
+    const coordinates = objectMap(range, ([axis, range]) => [axis, randomIntegerInclusive(range.min, range.max)]);
+
+    const move = () => {
+      Object.keys(coordinates).forEach(axis => {
+        coordinates[axis] += vector[axis];
+
+        if (coordinates[axis] < range[axis].min || coordinates[axis] > range[axis].max) {
+          div.style.color = randomItem(['#b58900', '#cb4b16', '#dc322f', '#d33682', '#6c71c4', '#268bd2', '#2aa198', '#859900']);
+          coordinates[axis] = Math.min(range[axis].max, Math.max(coordinates[axis], range[axis].min))
+          randomizeVector();
+        }
+      });
+
+      div.style.left = `${coordinates.x}px`;
+      div.style.top  = `${coordinates.y}px`;
+
+      setTimeout(move, 20);
+    }
+
+    move();
+  });
+</script>
 
 </html>
