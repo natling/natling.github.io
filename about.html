@@ -83,14 +83,12 @@
     const vector = {};
     randomizeVector();
 
-    const [x, y] = ['width', 'height']
-    .map(axis => [document.body, div].map(element => element.getBoundingClientRect()[axis]))
-    .map(([body, div]) => body - div)
-    .map(max => ({min: 0, max}));
+    const range = objectMap({x: 'width', y: 'height'}, property => {
+      const [body, string] = [document.body, div].map(element => element.getBoundingClientRect()[property]);
+      return {min: 0, max: body - string};
+    });
 
-    const range = {x, y};
-
-    const coordinates = objectMap(range, ([axis, range]) => [axis, randomIntegerInclusive(range.min, range.max)]);
+    const coordinates = objectMap(range, range => randomIntegerInclusive(range.min, range.max));
 
     const move = () => {
       Object.keys(coordinates).forEach(axis => {
