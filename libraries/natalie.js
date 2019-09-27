@@ -116,7 +116,7 @@ const flatten = (ary, ret) => {
 
 const transpose = matrix => matrix[0].map((_, column) => matrix.map(row => row[column]))
 
-const objectMap = (object, f) => Object.fromEntries(Object.entries(object).map(f))
+const objectMap = (object, f) => Object.fromEntries(Object.entries(object).map(([key, value]) => [key, f(value)]))
 
 const interleave = () => {
 	var arrs = [].slice.call(arguments);
