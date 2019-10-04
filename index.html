@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>natalie.computer</title>
+  <title>natalie[dot]computer</title>
   <meta charset="UTF-8">
   <link rel="shortcut icon" href="files/favicon.png"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,6 +29,7 @@
       background-size: cover;
       background-repeat: no-repeat;
       background-color: black;
+      transition: background-image 4s ease-out;
     }
 
     #box {
@@ -95,10 +96,16 @@
   const backgrounds = [
     '2017.04.08 b.jpg',
     '2018.12.22 b.jpg',
+    '51218513_290732458270588_6529311825723392000_n.jpg',
   ].map(file => `files/${file}`);
 
-  if (Math.random() < 0.83) {
-    document.body.style.backgroundImage = `url('${randomItem(backgrounds)}')`;
+  if (coin(0.83)) {
+    const cycle = () => {
+      document.body.style.backgroundImage = `url('${randomItem(backgrounds)}')`;
+      setTimeout(cycle, randomFloat(8, 16) * 1000);
+    }
+
+    cycle();
   } else {
     const iframe = document.createElement('iframe');
     document.body.appendChild(iframe);
