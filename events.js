@@ -172,7 +172,8 @@ const events = [
 			link : 'https://www.facebook.com/events/384219179178999/',
 		},
 		location : {
-			name : '1139 bushwick ave',
+			name : 'gymnopedie',
+			link : 'https://www.gymnopedie.nyc',
 		},
 	},
 ];
