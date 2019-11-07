@@ -176,4 +176,28 @@ const events = [
 			link : 'https://www.gymnopedie.nyc',
 		},
 	},
+
+	{
+		time     : new Date(2019, 10, 8, 19),
+		main     : {
+			name : 'Tallulah Bankheist [CHI] // Natalie Braginsky [NYC]',
+			link : 'https://www.facebook.com/events/512218192657296/',
+		},
+		location : {
+			name : 'Frenia House',
+			link : 'https://www.facebook.com/freniaCo',
+		},
+	},
+
+	{
+		time     : new Date(2019, 10, 16, 21),
+		main     : {
+			name : 'Views from Home',
+			link : 'https://www.facebook.com/events/409880053297872/',
+		},
+		location : {
+			name : 'hearth.land',
+			link : 'https://hearth.land',
+		},
+	},
 ];
