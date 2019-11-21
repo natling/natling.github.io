@@ -100,12 +100,7 @@
   ].map(file => `files/${file}`);
 
   if (coin(0.83)) {
-    const cycle = () => {
-      document.body.style.backgroundImage = `url('${randomItem(backgrounds)}')`;
-      setTimeout(cycle, randomFloat(8, 16) * 1000);
-    }
-
-    cycle();
+    document.body.style.backgroundImage = `url('${randomItem(backgrounds)}')`;
   } else {
     const iframe = document.createElement('iframe');
     document.body.appendChild(iframe);
