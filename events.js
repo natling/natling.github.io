@@ -200,4 +200,16 @@ const events = [
 			link : 'https://hearth.land',
 		},
 	},
+
+	{
+		time     : new Date(2019, 11, 15, 19, 30),
+		main     : {
+			name : 'Messica Arson // Char Stiles // natalie[dot]computer // dog star',
+			link : 'https://www.facebook.com/events/2464026473719733/',
+		},
+		location : {
+			name : 'synesthesia',
+			link : 'http://synesthesia.space',
+		},
+	},
 ];
