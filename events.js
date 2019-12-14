@@ -212,4 +212,16 @@ const events = [
 			link : 'http://synesthesia.space',
 		},
 	},
+
+	{
+		time     : new Date(2019, 11, 31, 20),
+		main     : {
+			name : '⫷Dancy Algorave⫸ New Year\'s Eve Party',
+			link : 'https://www.facebook.com/events/2452116085063130/',
+		},
+		location : {
+			name : 'wonderville',
+			link : 'https://www.wonderville.nyc',
+		},
+	},
 ];
