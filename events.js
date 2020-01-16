@@ -224,4 +224,28 @@ const events = [
 			link : 'https://www.wonderville.nyc',
 		},
 	},
+
+	{
+		time     : new Date(2020, 0, 17, 18),
+		main     : {
+			name : 'Synchrony Kick-off Party 2020 ( ◕ ᗜ ◕ )',
+			link : 'https://www.facebook.com/events/627310778100425/',
+		},
+		location : {
+			name : 'Babycastles',
+			link : 'https://babycastles.com',
+		},
+	},
+
+	{
+		time     : new Date(2020, 0, 23, 19),
+		main     : {
+			name : 'WordHack w/ Alexander King, Natalie Braginsky, Luke Degnan & Maria Baker',
+			link : 'https://www.facebook.com/events/498045457757835/',
+		},
+		location : {
+			name : 'Babycastles',
+			link : 'https://babycastles.com',
+		},
+	},
 ];
