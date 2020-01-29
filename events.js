@@ -248,4 +248,16 @@ const events = [
 			link : 'https://babycastles.com',
 		},
 	},
+
+	{
+		time     : new Date(2020, 1, 6, 19),
+		main     : {
+			name : 'Tallulah Bankheist (CHI) / Natalie Braginsky / Messica Arson',
+			link : 'https://www.facebook.com/events/174392443821389/',
+		},
+		location : {
+			name : 'Babycastles',
+			link : 'https://babycastles.com',
+		},
+	},
 ];
