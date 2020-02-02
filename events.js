@@ -100,7 +100,7 @@ const events = [
 			link : 'https://www.facebook.com/events/346500522914959/',
 		},
 		location : {
-			name : 'wonderville',
+			name : 'Wonderville',
 			link : 'https://www.wonderville.nyc',
 		},
 	},
@@ -220,7 +220,7 @@ const events = [
 			link : 'https://www.facebook.com/events/2452116085063130/',
 		},
 		location : {
-			name : 'wonderville',
+			name : 'Wonderville',
 			link : 'https://www.wonderville.nyc',
 		},
 	},
@@ -258,6 +258,18 @@ const events = [
 		location : {
 			name : 'Babycastles',
 			link : 'https://babycastles.com',
+		},
+	},
+
+	{
+		time     : new Date(2020, 1, 9, 14),
+		main     : {
+			name : 'ÐяΘηЭ',
+			link : 'https://www.facebook.com/events/275242750107724/',
+		},
+		location : {
+			name : 'Wonderville',
+			link : 'https://www.wonderville.nyc',
 		},
 	},
 ];
