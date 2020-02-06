@@ -272,4 +272,16 @@ const events = [
 			link : 'https://www.wonderville.nyc',
 		},
 	},
+
+	{
+		time     : new Date(2020, 2, 21, 18),
+		main     : {
+			name : 'RachikaS/KFW/natalie[dot]computer/CLee+CTao/YATTA/CeciliaLopez',
+			link : 'https://www.facebook.com/events/1070184123333621/',
+		},
+		location : {
+			name : 'DRTY SMMR',
+			link : 'https://www.drtysmmr.com',
+		},
+	},
 ];
