@@ -10,6 +10,8 @@ const randomFloat = (min, max) => {
 
 const mod = (x, n) => (x % n + n) % n
 
+const div = (x, n) => Math.floor(x / n)
+
 const getBaseLog = (x, y) => Math.log(y) / Math.log(x)
 
 const roundTo = (n, digits) => {
@@ -116,7 +118,11 @@ const flatten = (ary, ret) => {
 
 const transpose = matrix => matrix[0].map((_, column) => matrix.map(row => row[column]))
 
-const objectMap = (object, f) => Object.fromEntries(Object.entries(object).map(([key, value]) => [key, f(value)]))
+const fill = (n, f) => Array.from({length: n}, f)
+
+const objectMap = (object, f) => Object.fromEntries(Object.entries(object).map(([key, value], i) => [key, f(key, value, i)]))
+
+const objectFilter = (object, f) => Object.fromEntries(Object.entries(object).filter(([key, value], i) => f(key, value, i)))
 
 const interleave = () => {
 	var arrs = [].slice.call(arguments);
