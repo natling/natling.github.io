@@ -286,9 +286,21 @@ const events = [
 	},
 
 	{
+		time     : new Date(2020, 2, 11, 20),
+		main     : {
+			name : 'Rachika S + natalie[dot]computer in A Big Inflatable Roof Bubble',
+			link : 'https://www.facebook.com/events/2627440020818431/',
+		},
+		location : {
+			name : 'The Sultan Room',
+			link : 'https://thesultanroom.com',
+		},
+	},
+
+	{
 		time     : new Date(2020, 2, 21, 18),
 		main     : {
-			name : 'RachikaS/KFW/natalie[dot]computer/CLee+CTao/YATTA/CeciliaLopez',
+			name : 'natalie[dot]computer/CLee+CTao/KeithFWhitman/CeciliaLopez',
 			link : 'https://www.facebook.com/events/1070184123333621/',
 		},
 		location : {
