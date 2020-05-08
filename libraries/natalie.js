@@ -1,16 +1,14 @@
+const mod = (x, n) => (x % n + n) % n
+
+const div = (x, n) => Math.floor(x / n)
+
 const randomIntegerInclusive = (min, max) => {
 	min = Math.ceil(min);
 	max = Math.floor(max);
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-const randomFloat = (min, max) => {
-	return Math.random() * (max - min) + min;
-}
-
-const mod = (x, n) => (x % n + n) % n
-
-const div = (x, n) => Math.floor(x / n)
+const randomFloat = (min, max) => Math.random() * (max - min) + min
 
 const getBaseLog = (x, y) => Math.log(y) / Math.log(x)
 
@@ -61,9 +59,10 @@ const rotateArray = (array, distance, direction) => {
 
 const shuffleArray = array => {
 	for (let i = array.length - 1; i > 0; i--) {
-		var j = Math.floor(Math.random() * (i + 1));
+		const j = Math.floor(Math.random() * (i + 1));
 		[array[i], array[j]] = [array[j], array[i]];
 	}
+
 	return array;
 }
 
@@ -117,8 +116,6 @@ const flatten = (ary, ret) => {
 }
 
 const transpose = matrix => matrix[0].map((_, column) => matrix.map(row => row[column]))
-
-const fill = (n, f) => Array.from({length: n}, f)
 
 const objectMap = (object, f) => Object.fromEntries(Object.entries(object).map(([key, value], i) => [key, f(key, value, i)]))
 
