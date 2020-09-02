@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>there he is</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="files/favicon.png"/>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: grid;
+      grid: repeat(3, 1fr) / repeat(3, 1fr);
+      background: black;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+</body>
+
+<script>
+  for (let i = 0; i < 9; i++) {
+    const milt = document.body.appendChild(document.createElement('video'));
+
+    milt.src          = 'files/arex.mp4';
+    milt.loop         = true;
+    milt.muted        = true;
+    milt.autoplay     = true;
+    milt.playbackRate = i % 3 + 1;
+  }
+</script>
+
+</html>
