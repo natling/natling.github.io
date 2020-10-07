@@ -1,4 +1,4 @@
-var loss = [
+const loss = [
 	[ 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
 	[ 0, 1, 0, 0, 0, 1, 0, 0, 0 ],
 	[ 0, 1, 0, 0, 0, 1, 0, 1, 0 ],
@@ -10,43 +10,36 @@ var loss = [
 	[ 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
 ];
 
-var [lossWidth, lossHeight] = [loss[0], loss].map(x => x.length);
+const axes = ['x', 'y'];
 
-function setup() {
-	createCanvas(windowWidth, windowHeight);
+const matrixSize = {x: loss[0].length,    y: loss.length};
+const canvasSize = {x: window.innerWidth, y: window.innerHeight};
+
+setup = () => {
+	const depth = min(...axes.map(axis => floor(log(canvasSize[axis]) / log(matrixSize[axis]))));
+
+	createCanvas(...axes.map(axis => canvasSize[axis]));
 	background(0);
 	stroke(255);
-
-	var levels = Math.min(...[getBaseLog(lossWidth, width), getBaseLog(lossHeight, height)].map(Math.floor));
-
-	var marginX = (width  - lossWidth  ** levels) / 2;
-	var marginY = (height - lossHeight ** levels) / 2;
-
-	translate(marginX, marginY);
-	recursiveLoss(levels);
+	translate(...axes.map(axis => (canvasSize[axis] - matrixSize[axis] ** depth) / 2));
+	fractal(loss, depth);
 }
 
-function recursiveLoss(level) {
-	level--;
+const fractal = (matrix, depth) => {
+	depth--;
 
-	for (var j = 0; j < lossHeight; j++) {
-		for (var i = 0; i < lossWidth; i++) {
-			push();
+	matrix.forEach((row, y) => row.forEach((bit, x) => {
+		push();
+		translate(...axes.map(axis => matrixSize[axis] ** depth * {x, y}[axis]));
 
-			var x = lossWidth  ** level * i;
-			var y = lossHeight ** level * j;
-
-			translate(x, y);
-
-			if (loss[j][i]) {
-				if (level > 0) {
-					recursiveLoss(level);
-				} else {
-					point(0, 0);
-				}
+		if (bit) {
+			if (depth > 0) {
+				fractal(matrix, depth);
+			} else {
+				point(0, 0);
 			}
-
-			pop();
 		}
-	}
+
+		pop();
+	}));
 }
