@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>boing</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="files/favicon.png"/>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: bottom / cover url('files/ocean.png');
+      overflow: hidden;
+    }
+
+    img {
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+</body>
+
+<script>
+  const ocean = Array.from({length: 2}, (_, i) => {
+    const audio = new Audio('files/ocean.mp3');
+    audio.currentTime = i * 4;
+    audio.loop = true;
+    return audio;
+  });
+
+  document.onkeypress = () => {
+    const whale      = document.body.appendChild(document.createElement('img'));
+    whale.src        = 'files/whale.png';
+    whale.style.left = `${Math.random() * 100}%`;
+    whale.style.top  = `${Math.random() * 100}%`;
+
+    new Audio('files/boing.mp3').play();
+    ocean.forEach(audio => audio.play());
+  }
+</script>
+
+</html>
