@@ -33,6 +33,7 @@
     }
 
     #box {
+      display: none;
       position: absolute;
       top: 5vw;
       left: 5vw;
@@ -95,7 +96,7 @@
     '51218513_290732458270588_6529311825723392000_n.jpg',
   ].map(file => `files/${file}`);
 
-  if (coin(0.83)) {
+  if (coin(0)) {
     document.body.style.backgroundImage = `url('${randomItem(backgrounds)}')`;
   } else {
     const iframe = document.createElement('iframe');
