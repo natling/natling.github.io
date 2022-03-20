@@ -3,9 +3,12 @@
 <style>
   body {
     margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
-    background: black;
     image-rendering: pixelated;
+    background: black;
   }
 
   div {
@@ -14,7 +17,35 @@
     position: absolute;
     mix-blend-mode: difference;
   }
+
+  #loader {
+    width: 25vw;
+    height: 25vw;
+    border-radius: 50%;
+    border-style: solid;
+    animation: border 3s linear infinite, hue 8s linear infinite;
+  }
+
+  @keyframes border {
+      0% { border-width: 16px  0px  0px  0px; }
+     25% { border-width:  0px 16px  0px  0px; }
+     50% { border-width:  0px  0px 16px  0px; }
+     75% { border-width:  0px  0px  0px 16px; }
+    100% { border-width: 16px  0px  0px  0px; }
+  }
+
+  @keyframes hue {
+      0% { border-color: hsl(  0, 100%, 50%); }
+     25% { border-color: hsl( 90, 100%, 50%); }
+     50% { border-color: hsl(180, 100%, 50%); }
+     75% { border-color: hsl(270, 100%, 50%); }
+    100% { border-color: hsl(360, 100%, 50%); }
+  }
 </style>
+
+<body>
+  <div id="loader"></div>
+</body>
 
 <script type="module">
   const randomFloat   = (min = 0, max = 1) =>            Math.random() * (max - min)      + min
@@ -61,6 +92,8 @@
   ].map(file => `files/spectrograms/${file}.png`);
 
   const images = await Promise.all(paths.map(load));
+
+  loader.remove();
 
   const layers = images.map(({ src, width, height }) => {
     const { style } = document.body.appendChild(document.createElement('div'));
