@@ -1,8 +1,0 @@
-@font-face {
-  font-family: 'Menlo';
-  font-style: normal;
-  src:
-    local('Menlo'),
-    local('Menlo Regular'),
-    url('../fonts/Menlo.otf') format('opentype');
-}
